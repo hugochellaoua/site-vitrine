@@ -1,0 +1,603 @@
+@import "tailwindcss";
+
+:root {
+  /* Fond — indigo profond relevé dans la vidéo de démonstration.
+     Trois paliers seulement : le socle, un cran plus clair pour les reliefs,
+     un cran plus sombre pour creuser. */
+  --void: #141037;
+  --void-2: #16123c;
+  --void-deep: #100d30;
+
+  /* Surfaces */
+  --panel: #191552;
+  --panel-light: #1d1a5e;
+  --panel-soft: rgba(25, 21, 82, 0.55);
+  --chip: #141c5e;
+
+  /* Bordures */
+  --hairline: rgba(255, 255, 255, 0.10);
+  --hairline-strong: rgba(255, 255, 255, 0.18);
+
+  /* Bleu — la voix de Helpify. */
+  --accent: #1d50fe;
+  --accent-light: #5b81ff;
+  --accent-soft: rgba(29, 80, 254, 0.18);
+
+  /* Orange — la voix du candidat. Ce n'est pas une couleur décorative :
+     dans le produit, la scène entière bascule à l'orange quand le candidat
+     s'exprime. On lui garde ici ce rôle, et rien d'autre. */
+  --warm: #ffa046;
+  --warm-light: #ffb970;
+  --warm-soft: rgba(255, 160, 70, 0.16);
+
+  /* Texte */
+  --ink: #ffffff;
+  --muted: #a8adcf;
+  --faint: #757aa3;
+
+  /* Sémantique, employé avec parcimonie */
+  --success: #2cc36b;
+  --warning: #ffa046;
+  --error: #ff5d5d;
+
+  --shadow-glow: 0 20px 60px -20px rgba(29, 80, 254, 0.5);
+  --shadow-deep: 0 40px 90px -30px rgba(6, 4, 24, 0.65);
+
+  /* Une seule famille : le contraste vient de la graisse et du corps,
+     jamais d'un changement de caractère. */
+  --font-display: var(--font-sans-brand), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-sans-brand), ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+@theme inline {
+  --color-void: var(--void);
+  --color-void-2: var(--void-2);
+  --color-void-deep: var(--void-deep);
+  --color-panel: var(--panel);
+  --color-panel-light: var(--panel-light);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-chip: var(--chip);
+  --color-warm: var(--warm);
+  --color-warm-light: var(--warm-light);
+  --color-warm-soft: var(--warm-soft);
+  --color-accent-soft: var(--accent-soft);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-pulse-glow: pulseGlow 2.6s ease-in-out infinite;
+  --animate-marquee: marquee 38s linear infinite;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+* {
+  border-color: var(--hairline);
+}
+
+html {
+  background: var(--void);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    /* Sans cette ligne, les délais subsisteraient : le contenu resterait
+       invisible pendant plus d'une seconde avant d'apparaître d'un bloc. */
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  /* Un lever de rideau n'a pas de sens sans mouvement : on entre directement. */
+  .intro {
+    display: none;
+  }
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Reusable primitives */
+.text-balance {
+  text-wrap: balance;
+}
+
+.glass-panel {
+  background: var(--panel-soft);
+  border: 1px solid var(--hairline-strong);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
+    0 20px 50px -24px rgba(0, 0, 0, 0.6);
+}
+
+/* Premium glassy surface: subtle gradient fill, top edge catching light,
+   soft gradient border, deep shadow. Composes with Tailwind rounded-*. */
+.card-surface {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(165deg, rgba(31, 27, 82, 0.62) 0%, rgba(19, 15, 55, 0.62) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
+    0 30px 70px -34px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+.card-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.16), rgba(91, 129, 255, 0.10) 45%, rgba(255, 255, 255, 0) 75%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.card-surface:hover {
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.1) inset,
+    0 40px 90px -30px rgba(29, 80, 254, 0.24);
+}
+
+/* La lumière que le curseur promène sur la surface.
+   Le z-index négatif la place au-dessus du fond de la carte mais sous son
+   contenu : le texte n'est jamais délavé par la lueur qui passe dessous. */
+.card-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(91, 129, 255, 0.18),
+    rgba(91, 129, 255, 0.06) 42%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.card-surface[data-lit="true"]::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-surface::after {
+    display: none;
+  }
+}
+
+.glow-text {
+  background: linear-gradient(180deg, #ffffff 0%, #dfe6ff 58%, #9db4ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 34px rgba(29, 80, 254, 0.55));
+}
+
+.gradient-num {
+  background: linear-gradient(180deg, #ffffff, #8fa9ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Lever de rideau ─────────────────────────────────────────────────────
+   Le voile s'efface tout seul, par animation CSS : aucune étape de la
+   séquence ne dépend du JavaScript pour se terminer. */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Le noir dont on sort. */
+.intro-veil {
+  position: absolute;
+  inset: 0;
+  background: var(--void-deep);
+  animation: introVeil 0.85s cubic-bezier(0.5, 0, 0.2, 1) 0.28s forwards;
+}
+
+/* Le trait de lumière qui s'ouvre à l'horizon. */
+.intro-beam {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 1px;
+  width: 0;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(90deg, transparent, #dce6ff 18%, #ffffff 50%, #dce6ff 82%, transparent);
+  box-shadow: 0 0 24px 3px rgba(150, 180, 255, 0.75);
+  opacity: 0;
+  animation: introBeam 0.95s cubic-bezier(0.22, 0.7, 0.24, 1) 0.05s forwards;
+}
+
+/* La déflagration qui ouvre sur la galaxie. */
+.intro-bloom {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 60vmax;
+  width: 60vmax;
+  transform: translate(-50%, -50%) scale(0.05);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(140, 175, 255, 0.5) 0%, rgba(60, 100, 255, 0.16) 38%, transparent 68%);
+  opacity: 0;
+  animation: introBloom 1.05s cubic-bezier(0.2, 0.7, 0.24, 1) 0.3s forwards;
+}
+
+@keyframes introVeil {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes introBeam {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  22% {
+    opacity: 1;
+  }
+  55% {
+    width: 62vw;
+    opacity: 1;
+  }
+  100% {
+    width: 96vw;
+    opacity: 0;
+  }
+}
+
+@keyframes introBloom {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.05);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.6);
+  }
+}
+
+/* Abrègement : au premier geste, la séquence se replie immédiatement. */
+.intro[data-skip="true"] .intro-veil,
+.intro[data-skip="true"] .intro-beam,
+.intro[data-skip="true"] .intro-bloom {
+  animation: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Menu : arrivée de la barre, puis ouverture du panneau mobile.
+   `visibility` retire le panneau fermé du parcours clavier et des lecteurs
+   d'écran — un simple `opacity: 0` l'y aurait laissé. */
+@keyframes navbarEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+}
+.navbar-enter {
+  animation: navbarEnter 0.7s cubic-bezier(0.16, 0.8, 0.24, 1) backwards;
+}
+
+.mobile-menu {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.25s ease,
+    visibility 0s linear 0.25s;
+}
+.mobile-menu[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.25s ease,
+    visibility 0s linear 0s;
+}
+
+/* Apparition d'un bloc au défilement (voir components/ui/reveal.tsx). */
+.reveal {
+  opacity: 0;
+  transform: translateY(calc(var(--reveal-rest, 0px) + var(--reveal-y, 24px)));
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 0.8, 0.24, 1) var(--reveal-delay, 0s),
+    transform 0.7s cubic-bezier(0.16, 0.8, 0.24, 1) var(--reveal-delay, 0s);
+}
+.reveal[data-shown="true"] {
+  opacity: 1;
+  transform: translateY(var(--reveal-rest, 0px));
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: translateY(var(--reveal-rest, 0px));
+  }
+}
+
+/* Apparition du hero. `backwards` maintient l'élément à son état de départ
+   pendant le délai, puis l'animation le porte jusqu'à l'état final — qui reste
+   acquis ensuite. Le texte finit donc toujours visible, quoi qu'il arrive. */
+@keyframes heroRise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+.hero-rise {
+  animation: heroRise 0.9s cubic-bezier(0.16, 0.8, 0.24, 1) backwards;
+}
+
+@keyframes scrollCue {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(180%);
+  }
+}
+
+.scroll-cue {
+  animation: scrollCue 2.1s ease-in-out infinite;
+}
+
+/* Scènes de la séquence : une seule visible à la fois.
+   `visibility` est retardée à la fin du fondu pour la sortante, immédiate pour
+   l'entrante — la scène qui s'efface ne peut donc jamais masquer la suivante. */
+/* L'avance pas-à-pas de la séquence n'est pas confiée à `scroll-snap` :
+   l'accrochage natif ne résiste pas à l'inertie d'un geste franc — le
+   défilement traverse plusieurs points d'ancrage avant de se poser, et le
+   comportement diffère d'un navigateur à l'autre. Elle est pilotée dans
+   sequence.tsx, où une seule impulsion vaut exactement une étape. */
+
+/* Sortie : rapide et sans délai — la scène quittée s'efface la première. */
+.scene {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.99);
+  filter: blur(3px);
+  transition:
+    opacity 0.34s ease,
+    transform 0.5s ease,
+    filter 0.34s ease,
+    visibility 0s linear 0.34s;
+  z-index: 1;
+}
+
+/* Entrée : décalée du temps de la sortie, pour qu'aucun instant du fondu
+   ne montre deux textes lisibles superposés. */
+.scene[data-active="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  filter: none;
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 0.7, 0.3, 1) 0.3s,
+    transform 0.7s cubic-bezier(0.22, 0.7, 0.3, 1) 0.3s,
+    filter 0.5s cubic-bezier(0.22, 0.7, 0.3, 1) 0.3s,
+    visibility 0s linear 0s;
+  z-index: 2;
+}
+
+/* Point de départ de l'entrée : la scène arrive du bas, celle qui part
+   s'élève — le mouvement suit le sens de lecture du récit. */
+.scene[data-active="true"] {
+  animation: sceneIn 0.86s cubic-bezier(0.22, 0.7, 0.3, 1);
+}
+
+@keyframes sceneIn {
+  0%,
+  34% {
+    transform: translateY(12px) scale(0.99);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene {
+    transform: none;
+    filter: none;
+  }
+}
+
+/* Carte à arête lumineuse — reprise du plan « Résultats mesurés ».
+   Le trait s'allume sur le bord supérieur et s'éteint vers les côtés :
+   la carte paraît éclairée par le haut, jamais posée à plat. */
+.lit-card {
+  position: relative;
+  isolation: isolate;
+  border-radius: 22px;
+  background: linear-gradient(168deg, rgba(38, 34, 96, 0.72) 0%, rgba(20, 16, 55, 0.72) 100%);
+  box-shadow: 0 30px 70px -34px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+}
+.lit-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg, rgba(120, 158, 255, 0.55), rgba(120, 158, 255, 0.04) 38%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.lit-card::after {
+  content: "";
+  position: absolute;
+  inset-inline: 12%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
+  box-shadow: 0 0 14px 1px rgba(91, 129, 255, 0.7);
+  pointer-events: none;
+}
+.lit-card--warm::before {
+  background: linear-gradient(180deg, rgba(255, 178, 104, 0.55), rgba(255, 178, 104, 0.04) 38%);
+}
+.lit-card--warm::after {
+  background: linear-gradient(90deg, transparent, var(--warm), transparent);
+  box-shadow: 0 0 14px 1px rgba(255, 160, 70, 0.7);
+}
+
+/* Ciel étoilé appliqué à un encart.
+   La texture est posée en fond, puis estompée vers les bords par un masque :
+   les étoiles semblent émerger du noir au lieu de s'arrêter net sur une arête,
+   ce qui est exactement ce qui trahit un fond « collé ». */
+.starry {
+  position: relative;
+  isolation: isolate;
+}
+.starry::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-image: var(--star-texture);
+  background-size: 300px 300px;
+  background-repeat: repeat;
+  opacity: 0.34;
+  -webkit-mask-image: radial-gradient(ellipse 82% 74% at 50% 46%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 82% 74% at 50% 46%, #000 30%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Variante discrète, pour les surfaces qui portent déjà du texte dense. */
+.starry-soft::before {
+  opacity: 0.18;
+  background-size: 380px 380px;
+}
+
+/* Curseurs du calculateur ROI */
+.range-accent {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  outline: none;
+  cursor: pointer;
+}
+.range-accent::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  box-shadow: 0 0 0 4px rgba(29, 80, 254, 0.2), 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease;
+}
+.range-accent::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+.range-accent::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent-light);
+  box-shadow: 0 0 0 4px rgba(29, 80, 254, 0.2);
+}
+.range-accent:focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 4px;
+}

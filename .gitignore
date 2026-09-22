@@ -1,0 +1,83 @@
+# ─────────────────────────────────────────────────────────────
+# Application Next.js
+# Voir https://help.github.com/articles/ignoring-files/
+#
+# Règle générale : on ne versionne que ce qu'un humain écrit.
+# Tout ce qui se régénère avec `npm install` puis `npm run build`
+# reste hors du dépôt.
+# ─────────────────────────────────────────────────────────────
+
+# ── Dépendances ──────────────────────────────────────────────
+# Reconstruites par `npm install` à partir de package-lock.json,
+# qui, lui, doit bien être versionné.
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# ── Build et caches Next.js ──────────────────────────────────
+/.next/
+/out/
+/build
+/dist
+.turbo
+.swc
+
+# ── Variables d'environnement ────────────────────────────────
+# Elles contiennent des secrets : le webhook Slack du formulaire
+# de contact, et demain les clés d'API. Elles ne doivent jamais
+# partir dans le dépôt, même sur un dépôt privé.
+#
+# Seul .env.example est versionné : il ne contient aucune valeur,
+# il documente les variables à renseigner.
+.env
+.env.*
+!.env.example
+
+# ── Tests et couverture ──────────────────────────────────────
+/coverage
+*.lcov
+
+# ── TypeScript ───────────────────────────────────────────────
+*.tsbuildinfo
+# Régénéré par Next à chaque démarrage ; il ne se modifie pas à la main.
+next-env.d.ts
+
+# ── Journaux ─────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ── Plateformes de déploiement ───────────────────────────────
+.vercel
+.netlify
+
+# ── Éditeurs ─────────────────────────────────────────────────
+# On garde .vscode/extensions.json : il sert à toute l'équipe.
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── Système ──────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ── Certificats et clés ──────────────────────────────────────
+*.pem
+*.key
+*.p12
