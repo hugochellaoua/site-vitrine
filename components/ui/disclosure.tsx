@@ -22,6 +22,7 @@ export function DisclosureButton({
   labelOpen,
   controls,
   size = "lg",
+  tone = "neutral",
   className = "",
 }: {
   open: boolean;
@@ -31,10 +32,13 @@ export function DisclosureButton({
   labelOpen?: string;
   /** `id` du bloc déroulé, pour que les lecteurs d'écran fassent le lien. */
   controls: string;
-  size?: "lg" | "sm";
+  size?: "xl" | "lg" | "sm";
+  /** `warm` met le bouton en orange, pour le détacher sans prendre la place du
+   *  bleu plein, qui reste réservé à l'action la plus engageante. */
+  tone?: "neutral" | "warm";
   className?: string;
 }) {
-  const grand = size === "lg";
+  const chaud = tone === "warm";
   return (
     <button
       type="button"
@@ -42,17 +46,30 @@ export function DisclosureButton({
       aria-expanded={open}
       aria-controls={controls}
       className={cn(
-        "group inline-flex items-center gap-2.5 rounded-full border border-hairline-strong bg-white/[0.04] font-semibold text-ink backdrop-blur-sm transition-colors duration-300 hover:border-white/30 hover:bg-white/[0.08]",
-        grand ? "px-7 py-4 text-[15px]" : "px-5 py-2.5 text-[13.5px]",
+        "group inline-flex items-center rounded-full border font-semibold backdrop-blur-sm transition-[background-color,border-color,box-shadow] duration-300",
+        chaud
+          // La lueur orange donne au bouton la présence d'une vraie invitation :
+          // sans elle, un contour se perd dans une page sombre parcourue vite.
+          ? "border-warm/55 bg-warm-soft text-warm-light shadow-[0_18px_50px_-18px_rgba(255,160,70,0.5)] hover:border-warm/80 hover:bg-warm/20 hover:shadow-[0_24px_64px_-16px_rgba(255,160,70,0.7)]"
+          : "border-hairline-strong bg-white/[0.04] text-ink hover:border-white/30 hover:bg-white/[0.08]",
+        size === "xl"
+          // Large et mince plutôt que haut et court : la barre traverse la
+          // moitié de la page sur un grand écran, et prend toute la largeur
+          // disponible moins les marges sur un petit.
+          ? "w-full max-w-[640px] justify-center gap-3 px-6 py-3 text-[16.5px]"
+          : size === "lg"
+            ? "gap-2.5 px-7 py-4 text-[15px]"
+            : "gap-2.5 px-5 py-2.5 text-[13.5px]",
         className
       )}
     >
       {open && labelOpen ? labelOpen : label}
       <ChevronDown
-        size={grand ? 17 : 15}
+        size={size === "xl" ? 20 : size === "lg" ? 17 : 15}
         aria-hidden="true"
         className={cn(
-          "text-accent-light transition-transform duration-300",
+          "transition-transform duration-300",
+          chaud ? "text-warm" : "text-accent-light",
           open ? "rotate-180" : "group-hover:translate-y-0.5"
         )}
       />

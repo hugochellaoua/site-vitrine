@@ -85,8 +85,14 @@
   }
 }
 
-* {
-  border-color: var(--hairline);
+/* Couleur de bordure par défaut, pour que `border` seul trace un filet discret
+   plutôt que la couleur du texte. Elle doit vivre dans la couche `base` : hors
+   couche, cette règle bat toutes les classes utilitaires — et `border-warm/45`
+   comme `border-accent/35` se retrouvaient rendues en gris sans rien signaler. */
+@layer base {
+  * {
+    border-color: var(--hairline);
+  }
 }
 
 html {

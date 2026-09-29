@@ -38,7 +38,10 @@ export const nav = {
     // Placé juste après les produits : on entre plus souvent par son problème
     // que par le nom d'une brique logicielle.
     { label: "Cas d'usage", href: "/cas-d-usage", dropdown: "usecases" as const },
-    { label: "Le process", href: "/#story" },
+    // La méthodologie se déplie sous le process : c'est la même matière — ce
+    // qui se passe, puis comment on s'y prend — et la barre n'a plus la place
+    // d'une huitième entrée de premier niveau.
+    { label: "Le process", href: "/#story", dropdown: "process" as const },
     { label: "Services", href: "/#services", dropdown: "services" as const },
     { label: "Tarifs", href: "/#tarifs" },
     { label: "FAQ", href: "/#faq" },
@@ -215,6 +218,71 @@ export const synthesis = {
     { n: "02", title: "Expérience candidat", value: "4,8", unit: "/5", label: "note moyenne des candidats", steps: "Étapes 04 & 10" },
     { n: "03", title: "Évaluation", value: "3", unit: "×", label: "plus de signaux qualifiés", steps: "Étapes 01 & 07" },
   ],
+};
+
+/**
+ * Notre méthodologie.
+ *
+ * Texte de l'entreprise, repris mot pour mot : c'est sa parole, on ne la
+ * réécrit pas. Les `**…**` marquent ce qui doit ressortir à la lecture — le
+ * composant de page les rend en clair sur fond sombre.
+ */
+export const methodology = {
+  eyebrow: "Notre méthodologie",
+  title: "Une méthodologie d'évaluation fondée sur les sciences du recrutement",
+  emphasis: "les sciences du recrutement",
+  intro: [
+    "Helpify ne se contente pas de poser des questions.",
+    "Chaque conversation est construite autour de **critères d'évaluation précis**, puis analysée à partir d'éléments concrets et observables dans les réponses.",
+  ],
+
+  steps: [
+    {
+      n: "01",
+      title: "Définir les critères",
+      body: [
+        "À partir de la fiche de poste et du contexte de recrutement, Helpify identifie et suggère des **critères spécifiques au poste**.",
+        "Pas de compétences génériques : les critères doivent pouvoir être **observés et évalués à travers des situations concrètes**.",
+        "Le recruteur définit ensuite leur importance :",
+      ],
+      // Les trois niveaux reprennent le code couleur tenu partout : l'orange
+      // pour ce qui est éliminatoire, le gris pour ce qui n'est qu'un plus.
+      weights: ["Primordial", "Important", "Bonus"],
+    },
+    {
+      n: "02",
+      title: "Construire les questions",
+      body: [
+        // Pas de correspondance « un critère, une question » : tous ne sont pas
+        // interrogés, et l'annoncer engagerait sur un fonctionnement qui n'est
+        // pas le nôtre. Les critères orientent les questions, ils ne les
+        // dictent pas une à une.
+        "À partir des critères retenus, Helpify génère des questions qui explorent les expériences réelles du candidat : situations vécues, actions réalisées, décisions prises et résultats obtenus.",
+        "La conversation s'appuie notamment sur des principes issus des méthodes **STAR et STAR inversé**.",
+      ],
+    },
+    {
+      n: "03",
+      title: "Évaluer les réponses",
+      body: [
+        "Les réponses sont analysées au regard des critères définis et de leur niveau d'importance.",
+        "Helpify recherche des **éléments observables et contextualisés**, plutôt que de simples déclarations ou mots-clés.",
+      ],
+    },
+  ],
+
+  chain: {
+    title: "Une évaluation construite de bout en bout",
+    steps: ["Critères précis", "Questions adaptées", "Éléments observables", "Évaluation"],
+    lead: "Le CV donne le point de départ.",
+    punch: "La conversation permet d'aller chercher ce que le CV ne peut pas montrer.",
+  },
+
+  cta: {
+    title: "Voir la méthode appliquée à un de vos postes.",
+    emphasis: "à un de vos postes.",
+    sub: "15 min : vous décrivez le poste, on déroule la méthode devant vous.",
+  },
 };
 
 /**

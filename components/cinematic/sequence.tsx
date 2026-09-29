@@ -64,6 +64,8 @@ export function CinematicSequence() {
           label={processIntro.reveal}
           labelOpen={processIntro.revealOpen}
           controls="process-deroule"
+          tone="warm"
+          size="xl"
         />
       </div>
 

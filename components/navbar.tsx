@@ -23,6 +23,13 @@ const SUBMENUS = {
       href: `/produits#${p.id}`,
     })),
   },
+  process: {
+    tone: "ink" as const,
+    items: [
+      { label: "Le déroulé, étape par étape", href: "/#story" },
+      { label: "Notre méthodologie", href: "/methodologie" },
+    ],
+  },
   services: {
     tone: "ink" as const,
     items: [
