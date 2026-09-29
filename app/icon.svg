@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <title>Helpify</title>
+  <!-- La marque du site (components/logo-mark.tsx), agrandie de 18 % autour de
+       son centre : dans un onglet de 16 px, un logo qui ne remplit pas son
+       carré perd le peu de place dont il dispose. Aucun fond : les deux teintes
+       tiennent aussi bien sur une barre claire que sombre. -->
+  <g transform="translate(32,32) scale(1.18) translate(-32,-32)">
+    <path d="M27 10C14 19 14 45 27 54" stroke="#1d50fe" stroke-width="8.5" stroke-linecap="round"/>
+    <path d="M41 19C50 25 50 39 41 45" stroke="#ffa046" stroke-width="7.5" stroke-linecap="round"/>
+  </g>
+</svg>

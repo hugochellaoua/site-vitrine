@@ -8,7 +8,6 @@ import { Hero } from "@/components/hero";
 import { CinematicSequence, ProcessIntro } from "@/components/cinematic/sequence";
 import { ProductsOverview } from "@/components/products-overview";
 import { Synthesis } from "@/components/synthesis";
-import { Testimonials } from "@/components/testimonials";
 import { Integrations } from "@/components/integrations";
 import { Services } from "@/components/services";
 import { Roi } from "@/components/roi";
@@ -42,7 +41,6 @@ export default function Home() {
         <CinematicSequence />
         <ProductsOverview />
         <Synthesis />
-        <Testimonials />
         <Integrations />
         <Services />
         <Roi />

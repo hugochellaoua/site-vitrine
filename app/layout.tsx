@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: { default: site.title, template: `%s — ${site.name}` },
   description: site.description,
+  // Canonique de l'accueil seulement. Les métadonnées s'héritent : toute page
+  // qui ne redéclare pas la sienne se dirait copie de celle-ci, et sortirait
+  // de l'index. Chaque page en pose donc une.
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

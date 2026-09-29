@@ -4,7 +4,11 @@ import { legalDocs } from "@/lib/legal";
 
 const doc = legalDocs["cgu"];
 
-export const metadata: Metadata = { title: doc.title, description: doc.description };
+export const metadata: Metadata = {
+  title: doc.title,
+  description: doc.description,
+  alternates: { canonical: "/cgu" },
+};
 
 export default function Page() {
   return <LegalPage doc={doc} />;

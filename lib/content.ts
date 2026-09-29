@@ -6,7 +6,8 @@
 export const links = {
   booking: "https://calendar.app.google/kAfRpMQoheceUQZY8",
   contact: "/contact",
-  login: "/login",
+  // L'application est sur son propre sous-domaine : le lien sort du site.
+  login: "https://app.helpify-ai.fr/",
   mentionsLegales: "/mentions-legales",
   privacy: "/politique-de-confidentialite",
   noticeIA: "/notice-ia",
@@ -32,16 +33,19 @@ export const site = {
 
 export const nav = {
   links: [
-    { label: "Produits", href: "/produits" },
+    // `dropdown` : l'entrée déploie un sous-menu au survol (voir navbar.tsx).
+    { label: "Produits", href: "/produits", dropdown: "products" as const },
+    // Placé juste après les produits : on entre plus souvent par son problème
+    // que par le nom d'une brique logicielle.
+    { label: "Cas d'usage", href: "/cas-d-usage", dropdown: "usecases" as const },
     { label: "Le process", href: "/#story" },
-    { label: "Intégrations", href: "/#integrations" },
-    { label: "Services", href: "/#services" },
+    { label: "Services", href: "/#services", dropdown: "services" as const },
     { label: "Tarifs", href: "/#tarifs" },
     { label: "FAQ", href: "/#faq" },
     { label: "Contact", href: links.contact },
   ],
   connexion: { label: "Connexion", href: links.login },
-  cta: { label: "Réserver une démo", href: links.booking },
+  cta: { label: "Réservez une démo", href: links.booking },
 };
 
 export const hero = {
@@ -67,7 +71,11 @@ export const processIntro = {
   eyebrow: "Le process",
   title: "De votre besoin à la shortlist.",
   emphasis: "la shortlist.",
-  sub: "9 étapes. Voici exactement ce qui se passe.",
+  sub: "10 étapes. Voici exactement ce qui se passe.",
+  // Le déroulé fait dix écrans : il s'ouvre à la demande, pour ne pas imposer
+  // à tout visiteur une traversée qu'il n'a pas demandée.
+  reveal: "Découvrir le process",
+  revealOpen: "Replier le process",
 };
 
 export const processSteps = [
@@ -83,10 +91,18 @@ export const processSteps = [
     key: "besoin",
     n: "02",
     title: "Vous cadrez le poste",
-    sub: "Compétences clés, contexte d'équipe, critères, deal-breakers.",
+    sub: "Vous définissez les critères et leur importance.",
     role: "Customer Success Manager",
     roleLabel: "Poste à pourvoir",
-    fields: ["Compétences clés", "Contexte d'équipe", "Critères", "Deal-breakers"],
+    // Le poids compte autant que le critère : c'est lui qui départage deux
+    // candidats qui cochent les mêmes cases.
+    fieldsLabel: "Critères et importance",
+    fields: [
+      { label: "Relation client grands comptes", weight: "Primordial" },
+      { label: "Structuration d'un service", weight: "Primordial" },
+      { label: "Anglais courant", weight: "Important" },
+      { label: "Expérience SaaS", weight: "Bonus" },
+    ],
     status: "Campagne prête",
   },
   {
@@ -94,8 +110,8 @@ export const processSteps = [
     n: "03",
     title: "Vous diffusez un lien unique",
     sub: "Le même point d'entrée sur tous vos canaux.",
-    link: "helpify.io/c/8f3a2",
-    channels: ["LinkedIn", "Job boards", "Site carrière", "Cooptation", "Email", "Sourcing"],
+    link: "helpify-ai.fr/72401",
+    channels: ["LinkedIn", "Job boards", "Site carrière", "Email", "Sourcing"],
   },
   {
     key: "questions",
@@ -152,13 +168,23 @@ export const processSteps = [
     funnel: [
       { value: 200, label: "candidats" },
       { value: 200, label: "conversations analysées" },
-      { value: 42, label: "profils pertinents" },
+      { value: 60, label: "profils pertinents" },
       { value: 10, label: "profils shortlistés" },
     ],
   },
   {
-    key: "reponse",
+    key: "decision",
     n: "09",
+    title: "Vos RH prennent la décision",
+    sub: "Plus éclairée : elle s'appuie sur une évaluation faite selon les critères définis pour le poste.",
+    from: "Évaluation Helpify",
+    basis: ["Compétences clés", "Contexte d'équipe", "Deal-breakers"],
+    owner: "Vos RH",
+    verdict: "Décision",
+  },
+  {
+    key: "reponse",
+    n: "10",
     title: "Chaque candidat reçoit sa réponse",
     sub: "Écrite à partir de sa propre conversation.",
     decisions: ["Continuer", "Refuser"],
@@ -186,49 +212,173 @@ export const synthesis = {
   emphasis: "un seul process.",
   items: [
     { n: "01", title: "Gain de temps", value: "−90", unit: "%", label: "de temps jusqu'à la shortlist", steps: "Étapes 03 & 08" },
-    { n: "02", title: "Expérience candidat", value: "4,8", unit: "/5", label: "note moyenne des candidats", steps: "Étapes 04 & 09" },
+    { n: "02", title: "Expérience candidat", value: "4,8", unit: "/5", label: "note moyenne des candidats", steps: "Étapes 04 & 10" },
     { n: "03", title: "Évaluation", value: "3", unit: "×", label: "plus de signaux qualifiés", steps: "Étapes 01 & 07" },
   ],
 };
 
-// ─────────────────────────────────────────────────────────────
-// PREUVE SOCIALE
-//
-// Les citations ci-dessous sont des EMPLACEMENTS, pas des témoignages.
-// Elles ne s'affichent qu'en développement (voir components/testimonials.tsx)
-// et ne partiront jamais en production tant qu'elles n'auront pas été
-// remplacées par de vrais propos, recueillis avec l'accord de leur auteur.
-//
-// Publier de faux avis est une pratique commerciale trompeuse au sens du Code
-// de la consommation : le risque juridique est réel, et la crédibilité perdue
-// auprès d'un DRH ne se rattrape pas.
-// ─────────────────────────────────────────────────────────────
-export const testimonials = {
-  eyebrow: "Ils utilisent Helpify",
-  title: "Ce qu'en disent les recruteurs.",
-  emphasis: "les recruteurs.",
-  placeholderWarning:
-    "Emplacements d'exemple, visibles uniquement en local. Remplacez-les par de vraies citations avant la mise en ligne.",
+/**
+ * Cas d'usage.
+ *
+ * Chaque entrée part du problème tel que le recruteur le formule lui-même,
+ * puis dit ce qu'Helpify y répond. C'est l'inverse d'une liste de
+ * fonctionnalités : le visiteur doit se reconnaître dans une phrase avant
+ * qu'on lui parle du produit.
+ *
+ * `menu` et `promise` sont la version courte affichée dans le sous-menu de la
+ * navigation — la promesse y tient en une ligne. `tone` suit la règle de
+ * couleur du site : orange quand le cas parle du candidat, bleu quand il parle
+ * du travail du recruteur.
+ */
+export const useCases = {
+  eyebrow: "Cas d'usage",
+  title: "Neuf situations. Dans laquelle vous reconnaissez-vous ?",
+  emphasis: "Dans laquelle vous reconnaissez-vous ?",
+  intro:
+    "Le recrutement ne bloque pas au même endroit selon les équipes. Partez de votre situation : voici ce qu'Helpify y change, concrètement.",
+  menuLink: "Voir les neuf cas d'usage",
+
   items: [
     {
-      quote: "Citation exacte du client, telle qu'il l'a formulée. Une phrase concrète et chiffrée convainc davantage qu'un superlatif.",
-      name: "Prénom Nom",
-      role: "Directeur ou directrice des talents",
-      company: "Nom de l'entreprise",
+      id: "volume",
+      menu: "Volume important",
+      promise: "Gagnez du temps quel que soit le nombre de candidats",
+      problem:
+        "Je gère un volume important de candidatures et je n'ai pas le temps de toutes les analyser.",
+      answer: [
+        "Helpify automatise la première étape d'analyse et de préqualification. Chaque candidat peut être interrogé et évalué selon les critères définis pour le poste, afin de permettre aux recruteurs de se concentrer sur les profils nécessitant réellement leur intervention.",
+      ],
+      benefits: [
+        "Gain de temps sur le tri et la préqualification",
+        "Capacité à traiter des volumes importants",
+        "Première évaluation homogène des candidats",
+        "Plus de temps consacré aux étapes à forte valeur ajoutée",
+      ],
+      tone: "accent" as const,
     },
     {
-      quote: "Deuxième citation. L'idéal est qu'elle traite d'une objection : le temps de mise en place, ou la réaction des candidats.",
-      name: "Prénom Nom",
-      role: "DRH",
-      company: "Nom de l'ESN",
+      id: "standardiser-mon-process",
+      menu: "Standardiser mon process",
+      promise: "Les mêmes critères pour tous",
+      problem: "Je veux que tous les candidats soient évalués de la même manière.",
+      answer: [
+        "Les critères d'évaluation sont définis en amont et servent de base aux conversations avec les candidats. Chaque candidat est ainsi évalué selon le même cadre, indépendamment du recruteur.",
+      ],
+      keyMessage: "Les mêmes critères pour tous.",
+      tone: "accent" as const,
     },
     {
-      quote: "Troisième citation. Celle-ci peut porter un résultat mesuré, à condition de pouvoir le justifier.",
-      name: "Prénom Nom",
-      role: "Responsable recrutement",
-      company: "Nom du cabinet",
+      id: "mieux-lire-les-candidats",
+      menu: "Mieux lire les candidats",
+      promise: "Un profil unifié et structuré",
+      problem:
+        "Les informations sont dispersées et j'ai besoin d'une lecture plus simple des profils.",
+      answer: [
+        "Helpify transforme les informations recueillies pendant la conversation en un profil unifié et structuré, basé sur les critères importants pour le poste.",
+      ],
+      benefits: [
+        "Profil candidat standardisé",
+        "Informations structurées",
+        "Lecture plus rapide",
+        "Comparaison facilitée",
+        "Mise en avant des informations pertinentes pour le poste",
+      ],
+      tone: "accent" as const,
+    },
+    {
+      id: "evaluer-les-competences",
+      menu: "Évaluer les compétences",
+      promise: "Allez au-delà des compétences déclarées",
+      problem:
+        "Je ne veux pas seulement savoir ce que le candidat affirme savoir faire. Je veux pouvoir évaluer ses compétences.",
+      answer: [
+        "Helpify ne se contente pas de collecter des informations. La conversation est construite autour des critères d'évaluation définis pour le poste et permet d'aller chercher des éléments concrets sur l'expérience, les compétences et les situations vécues par le candidat.",
+      ],
+      keyMessage: "Ne vous contentez plus de lire les compétences déclarées. Évaluez-les.",
+      tone: "accent" as const,
+    },
+    {
+      id: "cv-boostes-par-ia",
+      menu: "CV boostés par l'IA",
+      promise: "Allez vérifier ce qu'il y a derrière le CV",
+      problem:
+        "Les candidats utilisent l'IA pour optimiser leur CV. Comment savoir ce qu'il y a réellement derrière le document ?",
+      answer: [
+        "Le CV n'est plus la seule source d'information. Helpify ajoute une conversation avec le candidat pour aller au-delà du document.",
+        "Les questions sont construites à partir des critères d'évaluation du poste et d'une méthodologie structurée de recrutement. Le candidat doit apporter des éléments concrets sur son expérience et son parcours.",
+      ],
+      // Une promesse d'infaillibilité serait invendable le jour où elle est
+      // prise en défaut. On dit donc ce que la conversation fait vraiment.
+      nuance:
+        "La conversation ne rend pas la triche impossible. Elle limite les réponses artificiellement optimisées et confronte les déclarations à des éléments concrets.",
+      tone: "accent" as const,
+    },
+    {
+      id: "ne-passer-a-cote-daucun-talent",
+      menu: "Ne passer à côté d'aucun talent",
+      promise: "100 % des candidats écoutés et évalués",
+      problem:
+        "Je ne veux pas écarter un bon candidat simplement parce que son CV ne correspond pas parfaitement à ce que je recherche.",
+      answer: [
+        "Avec Helpify, 100 % des candidats sont écoutés, entendus et évalués selon les critères définis pour le poste.",
+        "La décision ne repose donc plus uniquement sur les quelques lignes visibles sur un CV.",
+      ],
+      keyMessage: "100 % des candidats sont écoutés, entendus et évalués.",
+      tone: "warm" as const,
+    },
+    {
+      id: "experience-candidat",
+      menu: "Améliorer l'expérience candidat",
+      promise: "Donnez à chaque candidat la possibilité de s'exprimer",
+      problem: "Je veux que mes candidats aient réellement l'occasion de s'exprimer.",
+      answer: [
+        "Chaque candidat peut avoir une véritable conversation autour de son parcours, de son expérience et de ses attentes.",
+        "Il peut expliquer qui il est, apporter du contexte à son parcours et poser ses propres questions. Il peut également recevoir un retour personnalisé, si vous activez l'option.",
+      ],
+      keyMessage: "Donnez à chaque candidat la possibilité de s'exprimer.",
+      tone: "warm" as const,
+    },
+    {
+      id: "profils-atypiques",
+      menu: "Comprendre les profils atypiques",
+      promise: "Évaluez le talent au-delà du parcours linéaire",
+      problem:
+        "Certains profils ne rentrent pas dans les cases classiques du CV, mais pourraient pourtant correspondre au poste.",
+      answer: [
+        "La conversation permet d'aller plus loin qu'une lecture linéaire du parcours.",
+        "Elle permet de comprendre ce que le candidat a réellement fait, dans quel contexte, avec quelles responsabilités et quelles compétences, afin d'évaluer son adéquation avec le poste au-delà des intitulés et des parcours traditionnels.",
+      ],
+      keyMessage: "Comprendre le talent derrière le parcours.",
+      tone: "warm" as const,
+    },
+    {
+      id: "enrichir-le-vivier",
+      menu: "Enrichir le vivier",
+      promise: "Un vivier plus riche et mieux exploitable",
+      problem:
+        "Je veux mieux connaître mon vivier de candidats pour pouvoir mieux l'exploiter dans le temps.",
+      answer: [
+        "Chaque conversation permet d'enrichir progressivement les informations disponibles sur les candidats : leur expérience, leurs compétences, leurs expertises, leurs contextes d'intervention ou encore leurs aspirations.",
+        "Votre vivier devient ainsi plus riche et mieux exploitable, avec davantage d'informations qualifiées pour retrouver plus facilement les profils pertinents lorsqu'un nouveau besoin apparaît.",
+        "Ces données peuvent notamment permettre, dans le temps, de mieux identifier les candidats susceptibles de correspondre à de futurs besoins et de mieux les allouer en fonction des opportunités.",
+      ],
+      benefits: [
+        "Une connaissance plus riche des candidats déjà présents dans le vivier",
+        "Davantage d'informations qualifiées sur les profils",
+        "Un vivier qui s'enrichit au fil des interactions",
+        "Une meilleure capacité à retrouver les profils pertinents pour de futurs besoins",
+        "Une meilleure exploitation des talents déjà présents dans votre vivier",
+      ],
+      keyMessage: "Un vivier enrichi et mieux exploitable.",
+      tone: "warm" as const,
     },
   ],
+
+  cta: {
+    title: "Votre situation n'est pas dans la liste ?",
+    emphasis: "pas dans la liste ?",
+    sub: "Décrivez-nous votre process : on vous montre en 15 min ce qu'Helpify y change.",
+  },
 };
 
 // ─────────────────────────────────────────────────────────────
@@ -277,7 +427,7 @@ export const products = {
       id: "360-matching",
       name: "360 Matching",
       headline: "Ne laissez plus passer un talent à cause d'une seule candidature",
-      body: "Un candidat qui ne correspond pas à un poste peut être parfaitement adapté à un autre. 360 Matching identifie ces synergies dans l'ensemble de votre vivier.",
+      body: "Un candidat qui ne correspond pas à un poste peut être parfaitement adapté à un autre. 360 Matching identifie ces synergies dans l'ensemble de vos offres d'emploi.",
       visual: "constellation" as const,
       tone: "accent" as const,
     },
@@ -297,11 +447,13 @@ export const products = {
   // que le visiteur reconnaisse le même produit d'une page à l'autre.
   demo: {
     prequal: {
+      // Une question factuelle : la préqualification collecte d'abord les
+      // informations qu'un recruteur devrait sinon demander au téléphone.
       messages: [
-        { from: "helpify", text: "Racontez-moi comment vous avez monté un service client." },
-        { from: "candidate", text: "J'étais seule au départ. J'ai écrit les process, recruté trois personnes, puis mis en place un suivi de satisfaction." },
+        { from: "helpify", text: "Sous combien de temps êtes-vous disponible ?" },
+        { from: "candidate", text: "Dans trois mois." },
       ],
-      extracted: ["Expérience", "Compétences", "Motivations", "Soft skills", "Disponibilité"],
+      extracted: ["Disponibilité", "Mobilité", "Diplôme", "Langues parlées"],
     },
     score: {
       candidate: "Sarah K.",
@@ -370,25 +522,43 @@ export const services = {
   eyebrow: "Services additionnels",
   title: "Ce que nous faisons en plus.",
   emphasis: "en plus.",
+  // `line` tient sur une ligne et suffit à comprendre l'offre ; `body` se
+  // déroule à la demande, pour qui veut savoir ce que cela recouvre vraiment.
   items: [
     {
+      id: "marque-blanche",
       n: "01",
       title: "Marque blanche",
-      line: "Helpify déployé aux couleurs de votre cabinet : logo, ton, charte.",
+      line: "Helpify déployé aux couleurs de votre entreprise : logo, ton, charte.",
+      body: [
+        "Vos candidats échangent avec votre marque, pas avec la nôtre. Logo, couleurs et typographie sont les vôtres, du premier message jusqu'au compte rendu.",
+        "C'est déterminant pour un cabinet ou une ESN, dont la relation candidat est le métier : elle doit rester à leur nom.",
+      ],
     },
     {
+      id: "accompagnement",
       n: "02",
       title: "Accompagnement sur mesure",
-      line: "Un chef de projet dédié anime des ateliers avec vos équipes pour cadrer vos campagnes et vos process.",
+      line: "Un chef de projet dédié cadre le projet avec vos équipes : objectifs, ROI attendu, intégration à vos outils.",
+      body: [
+        "Un chef de projet dédié travaille avec vos équipes, pas à côté d'elles.",
+        "Des ateliers d'abord, pour cadrer le projet : les objectifs, le ROI attendu et l'intégration à vos outils. On y décide de ce qui doit se passer — et de ce qui ne doit surtout pas changer.",
+        "Le but n'est pas de vous faire adopter une nouvelle façon de travailler. C'est que tout s'enchaîne sans friction chez vous, que vos équipes gardent leurs habitudes, et que l'impact business soit clair avant même de commencer.",
+        "Enfin des points réguliers, pour ajuster ce qui doit l'être à mesure que vos recrutements avancent.",
+      ],
     },
   ],
+  reveal: "En savoir plus",
+  revealOpen: "Replier",
 };
 
 export const roi = {
   eyebrow: "ROI",
-  title: "Ce que Helpify vous fait gagner.",
+  title: "Ce qu'Helpify vous fait gagner.",
   emphasis: "gagner.",
   sub: "Toutes les hypothèses sont modifiables. Le calcul se met à jour immédiatement.",
+  reveal: "Calculer mon ROI",
+  revealOpen: "Replier le calcul",
 
   // Bloc 1 — le temps repris sur des tâches que Helpify absorbe.
   time: {
@@ -406,23 +576,29 @@ export const roi = {
   // Bloc 2 — la valeur d'un recrutement qui aboutit plus vite.
   speed: {
     title: "Accélérez vos recrutements",
+    // La réduction du time-to-hire n'est plus un curseur à régler : c'est
+    // l'ordre de grandeur que nous retenons, posé une fois pour toutes. Un
+    // visiteur n'a aucun moyen d'estimer ce chiffre lui-même ; le lui demander
+    // ne faisait que déplacer sur lui une hypothèse qui nous revient.
+    cut: 15,
+    // Un poste vacant coûte ce qu'il ne produit pas. Plutôt que de demander au
+    // visiteur de deviner « la valeur d'une journée gagnée », on la déduit du
+    // salaire — et au plus bas que le secteur admette.
+    //
+    // Les calculateurs de référence posent : journée = salaire annuel ×
+    // multiplicateur de poste ÷ jours ouvrés, avec un multiplicateur de 1,2
+    // (support, ops) à 4 (commercial). On retient 1, soit en dessous de leur
+    // plancher, et on n'ajoute pas les charges patronales : pendant la vacance,
+    // l'entreprise ne verse pas ce salaire. Un chiffre qu'un DRH ne peut pas
+    // contester vaut mieux qu'un chiffre flatteur qu'il démonte en rendez-vous.
+    valueMultiplier: 1,
+    workingDays: 220,
     inputs: [
       { key: "hires", label: "Recrutements par an", value: 100, min: 1, max: 1000, step: 1, unit: "" },
       { key: "timeToHire", label: "Time-to-hire actuel", value: 30, min: 5, max: 180, step: 1, unit: " j" },
-      { key: "timeToHireCut", label: "Réduction estimée du time-to-hire", value: 15, min: 0, max: 60, step: 5, unit: " %" },
-      { key: "dayValue", label: "Valeur d'une journée gagnée", value: 100, min: 0, max: 1000, step: 50, unit: " €", note: "Hypothèse prudente de valeur économique d'une journée de recrutement gagnée." },
+      { key: "grossSalary", label: "Salaire brut annuel moyen du poste", value: 45000, min: 20000, max: 200000, step: 1000, unit: " €" },
     ],
-  },
-
-  // Bloc 3 — le coût évité sur les recrutements qui échouent.
-  quality: {
-    title: "Améliorez la qualité de vos recrutements",
-    inputs: [
-      { key: "badHireRate", label: "Taux de recrutements inadéquats", value: 10, min: 0, max: 50, step: 1, unit: " %" },
-      { key: "badHireCost", label: "Coût d'un recrutement inadéquat", value: 10000, min: 1000, max: 100000, step: 1000, unit: " €" },
-      { key: "badHireCut", label: "Réduction estimée grâce à Helpify", value: 10, min: 0, max: 50, step: 5, unit: " %" },
-    ],
-    note: "Estimation prudente basée sur des hypothèses modifiables.",
+    note: "Réduction du time-to-hire retenue : 15 %. Une journée gagnée est valorisée au salaire brut du poste rapporté à 220 jours ouvrés, sans multiplicateur — là où les calculateurs du secteur en appliquent un de 1,2 à 4 selon le poste.",
   },
 
   // Le simulateur est le moment où le visiteur est le plus engagé : il vient
@@ -442,7 +618,6 @@ export const roi = {
     lines: [
       { key: "time", label: "Économies de temps" },
       { key: "speed", label: "Valeur de l'accélération des recrutements" },
-      { key: "quality", label: "Valeur potentielle d'une meilleure qualité de recrutement" },
     ],
     totalLabel: "Valeur annuelle estimée",
     note: "Simulation indicative basée sur les hypothèses renseignées.",
@@ -453,7 +628,7 @@ export const roi = {
     title: "Et l'expérience candidat ?",
     items: [
       "100 % des candidats évalués",
-      "100 % reçoivent un retour personnalisé",
+      "Un retour personnalisé à chaque candidat, si vous activez l'option",
       "Une expérience plus rapide et plus humaine",
     ],
   },
@@ -466,7 +641,7 @@ export const pricing = {
   sub: "Pas de licence par siège. Pas de surprise.",
   stat: 380,
   statLabel: "ROI moyen constaté",
-  cta: { label: "Réserver ma démo", href: links.booking },
+  cta: { label: "Réservez une démo", href: links.booking },
   ctaSub: "15 min · Sans engagement",
   altLink: { label: "J'ai déjà un compte", href: links.login },
 };
@@ -478,11 +653,11 @@ export const faq = {
   items: [
     {
       q: "Ai-je vraiment besoin d'un outil de tri si je gère déjà ?",
-      a: "Vous gérez les candidatures que vous lisez. Mais combien lisez-vous vraiment ? Sur 200 candidatures, à 6 secondes par mot clé, ça fait 20 minutes pour passer à côté de la moitié de vos talents. Helpify ne remplace pas votre œil, il s'assure que les bons profils arrivent jusqu'à lui.",
+      a: "Vous gérez les candidatures que vous lisez. Mais combien lisez-vous vraiment ? Sur 200 candidatures, à 6 secondes par candidature, ça fait 20 minutes pour passer à côté de la moitié de vos talents. Helpify ne remplace pas votre œil, il s'assure que les bons profils arrivent jusqu'à lui.",
     },
     {
       q: "Comment gérez-vous les biais de l'IA ?",
-      a: "Helpify ne juge pas, ne devine pas, n'invente pas : elle écoute et synthétise. Chaque conclusion est sourcée mot pour mot sur les réponses du candidat (citations textuelles incluses). Le score est justifié critère par critère. Vous gardez la décision finale, toujours.",
+      a: "Helpify ne juge pas, ne devine pas, n'invente pas : il écoute et synthétise. Chaque conclusion est sourcée mot pour mot sur les réponses du candidat (citations textuelles incluses). Le score est justifié critère par critère. Vous gardez la décision finale, toujours.",
     },
     {
       q: "Les candidats sont-ils réfractaires à échanger avec une IA ?",
@@ -490,7 +665,11 @@ export const faq = {
     },
     {
       q: "Est-ce compatible avec notre ATS existant ?",
-      a: "Helpify n'est pas un ATS. C'est le filtre intelligent qui se branche AVANT votre ATS (Bullhorn, Lever, Greenhouse, Teamtailor…). Vous gardez vos outils, on enlève le bruit. La shortlist scorée arrive directement dans votre flux habituel.",
+      a: "Helpify n'est pas un ATS. C'est le filtre intelligent qui se branche en amont de votre ATS (Bullhorn, Lever, Greenhouse, Teamtailor…). Vous gardez vos outils, on enlève le bruit. La shortlist scorée arrive directement dans votre flux habituel.",
+    },
+    {
+      q: "Encore un outil de plus à faire adopter à mes équipes ?",
+      a: "Non, et c'est justement le point : vos recruteurs ne changent pas d'outil. Helpify s'intègre à votre ATS, où sont récupérées toutes les informations nécessaires pour lancer une campagne sur un nouveau poste. Une extension Chrome permet de piloter Helpify sans quitter l'ATS, et les résultats y remontent au même endroit. Vos équipes gardent leurs habitudes : le passage par Helpify est transparent.",
     },
     {
       q: "Combien de temps pour mettre ça en place ?",
@@ -502,11 +681,11 @@ export const faq = {
     },
     {
       q: "Ça coûte combien ?",
-      a: "Ça dépend de votre volume de campagnes et de candidats. La meilleure réponse, c'est 15 minutes de démo pour qu'on cale ça ensemble, sans engagement.",
+      a: "Ça dépend de votre volume de campagnes et de candidats. La meilleure réponse, c'est 15 minutes de démo pour qu'on planifie ça ensemble, sans engagement.",
     },
     {
       q: "Et si on veut tester avant de s'engager ?",
-      a: "Nous proposons des pilotes sur un poste réel, facturés mais avec une garantie « satisfait ou remboursé ». Vous évaluez la qualité des shortlists en conditions réelles, sans engagement durable, si le résultat n'est pas au rendez-vous, vous êtes remboursé.",
+      a: "Nous proposons des pilotes sur un poste réel, facturés mais avec une garantie « satisfait ou remboursé ». Vous évaluez la qualité des shortlists en conditions réelles, sans engagement durable : si le résultat n'est pas au rendez-vous, vous êtes remboursé.",
     },
   ],
 };
