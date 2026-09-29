@@ -17,11 +17,16 @@ export function Footer() {
               rel="noopener noreferrer"
               aria-label={footer.social.label}
               title={footer.social.label}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-hairline text-muted transition-colors hover:border-hairline-strong hover:text-ink"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-hairline transition-colors hover:border-hairline-strong"
             >
-              {/* Lucide ne fournit pas d'icônes de marques : le glyphe est intégré ici. */}
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM2.4 21.5h5.2V9.3H2.4v12.2ZM9.9 9.3h4.98v1.67h.07c.7-1.25 2.4-2.57 4.93-2.57 5.27 0 6.24 3.3 6.24 7.6v5.5h-5.2v-4.88c0-1.17-.02-2.67-1.7-2.67-1.7 0-1.96 1.27-1.96 2.58v4.97H9.9V9.3Z" />
+              {/* La marque officielle de LinkedIn — Lucide ne fournit pas les
+                  logos de marques. Elle garde son bleu : un logo redessiné ou
+                  recoloré n'est plus le logo de personne. */}
+              <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="#0A66C2"
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                />
               </svg>
             </a>
           </div>

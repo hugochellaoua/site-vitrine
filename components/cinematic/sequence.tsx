@@ -7,6 +7,7 @@ import { processIntro, processOutro, processSteps } from "@/lib/content";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 import { SecondaryCta } from "@/components/ui/secondary-cta";
 import { Reveal } from "@/components/ui/reveal";
+import { DisclosureButton, DisclosurePanel } from "@/components/ui/disclosure";
 import { STEP_COUNT } from "./config";
 import { Scene } from "./scene";
 import { StepScene } from "./scenes";
@@ -23,12 +24,55 @@ function useIsCompact() {
   return compact;
 }
 
+/**
+ * Le process, déroulé à la demande.
+ *
+ * La séquence occupe dix hauteurs d'écran : l'imposer à tout visiteur revient à
+ * lui faire traverser le produit avant qu'il ait dit vouloir le voir. Elle est
+ * donc repliée, et un bouton la déroule.
+ *
+ * Le contenu reste dans la page, masqué, pour rester indexable. En revanche la
+ * mécanique de défilement, elle, est coupée tant que le bloc est replié : ses
+ * gestionnaires de molette détourneraient le défilement d'une section
+ * invisible.
+ */
 export function CinematicSequence() {
   const compact = useIsCompact();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  function toggle() {
+    const next = !open;
+    setOpen(next);
+    if (!next) return;
+    // Le bloc vient d'apparaître : on amène son sommet en haut de l'écran, là
+    // où commence la première étape. Sans cela, le visiteur resterait devant le
+    // bouton et devrait chercher lui-même ce qu'il vient d'ouvrir.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  }
+
   return (
     <>
-      {compact ? <Stacked /> : <Cinematic />}
-      <Outro />
+      <div className="relative flex justify-center px-6 pb-20">
+        <DisclosureButton
+          open={open}
+          onToggle={toggle}
+          label={processIntro.reveal}
+          labelOpen={processIntro.revealOpen}
+          controls="process-deroule"
+        />
+      </div>
+
+      <DisclosurePanel open={open} id="process-deroule">
+        <div ref={ref}>
+          {compact ? <Stacked /> : <Cinematic enabled={open} />}
+          <Outro />
+        </div>
+      </DisclosurePanel>
     </>
   );
 }
@@ -38,7 +82,7 @@ export function CinematicSequence() {
  * L'étape active est dérivée de la position de scroll — donc réversible,
  * et toujours juste après un saut brutal.
  */
-function Cinematic() {
+function Cinematic({ enabled }: { enabled: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
   const indexRef = useRef(0);
@@ -48,7 +92,7 @@ function Cinematic() {
 
   useEffect(() => {
     const node = ref.current;
-    if (!node) return;
+    if (!node || !enabled) return;
 
     let frame = 0;
     function measure() {
@@ -76,7 +120,7 @@ function Cinematic() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [enabled]);
 
   /**
    * Avance pas-à-pas.
@@ -95,7 +139,7 @@ function Cinematic() {
    */
   useEffect(() => {
     const node = ref.current;
-    if (!node) return;
+    if (!node || !enabled) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let locked = false;
@@ -187,12 +231,12 @@ function Cinematic() {
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("keydown", onKey);
     };
-  }, []);
+  }, [enabled]);
 
   const step = processSteps[active];
 
   return (
-    <section id="story" ref={ref} className="relative">
+    <section id="story" ref={ref} className="relative scroll-mt-0">
       <div className="sticky top-0 z-10 h-[100svh] w-full overflow-hidden">
         {/* Repère de progression : uniquement la position dans le déroulé.
             Aucun texte ici — le titre de l'étape appartient à la scène, et une
@@ -303,7 +347,7 @@ function StepArrow({
 /* Mobile / mouvement réduit : le process devient une liste d'étapes lisible. */
 function Stacked() {
   return (
-    <section id="story" className="relative flex flex-col gap-20 py-20">
+    <section id="story" className="relative flex scroll-mt-0 flex-col gap-20 py-20">
       {processSteps.map((s) => (
         <Block key={s.key}>
           <StepScene step={s} />
@@ -324,7 +368,7 @@ function Block({ children }: { children: React.ReactNode }) {
 /* Titre du process, posé juste avant la séquence. */
 export function ProcessIntro() {
   return (
-    <section className="relative flex flex-col items-center px-6 pb-4 pt-24 text-center sm:pt-32">
+    <section className="relative flex flex-col items-center px-6 pb-10 pt-24 text-center sm:pt-32">
       <Badge>{processIntro.eyebrow}</Badge>
       <SectionTitle
         title={processIntro.title}

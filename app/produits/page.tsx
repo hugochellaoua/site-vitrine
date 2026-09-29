@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   // de l'entreprise. Les deux n'ont pas à dire la même chose.
   title: "Produits — Préqualification, matching et réponses candidats",
   description:
-    "Quatre produits qui s'intègrent à votre ATS : préqualification automatique des candidats, matching au-delà du CV, 360 Matching sur tout votre vivier et Talent Ask pour répondre aux candidats 24h/24.",
+    "Quatre produits intégrés à votre ATS : préqualification des candidats, matching au-delà du CV, 360 Matching sur tout le vivier, et Talent Ask qui répond 24h/24.",
   alternates: { canonical: "/produits" },
   openGraph: {
     title: "Quatre produits. Une seule conversation.",
@@ -143,11 +143,13 @@ export default function ProduitsPage() {
                   reversed ? "lg:flex-row-reverse" : "lg:flex-row"
                 }`}
               >
-                <Reveal className="flex w-full justify-center lg:w-1/2">
-                  <Visual />
-                </Reveal>
-
-                <Reveal delay={0.1} className="w-full lg:w-1/2">
+                {/* Le texte précède le visuel dans le document, et non
+                    l'inverse : sur un écran étroit les deux colonnes s'empilent,
+                    et l'illustration arrivait alors avant qu'on sache de quel
+                    produit elle parle. On lit maintenant le nom, la promesse,
+                    l'explication — puis l'image qui les représente. Côte à côte,
+                    l'alternance gauche/droite est inchangée. */}
+                <Reveal className="w-full lg:w-1/2">
                   {/* Le nom du produit porte la page : il doit s'imposer avant
                       le titre, pas se cacher dans une pastille. L'orange le
                       détache du bleu employé partout ailleurs. */}
@@ -168,6 +170,10 @@ export default function ProduitsPage() {
                     Voir {product.name} en démo
                     <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-1" />
                   </Link>
+                </Reveal>
+
+                <Reveal delay={0.1} className="flex w-full justify-center lg:w-1/2">
+                  <Visual />
                 </Reveal>
               </div>
             </section>

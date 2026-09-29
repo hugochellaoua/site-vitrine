@@ -13,7 +13,36 @@ import type { LegalDoc } from "@/lib/legal";
  * hiérarchie de titres nette, aucun effet. Le décor du site reste présent
  * (ciel, menu, pied de page) pour qu'on sache qu'on n'a pas quitté Helpify.
  */
+/**
+ * Remet les niveaux de titre à plat, sans trou.
+ *
+ * Les documents viennent de fichiers Word dont les niveaux sont ceux de leur
+ * auteur : la notice IA et les CGU n'utilisent que des `h3`, et la politique de
+ * confidentialité passe par endroits du `h2` au `h4`. Tels quels, ils produisent
+ * une hiérarchie trouée — un lecteur d'écran annonce des sections imbriquées
+ * qui ne le sont pas, et les moteurs lisent mal le plan du document.
+ *
+ * On parcourt donc les blocs dans l'ordre en conservant la structure *relative*
+ * voulue par l'auteur : un titre plus profond que le précédent descend d'un
+ * cran, jamais de deux ; un titre moins profond remonte au niveau de l'ancêtre
+ * qui lui correspond. Le premier niveau part de `h2`, juste sous le `h1` de la
+ * page.
+ */
+function normaliserNiveaux(blocs: LegalDoc["blocks"]) {
+  const pile: { source: number; rendu: number }[] = [];
+  return blocs.map((b) => {
+    const source = /^h([2-6])$/.exec(b.k)?.[1];
+    if (!source) return b;
+    const n = Number(source);
+    while (pile.length && pile[pile.length - 1].source >= n) pile.pop();
+    const rendu = Math.min(pile.length ? pile[pile.length - 1].rendu + 1 : 2, 4);
+    pile.push({ source: n, rendu });
+    return { ...b, k: `h${rendu}` };
+  });
+}
+
 export function LegalPage({ doc }: { doc: LegalDoc }) {
+  const blocs = normaliserNiveaux(doc.blocks);
   return (
     <>
       <Galaxy />
@@ -27,7 +56,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
           {doc.updated && <p className="mt-4 text-[13px] text-faint">{doc.updated}</p>}
 
           <div className="mt-12 flex flex-col">
-            {doc.blocks.map((b, i) => {
+            {blocs.map((b, i) => {
               if (b.k === "h2")
                 return (
                   <h2

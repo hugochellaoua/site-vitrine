@@ -121,6 +121,17 @@ body {
   }
 }
 
+/* Toute cible d'ancre s'arrête sous la barre de navigation.
+   Celle-ci est fixe : sans cette marge, un lien vers une section amène son
+   titre exactement derrière elle. La règle est dans la couche `base` pour
+   qu'une classe utilitaire `scroll-mt-*` puisse encore la surcharger au cas
+   par cas — c'est ce que fait la séquence du process. */
+@layer base {
+  [id] {
+    scroll-margin-top: 6.5rem;
+  }
+}
+
 ::selection {
   background: var(--accent);
   color: #fff;
@@ -139,6 +150,45 @@ body {
   box-shadow:
     0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
     0 20px 50px -24px rgba(0, 0, 0, 0.6);
+}
+
+/* Panneau d'un sous-menu. `visibility` le retire du parcours clavier quand il
+   est fermé — un simple `opacity: 0` y laisserait ses liens atteignables. */
+.dropdown {
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    visibility 0s linear 0.2s;
+}
+.dropdown[data-open="true"] {
+  visibility: visible;
+  opacity: 1;
+  transition:
+    opacity 0.2s ease,
+    visibility 0s linear 0s;
+}
+
+/* Barre de navigation pendant le défilement.
+   La règle vit ici, et non dans une classe utilitaire de couleur : `.glass-panel`
+   pose un `background` en raccourci, qu'une utilitaire `bg-*` ne parvient pas à
+   supplanter. C'est ce qui laissait la barre presque transparente au scroll, le
+   texte de la page passant derrière. On garde quelques pour cent de
+   transparence et le flou pour conserver l'effet de verre. */
+.glass-panel--solid {
+  background: rgba(16, 13, 48, 0.94);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
+    0 18px 50px -24px rgba(3, 2, 17, 0.95);
+}
+
+/* Surface d'un sous-menu : opaque, contrairement à la barre de navigation.
+   Celle-ci se détache sur un fond qu'elle laisse deviner, ce qui est voulu ;
+   un panneau déployé, lui, recouvre le contenu de la page. Au moindre reste de
+   transparence, un grand titre continue de se lire à travers les libellés. */
+.dropdown-panel {
+  background: #100d30;
 }
 
 /* Premium glassy surface: subtle gradient fill, top edge catching light,
@@ -401,6 +451,19 @@ body {
   }
 }
 
+/* Les pastilles du dernier écran gravitent autour du titre grâce à un décalage
+   vertical alterné. Sur un écran étroit, la liste passe sur plusieurs rangées :
+   deux pastilles de rangs voisins, l'une poussée vers le bas et l'autre vers le
+   haut, finissaient par se recouvrir. Le décalage est donc neutralisé en
+   dessous de 640 px. `!important` est ici nécessaire, et seulement ici : la
+   variable est posée en style en ligne, qu'une règle de feuille ne peut pas
+   surcharger autrement. */
+@media (max-width: 639px) {
+  .chip-float {
+    --reveal-rest: 0px !important;
+  }
+}
+
 /* Apparition du hero. `backwards` maintient l'élément à son état de départ
    pendant le délai, puis l'animation le porte jusqu'à l'état final — qui reste
    acquis ensuite. Le texte finit donc toujours visible, quoi qu'il arrive. */
@@ -567,14 +630,27 @@ body {
 }
 
 /* Curseurs du calculateur ROI */
+/* Le rail ne fait que 3 px, mais c'est la zone de saisie que l'on attrape —
+   et 3 px sont introuvables au doigt. On donne donc 24 px de hauteur au champ
+   lui-même, transparent, et on dessine le rail dans les pseudo-éléments de
+   piste. L'apparence ne change pas ; la cible, si. */
 .range-accent {
   -webkit-appearance: none;
   appearance: none;
+  height: 24px;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+}
+.range-accent::-webkit-slider-runnable-track {
   height: 3px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.12);
-  outline: none;
-  cursor: pointer;
+}
+.range-accent::-moz-range-track {
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
 }
 .range-accent::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -585,6 +661,8 @@ body {
   background: var(--accent-light);
   box-shadow: 0 0 0 4px rgba(29, 80, 254, 0.2), 0 4px 12px rgba(0, 0, 0, 0.5);
   transition: transform 0.2s ease;
+  /* Recentre la pastille de 16 px sur le rail de 3 px. */
+  margin-top: -6.5px;
 }
 .range-accent::-webkit-slider-thumb:hover {
   transform: scale(1.15);

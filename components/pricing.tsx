@@ -36,13 +36,13 @@ export function Pricing() {
           <SecondaryCta />
           </div>
           <span className="text-[12.5px] text-faint">{pricing.ctaSub}</span>
-          <Link
+          {/* Vers l'application, qui est sur un autre domaine. */}
+          <a
             href={pricing.altLink.href}
-            prefetch={false}
             className="mt-2 text-[13px] text-muted underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
             {pricing.altLink.label}
-          </Link>
+          </a>
         </div>
       </div>
     </section>

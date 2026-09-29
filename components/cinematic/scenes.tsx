@@ -1,4 +1,4 @@
-import { Check, MessageSquare, X } from "lucide-react";
+import { Check, MessageSquare, UserCheck, X } from "lucide-react";
 import { processSteps } from "@/lib/content";
 import { LogoMark } from "@/components/logo-mark";
 import { Constellation } from "./constellation";
@@ -110,15 +110,30 @@ function Besoin({ step }: { step: Extract<Step, { key: "besoin" }> }) {
       <div className="card-surface w-full rounded-3xl p-6">
         <div className="text-[10.5px] uppercase tracking-[0.1em] text-accent-light">{step.roleLabel}</div>
         <div className="mt-2 font-display text-[21px] font-semibold text-ink">{step.role}</div>
-        <div className="mt-5 flex flex-col gap-2">
+        <div className="mt-5 text-[10px] uppercase tracking-[0.12em] text-faint">
+          {step.fieldsLabel}
+        </div>
+        <div className="mt-2.5 flex flex-col gap-2">
           {step.fields.map((f, i) => (
             <div
-              key={f}
-              className="flex items-center justify-between rounded-xl border border-hairline bg-void/40 px-3.5 py-2.5 text-[12.5px] text-[#e4e5f5]"
+              key={f.label}
+              className="flex items-center justify-between gap-3 rounded-xl border border-hairline bg-void/40 px-3.5 py-2.5 text-[12.5px] text-[#e4e5f5]"
               style={{ animation: "pulseGlow 2.6s ease-in-out infinite", animationDelay: `${i * 0.2}s` }}
             >
-              {f}
-              <Check size={13} className="text-success" />
+              <span className="min-w-0 truncate">{f.label}</span>
+              {/* Le poids du critère, lu d'un coup d'œil : l'orange marque ce
+                  qui est éliminatoire, le gris ce qui n'est qu'un plus. */}
+              <span
+                className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] ${
+                  f.weight === "Primordial"
+                    ? "bg-warm-soft text-warm-light"
+                    : f.weight === "Important"
+                      ? "bg-accent-soft text-accent-light"
+                      : "bg-white/[0.06] text-muted"
+                }`}
+              >
+                {f.weight}
+              </span>
             </div>
           ))}
         </div>
@@ -379,6 +394,46 @@ function Reponse({ step }: { step: Extract<Step, { key: "reponse" }> }) {
   );
 }
 
+/* 09 — La décision revient aux RH.
+   Deux blocs et une flèche : l'évaluation d'un côté, la décision humaine de
+   l'autre. C'est la seule étape où le produit s'arrête et passe la main —
+   le visuel doit le dire sans phrase. */
+function Decision({ step }: { step: Extract<Step, { key: "decision" }> }) {
+  return (
+    <div className="flex w-full max-w-2xl flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-6">
+      <div className="card-surface w-full max-w-[230px] rounded-2xl px-5 py-5 text-center">
+        <p className="text-[10.5px] uppercase tracking-[0.12em] text-faint">{step.from}</p>
+        <ul className="mt-4 flex flex-col gap-2">
+          {step.basis.map((c, i) => (
+            <li
+              key={c}
+              className="flex items-center justify-center gap-2 rounded-lg border border-hairline bg-void/40 px-3 py-2 text-[11.5px] text-[#dfe3ff]"
+              style={{ animation: "pulseGlow 2.8s ease-in-out infinite", animationDelay: `${i * 0.22}s` }}
+            >
+              <Check size={11} className="text-accent-light" />
+              {c}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <span className="rotate-90 text-lg text-faint sm:rotate-0" aria-hidden="true">
+        →
+      </span>
+
+      {/* La décision appartient au candidat autant qu'au recruteur : elle est
+          humaine, donc en orange, comme tout ce qui touche au talent. */}
+      <div className="w-full max-w-[230px] rounded-2xl border border-warm/40 bg-warm-soft px-5 py-6 text-center">
+        <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-warm/20 text-warm">
+          <UserCheck size={20} />
+        </span>
+        <p className="mt-4 font-display text-[17px] font-bold text-ink">{step.owner}</p>
+        <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-warm-light">{step.verdict}</p>
+      </div>
+    </div>
+  );
+}
+
 /** Aiguillage : chaque étape rend sa propre preuve visuelle. */
 export function StepScene({ step }: { step: Step }) {
   let visual: React.ReactNode = null;
@@ -407,6 +462,9 @@ export function StepScene({ step }: { step: Step }) {
       break;
     case "shortlist":
       visual = <Shortlist step={step} />;
+      break;
+    case "decision":
+      visual = <Decision step={step} />;
       break;
     case "reponse":
       visual = <Reponse step={step} />;

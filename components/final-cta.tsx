@@ -149,7 +149,7 @@ export function FinalCta() {
               restY={OFFSETS[i % OFFSETS.length]}
               y={18}
               delay={0.1 + i * 0.09}
-              className="flex items-center gap-2.5 rounded-full border border-accent/35 bg-chip px-4 py-2.5 text-[13px] font-medium text-ink shadow-[0_10px_30px_-14px_rgba(29,80,254,0.9)]"
+              className="chip-float flex items-center gap-2.5 rounded-full border border-accent/35 bg-chip px-4 py-2.5 text-[13px] font-medium text-ink shadow-[0_10px_30px_-14px_rgba(29,80,254,0.9)]"
             >
               <span
                 className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent-light"

@@ -11,6 +11,7 @@ import { links } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Mentions légales",
   description: "Informations légales relatives à l'éditeur et à l'hébergeur du site Helpify.",
+  alternates: { canonical: "/mentions-legales" },
 };
 
 export default function Page() {
