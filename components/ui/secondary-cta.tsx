@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { learnMore } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 
 /**
  * « En savoir plus » — le second palier d'engagement.
@@ -11,7 +11,14 @@ import { learnMore } from "@/lib/content";
  *
  * Elle mène à la page de contact du site.
  */
-export function SecondaryCta({ className = "" }: { className?: string }) {
+export function SecondaryCta({
+  locale,
+  className = "",
+}: {
+  locale: Locale;
+  className?: string;
+}) {
+  const { learnMore } = dict(locale);
   return (
     <Link
       href={learnMore.href}

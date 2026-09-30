@@ -5,63 +5,76 @@ import Link from "next/link";
 import { Magnetic } from "@/components/ui/magnetic";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import { LogoLockup } from "@/components/logo-mark";
-import { nav, products, services, useCases } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/cn";
+import { LanguageSwitch } from "@/components/ui/language-switch";
 
 /**
- * Contenu des sous-menus.
+ * Contenu des sous-menus, pour une langue donnée.
  *
  * Il est dérivé des sections du site plutôt que ressaisi : ajouter un produit
- * ou un service le fait apparaître dans le menu sans autre intervention, et
- * les libellés ne peuvent pas diverger de ceux des pages.
+ * ou un service le fait apparaître dans le menu sans autre intervention, et les
+ * libellés ne peuvent pas diverger de ceux des pages. Le calcul dépend de la
+ * langue, il ne peut donc plus se faire au chargement du module.
  */
-const SUBMENUS = {
-  products: {
-    tone: "warm" as const,
-    items: products.items.map((p) => ({
-      label: p.name,
-      href: `/produits#${p.id}`,
-    })),
-  },
-  process: {
-    tone: "ink" as const,
-    items: [
-      { label: "Le déroulé, étape par étape", href: "/#story" },
-      { label: "Notre méthodologie", href: "/methodologie" },
-    ],
-  },
-  services: {
-    tone: "ink" as const,
-    items: [
-      // Les intégrations quittent le premier niveau du menu : elles relèvent de
-      // ce que l'on met en place autour du produit, comme les autres services.
-      { label: "Intégrations", href: "/#integrations" },
-      ...services.items.map((s) => ({ label: s.title, href: `/#${s.id}` })),
-    ],
-  },
-  /**
-   * Les cas d'usage s'affichent problème → réponse, sur deux colonnes.
-   *
-   * Un menu qui n'énumérerait que « Volume important » ou « Profils atypiques »
-   * obligerait à cliquer pour comprendre. La promesse posée sous chaque libellé
-   * fait tout le travail : le visiteur reconnaît sa situation et sait déjà ce
-   * qu'on lui répond.
-   */
-  usecases: {
-    tone: "ink" as const,
-    wide: true,
-    // Pas de sous-menu sur mobile : déplier neuf intitulés y rendrait la liste
-    // interminable, alors que l'entrée mène déjà à la page qui les présente
-    // tous, mieux qu'un menu ne le ferait.
-    mobile: false,
-    all: { label: useCases.menuLink, href: "/cas-d-usage" },
-    items: useCases.items.map((u) => ({
-      label: u.menu,
-      desc: u.promise,
-      href: `/cas-d-usage#${u.id}`,
-    })),
-  },
-};
+function submenus(locale: Locale) {
+  const { products, services, useCases } = dict(locale);
+  const p = (path: string) => (locale === "fr" ? path : `/en${path === "/" ? "" : path}`);
+  const produits = locale === "fr" ? "/produits" : "/en/products";
+  const cas = locale === "fr" ? "/cas-d-usage" : "/en/use-cases";
+  const metho = locale === "fr" ? "/methodologie" : "/en/methodology";
+  const mots =
+    locale === "fr"
+      ? { deroule: "Le déroulé, étape par étape", metho: "Notre méthodologie", integ: "Intégrations" }
+      : { deroule: "The process, step by step", metho: "Our methodology", integ: "Integrations" };
+
+  return {
+    products: {
+      tone: "warm" as const,
+      items: products.items.map((x) => ({ label: x.name, href: `${produits}#${x.id}` })),
+    },
+    process: {
+      tone: "ink" as const,
+      items: [
+        { label: mots.deroule, href: p("/#story") },
+        { label: mots.metho, href: metho },
+      ],
+    },
+    services: {
+      tone: "ink" as const,
+      items: [
+        // Les intégrations quittent le premier niveau du menu : elles relèvent
+        // de ce que l'on met en place autour du produit, comme les autres.
+        { label: mots.integ, href: p("/#integrations") },
+        ...services.items.map((x) => ({ label: x.title, href: p(`/#${x.id}`) })),
+      ],
+    },
+    /**
+     * Les cas d'usage s'affichent problème → réponse, sur deux colonnes.
+     *
+     * Un menu qui n'énumérerait que « Volume important » ou « Profils atypiques »
+     * obligerait à cliquer pour comprendre. La promesse posée sous chaque
+     * libellé fait tout le travail : le visiteur reconnaît sa situation et sait
+     * déjà ce qu'on lui répond.
+     */
+    usecases: {
+      tone: "ink" as const,
+      wide: true,
+      // Pas de sous-menu sur mobile : déplier neuf intitulés y rendrait la liste
+      // interminable, alors que l'entrée mène déjà à la page qui les présente
+      // tous, mieux qu'un menu ne le ferait.
+      mobile: false,
+      all: { label: useCases.menuLink, href: cas },
+      items: useCases.items.map((u) => ({
+        label: u.menu,
+        desc: u.promise,
+        href: `${cas}#${u.id}`,
+      })),
+    },
+  };
+}
+
+type Submenus = ReturnType<typeof submenus>;
 
 /**
  * Sous-menu déployé au survol d'une entrée du menu principal.
@@ -79,12 +92,14 @@ function DropdownMenu({
   label,
   href,
   menu,
+  sous,
 }: {
   label: string;
   href: string;
-  menu: keyof typeof SUBMENUS;
+  menu: keyof Submenus;
+  sous: Submenus;
 }) {
-  const sousMenu = SUBMENUS[menu];
+  const sousMenu = sous[menu];
   const { items, tone } = sousMenu;
   const wide = "wide" in sousMenu && sousMenu.wide;
   const all = "all" in sousMenu ? sousMenu.all : null;
@@ -204,7 +219,9 @@ function DropdownMenu({
   );
 }
 
-export function Navbar() {
+export function Navbar({ locale }: { locale: Locale }) {
+  const { nav } = dict(locale);
+  const sous = submenus(locale);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -246,6 +263,7 @@ export function Navbar() {
                 label={link.label}
                 href={link.href}
                 menu={link.dropdown}
+                sous={sous}
               />
             ) : (
               <Link
@@ -269,6 +287,7 @@ export function Navbar() {
           >
             {nav.connexion.label}
           </a>
+          <LanguageSwitch locale={locale} />
           <Magnetic radius={80} strength={0.24}>
             <Link
               href={nav.cta.href}
@@ -319,9 +338,8 @@ export function Navbar() {
         <div className="flex flex-1 flex-col overflow-y-auto px-6 py-4">
           <div className="m-auto flex flex-col items-center gap-4">
             {nav.links.map((link) => {
-              const sous = link.dropdown ? SUBMENUS[link.dropdown] : null;
-              const deplie =
-                sous && !("mobile" in sous && sous.mobile === false);
+              const sm = link.dropdown ? sous[link.dropdown] : null;
+              const deplie = sm && !("mobile" in sm && sm.mobile === false);
               return (
                 <div
                   key={link.href}
@@ -339,14 +357,14 @@ export function Navbar() {
                     // celle qui les porte : une seule ligne, sous le titre, dans
                     // une graisse qui ne lui dispute rien.
                     <ul className="flex flex-wrap items-center justify-center gap-x-1 text-[13px]">
-                      {sous.items.map((item, i) => (
+                      {sm.items.map((item, i) => (
                         <li key={item.href} className="flex items-center gap-1">
                           <Link
                             href={item.href}
                             onClick={() => setOpen(false)}
                             className={cn(
                               "py-1.5",
-                              sous.tone === "warm" ? "text-warm" : "text-muted",
+                              sm.tone === "warm" ? "text-warm" : "text-muted",
                             )}
                           >
                             {item.label}
@@ -354,7 +372,7 @@ export function Navbar() {
                           {/* Le séparateur suit son entrée plutôt qu'il ne
                               précède la suivante : au passage à la ligne, il
                               reste en fin de ligne au lieu d'en ouvrir une. */}
-                          {i < sous.items.length - 1 && (
+                          {i < sm.items.length - 1 && (
                             <span className="text-faint" aria-hidden="true">
                               ·
                             </span>
@@ -380,6 +398,7 @@ export function Navbar() {
             >
               {nav.cta.label}
             </Link>
+            <LanguageSwitch locale={locale} className="mt-1" />
           </div>
         </div>
       </div>

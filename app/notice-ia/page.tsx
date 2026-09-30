@@ -7,9 +7,9 @@ const doc = legalDocs["notice-ia"];
 export const metadata: Metadata = {
   title: doc.title,
   description: doc.description,
-  alternates: { canonical: "/notice-ia" },
+  alternates: { canonical: "/notice-ia", languages: { fr: "/notice-ia", en: "/en/ai-notice" } },
 };
 
 export default function Page() {
-  return <LegalPage doc={doc} />;
+  return <LegalPage doc={doc} locale="fr" />;
 }

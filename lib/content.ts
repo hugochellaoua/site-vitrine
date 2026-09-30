@@ -724,6 +724,10 @@ export const faq = {
       a: "Vous gérez les candidatures que vous lisez. Mais combien lisez-vous vraiment ? Sur 200 candidatures, à 6 secondes par candidature, ça fait 20 minutes pour passer à côté de la moitié de vos talents. Helpify ne remplace pas votre œil, il s'assure que les bons profils arrivent jusqu'à lui.",
     },
     {
+      q: "Pourquoi confier cette première étape à une IA ?",
+      a: "Elle ne prend le travail de personne — regardez où elle se place. Aujourd'hui, un candidat envoie un CV et, dans 95 % des cas, n'obtient aucun retour. Il n'a jamais eu l'occasion de s'expliquer, et vous n'avez de lui que des mots clés : souvent optimisés par une IA, parfois simplement mal présentés. Cette première étape est la seule du processus où personne ne parle à personne. Tout ce qui suit — l'entretien, la mise en situation — repose au contraire sur une conversation, une évaluation structurée, une écoute. Helpify met la première étape au niveau des suivantes. Vos recruteurs gardent leur métier : les critères, le jugement, la décision. Ce qui change, c'est qu'ils la rendent sur des profils qu'on a réellement écoutés, et non sur une pile de CV.",
+    },
+    {
       q: "Comment gérez-vous les biais de l'IA ?",
       a: "Helpify ne juge pas, ne devine pas, n'invente pas : il écoute et synthétise. Chaque conclusion est sourcée mot pour mot sur les réponses du candidat (citations textuelles incluses). Le score est justifié critère par critère. Vous gardez la décision finale, toujours.",
     },
@@ -806,4 +810,23 @@ export const footer = {
   social: { label: "Helpify sur LinkedIn", href: links.linkedin },
   badges: ["Conforme RGPD", "Hébergement UE", "Données européennes"],
   copyright: "© 2026 Helpify",
+};
+
+/**
+ * Les quelques mots d'interface qui n'appartiennent à aucune section : libellés
+ * de navigation interne, repères de progression, intitulés de boutons répétés.
+ * Ils vivaient en dur dans les composants, ce qui les rendait intraduisibles.
+ */
+export const ui = {
+  backHome: "Retour à l'accueil",
+  learnMore: "En savoir plus",
+  step: "Étape",
+  stepOf: "sur",
+  firstStep: "Première étape",
+  prevStep: "Étape précédente",
+  nextStep: "Étape suivante",
+  lastStep: "Dernière étape",
+  seeInDemoBefore: "Voir ",
+  seeInDemoAfter: " en démo",
+  helpifyAnswer: "La réponse Helpify",
 };

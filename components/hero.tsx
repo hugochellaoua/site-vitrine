@@ -1,10 +1,9 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Magnetic } from "@/components/ui/magnetic";
-import { hero } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 import { SecondaryCta } from "@/components/ui/secondary-cta";
 
-const words = hero.title.split(" ");
 const STEP = 0.05;
 // Le titre s'affiche presque immédiatement. Il attendait auparavant la fin du
 // lever de rideau (1,05 s) : or c'est lui que Google chronomètre pour juger la
@@ -21,7 +20,11 @@ const START = 0.28;
  * initial, donc invisible. Avec `animation-fill-mode: backwards`, l'état final
  * est toujours atteint, et la préférence « mouvement réduit » l'affiche d'emblée.
  */
-export function Hero() {
+export function Hero({ locale }: { locale: Locale }) {
+  const { hero } = dict(locale);
+  // Le titre est découpé mot à mot pour être levé en cascade ; le découpage
+  // dépend donc de la langue et vit dans le composant, plus au chargement.
+  const words = hero.title.split(" ");
   return (
     <section
       id="top"
@@ -80,7 +83,7 @@ export function Hero() {
             <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </Magnetic>
-        <SecondaryCta />
+        <SecondaryCta locale={locale} />
       </div>
 
       <div

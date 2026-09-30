@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { services } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 import { SecondaryCta } from "@/components/ui/secondary-cta";
 import { DisclosureButton, DisclosurePanel } from "@/components/ui/disclosure";
@@ -9,7 +9,8 @@ import { DisclosureButton, DisclosurePanel } from "@/components/ui/disclosure";
 /* Une ligne par offre : ces services complètent le produit, ils ne sont pas
    le sujet principal de la page. Le détail se déroule à la demande, pour que
    la section garde sa brièveté sans priver d'explication qui en veut une. */
-export function Services() {
+export function Services({ locale }: { locale: Locale }) {
+  const { services } = dict(locale);
   return (
     <section id="services" className="relative px-6 py-24">
       <div className="mx-auto max-w-4xl">
@@ -20,19 +21,27 @@ export function Services() {
 
         <div className="mt-12 divide-y divide-hairline border-y border-hairline">
           {services.items.map((item) => (
-            <Service key={item.n} item={item} />
+            <Service key={item.n} item={item} reveal={services.reveal} revealOpen={services.revealOpen} />
           ))}
         </div>
 
         <div className="mt-10 flex justify-center">
-          <SecondaryCta />
+          <SecondaryCta locale={locale} />
         </div>
       </div>
     </section>
   );
 }
 
-function Service({ item }: { item: (typeof services.items)[number] }) {
+function Service({
+  item,
+  reveal,
+  revealOpen,
+}: {
+  item: { id: string; n: string; title: string; line: string; body: readonly string[] | string[] };
+  reveal: string;
+  revealOpen: string;
+}) {
   const [open, setOpen] = useState(false);
   return (
     <div id={item.id} className="group scroll-mt-28 py-7">
@@ -52,8 +61,8 @@ function Service({ item }: { item: (typeof services.items)[number] }) {
         <DisclosureButton
           open={open}
           onToggle={() => setOpen((o) => !o)}
-          label={services.reveal}
-          labelOpen={services.revealOpen}
+          label={reveal}
+          labelOpen={revealOpen}
           controls={`${item.id}-detail`}
           size="sm"
         />

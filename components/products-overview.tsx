@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { products } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -14,7 +14,8 @@ import { Reveal } from "@/components/ui/reveal";
  * Le nom du produit est traité comme un titre à part entière — c'est ce qu'on
  * doit retenir, et c'est la seule information qu'un lecteur pressé lira.
  */
-export function ProductsOverview() {
+export function ProductsOverview({ locale }: { locale: Locale }) {
+  const { products, ui } = dict(locale);
   return (
     <section id="produits" className="relative scroll-mt-28 px-6 py-28">
       <div className="mx-auto max-w-5xl">
@@ -38,7 +39,7 @@ export function ProductsOverview() {
                 </h3>
                 <p className="mt-3 text-[14px] leading-relaxed text-muted">{product.body}</p>
                 <span className="mt-6 inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-accent-light">
-                  En savoir plus
+                  {ui.learnMore}
                   <ArrowUpRight
                     size={14}
                     className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

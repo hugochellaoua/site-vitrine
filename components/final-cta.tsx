@@ -6,7 +6,7 @@ import { Magnetic } from "@/components/ui/magnetic";
 import { SecondaryCta } from "@/components/ui/secondary-cta";
 import { Reveal } from "@/components/ui/reveal";
 import { ArrowRight } from "lucide-react";
-import { finalCta } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 
 /**
  * Dernière image : la galaxie du début revient, mais organisée.
@@ -119,7 +119,8 @@ function OrganizedField() {
 
 const OFFSETS = [0, -14, 10, -8, 14, -4, 6];
 
-export function FinalCta() {
+export function FinalCta({ locale }: { locale: Locale }) {
+  const { finalCta } = dict(locale);
   return (
     <section className="relative overflow-hidden px-6 py-40">
       <OrganizedField />
@@ -179,7 +180,7 @@ export function FinalCta() {
               <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </Magnetic>
-          <SecondaryCta />
+          <SecondaryCta locale={locale} />
         </Reveal>
       </div>
     </section>

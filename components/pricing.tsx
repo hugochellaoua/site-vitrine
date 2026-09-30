@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Magnetic } from "@/components/ui/magnetic";
-import { pricing } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 import { AnimatedStat } from "@/components/animated-stat";
 import { SecondaryCta } from "@/components/ui/secondary-cta";
 
-export function Pricing() {
+export function Pricing({ locale }: { locale: Locale }) {
+  const { pricing } = dict(locale);
   return (
     <section id="tarifs" className="relative px-6 py-28">
       <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
@@ -33,7 +34,7 @@ export function Pricing() {
               {pricing.cta.label}
             </Link>
           </Magnetic>
-          <SecondaryCta />
+          <SecondaryCta locale={locale} />
           </div>
           <span className="text-[12.5px] text-faint">{pricing.ctaSub}</span>
           {/* Vers l'application, qui est sur un autre domaine. */}

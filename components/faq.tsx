@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import { faq } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 import { cn } from "@/lib/cn";
 
-export function Faq() {
+export function Faq({ locale }: { locale: Locale }) {
+  const { faq } = dict(locale);
   const [open, setOpen] = useState<number | null>(null);
 
   return (

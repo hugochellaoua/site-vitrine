@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { roi } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 import { RoiCapture } from "@/components/roi-capture";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 import { DisclosureButton, DisclosurePanel } from "@/components/ui/disclosure";
@@ -22,9 +22,11 @@ type Input = {
   note?: string;
 };
 
-const ALL_INPUTS: Input[] = [...roi.time.inputs, ...roi.speed.inputs];
-
-export function Roi() {
+export function Roi({ locale }: { locale: Locale }) {
+  const { roi } = dict(locale);
+  // Les libellés des curseurs changent avec la langue : la liste se construit
+  // dans le composant, plus au chargement du module.
+  const ALL_INPUTS: Input[] = [...roi.time.inputs, ...roi.speed.inputs];
   // Le simulateur est long et demande de renseigner une dizaine d'hypothèses.
   // Replié, il laisse la promesse lisible ; déroulé, il occupe la place qu'il
   // lui faut, pour qui veut vraiment faire le calcul.
@@ -32,6 +34,8 @@ export function Roi() {
   const [v, setV] = useState<Record<string, number>>(() =>
     Object.fromEntries(ALL_INPUTS.map((i) => [i.key, i.value])),
   );
+
+  const { cut, valueMultiplier, workingDays } = roi.speed;
 
   const calc = useMemo(() => {
     // Bloc 1 — le temps. Chaque ligne découle de la précédente, dans l'ordre
@@ -48,9 +52,9 @@ export function Roi() {
     // demander revenait à lui faire porter notre hypothèse. De même, la valeur
     // d'une journée gagnée se déduit du salaire au lieu d'être devinée, sur
     // l'hypothèse la plus basse que le secteur admette (voir `roi.speed`).
-    const daysSaved = (v.timeToHire * roi.speed.cut) / 100;
+    const daysSaved = (v.timeToHire * cut) / 100;
     const dayValue =
-      (v.grossSalary * roi.speed.valueMultiplier) / roi.speed.workingDays;
+      (v.grossSalary * valueMultiplier) / workingDays;
     const speedValue = v.hires * daysSaved * dayValue;
 
     return {
@@ -65,7 +69,7 @@ export function Roi() {
       speedValue,
       total: timeValue + speedValue,
     };
-  }, [v]);
+  }, [v, cut, valueMultiplier, workingDays]);
 
   const set = (key: string, value: number) =>
     setV((prev) => ({ ...prev, [key]: value }));
@@ -165,7 +169,7 @@ export function Roi() {
                 <Line value={nf.format(v.hires)} label="recrutements par an" />
                 <Op>
                   time-to-hire de {v.timeToHire} jours, réduit de{" "}
-                  {roi.speed.cut} %
+                  {cut} %
                 </Op>
                 <Line
                   value={`${decimal.format(calc.daysSaved)} j`}

@@ -1,4 +1,4 @@
-import { synthesis } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 import { Reveal } from "@/components/ui/reveal";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 
@@ -10,7 +10,8 @@ import { Badge, SectionTitle } from "@/components/ui/section-title";
  * en petit juste après. Le chiffre porte l'argument ; le texte ne fait que le
  * nommer. C'est ce qui distingue une preuve d'un paragraphe.
  */
-export function Synthesis() {
+export function Synthesis({ locale }: { locale: Locale }) {
+  const { synthesis } = dict(locale);
   return (
     <section className="relative px-6 py-28">
       <div className="mx-auto max-w-5xl">

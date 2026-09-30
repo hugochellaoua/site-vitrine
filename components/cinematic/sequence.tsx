@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp, ChevronsDown, ChevronsUp } from "lucide-react";
 import Link from "next/link";
-import { processIntro, processOutro, processSteps } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 import { SecondaryCta } from "@/components/ui/secondary-cta";
 import { Reveal } from "@/components/ui/reveal";
@@ -36,7 +36,8 @@ function useIsCompact() {
  * gestionnaires de molette détourneraient le défilement d'une section
  * invisible.
  */
-export function CinematicSequence() {
+export function CinematicSequence({ locale }: { locale: Locale }) {
+  const { processIntro } = dict(locale);
   const compact = useIsCompact();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -71,8 +72,8 @@ export function CinematicSequence() {
 
       <DisclosurePanel open={open} id="process-deroule">
         <div ref={ref}>
-          {compact ? <Stacked /> : <Cinematic enabled={open} />}
-          <Outro />
+          {compact ? <Stacked locale={locale} /> : <Cinematic enabled={open} locale={locale} />}
+          <Outro locale={locale} />
         </div>
       </DisclosurePanel>
     </>
@@ -84,7 +85,8 @@ export function CinematicSequence() {
  * L'étape active est dérivée de la position de scroll — donc réversible,
  * et toujours juste après un saut brutal.
  */
-function Cinematic({ enabled }: { enabled: boolean }) {
+function Cinematic({ enabled, locale }: { enabled: boolean; locale: Locale }) {
+  const { processSteps, ui } = dict(locale);
   const ref = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
   const indexRef = useRef(0);
@@ -257,7 +259,7 @@ function Cinematic({ enabled }: { enabled: boolean }) {
             ))}
           </div>
           <span className="text-[10px] uppercase tracking-[0.18em] text-faint tabular-nums">
-            Étape {step.n} sur {STEP_COUNT}
+            {ui.step} {step.n} {ui.stepOf} {STEP_COUNT}
           </span>
         </div>
 
@@ -273,25 +275,25 @@ function Cinematic({ enabled }: { enabled: boolean }) {
         <div className="absolute right-5 top-1/2 z-[160] flex -translate-y-1/2 flex-col items-center gap-2 lg:right-8">
           <StepArrow
             icon="first"
-            label="Première étape"
+            label={ui.firstStep}
             disabled={active === 0}
             onClick={() => goToRef.current?.(0)}
           />
           <StepArrow
             icon="prev"
-            label="Étape précédente"
+            label={ui.prevStep}
             disabled={active === 0}
             onClick={() => goToRef.current?.(active - 1)}
           />
           <StepArrow
             icon="next"
-            label="Étape suivante"
+            label={ui.nextStep}
             disabled={active === STEP_COUNT - 1}
             onClick={() => goToRef.current?.(active + 1)}
           />
           <StepArrow
             icon="last"
-            label="Dernière étape"
+            label={ui.lastStep}
             disabled={active === STEP_COUNT - 1}
             onClick={() => goToRef.current?.(STEP_COUNT - 1)}
           />
@@ -347,7 +349,8 @@ function StepArrow({
 }
 
 /* Mobile / mouvement réduit : le process devient une liste d'étapes lisible. */
-function Stacked() {
+function Stacked({ locale }: { locale: Locale }) {
+  const { processSteps } = dict(locale);
   return (
     <section id="story" className="relative flex scroll-mt-0 flex-col gap-20 py-20">
       {processSteps.map((s) => (
@@ -368,7 +371,8 @@ function Block({ children }: { children: React.ReactNode }) {
 }
 
 /* Titre du process, posé juste avant la séquence. */
-export function ProcessIntro() {
+export function ProcessIntro({ locale }: { locale: Locale }) {
+  const { processIntro } = dict(locale);
   return (
     <section className="relative flex flex-col items-center px-6 pb-10 pt-24 text-center sm:pt-32">
       <Badge>{processIntro.eyebrow}</Badge>
@@ -382,7 +386,8 @@ export function ProcessIntro() {
   );
 }
 
-function Outro() {
+function Outro({ locale }: { locale: Locale }) {
+  const { processOutro } = dict(locale);
   return (
     <div className="relative flex flex-col items-center gap-3 px-6 pb-8 pt-4">
       <div className="flex flex-wrap items-center justify-center gap-3">
@@ -392,7 +397,7 @@ function Outro() {
         >
           {processOutro.cta.label}
         </Link>
-        <SecondaryCta />
+        <SecondaryCta locale={locale} />
       </div>
       <span className="text-[12px] text-faint">{processOutro.sub}</span>
     </div>

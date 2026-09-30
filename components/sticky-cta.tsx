@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { hero, learnMore } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 
 /**
  * Barre d'action fixe, sur mobile uniquement.
@@ -12,7 +12,8 @@ import { hero, learnMore } from "@/lib/content";
  * sont à l'écran, la répéter serait du bruit. Sur ordinateur, le menu reste
  * visible en permanence et porte déjà le bouton — la barre n'a pas lieu d'être.
  */
-export function StickyCta() {
+export function StickyCta({ locale }: { locale: Locale }) {
+  const { hero, learnMore } = dict(locale);
   const [shown, setShown] = useState(false);
 
   useEffect(() => {

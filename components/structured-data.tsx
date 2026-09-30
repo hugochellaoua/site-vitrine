@@ -1,4 +1,4 @@
-import { site, links, faq } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 import { siteUrl } from "@/lib/site";
 
 /**
@@ -12,7 +12,8 @@ import { siteUrl } from "@/lib/site";
  * Aucun prix ni aucune note n'est déclaré : affirmer une note agrégée sans
  * avis réels exposerait à une pénalité et serait tout simplement faux.
  */
-export function StructuredData() {
+export function StructuredData({ locale }: { locale: Locale }) {
+  const { site, links, faq } = dict(locale);
   const data = {
     "@context": "https://schema.org",
     "@graph": [

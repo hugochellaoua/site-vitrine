@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { footer, nav } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 import { LogoLockup } from "@/components/logo-mark";
 
-export function Footer() {
+export function Footer({ locale }: { locale: Locale }) {
+  const { footer, nav } = dict(locale);
   return (
     <footer className="relative border-t border-hairline px-6 pb-28 pt-12 lg:pb-12">
       <div className="mx-auto flex max-w-5xl flex-col gap-8">

@@ -5,6 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Badge } from "@/components/ui/section-title";
 import type { LegalDoc } from "@/lib/legal";
+import { dict, type Locale } from "@/lib/i18n";
 
 /**
  * Gabarit commun aux pages juridiques.
@@ -41,12 +42,13 @@ function normaliserNiveaux(blocs: LegalDoc["blocks"]) {
   });
 }
 
-export function LegalPage({ doc }: { doc: LegalDoc }) {
+export function LegalPage({ doc, locale }: { doc: LegalDoc; locale: Locale }) {
+  const { ui } = dict(locale);
   const blocs = normaliserNiveaux(doc.blocks);
   return (
     <>
       <Galaxy />
-      <Navbar />
+      <Navbar locale={locale} />
       <main className="relative z-10 px-6 pb-24 pt-36 sm:pt-44">
         <article className="mx-auto max-w-[68ch]">
           <Badge>Informations légales</Badge>
@@ -98,11 +100,11 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
             className="mt-16 inline-flex items-center gap-2 text-[14px] font-semibold text-muted transition-colors hover:text-ink"
           >
             <ArrowLeft size={15} />
-            Retour à l&apos;accueil
+            {ui.backHome}
           </Link>
         </article>
       </main>
-      <Footer />
+      <Footer locale={locale} />
     </>
   );
 }

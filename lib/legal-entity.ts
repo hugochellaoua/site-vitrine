@@ -28,3 +28,22 @@ export const legalEntity: LegalField[] = [
 
 export const legalEntityIntro =
   "Le présent site est édité par la société ci-dessous. Pour toute question relative au traitement de vos données personnelles, consultez la politique de confidentialité.";
+
+/**
+ * Les mêmes informations, dans les libellés anglais.
+ *
+ * Seules les étiquettes sont traduites : les valeurs — raison sociale, adresse,
+ * nom du dirigeant — ne se traduisent pas, ce sont des données d'état civil.
+ */
+export const legalEntityLabelsEn: Record<string, string> = {
+  "Raison sociale": "Registered name",
+  "Forme juridique": "Legal form",
+  "Siège social": "Registered office",
+  "Capital social": "Share capital",
+  "Directeur de la publication": "Publication director",
+  Contact: "Contact",
+  "Hébergeur du site": "Website host",
+};
+
+export const legalEntityIntroEn =
+  "This website is published by the company set out below. For any question about the processing of your personal data, see the privacy policy.";

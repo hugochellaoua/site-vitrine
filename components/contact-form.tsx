@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
-import { contact } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -17,7 +17,8 @@ const label = "mb-2 block text-[12.5px] font-medium text-muted";
  * La route serveur revérifie tout — le navigateur ne fait que rendre l'erreur
  * visible plus tôt.
  */
-export function ContactForm() {
+export function ContactForm({ locale }: { locale: Locale }) {
+  const { contact } = dict(locale);
   const [status, setStatus] = useState<Status>("idle");
   const sentRef = useRef<HTMLHeadingElement>(null);
 

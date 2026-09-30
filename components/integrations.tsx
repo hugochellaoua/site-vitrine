@@ -1,4 +1,4 @@
-import { integrations } from "@/lib/content";
+import { dict, type Locale } from "@/lib/i18n";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 import { LogoMark } from "@/components/logo-mark";
 
@@ -7,7 +7,8 @@ const RINGS = [
   { r: 44, count: 7, dur: "52s" },
 ];
 
-export function Integrations() {
+export function Integrations({ locale }: { locale: Locale }) {
+  const { integrations } = dict(locale);
   return (
     <section id="integrations" className="relative px-6 py-28">
       <div className="mx-auto max-w-4xl">

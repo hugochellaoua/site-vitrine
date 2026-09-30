@@ -7,9 +7,9 @@ const doc = legalDocs["cgu"];
 export const metadata: Metadata = {
   title: doc.title,
   description: doc.description,
-  alternates: { canonical: "/cgu" },
+  alternates: { canonical: "/cgu", languages: { fr: "/cgu", en: "/en/terms" } },
 };
 
 export default function Page() {
-  return <LegalPage doc={doc} />;
+  return <LegalPage doc={doc} locale="fr" />;
 }
