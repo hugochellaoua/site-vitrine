@@ -28,7 +28,10 @@ export const metadata: Metadata = {
   // Canonique de l'accueil seulement. Les métadonnées s'héritent : toute page
   // qui ne redéclare pas la sienne se dirait copie de celle-ci, et sortirait
   // de l'index. Chaque page en pose donc une.
-  alternates: { canonical: "/" },
+  // L'accueil français n'a pas de fichier de métadonnées à lui : il hérite
+  // d'ici. Ses équivalences de langue doivent donc y figurer, sans quoi il
+  // serait la seule page du site à ne pas déclarer sa version anglaise.
+  alternates: { canonical: "/", languages: { fr: "/", en: "/en" } },
   openGraph: {
     type: "website",
     locale: "fr_FR",
