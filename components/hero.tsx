@@ -52,7 +52,7 @@ export function Hero({ locale }: { locale: Locale }) {
               className="hero-rise mr-[0.24em] inline-block"
               style={{ animationDelay: `${START + i * STEP}s` }}
             >
-              <MotCandidat texte={word} />
+              <MotCandidat texte={word} avecPoint />
             </span>
           ))}
           <span

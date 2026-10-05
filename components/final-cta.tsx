@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { MotCandidat } from "@/components/ui/mot-candidat";
 import { Magnetic } from "@/components/ui/magnetic";
 import { SecondaryCta } from "@/components/ui/secondary-cta";
 import { Reveal } from "@/components/ui/reveal";
@@ -167,7 +168,7 @@ export function FinalCta({ locale }: { locale: Locale }) {
           y={18}
           className="mt-14 max-w-[18ch] text-balance font-display text-[clamp(30px,4.6vw,58px)] font-bold leading-[1.04] tracking-[-0.03em] text-ink"
         >
-          {finalCta.title} <span className="text-warm">{finalCta.emphasis}</span>
+          <MotCandidat texte={finalCta.title} avecPoint /> <span className="text-warm">{finalCta.emphasis}</span>
         </Reveal>
 
         <Reveal delay={0.7} y={14} className="mt-10 flex flex-wrap items-center justify-center gap-3">
