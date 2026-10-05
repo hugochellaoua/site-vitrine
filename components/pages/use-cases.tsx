@@ -101,7 +101,7 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
                     </span>
                     <span className="mt-2.5 text-[13px] leading-snug text-muted">
                       <span
-                        className={u.tone === "warm" ? "text-warm" : "text-accent-light"}
+                        className={u.tone === "iris" ? "text-iris" : "text-accent-light"}
                         aria-hidden="true"
                       >
                         →{" "}
@@ -117,7 +117,7 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
 
         {/* ── Les neuf cas, en détail ──────────────────────────────────── */}
         {useCases.items.map((u, i) => {
-          const warm = u.tone === "warm";
+          const iris = u.tone === "iris";
           return (
             <section
               key={u.id}
@@ -138,11 +138,11 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
                   </div>
 
                   <blockquote
-                    className={`lit-card mt-6 px-7 py-7 ${warm ? "lit-card--warm" : ""}`}
+                    className={`lit-card mt-6 px-7 py-7 ${iris ? "lit-card--iris" : ""}`}
                   >
                     <span
                       className={`block font-display text-[40px] font-bold leading-[0.6] ${
-                        warm ? "text-warm/60" : "text-accent-light/60"
+                        iris ? "text-iris/60" : "text-accent-light/60"
                       }`}
                       aria-hidden="true"
                     >
@@ -161,7 +161,7 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
                   </p>
                   <h2
                     className={`mt-3 max-w-[22ch] text-balance font-display text-[clamp(23px,2.9vw,32px)] font-bold leading-[1.12] tracking-[-0.02em] ${
-                      warm ? "text-warm" : "text-ink"
+                      iris ? "text-iris" : "text-ink"
                     }`}
                   >
                     {u.promise}
@@ -179,7 +179,7 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
                         <li key={b} className="flex items-start gap-2.5">
                           <Check
                             size={15}
-                            className={`mt-0.5 shrink-0 ${warm ? "text-warm" : "text-accent-light"}`}
+                            className={`mt-0.5 shrink-0 ${iris ? "text-iris" : "text-accent-light"}`}
                             aria-hidden="true"
                           />
                           <span className="text-[14px] leading-snug text-ink">{b}</span>
@@ -193,7 +193,7 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
                     // détachée du paragraphe pour qu'elle se lise seule.
                     <p
                       className={`mt-7 border-l-2 pl-5 font-display text-[clamp(16px,1.9vw,19px)] font-bold leading-snug tracking-[-0.01em] ${
-                        warm ? "border-warm text-warm" : "border-accent text-accent-light"
+                        iris ? "border-iris text-iris" : "border-accent text-accent-light"
                       }`}
                     >
                       {u.keyMessage}

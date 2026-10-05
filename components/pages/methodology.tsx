@@ -61,7 +61,7 @@ function MethodJsonLd({ locale }: { locale: Locale }) {
 }
 
 const TEINTE_POIDS = [
-  "border-warm/45 bg-warm-soft text-warm-light",
+  "border-iris/45 bg-iris-soft text-iris-light",
   "border-accent/45 bg-accent-soft text-accent-light",
   "border-hairline-strong bg-white/[0.05] text-muted",
 ];
@@ -88,7 +88,7 @@ export function MethodologyPage({ locale }: { locale: Locale }) {
             aria-hidden="true"
           />
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-            <Badge>{methodology.eyebrow}</Badge>
+            <Badge tone="iris">{methodology.eyebrow}</Badge>
             <SectionTitle
               as="h1"
               title={methodology.title}
@@ -117,12 +117,12 @@ export function MethodologyPage({ locale }: { locale: Locale }) {
                 <li key={step.n} id={`etape-${step.n}`} className="scroll-mt-28">
                   <Reveal delay={i * 0.08} className="flex gap-5 sm:gap-8">
                     <div className="flex flex-col items-center">
-                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-accent/40 bg-accent-soft font-display text-[14px] font-bold tabular-nums text-accent-light">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-iris/40 bg-iris-soft font-display text-[14px] font-bold tabular-nums text-iris-light">
                         {step.n}
                       </span>
                       {!dernier && (
                         <span
-                          className="mt-3 w-px flex-1 bg-gradient-to-b from-accent/35 to-transparent"
+                          className="mt-3 w-px flex-1 bg-gradient-to-b from-iris/35 to-transparent"
                           aria-hidden="true"
                         />
                       )}
@@ -179,11 +179,11 @@ export function MethodologyPage({ locale }: { locale: Locale }) {
               <ol className="flex flex-col items-center justify-center gap-3 lg:flex-row">
                 {methodology.chain.steps.map((s, i) => (
                   <li key={s} className="flex flex-col items-center gap-3 lg:flex-row">
-                    <span className="rounded-full border border-accent/35 bg-chip px-5 py-2.5 text-[13.5px] font-semibold text-ink">
+                    <span className="rounded-full border border-iris/35 bg-chip px-5 py-2.5 text-[13.5px] font-semibold text-ink">
                       {s}
                     </span>
                     {i < methodology.chain.steps.length - 1 && (
-                      <span className="rotate-90 text-accent-light lg:rotate-0" aria-hidden="true">
+                      <span className="rotate-90 text-iris-light lg:rotate-0" aria-hidden="true">
                         →
                       </span>
                     )}

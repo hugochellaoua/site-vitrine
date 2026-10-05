@@ -39,28 +39,43 @@ export function SectionTitle({
  * Pastille de chapitre — reprise telle quelle du produit : un point coloré,
  * le mot en capitales espacées, sur une surface translucide.
  *
- * La variante `warm` signale que la section parle du candidat ; `accent`,
- * qu'elle parle du produit.
+ * La teinte répond à une question, et à une seule : de quoi la section parle.
+ * `accent`, du produit ; `warm`, du candidat ; `iris`, de la méthode — ce que
+ * Helpify fait de ce que le candidat a dit.
  */
+const TEINTES_BADGE = {
+  accent: {
+    cadre: "border-accent/35 bg-accent-soft text-accent-light",
+    point: "bg-accent-light",
+    halo: "rgba(91,129,255,.9)",
+  },
+  warm: {
+    cadre: "border-warm/35 bg-warm-soft text-warm-light",
+    point: "bg-warm",
+    halo: "rgba(255,160,70,.9)",
+  },
+  iris: {
+    cadre: "border-iris/35 bg-iris-soft text-iris-light",
+    point: "bg-iris",
+    halo: "rgba(172,152,255,.9)",
+  },
+} as const;
+
 export function Badge({
   children,
   tone = "accent",
 }: {
   children: ReactNode;
-  tone?: "accent" | "warm";
+  tone?: keyof typeof TEINTES_BADGE;
 }) {
-  const warm = tone === "warm";
+  const t = TEINTES_BADGE[tone];
   return (
     <span
-      className={`inline-flex items-center gap-2.5 rounded-full border px-4 py-2 text-[10.5px] font-semibold uppercase tracking-[0.16em] backdrop-blur-sm ${
-        warm
-          ? "border-warm/35 bg-warm-soft text-warm-light"
-          : "border-accent/35 bg-accent-soft text-accent-light"
-      }`}
+      className={`inline-flex items-center gap-2.5 rounded-full border px-4 py-2 text-[10.5px] font-semibold uppercase tracking-[0.16em] backdrop-blur-sm ${t.cadre}`}
     >
       <span
-        className={`h-1.5 w-1.5 shrink-0 rounded-full ${warm ? "bg-warm" : "bg-accent-light"}`}
-        style={{ boxShadow: `0 0 10px 1px ${warm ? "rgba(255,160,70,.9)" : "rgba(91,129,255,.9)"}` }}
+        className={`h-1.5 w-1.5 shrink-0 rounded-full ${t.point}`}
+        style={{ boxShadow: `0 0 10px 1px ${t.halo}` }}
       />
       {children}
     </span>

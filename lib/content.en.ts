@@ -334,7 +334,7 @@ export const useCases = {
         "The decision no longer rests on the few lines visible on a CV.",
       ],
       keyMessage: "100% of candidates are heard, listened to and assessed.",
-      tone: "warm" as const,
+      tone: "iris" as const,
     },
     {
       id: "candidate-experience",
@@ -346,7 +346,7 @@ export const useCases = {
         "They can explain who they are, add context to their track record and ask their own questions. They can also receive personalised feedback, if you turn the option on.",
       ],
       keyMessage: "Give every candidate room to speak.",
-      tone: "warm" as const,
+      tone: "iris" as const,
     },
     {
       id: "non-linear-profiles",
@@ -359,7 +359,7 @@ export const useCases = {
         "It shows what the candidate actually did, in what context, with what responsibilities and what skills — so their fit for the role can be assessed beyond job titles and conventional paths.",
       ],
       keyMessage: "Understand the talent behind the track record.",
-      tone: "warm" as const,
+      tone: "iris" as const,
     },
     {
       id: "enrich-the-talent-pool",
@@ -379,7 +379,7 @@ export const useCases = {
         "More value drawn from the talent already in your pool",
       ],
       keyMessage: "A richer, more usable talent pool.",
-      tone: "warm" as const,
+      tone: "iris" as const,
     },
   ],
 
@@ -432,7 +432,7 @@ export const products = {
       headline: "Answer candidates, around the clock",
       body: "Talent Ask lets candidates ask their questions about your company, your roles and your environment, right inside their hiring journey.",
       visual: "ask" as const,
-      tone: "warm" as const,
+      tone: "iris" as const,
     },
   ],
 

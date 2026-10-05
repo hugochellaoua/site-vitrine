@@ -1,3 +1,4 @@
+import { MotCandidat } from "@/components/ui/mot-candidat";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Magnetic } from "@/components/ui/magnetic";
@@ -51,7 +52,7 @@ export function Hero({ locale }: { locale: Locale }) {
               className="hero-rise mr-[0.24em] inline-block"
               style={{ animationDelay: `${START + i * STEP}s` }}
             >
-              {word}
+              <MotCandidat texte={word} />
             </span>
           ))}
           <span

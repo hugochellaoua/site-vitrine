@@ -1,3 +1,4 @@
+import { MotCandidat } from "@/components/ui/mot-candidat";
 import { dict, type Locale } from "@/lib/i18n";
 import { Reveal } from "@/components/ui/reveal";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
@@ -10,6 +11,17 @@ import { Badge, SectionTitle } from "@/components/ui/section-title";
  * en petit juste après. Le chiffre porte l'argument ; le texte ne fait que le
  * nommer. C'est ce qui distingue une preuve d'un paragraphe.
  */
+/**
+ * Une teinte par chiffre, dans l'ordre des trois voix du site : le produit, le
+ * candidat, la méthode — ces deux dernières partageant le violet. Trois cartes identiques ne se distingueraient que par
+ * leur contenu ; ainsi, on retient aussi laquelle parle de quoi.
+ */
+const TEINTES = [
+  { arete: "", chiffre: "text-accent-light", unite: "text-accent-light/70" },
+  { arete: "lit-card--iris", chiffre: "text-iris", unite: "text-iris/70" },
+  { arete: "lit-card--iris", chiffre: "text-iris", unite: "text-iris/70" },
+] as const;
+
 export function Synthesis({ locale }: { locale: Locale }) {
   const { synthesis } = dict(locale);
   return (
@@ -21,29 +33,27 @@ export function Synthesis({ locale }: { locale: Locale }) {
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
-          {synthesis.items.map((item, i) => (
+          {synthesis.items.map((item, i) => {
+            const teinte = TEINTES[i % TEINTES.length];
+            return (
             <Reveal
               key={item.n}
               delay={i * 0.12}
               y={26}
-              className={`lit-card px-7 py-8 ${i === 1 ? "lit-card--warm" : ""}`}
+              className={`lit-card px-7 py-8 ${teinte.arete}`}
             >
               <h3 className="font-display text-[19px] font-bold tracking-[-0.01em] text-ink">
-                {item.title}
+                <MotCandidat texte={item.title} />
               </h3>
 
               <div className="mt-4 flex items-baseline gap-1">
                 <span
-                  className={`font-display text-[clamp(44px,5vw,64px)] font-bold leading-none tracking-[-0.04em] ${
-                    i === 1 ? "text-warm" : "text-accent-light"
-                  }`}
+                  className={`font-display text-[clamp(44px,5vw,64px)] font-bold leading-none tracking-[-0.04em] ${teinte.chiffre}`}
                 >
                   {item.value}
                 </span>
                 <span
-                  className={`font-display text-[22px] font-bold leading-none ${
-                    i === 1 ? "text-warm/70" : "text-accent-light/70"
-                  }`}
+                  className={`font-display text-[22px] font-bold leading-none ${teinte.unite}`}
                 >
                   {item.unit}
                 </span>
@@ -54,7 +64,8 @@ export function Synthesis({ locale }: { locale: Locale }) {
                 {item.steps}
               </p>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

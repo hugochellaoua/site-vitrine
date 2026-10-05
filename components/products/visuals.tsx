@@ -5,15 +5,15 @@ import { Constellation } from "@/components/cinematic/constellation";
 const d = products.demo;
 
 /** Bulle de conversation, au sens du produit : Helpify à gauche, candidat à droite. */
-function Bubble({ from, text, tone = "accent" }: { from: string; text: string; tone?: "accent" | "warm" }) {
+function Bubble({ from, text, tone = "accent" }: { from: string; text: string; tone?: "accent" | "iris" }) {
   const helpify = from === "helpify";
   return (
     <div
       style={{ alignSelf: helpify ? "flex-start" : "flex-end" }}
       className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 text-[12.5px] leading-snug ${
         helpify
-          ? tone === "warm"
-            ? "rounded-bl-sm bg-warm font-medium text-[#2a1607]"
+          ? tone === "iris"
+            ? "rounded-bl-sm bg-iris font-medium text-[#1a1236]"
             : "rounded-bl-sm bg-accent text-white"
           : "rounded-br-sm bg-[#f9f9fb] font-medium text-[#141037]"
       }`}
@@ -29,19 +29,19 @@ function ChatCard({
   badge,
 }: {
   messages: readonly { from: string; text: string }[];
-  tone?: "accent" | "warm";
+  tone?: "accent" | "iris";
   badge?: string;
 }) {
   return (
     <div className="card-surface w-full max-w-md rounded-3xl p-5">
       <div className="mb-4 flex items-center justify-between gap-2 border-b border-hairline pb-3 text-[10.5px] uppercase tracking-[0.1em] text-faint">
         <span className="flex items-center gap-2">
-          <MessageSquare size={12} className={tone === "warm" ? "text-warm" : "text-accent-light"} />
+          <MessageSquare size={12} className={tone === "iris" ? "text-iris" : "text-accent-light"} />
           Candidat <span className="text-hairline-strong">↔</span> Helpify
         </span>
         {badge && (
-          <span className="flex items-center gap-1.5 rounded-full border border-warm/40 bg-warm-soft px-2.5 py-1 text-[9px] font-semibold tracking-[0.14em] text-warm-light">
-            <span className="h-1 w-1 rounded-full bg-warm" />
+          <span className="flex items-center gap-1.5 rounded-full border border-iris/40 bg-iris-soft px-2.5 py-1 text-[9px] font-semibold tracking-[0.14em] text-iris-light">
+            <span className="h-1 w-1 rounded-full bg-iris" />
             {badge}
           </span>
         )}
@@ -139,12 +139,12 @@ export function SynergiesVisual() {
 export function AskVisual() {
   return (
     <div className="flex w-full flex-col items-center gap-5">
-      <ChatCard messages={d.ask.messages} tone="warm" badge="Talent ask" />
+      <ChatCard messages={d.ask.messages} tone="iris" badge="Talent ask" />
       <div className="flex flex-wrap items-center justify-center gap-2">
         {d.ask.hours.map((h, i) => (
           <span
             key={h}
-            className="flex items-center gap-1.5 rounded-full border border-warm/30 bg-warm-soft px-3 py-1.5 text-[11.5px] tabular-nums text-warm-light"
+            className="flex items-center gap-1.5 rounded-full border border-iris/30 bg-iris-soft px-3 py-1.5 text-[11.5px] tabular-nums text-iris-light"
             style={{ animation: "pulseGlow 3s ease-in-out infinite", animationDelay: `${i * 0.3}s` }}
           >
             <Check size={11} />

@@ -1,3 +1,4 @@
+import { MotCandidat } from "@/components/ui/mot-candidat";
 import { Check, MessageSquare, UserCheck, X } from "lucide-react";
 import { processSteps } from "@/lib/content";
 import { LogoMark } from "@/components/logo-mark";
@@ -24,19 +25,19 @@ const TALENT_STEPS = new Set(["questions", "reponses", "always", "reponse"]);
  * seul le contenu change, jamais la grille de lecture.
  */
 function StepLayout({ step, children }: { step: Step; children: React.ReactNode }) {
-  const warm = TALENT_STEPS.has(step.key);
+  const iris = TALENT_STEPS.has(step.key);
   return (
     <div className="flex w-full max-w-3xl flex-col items-center">
       <div className="flex items-baseline gap-3">
         <span
           className={`font-display text-[clamp(30px,4vw,46px)] font-bold leading-none tabular-nums ${
-            warm ? "text-warm" : "text-accent-light"
+            iris ? "text-iris" : "text-accent-light"
           }`}
         >
           {step.n}
         </span>
         <h2 className="max-w-[17ch] text-balance font-display text-[clamp(24px,3.2vw,38px)] font-bold leading-[1.1] tracking-[-0.02em] text-ink">
-          {step.title}
+          <MotCandidat texte={step.title} />
         </h2>
       </div>
       <p className="mt-3.5 max-w-[46ch] text-balance text-center text-[13px] leading-relaxed text-muted sm:text-[14.5px]">
@@ -65,12 +66,12 @@ function Chat({
     <div className="card-surface w-full max-w-md rounded-3xl p-5">
       <div className="mb-4 flex items-center justify-between gap-2 border-b border-hairline pb-3 text-[10.5px] uppercase tracking-[0.1em] text-faint">
         <span className="flex items-center gap-2">
-          <MessageSquare size={12} className={probe ? "text-warm" : "text-accent-light"} />
+          <MessageSquare size={12} className={probe ? "text-iris" : "text-accent-light"} />
           Candidat <span className="text-hairline-strong">↔</span> Helpify
         </span>
         {probe && (
-          <span className="flex items-center gap-1.5 rounded-full border border-warm/40 bg-warm-soft px-2.5 py-1 text-[9px] font-semibold tracking-[0.14em] text-warm-light">
-            <span className="h-1 w-1 rounded-full bg-warm" />
+          <span className="flex items-center gap-1.5 rounded-full border border-iris/40 bg-iris-soft px-2.5 py-1 text-[9px] font-semibold tracking-[0.14em] text-iris-light">
+            <span className="h-1 w-1 rounded-full bg-iris" />
             Talent ask
           </span>
         )}
@@ -84,7 +85,7 @@ function Chat({
             className={`max-w-[86%] rounded-2xl px-3.5 py-2.5 text-[12.5px] leading-snug ${
               m.from === "helpify"
                 ? probe
-                  ? "rounded-bl-sm bg-warm font-medium text-[#2a1607]"
+                  ? "rounded-bl-sm bg-iris font-medium text-[#1a1236]"
                   : "rounded-bl-sm bg-accent text-white"
                 : "rounded-br-sm bg-[#f9f9fb] font-medium text-[#141037]"
             }`}
@@ -121,12 +122,12 @@ function Besoin({ step }: { step: Extract<Step, { key: "besoin" }> }) {
               style={{ animation: "pulseGlow 2.6s ease-in-out infinite", animationDelay: `${i * 0.2}s` }}
             >
               <span className="min-w-0 truncate">{f.label}</span>
-              {/* Le poids du critère, lu d'un coup d'œil : l'orange marque ce
+              {/* Le poids du critère, lu d'un coup d'œil : le violet marque ce
                   qui est éliminatoire, le gris ce qui n'est qu'un plus. */}
               <span
                 className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] ${
                   f.weight === "Primordial"
-                    ? "bg-warm-soft text-warm-light"
+                    ? "bg-iris-soft text-iris-light"
                     : f.weight === "Important"
                       ? "bg-accent-soft text-accent-light"
                       : "bg-white/[0.06] text-muted"
@@ -189,7 +190,7 @@ function Reponses({ step }: { step: Extract<Step, { key: "reponses" }> }) {
           {step.extracted.map((tag, i) => (
             <li
               key={tag}
-              className="rounded-full border border-warm/35 bg-warm-soft px-3 py-1.5 text-[11px] text-warm-light"
+              className="rounded-full border border-iris/35 bg-iris-soft px-3 py-1.5 text-[11px] text-iris-light"
               style={{ animation: "pulseGlow 2.8s ease-in-out infinite", animationDelay: `${i * 0.22}s` }}
             >
               {tag}
@@ -212,7 +213,7 @@ function Always({ step }: { step: Extract<Step, { key: "always" }> }) {
         <div className="relative">
           <div
             className="absolute -inset-6 -z-10 rounded-full"
-            style={{ background: "radial-gradient(circle, rgba(255,160,70,0.32) 0%, rgba(255,160,70,0) 70%)" }}
+            style={{ background: "radial-gradient(circle, rgba(172,152,255,0.32) 0%, rgba(172,152,255,0) 70%)" }}
           />
           <svg width="88" height="88" viewBox="0 0 100 100" aria-hidden="true">
             <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(255,255,255,0.14)" strokeWidth="2" />
@@ -235,16 +236,16 @@ function Always({ step }: { step: Extract<Step, { key: "always" }> }) {
             })}
             {/* Aiguilles : des tours complets, à deux vitesses. */}
             <g style={{ transformOrigin: "50px 50px", animation: "spin 8s linear infinite" }}>
-              <line x1="50" y1="50" x2="50" y2="24" stroke="var(--warm)" strokeWidth="2.6" strokeLinecap="round" />
+              <line x1="50" y1="50" x2="50" y2="24" stroke="var(--iris)" strokeWidth="2.6" strokeLinecap="round" />
             </g>
             <g style={{ transformOrigin: "50px 50px", animation: "spin 48s linear infinite" }}>
               <line x1="50" y1="50" x2="50" y2="33" stroke="#f5f4ff" strokeWidth="3" strokeLinecap="round" />
             </g>
-            <circle cx="50" cy="50" r="3" fill="var(--warm)" />
+            <circle cx="50" cy="50" r="3" fill="var(--iris)" />
           </svg>
         </div>
 
-        <span className="font-display text-[clamp(40px,6vw,68px)] font-bold leading-none tracking-[-0.03em] tabular-nums text-warm">
+        <span className="font-display text-[clamp(40px,6vw,68px)] font-bold leading-none tracking-[-0.03em] tabular-nums text-iris">
           24/7
         </span>
       </div>
@@ -422,13 +423,13 @@ function Decision({ step }: { step: Extract<Step, { key: "decision" }> }) {
       </span>
 
       {/* La décision appartient au candidat autant qu'au recruteur : elle est
-          humaine, donc en orange, comme tout ce qui touche au talent. */}
-      <div className="w-full max-w-[230px] rounded-2xl border border-warm/40 bg-warm-soft px-5 py-6 text-center">
-        <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-warm/20 text-warm">
+          humaine, donc en violet, comme tout ce qui touche au talent. */}
+      <div className="w-full max-w-[230px] rounded-2xl border border-iris/40 bg-iris-soft px-5 py-6 text-center">
+        <span className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-iris/20 text-iris">
           <UserCheck size={20} />
         </span>
         <p className="mt-4 font-display text-[17px] font-bold text-ink">{step.owner}</p>
-        <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-warm-light">{step.verdict}</p>
+        <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-iris-light">{step.verdict}</p>
       </div>
     </div>
   );

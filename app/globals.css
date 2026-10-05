@@ -30,6 +30,14 @@
   --warm-light: #ffb970;
   --warm-soft: rgba(255, 160, 70, 0.16);
 
+  /* Violet — la méthode. Entre le bleu de Helpify et l'orange du candidat se
+     place ce que l'un fait de ce que l'autre a dit : les critères, leur poids,
+     l'évaluation. La teinte le dit optiquement, puisqu'elle tient des deux.
+     Elle ne s'emploie donc que là où le site explique sa façon de procéder. */
+  --iris: #ac98ff;
+  --iris-light: #c3b4ff;
+  --iris-soft: rgba(172, 152, 255, 0.16);
+
   /* Texte */
   --ink: #ffffff;
   --muted: #a8adcf;
@@ -63,6 +71,9 @@
   --color-warm: var(--warm);
   --color-warm-light: var(--warm-light);
   --color-warm-soft: var(--warm-soft);
+  --color-iris: var(--iris);
+  --color-iris-light: var(--iris-light);
+  --color-iris-soft: var(--iris-soft);
   --color-accent-soft: var(--accent-soft);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
@@ -604,6 +615,13 @@ body {
 .lit-card--warm::after {
   background: linear-gradient(90deg, transparent, var(--warm), transparent);
   box-shadow: 0 0 14px 1px rgba(255, 160, 70, 0.7);
+}
+.lit-card--iris::before {
+  background: linear-gradient(180deg, rgba(172, 152, 255, 0.55), rgba(172, 152, 255, 0.04) 38%);
+}
+.lit-card--iris::after {
+  background: linear-gradient(90deg, transparent, var(--iris), transparent);
+  box-shadow: 0 0 14px 1px rgba(172, 152, 255, 0.7);
 }
 
 /* Ciel étoilé appliqué à un encart.

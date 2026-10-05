@@ -392,7 +392,7 @@ export const useCases = {
         "La décision ne repose donc plus uniquement sur les quelques lignes visibles sur un CV.",
       ],
       keyMessage: "100 % des candidats sont écoutés, entendus et évalués.",
-      tone: "warm" as const,
+      tone: "iris" as const,
     },
     {
       id: "experience-candidat",
@@ -404,7 +404,7 @@ export const useCases = {
         "Il peut expliquer qui il est, apporter du contexte à son parcours et poser ses propres questions. Il peut également recevoir un retour personnalisé, si vous activez l'option.",
       ],
       keyMessage: "Donnez à chaque candidat la possibilité de s'exprimer.",
-      tone: "warm" as const,
+      tone: "iris" as const,
     },
     {
       id: "profils-atypiques",
@@ -417,7 +417,7 @@ export const useCases = {
         "Elle permet de comprendre ce que le candidat a réellement fait, dans quel contexte, avec quelles responsabilités et quelles compétences, afin d'évaluer son adéquation avec le poste au-delà des intitulés et des parcours traditionnels.",
       ],
       keyMessage: "Comprendre le talent derrière le parcours.",
-      tone: "warm" as const,
+      tone: "iris" as const,
     },
     {
       id: "enrichir-le-vivier",
@@ -438,7 +438,7 @@ export const useCases = {
         "Une meilleure exploitation des talents déjà présents dans votre vivier",
       ],
       keyMessage: "Un vivier enrichi et mieux exploitable.",
-      tone: "warm" as const,
+      tone: "iris" as const,
     },
   ],
 
@@ -507,7 +507,7 @@ export const products = {
       // Seul produit tourné vers le candidat : il porte donc l'orange, comme
       // partout ailleurs sur le site.
       visual: "ask" as const,
-      tone: "warm" as const,
+      tone: "iris" as const,
     },
   ],
 
