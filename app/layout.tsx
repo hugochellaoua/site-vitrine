@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import { site } from "@/lib/content";
 import { siteUrl } from "@/lib/site";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 /**
@@ -51,7 +52,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${dmSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-void text-ink">{children}</body>
+      <body className="min-h-full flex flex-col bg-void text-ink">
+        {children}
+        {/* Mesure d'audience sans cookie. Si l'outil change, la section 11 de la
+            politique de confidentialité (lib/legal.ts et lib/legal.en.ts) doit suivre. */}
+        <Analytics />
+      </body>
     </html>
   );
 }
