@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { suivi } from "@/lib/analytics";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { dict, type Locale } from "@/lib/i18n";
@@ -38,6 +39,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      if (res.ok) suivi("generate_lead", { formulaire: "contact" });
       setStatus(res.ok ? "sent" : "error");
     } catch {
       setStatus("error");

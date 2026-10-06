@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { dict, type Locale } from "@/lib/i18n";
 import { LogoLockup } from "@/components/logo-mark";
+import { CookieSettingsButton } from "@/components/cookie-consent";
 
 export function Footer({ locale }: { locale: Locale }) {
-  const { footer, nav } = dict(locale);
+  const { footer, nav, cookies } = dict(locale);
   return (
     <footer className="relative border-t border-hairline px-6 pb-28 pt-12 lg:pb-12">
       <div className="mx-auto flex max-w-5xl flex-col gap-8">
@@ -47,6 +48,7 @@ export function Footer({ locale }: { locale: Locale }) {
                 {l.label}
               </Link>
             ))}
+            <CookieSettingsButton label={cookies.settings} />
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[11px] text-faint">
             {footer.badges.map((b) => (

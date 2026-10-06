@@ -709,6 +709,19 @@ export const footer = {
   copyright: "© 2026 Helpify",
 };
 
+/**
+ * The consent banner. Declining must be as easy as accepting: both buttons carry
+ * the same weight, and the text says what happens in each case.
+ */
+export const cookies = {
+  title: "Your cookies, your choice",
+  text: "With your consent, we measure the site's audience with Google Analytics: pages read, visit length, where visitors come from. Without it, no cookie is set and nothing is sent to Google.",
+  privacy: { label: "Learn more", href: links.privacy },
+  accept: "Accept",
+  refuse: "Decline",
+  settings: "Cookie settings",
+};
+
 /** Interface words that belong to no section — see the French file. */
 export const ui = {
   backHome: "Back to home",

@@ -813,6 +813,19 @@ export const footer = {
 };
 
 /**
+ * Le bandeau de consentement. Refuser doit être aussi simple qu'accepter : les
+ * deux boutons ont le même poids, et le texte dit ce qui se passe dans chaque cas.
+ */
+export const cookies = {
+  title: "Vos cookies, votre choix",
+  text: "Avec votre accord, nous mesurons l'audience du site avec Google Analytics : pages lues, durée de visite, provenance. Sans votre accord, aucun cookie n'est déposé et rien n'est envoyé à Google.",
+  privacy: { label: "En savoir plus", href: links.privacy },
+  accept: "Accepter",
+  refuse: "Refuser",
+  settings: "Gérer les cookies",
+};
+
+/**
  * Les quelques mots d'interface qui n'appartiennent à aucune section : libellés
  * de navigation interne, repères de progression, intitulés de boutons répétés.
  * Ils vivaient en dur dans les composants, ce qui les rendait intraduisibles.

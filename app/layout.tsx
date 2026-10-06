@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import { site } from "@/lib/content";
 import { siteUrl } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/next";
+import { CookieConsent } from "@/components/cookie-consent";
 import "./globals.css";
 
 /**
@@ -57,6 +58,8 @@ export default function RootLayout({
         {/* Mesure d'audience sans cookie. Si l'outil change, la section 11 de la
             politique de confidentialité (lib/legal.ts et lib/legal.en.ts) doit suivre. */}
         <Analytics />
+        {/* Mesure Google, avec cookies : rien n'est chargé avant l'accord du visiteur. */}
+        <CookieConsent />
       </body>
     </html>
   );

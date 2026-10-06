@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { roi } from "@/lib/content";
+import { suivi } from "@/lib/analytics";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -27,6 +28,7 @@ export function RoiCapture({ recap }: { recap: string }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, message: recap, source: roi.capture.source }),
       });
+      if (res.ok) suivi("generate_lead", { formulaire: "roi" });
       setStatus(res.ok ? "sent" : "error");
     } catch {
       setStatus("error");
