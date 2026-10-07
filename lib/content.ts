@@ -814,11 +814,13 @@ export const footer = {
 
 /**
  * Le bandeau de consentement. Refuser doit être aussi simple qu'accepter : les
- * deux boutons ont le même poids, et le texte dit ce qui se passe dans chaque cas.
+ * deux boutons ont le même poids. Le texte nomme la finalité, la mesure
+ * d'audience, et renvoie à la politique de confidentialité pour le détail
+ * (outil, durée, droits).
  */
 export const cookies = {
-  title: "Vos cookies, votre choix",
-  text: "Avec votre accord, nous mesurons l'audience du site avec Google Analytics : pages lues, durée de visite, provenance. Sans votre accord, aucun cookie n'est déposé et rien n'est envoyé à Google.",
+  title: "Cookies",
+  text: "Nous utilisons des cookies pour mesurer l'audience de ce site et l'améliorer. Vous pouvez les accepter ou les refuser : cela ne change rien à votre navigation.",
   privacy: { label: "En savoir plus", href: links.privacy },
   accept: "Accepter",
   refuse: "Refuser",

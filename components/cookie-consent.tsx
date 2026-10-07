@@ -12,7 +12,8 @@ import { GA_ID, mesureAutorisee } from "@/lib/analytics";
  *
  * Refuser est aussi simple qu'accepter : deux boutons identiques, côte à côte.
  * Tant que rien n'est accepté, le script de Google n'est pas même téléchargé —
- * c'est ce qui tient la promesse « sans votre accord, rien n'est envoyé à Google ».
+ * c'est ce qui tient la promesse de la politique de confidentialité : aucune
+ * donnée n'est envoyée à Google avant l'accord.
  *
  * Le choix se garde dans le stockage local du navigateur, six mois : la CNIL
  * recommande de redemander passé ce délai. Les trois états (`aucun`, `accepte`,

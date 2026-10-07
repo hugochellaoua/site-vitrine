@@ -711,11 +711,12 @@ export const footer = {
 
 /**
  * The consent banner. Declining must be as easy as accepting: both buttons carry
- * the same weight, and the text says what happens in each case.
+ * the same weight. The text names the purpose, audience measurement, and points
+ * to the privacy policy for the detail (tool, duration, rights).
  */
 export const cookies = {
-  title: "Your cookies, your choice",
-  text: "With your consent, we measure the site's audience with Google Analytics: pages read, visit length, where visitors come from. Without it, no cookie is set and nothing is sent to Google.",
+  title: "Cookies",
+  text: "We use cookies to measure this site's audience and improve it. You can accept or decline them: it makes no difference to your browsing.",
   privacy: { label: "Learn more", href: links.privacy },
   accept: "Accept",
   refuse: "Decline",
