@@ -3,6 +3,8 @@
 // le texte ne fait que la nommer. Toute copie longue a été condensée ou supprimée.
 // Contenu de référence vérifié sur helpify-ai.fr (2026-08-13) puis réduit.
 
+import type { DemoContent } from "./demo-types";
+
 export const links = {
   booking: "https://calendar.app.google/kAfRpMQoheceUQZY8",
   contact: "/contact",
@@ -52,13 +54,76 @@ export const nav = {
 };
 
 export const hero = {
-  title: "Rencontrez vos meilleurs candidats.",
+  title: "Obtenez vos meilleurs candidats.",
   // Mis en orange, comme dans la vidéo : la couleur porte la promesse.
   emphasis: "Rapidement.",
   subtitle:
     "Une conversation qui comprend votre entreprise, échange avec chaque candidat et vous aide à recruter plus vite et mieux.",
   cta: { label: "Réservez une démo", href: links.booking },
   scrollHint: "Faites défiler",
+};
+
+/**
+ * La démonstration sous le titre : un échange entre Helpify et un candidat, joué
+ * d'un bout à l'autre. Le ton est le sujet — Helpify parle comme un recruteur
+ * sympa, pas comme un questionnaire, et le candidat peut poser ses questions.
+ * Noms et chiffres sont inventés, et la page le dit.
+ */
+export const demo: DemoContent = {
+  eyebrow: "Côté candidat",
+  title: "Une conversation pour vous et vos candidats.",
+  emphasis: "vos candidats.",
+  sub: "Marc dépose son CV et son LinkedIn. Helpify les lit, puis lui parle comme le ferait un recruteur sympa.",
+  fiction: "Échange fictif, à titre d'illustration.",
+  header: { name: "Helpify", role: "Candidature · Responsable grands comptes" },
+  candidate: {
+    name: "Marc",
+    initial: "M",
+    cv: "Marc_Lefebvre_CV.pdf",
+    cvSize: "184 Ko",
+    linkedin: "linkedin.com/in/marc-lefebvre",
+  },
+  analysis: {
+    reading: "Helpify lit votre profil…",
+    done: "Profil analysé",
+    points: ["8 ans en vente grands comptes", "SaaS B2B", "12 comptes stratégiques"],
+  },
+  notice: { label: "En savoir plus sur le traitement de ma candidature", href: links.noticeIA },
+  controls: { pause: "Pause", play: "Lire", replay: "Revoir" },
+  steps: [
+    {
+      type: "message",
+      from: "helpify",
+      text: "Bonjour **Marc**, je suis **Helpify**.\nJe suis là pour que nos recruteurs voient vraiment qui vous êtes, au-delà du CV, et pour vous présenter le poste afin que vous voyiez s'il vous correspond.\nVotre candidature sera toujours analysée par un recruteur.",
+    },
+    { type: "profile" },
+    { type: "analysis" },
+    {
+      type: "message",
+      from: "helpify",
+      text: "Merci pour votre CV et votre LinkedIn, **Marc**.\nJ'ai vu que vous aviez géré des comptes stratégiques chez **Nordis**. Comment cela s'est passé, concrètement, pour les développer ?\nN'hésitez pas si vous avez aussi des questions sur notre poste.",
+    },
+    {
+      type: "message",
+      from: "candidate",
+      text: "Merci ! En effet, j'avais 12 comptes.\nJ'ai mis en place un point trimestriel avec chaque direction pour détecter les upsells éventuels et assurer le suivi : +35 % de revenus en 18 mois.\nEt chez vous, que proposez-vous pour le développement de vos collaborateurs ?",
+    },
+    {
+      type: "message",
+      from: "helpify",
+      text: "Bonne question ! Chez nous, c'est essentiel : chacun a son budget formation (formations, outils d'IA avancés, conférences, salons).\nAvez-vous déjà eu une situation avec un compte clé menacé de partir ? Qu'avez-vous pu mettre en place ?",
+    },
+    {
+      type: "message",
+      from: "candidate",
+      text: "Par exemple, j'appelle le sponsor sous 48 heures pour comprendre la raison.\nJe monte un success plan et je reviens avec des engagements chiffrés.\nEt chez vous, comment ça se passe pour le télétravail ?",
+    },
+    {
+      type: "message",
+      from: "helpify",
+      text: "Merci **Marc**, c'est très clair.\nCôté télétravail, nous proposons deux jours par semaine, que vous fixez en autonomie.\nSi vous avez d'autres questions, je suis là.",
+    },
+  ],
 };
 
 // ─────────────────────────────────────────────────────────────
@@ -795,7 +860,7 @@ export const finalCta = {
     "Candidats écoutés",
     "Shortlist automatisée",
   ],
-  title: "Rencontrez vos meilleurs candidats.",
+  title: "Obtenez vos meilleurs candidats.",
   emphasis: "Rapidement.",
   cta: { label: "Réservez une démo", href: links.booking },
 };

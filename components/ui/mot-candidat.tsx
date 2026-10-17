@@ -15,7 +15,7 @@ const MOT_ET_POINT = /(candidat(?:es|e|s)?\.?)/gi;
  * lit comme une erreur de mise en forme.
  *
  * `avecPoint` emporte aussi le point qui suit le mot. Il sert à la phrase
- * « Rencontrez vos meilleurs candidats. », qui ouvre et clôt la page : le
+ * « Obtenez vos meilleurs candidats. », qui ouvre et clôt la page : le
  * violet s'arrête alors sur le point, et l'orange reprend avec « Rapidement. ».
  */
 export function MotCandidat({ texte, avecPoint = false }: { texte: string; avecPoint?: boolean }) {

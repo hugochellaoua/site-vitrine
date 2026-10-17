@@ -2,6 +2,8 @@
 // keys — only the prose changes. Anything that is not prose (input keys, visual
 // names, step keys) must stay identical: the components match on them.
 
+import type { DemoContent } from "./demo-types";
+
 export const links = {
   booking: "https://calendar.app.google/kAfRpMQoheceUQZY8",
   contact: "/en/contact",
@@ -38,12 +40,75 @@ export const nav = {
 };
 
 export const hero = {
-  title: "Meet your best candidates.",
-  emphasis: "Faster.",
+  title: "Get your best candidates.",
+  emphasis: "Fast.",
   subtitle:
     "A conversation that understands your company, talks to every candidate, and helps you hire faster and better.",
   cta: { label: "Book a demo", href: links.booking },
   scrollHint: "Scroll",
+};
+
+/**
+ * The demo under the headline: an exchange between Helpify and a candidate,
+ * played end to end. The tone is the point — Helpify talks like a friendly
+ * recruiter, not like a questionnaire, and the candidate gets to ask questions.
+ * Names and figures are invented, and the page says so.
+ */
+export const demo: DemoContent = {
+  eyebrow: "The candidate's side",
+  title: "A conversation for you and your candidates.",
+  emphasis: "your candidates.",
+  sub: "Marc drops in his CV and LinkedIn. Helpify reads them, then talks to him the way a friendly recruiter would.",
+  fiction: "Fictional exchange, for illustration.",
+  header: { name: "Helpify", role: "Application · Key Account Manager" },
+  candidate: {
+    name: "Marc",
+    initial: "M",
+    cv: "Marc_Lefebvre_CV.pdf",
+    cvSize: "184 KB",
+    linkedin: "linkedin.com/in/marc-lefebvre",
+  },
+  analysis: {
+    reading: "Helpify is reading your profile…",
+    done: "Profile analysed",
+    points: ["8 years in key account sales", "B2B SaaS", "12 strategic accounts"],
+  },
+  notice: { label: "Learn how my application is handled", href: links.noticeIA },
+  controls: { pause: "Pause", play: "Play", replay: "Replay" },
+  steps: [
+    {
+      type: "message",
+      from: "helpify",
+      text: "Hi **Marc**, I'm **Helpify**.\nI'm here so our recruiters can really see who you are, beyond your CV, and to tell you about the role so you can see whether it suits you.\nYour application will always be reviewed by a recruiter.",
+    },
+    { type: "profile" },
+    { type: "analysis" },
+    {
+      type: "message",
+      from: "helpify",
+      text: "Thanks for your CV and your LinkedIn, **Marc**.\nI saw that you managed strategic accounts at **Nordis**. How did that go, concretely, in growing them?\nFeel free to ask me anything about the role too.",
+    },
+    {
+      type: "message",
+      from: "candidate",
+      text: "Thanks! Yes, I had 12 accounts.\nI set up a quarterly review with each leadership team to spot upsell opportunities and keep things on track: +35% revenue in 18 months.\nAnd what do you offer for the development of your people?",
+    },
+    {
+      type: "message",
+      from: "helpify",
+      text: "Great question! Here it's essential: everyone has their own training budget (courses, advanced AI tools, conferences, trade shows).\nHave you ever had a situation with a key account at risk of leaving? What were you able to put in place?",
+    },
+    {
+      type: "message",
+      from: "candidate",
+      text: "For example, I call the sponsor within 48 hours to understand why.\nI build a success plan and come back with quantified commitments.\nAnd what's the remote work policy here?",
+    },
+    {
+      type: "message",
+      from: "helpify",
+      text: "Thank you **Marc**, that's very clear.\nOn remote work, we offer two days a week, which you set yourself.\nIf you have any other questions, I'm here.",
+    },
+  ],
 };
 
 export const processIntro = {
@@ -692,8 +757,8 @@ export const finalCta = {
     "Candidates heard",
     "Automated shortlist",
   ],
-  title: "Meet your best candidates.",
-  emphasis: "Faster.",
+  title: "Get your best candidates.",
+  emphasis: "Fast.",
   cta: { label: "Book a demo", href: links.booking },
 };
 
