@@ -8,6 +8,7 @@ import { Hero } from "@/components/hero";
 import { DemoConversation } from "@/components/demo-conversation";
 import { CinematicSequence, ProcessIntro } from "@/components/cinematic/sequence";
 import { ProductsOverview } from "@/components/products-overview";
+import { Experts } from "@/components/experts";
 import { Synthesis } from "@/components/synthesis";
 import { Integrations } from "@/components/integrations";
 import { Services } from "@/components/services";
@@ -24,7 +25,8 @@ import type { Locale } from "@/lib/i18n";
  *
  *  — LE PROCESS (hero → démo → séquence) : comment le produit fonctionne, d'abord
  *    vu du candidat dans la démo, puis étape par étape dans la séquence.
- *  — LE POURQUOI (piliers → CTA)  : les bénéfices et les arguments.
+ *  — LE POURQUOI (experts → piliers → CTA)  : la caution, puis les bénéfices et
+ *    les arguments.
  *
  * Une idée appartient à l'un ou à l'autre, jamais aux deux : c'est ce qui évite
  * les redites entre la séquence et le bas de page.
@@ -44,6 +46,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <ProcessIntro locale={locale} />
         <CinematicSequence locale={locale} />
         <ProductsOverview locale={locale} />
+        <Experts locale={locale} />
         <Synthesis locale={locale} />
         <Integrations locale={locale} />
         <Services locale={locale} />

@@ -3,6 +3,7 @@
 // names, step keys) must stay identical: the components match on them.
 
 import type { DemoContent } from "./demo-types";
+import type { ExpertsContent } from "./expert-types";
 
 export const links = {
   booking: "https://calendar.app.google/kAfRpMQoheceUQZY8",
@@ -244,6 +245,32 @@ export const processSteps = [
 export const processOutro = {
   cta: { label: "Start my first campaign", href: links.booking },
   sub: "15 min, on one of your real roles.",
+};
+
+export const experts: ExpertsContent = {
+  title: "The experts around us.",
+  emphasis: "around us.",
+  intro:
+    "The support and expertise of experienced professionals who challenge our thinking on HR, business and technology issues.",
+  items: [
+    {
+      name: "Brice Monnier",
+      role: "HR Director at L'Oréal Innovation",
+      logo: "loreal",
+      body: "Brings a strategic view of HR issues within large groups, the evolution of organisations and the challenges of talent development.",
+    },
+    {
+      name: "Florent Gbelidji",
+      role: "Member of Technical Staff – Open Source Lead at Reflection AI",
+      logo: "reflection",
+      body: "Brings cutting-edge expertise in AI model engineering, with a demanding eye on their reliability, robustness and control.",
+    },
+    {
+      name: "Rome Lambert",
+      role: "Independent HR manager – SMEs and micro-businesses",
+      body: "Brings a field-level view of operational HR issues, with a hands-on approach that stays close to the realities of businesses.",
+    },
+  ],
 };
 
 export const synthesis = {

@@ -4,6 +4,7 @@
 // Contenu de référence vérifié sur helpify-ai.fr (2026-08-13) puis réduit.
 
 import type { DemoContent } from "./demo-types";
+import type { ExpertsContent } from "./expert-types";
 
 export const links = {
   booking: "https://calendar.app.google/kAfRpMQoheceUQZY8",
@@ -272,6 +273,39 @@ export const processSteps = [
 export const processOutro = {
   cta: { label: "Démarrer ma première campagne", href: links.booking },
   sub: "15 min, sur un de vos postes réels.",
+};
+
+/**
+ * Les experts qui challengent la réflexion de l'équipe.
+ *
+ * Les fonctions et les descriptifs sont ceux fournis par l'entreprise, repris
+ * tels quels : c'est la façon dont ces personnes sont présentées, on ne la
+ * reformule pas.
+ */
+export const experts: ExpertsContent = {
+  title: "Les experts qui nous entourent.",
+  emphasis: "qui nous entourent.",
+  intro:
+    "Le soutien et l'expertise de profils expérimentés pour challenger notre réflexion sur les enjeux RH, business et technologiques.",
+  items: [
+    {
+      name: "Brice Monnier",
+      role: "DRH chez L'Oréal Innovation",
+      logo: "loreal",
+      body: "Apporte un regard stratégique sur les enjeux RH au sein de grands groupes, l'évolution des organisations et les problématiques liées au développement des talents.",
+    },
+    {
+      name: "Florent Gbelidji",
+      role: "Member of Technical Staff – Open Source Lead chez Reflection AI",
+      logo: "reflection",
+      body: "Apporte une expertise de pointe en ingénierie des modèles d'IA, avec un regard exigeant sur leur fiabilité, leur robustesse et leur maîtrise.",
+    },
+    {
+      name: "Rome Lambert",
+      role: "RRH indépendante – PME TPE",
+      body: "Apporte une vision terrain des problématiques RH opérationnelles, avec une approche de proximité au plus près des réalités des entreprises.",
+    },
+  ],
 };
 
 export const synthesis = {
