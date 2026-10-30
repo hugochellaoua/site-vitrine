@@ -1,4 +1,5 @@
 import { Galaxy } from "@/components/galaxy";
+import { Halo } from "@/components/ui/halo";
 import { StructuredData } from "@/components/structured-data";
 import { Intro } from "@/components/intro";
 import { CursorLight } from "@/components/cursor-light";
@@ -37,6 +38,7 @@ export function HomePage({ locale }: { locale: Locale }) {
       <StructuredData locale={locale} />
       <StarTexture />
       <Galaxy />
+      <Halo />
       <Intro />
       <CursorLight />
       <Navbar locale={locale} />

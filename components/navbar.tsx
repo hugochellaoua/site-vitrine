@@ -245,7 +245,7 @@ export function Navbar({ locale }: { locale: Locale }) {
     <header className="navbar-enter fixed inset-x-0 top-4 z-50 flex justify-center px-4 sm:top-6">
       <nav
         className={cn(
-          "glass-panel flex w-full max-w-[1020px] items-center justify-between gap-4 rounded-full transition-[padding,background-color,box-shadow] duration-300 ease-out",
+          "glass-panel flex w-full max-w-[1120px] items-center justify-between gap-4 rounded-full transition-[padding,background-color,box-shadow] duration-300 ease-out",
           // Au scroll, la barre bascule sur un fond quasi opaque : voir
           // `.glass-panel--solid` dans globals.css.
           scrolled ? "glass-panel--solid px-3 py-2" : "px-4 py-2.5",
