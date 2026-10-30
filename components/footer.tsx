@@ -6,7 +6,8 @@ import { CookieSettingsButton } from "@/components/cookie-consent";
 export function Footer({ locale }: { locale: Locale }) {
   const { footer, nav, cookies } = dict(locale);
   return (
-    <footer className="relative border-t border-hairline px-6 pb-28 pt-12 lg:pb-12">
+    <footer className="relative border-t border-hairline bg-void px-6 pb-28 pt-12 lg:pb-12">
+      {/* Fond plein : le halo fixe de l'accueil s'arrête au pied de page, qui reste lisible. */}
       <div className="mx-auto flex max-w-5xl flex-col gap-8">
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
           <div className="flex items-center gap-4">
