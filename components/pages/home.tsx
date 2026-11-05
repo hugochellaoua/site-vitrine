@@ -23,15 +23,14 @@ import { StickyCta } from "@/components/sticky-cta";
 import type { Locale } from "@/lib/i18n";
 
 /**
- * Deux registres, jamais mélangés :
+ * L'ordre de l'accueil :
  *
- *  — LE PROCESS (hero → démo → séquence) : comment le produit fonctionne, d'abord
- *    vu du candidat dans la démo, puis étape par étape dans la séquence.
- *  — LE POURQUOI (experts → piliers → CTA)  : la caution, puis les bénéfices et
- *    les arguments.
- *
- * Une idée appartient à l'un ou à l'autre, jamais aux deux : c'est ce qui évite
- * les redites entre la séquence et le bas de page.
+ *  — le process en frise, étape par étape, puis juste dessous les bénéfices
+ *    qui en découlent ;
+ *  — les produits, puis les experts qui nous entourent ;
+ *  — la démonstration (un échange entre Helpify et un candidat), qui montre
+ *    concrètement comment ça se passe ;
+ *  — les intégrations, les services, les tarifs et la FAQ.
  */
 export function HomePage({ locale }: { locale: Locale }) {
   return (
@@ -45,12 +44,12 @@ export function HomePage({ locale }: { locale: Locale }) {
       <Navbar locale={locale} />
       <main className="relative z-10">
         <Hero locale={locale} />
-        <DemoConversation locale={locale} />
         <ProcessIntro locale={locale} />
         <ProcessTimeline locale={locale} />
+        <Synthesis locale={locale} />
         <ProductsOverview locale={locale} />
         <Experts locale={locale} />
-        <Synthesis locale={locale} />
+        <DemoConversation locale={locale} />
         <Integrations locale={locale} />
         <Services locale={locale} />
         <Roi locale={locale} />

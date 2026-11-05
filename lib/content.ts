@@ -312,6 +312,7 @@ export const synthesis = {
   eyebrow: "Résultats mesurés",
   title: "Quatre bénéfices, un seul process.",
   emphasis: "un seul process.",
+  sub: "Le temps gagné, vos recruteurs le consacrent aux entretiens et à ce qui fait vraiment avancer votre activité.",
   items: [
     { n: "01", title: "Gain de temps", value: "−90", unit: "%", label: "de temps jusqu'à la shortlist", steps: "Étapes 03 & 08" },
     { n: "02", title: "Expérience candidat", value: "4,8", unit: "/5", label: "note moyenne des candidats", steps: "Étapes 04 & 10" },
@@ -500,10 +501,11 @@ export const useCases = {
       promise: "Donnez à chaque candidat la possibilité de s'exprimer",
       problem: "Je veux que mes candidats aient réellement l'occasion de s'exprimer.",
       answer: [
+        "Aujourd'hui, seuls quelques candidats sont appelés par les recruteurs et ont l'occasion d'exprimer qui ils sont. Offrez cette occasion à tous vos candidats.",
         "Chaque candidat peut avoir une véritable conversation autour de son parcours, de son expérience et de ses attentes.",
         "Il peut expliquer qui il est, apporter du contexte à son parcours et poser ses propres questions. Il peut également recevoir un retour personnalisé, si vous activez l'option.",
       ],
-      keyMessage: "Donnez à chaque candidat la possibilité de s'exprimer.",
+      keyMessage: "Montrez une entreprise tournée vers ses candidats, qui s'intéresse à chacun d'eux.",
       tone: "iris" as const,
     },
     {

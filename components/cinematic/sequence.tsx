@@ -374,7 +374,8 @@ function Block({ children }: { children: React.ReactNode }) {
 export function ProcessIntro({ locale }: { locale: Locale }) {
   const { processIntro } = dict(locale);
   return (
-    <section className="relative flex flex-col items-center px-6 pb-10 pt-24 text-center sm:pt-32">
+    // L'ancre du menu « Le process » : elle pointe sur ce titre, juste avant la frise.
+    <section id="story" className="relative flex scroll-mt-0 flex-col items-center px-6 pb-10 pt-24 text-center sm:pt-32">
       <Badge>{processIntro.eyebrow}</Badge>
       <SectionTitle
         title={processIntro.title}

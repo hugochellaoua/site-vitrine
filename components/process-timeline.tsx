@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 import { dict, type Locale } from "@/lib/i18n";
 
 /**
@@ -68,6 +69,8 @@ function Frise({ locale, vertical }: { locale: Locale; vertical: boolean }) {
   const teinte = useRef<SVGLinearGradientElement>(null);
   const points = useRef<(SVGGElement | null)[]>([]);
   const etapes = useRef<(HTMLLIElement | null)[]>([]);
+  /** Jusqu'à quand on laisse la page filer sans la poser sur une étape. */
+  const zap = useRef(0);
 
   useEffect(() => {
     const el = section.current;
@@ -114,6 +117,7 @@ function Frise({ locale, vertical }: { locale: Locale; vertical: boolean }) {
     let geste: { depart: number; dir: number; cumul: number; actif: boolean } | null = null;
     let derniereRoue = 0;
     const surRoue = (ev: WheelEvent) => {
+      if (performance.now() < zap.current) return;
       const facteur = ev.deltaMode === 1 ? 16 : ev.deltaMode === 2 ? window.innerHeight : 1;
       // Glisser vers la gauche sur le pavé tactile fait avancer, comme la frise.
       const delta = (Math.abs(ev.deltaX) > Math.abs(ev.deltaY) ? ev.deltaX : ev.deltaY) * facteur;
@@ -202,7 +206,7 @@ function Frise({ locale, vertical }: { locale: Locale; vertical: boolean }) {
     const planifierAimant = () => {
       window.clearTimeout(minuterie);
       minuterie = window.setTimeout(() => {
-        if (!fixe()) return;
+        if (!fixe() || performance.now() < zap.current) return;
         if (tenue || performance.now() - derniereRoue < 170) return planifierAimant();
         aller(etape());
       }, 200);
@@ -335,6 +339,24 @@ function Frise({ locale, vertical }: { locale: Locale; vertical: boolean }) {
       : { ...proche, left: `calc(50% + ${i * ECART_LARGEUR * 100}%)`, top: "calc(34% + 82px)", width: `${ECART_LARGEUR * 95}%`, opacity: v, visibility: v < 0.01 ? "hidden" : "visible", transform: `translateX(-50%) scale(${s})` };
   };
 
+  // Les deux flèches : passer toute la frise, ou revenir avant elle.
+  const zapper = (sens: 1 | -1) => {
+    const el = section.current;
+    if (!el) return;
+    const avant = el.previousElementSibling ?? el;
+    const top = sens > 0
+      ? el.getBoundingClientRect().bottom + window.scrollY
+      : avant.getBoundingClientRect().top + window.scrollY;
+    const doux = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    zap.current = performance.now() + 1800;
+    window.scrollTo({ top: Math.round(top), behavior: doux ? "smooth" : "instant" });
+  };
+  const fleches = locale === "en"
+    ? { haut: "Back before the process", bas: "Skip the process" }
+    : { haut: "Revenir avant le process", bas: "Passer le process" };
+  const bouton =
+    "grid h-11 w-11 place-items-center rounded-full border border-hairline-strong bg-panel/60 text-ink/80 backdrop-blur transition-colors duration-200 hover:border-white/30 hover:bg-chip hover:text-ink";
+
   const fondu = vertical
     ? "linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent)"
     : "linear-gradient(to right, transparent, #000 14%, #000 86%, transparent)";
@@ -400,6 +422,14 @@ function Frise({ locale, vertical }: { locale: Locale; vertical: boolean }) {
               </li>
             ))}
           </ol>
+        </div>
+        <div className={`absolute z-10 flex flex-col gap-2.5 ${vertical ? "bottom-36 right-4" : "right-6 top-1/2 -translate-y-1/2 lg:right-10"}`}>
+          <button type="button" onClick={() => zapper(-1)} aria-label={fleches.haut} title={fleches.haut} className={bouton}>
+            <ArrowUp className="h-[18px] w-[18px]" strokeWidth={1.75} />
+          </button>
+          <button type="button" onClick={() => zapper(1)} aria-label={fleches.bas} title={fleches.bas} className={bouton}>
+            <ArrowDown className="h-[18px] w-[18px]" strokeWidth={1.75} />
+          </button>
         </div>
       </div>
     </section>

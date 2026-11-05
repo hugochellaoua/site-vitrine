@@ -277,6 +277,7 @@ export const synthesis = {
   eyebrow: "Measured results",
   title: "Four benefits, one process.",
   emphasis: "one process.",
+  sub: "The time saved goes back to your recruiters: for interviews, and for the work that really moves your business forward.",
   items: [
     { n: "01", title: "Time saved", value: "−90", unit: "%", label: "less time to shortlist", steps: "Steps 03 & 08" },
     { n: "02", title: "Candidate experience", value: "4.8", unit: "/5", label: "average candidate rating", steps: "Steps 04 & 10" },
@@ -435,10 +436,11 @@ export const useCases = {
       promise: "Give every candidate room to speak",
       problem: "I want my candidates to genuinely have a chance to express themselves.",
       answer: [
+        "Today, only a few candidates get a call from a recruiter and a chance to show who they are. Give that chance to all your candidates.",
         "Every candidate can have a real conversation about their background, their experience and what they are looking for.",
         "They can explain who they are, add context to their track record and ask their own questions. They can also receive personalised feedback, if you turn the option on.",
       ],
-      keyMessage: "Give every candidate room to speak.",
+      keyMessage: "Show a company that cares about its candidates, and takes an interest in each of them.",
       tone: "iris" as const,
     },
     {

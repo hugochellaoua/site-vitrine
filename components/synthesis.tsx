@@ -32,6 +32,7 @@ export function Synthesis({ locale }: { locale: Locale }) {
         <div className="flex flex-col items-center text-center">
           <Badge>{synthesis.eyebrow}</Badge>
           <SectionTitle title={synthesis.title} emphasis={synthesis.emphasis} className="mt-6" />
+          <p className="mx-auto mt-5 max-w-[52ch] text-balance text-[16.5px] leading-relaxed text-muted">{synthesis.sub}</p>
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
