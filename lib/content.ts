@@ -55,7 +55,7 @@ export const nav = {
 };
 
 export const hero = {
-  title: "Obtenez vos meilleurs candidats.",
+  title: "Rencontrez vos meilleurs candidats.",
   // Mis en orange, comme dans la vidéo : la couleur porte la promesse.
   emphasis: "Rapidement.",
   subtitle:
@@ -897,7 +897,7 @@ export const finalCta = {
     "Candidats écoutés",
     "Shortlist automatisée",
   ],
-  title: "Obtenez vos meilleurs candidats.",
+  title: "Rencontrez vos meilleurs candidats.",
   emphasis: "Rapidement.",
   cta: { label: "Réservez une démo", href: links.booking },
 };

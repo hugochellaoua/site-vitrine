@@ -41,7 +41,7 @@ export const nav = {
 };
 
 export const hero = {
-  title: "Get your best candidates.",
+  title: "Meet your best candidates.",
   emphasis: "Fast.",
   subtitle:
     "A conversation that understands your company, talks to every candidate, and helps you hire faster and better.",
@@ -787,7 +787,7 @@ export const finalCta = {
     "Candidates heard",
     "Automated shortlist",
   ],
-  title: "Get your best candidates.",
+  title: "Meet your best candidates.",
   emphasis: "Fast.",
   cta: { label: "Book a demo", href: links.booking },
 };
