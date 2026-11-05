@@ -104,7 +104,7 @@ function Entreprise({ step }: { step: Extract<Step, { key: "entreprise" }> }) {
   return <Constellation labels={[...step.sources]} center={step.center} />;
 }
 
-/* 02 — Vous cadrez le poste */
+/* 02 — Vous validez le cadrage du poste */
 function Besoin({ step }: { step: Extract<Step, { key: "besoin" }> }) {
   return (
     <div className="flex w-full max-w-sm flex-col items-center">
@@ -147,7 +147,7 @@ function Besoin({ step }: { step: Extract<Step, { key: "besoin" }> }) {
   );
 }
 
-/* 03 — Vous diffusez un lien unique */
+/* 03 — Helpify est diffusé sur vos canaux */
 function Diffusion({ step }: { step: Extract<Step, { key: "diffusion" }> }) {
   return (
     <div className="flex w-full flex-col items-center">

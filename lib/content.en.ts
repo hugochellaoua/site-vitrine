@@ -133,8 +133,8 @@ export const processSteps = [
   {
     key: "besoin",
     n: "02",
-    title: "You frame the role",
-    sub: "You define the criteria and how much each one matters.",
+    title: "You validate the role framing",
+    sub: "The criteria and how much each one matters.",
     role: "Customer Success Manager",
     roleLabel: "Open role",
     fieldsLabel: "Criteria and weight",
@@ -149,8 +149,8 @@ export const processSteps = [
   {
     key: "diffusion",
     n: "03",
-    title: "You share a single link",
-    sub: "The same entry point across every channel.",
+    title: "Helpify is shared on your channels",
+    sub: "The ones you choose.",
     link: "helpify-ai.fr/72401",
     channels: ["LinkedIn", "Job boards", "Careers site", "Email", "Sourcing"],
   },
@@ -275,12 +275,13 @@ export const experts: ExpertsContent = {
 
 export const synthesis = {
   eyebrow: "Measured results",
-  title: "Three benefits, one process.",
+  title: "Four benefits, one process.",
   emphasis: "one process.",
   items: [
     { n: "01", title: "Time saved", value: "−90", unit: "%", label: "less time to shortlist", steps: "Steps 03 & 08" },
     { n: "02", title: "Candidate experience", value: "4.8", unit: "/5", label: "average candidate rating", steps: "Steps 04 & 10" },
-    { n: "03", title: "Assessment", value: "3", unit: "×", label: "more qualified signals", steps: "Steps 01 & 07" },
+    { n: "03", title: "Assessment", value: "3", unit: "×", label: "more qualified signals: achievements and their context", steps: "Steps 01 & 07" },
+    { n: "04", title: "Talent pool", value: "100", unit: "%", label: "of candidates with a rich profile, not just a CV", steps: "Steps 05 & 07" },
   ],
 };
 

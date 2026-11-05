@@ -7,7 +7,8 @@ import { StarTexture } from "@/components/star-texture";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { DemoConversation } from "@/components/demo-conversation";
-import { CinematicSequence, ProcessIntro } from "@/components/cinematic/sequence";
+import { ProcessIntro } from "@/components/cinematic/sequence";
+import { ProcessTimeline } from "@/components/process-timeline";
 import { ProductsOverview } from "@/components/products-overview";
 import { Experts } from "@/components/experts";
 import { Synthesis } from "@/components/synthesis";
@@ -46,7 +47,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <Hero locale={locale} />
         <DemoConversation locale={locale} />
         <ProcessIntro locale={locale} />
-        <CinematicSequence locale={locale} />
+        <ProcessTimeline locale={locale} />
         <ProductsOverview locale={locale} />
         <Experts locale={locale} />
         <Synthesis locale={locale} />

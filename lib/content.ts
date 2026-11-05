@@ -159,8 +159,8 @@ export const processSteps = [
   {
     key: "besoin",
     n: "02",
-    title: "Vous cadrez le poste",
-    sub: "Vous définissez les critères et leur importance.",
+    title: "Vous validez le cadrage du poste",
+    sub: "Les critères et leur importance.",
     role: "Customer Success Manager",
     roleLabel: "Poste à pourvoir",
     // Le poids compte autant que le critère : c'est lui qui départage deux
@@ -177,8 +177,8 @@ export const processSteps = [
   {
     key: "diffusion",
     n: "03",
-    title: "Vous diffusez un lien unique",
-    sub: "Le même point d'entrée sur tous vos canaux.",
+    title: "Helpify est diffusé sur vos canaux",
+    sub: "Ceux que vous choisissez.",
     link: "helpify-ai.fr/72401",
     channels: ["LinkedIn", "Job boards", "Site carrière", "Email", "Sourcing"],
   },
@@ -310,12 +310,13 @@ export const experts: ExpertsContent = {
 
 export const synthesis = {
   eyebrow: "Résultats mesurés",
-  title: "Trois bénéfices, un seul process.",
+  title: "Quatre bénéfices, un seul process.",
   emphasis: "un seul process.",
   items: [
     { n: "01", title: "Gain de temps", value: "−90", unit: "%", label: "de temps jusqu'à la shortlist", steps: "Étapes 03 & 08" },
     { n: "02", title: "Expérience candidat", value: "4,8", unit: "/5", label: "note moyenne des candidats", steps: "Étapes 04 & 10" },
-    { n: "03", title: "Évaluation", value: "3", unit: "×", label: "plus de signaux qualifiés", steps: "Étapes 01 & 07" },
+    { n: "03", title: "Évaluation", value: "3", unit: "×", label: "plus de signaux qualifiés : les réalisations et leur contexte", steps: "Étapes 01 & 07" },
+    { n: "04", title: "Vivier", value: "100", unit: "%", label: "des candidats avec un profil riche, pas seulement un CV", steps: "Étapes 05 & 07" },
   ],
 };
 

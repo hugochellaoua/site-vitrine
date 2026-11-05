@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 
 /**
- * Ce que le process produit, en trois chiffres.
+ * Ce que le process produit, en quatre chiffres.
  *
  * La mise en page reprend le plan « Résultats mesurés » du produit : une carte
  * par bénéfice, arête supérieure allumée, le chiffre en très grand et son unité
@@ -13,26 +13,28 @@ import { Badge, SectionTitle } from "@/components/ui/section-title";
  */
 /**
  * Une teinte par chiffre, dans l'ordre des trois voix du site : le produit, le
- * candidat, la méthode — ces deux dernières partageant le violet. Trois cartes identiques ne se distingueraient que par
+ * candidat, la méthode — ces deux dernières partageant le violet, et l’orange pour le vivier. Des cartes identiques ne se distingueraient que par
  * leur contenu ; ainsi, on retient aussi laquelle parle de quoi.
  */
 const TEINTES = [
   { arete: "", chiffre: "text-accent-light", unite: "text-accent-light/70" },
   { arete: "lit-card--iris", chiffre: "text-iris", unite: "text-iris/70" },
   { arete: "lit-card--iris", chiffre: "text-iris", unite: "text-iris/70" },
+  // Le vivier : ce que chaque candidat laisse derrière lui, donc l'orange, sa voix.
+  { arete: "lit-card--warm", chiffre: "text-warm", unite: "text-warm/70" },
 ] as const;
 
 export function Synthesis({ locale }: { locale: Locale }) {
   const { synthesis } = dict(locale);
   return (
     <section className="relative px-6 py-28">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-center text-center">
           <Badge>{synthesis.eyebrow}</Badge>
           <SectionTitle title={synthesis.title} emphasis={synthesis.emphasis} className="mt-6" />
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
+        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {synthesis.items.map((item, i) => {
             const teinte = TEINTES[i % TEINTES.length];
             return (
