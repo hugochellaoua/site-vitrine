@@ -1,4 +1,3 @@
-import { MotCandidat } from "@/components/ui/mot-candidat";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Magnetic } from "@/components/ui/magnetic";
@@ -10,6 +9,22 @@ const STEP = 0.05;
 // lever de rideau (1,05 s) : or c'est lui que Google chronomètre pour juger la
 // vitesse perçue de la page, et un visiteur qui hésite part avant.
 const START = 0.28;
+
+const TEINTE = { warm: "text-warm", iris: "text-iris" } as const;
+
+/** Un mot du titre, avec la partie mise en couleur s'il en contient une. */
+function Mot({ mot, accents }: { mot: string; accents: Record<string, "warm" | "iris"> }) {
+  const cle = Object.keys(accents).find((k) => mot.includes(k));
+  if (!cle) return <>{mot}</>;
+  const i = mot.indexOf(cle);
+  return (
+    <>
+      {mot.slice(0, i)}
+      <span className={TEINTE[accents[cle]]}>{cle}</span>
+      {mot.slice(i + cle.length)}
+    </>
+  );
+}
 
 /**
  * Le hero.
@@ -42,7 +57,7 @@ export function Hero({ locale }: { locale: Locale }) {
       />
 
       <h1
-        aria-label={`${hero.title} ${hero.emphasis}`}
+        aria-label={hero.title}
         className="max-w-5xl text-center font-display text-[clamp(38px,6.4vw,86px)] font-bold leading-[1.02] tracking-[-0.03em] text-ink"
       >
         <span aria-hidden="true">
@@ -52,15 +67,9 @@ export function Hero({ locale }: { locale: Locale }) {
               className="hero-rise mr-[0.24em] inline-block"
               style={{ animationDelay: `${START + i * STEP}s` }}
             >
-              <MotCandidat texte={word} avecPoint />
+              <Mot mot={word} accents={hero.accents} />
             </span>
           ))}
-          <span
-            className="hero-rise inline-block text-warm"
-            style={{ animationDelay: `${START + words.length * STEP}s` }}
-          >
-            {hero.emphasis}
-          </span>
         </span>
       </h1>
 

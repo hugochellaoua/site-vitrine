@@ -55,9 +55,10 @@ export const nav = {
 };
 
 export const hero = {
-  title: "Rencontrez vos meilleurs candidats.",
-  // Mis en orange, comme dans la vidéo : la couleur porte la promesse.
-  emphasis: "Rapidement.",
+  title: "L'intelligence qui révèle et engage vos meilleurs candidats.",
+  // Les mots mis en couleur : « intelligence » en orange, ce qu'elle fait
+  // (révéler, engager) en violet.
+  accents: { intelligence: "warm", "révèle": "iris", engage: "iris" } as Record<string, "warm" | "iris">,
   subtitle:
     "Une conversation qui comprend votre entreprise, échange avec chaque candidat et vous aide à recruter plus vite et mieux.",
   cta: { label: "Réservez une démo", href: links.booking },

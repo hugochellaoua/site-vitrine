@@ -6,8 +6,8 @@ export const contentType = ogContentType;
 
 export default function Image() {
   return renderOgImage({
-    lead: "Rencontrez vos meilleurs candidats.",
-    accent: "Rapidement.",
+    lead: "L'intelligence qui révèle et engage",
+    accent: "vos meilleurs candidats.",
     sub: "Une conversation qui comprend votre entreprise, échange avec chaque candidat et vous aide à recruter plus vite.",
   });
 }
