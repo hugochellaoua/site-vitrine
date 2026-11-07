@@ -10,21 +10,9 @@ const STEP = 0.05;
 // vitesse perçue de la page, et un visiteur qui hésite part avant.
 const START = 0.28;
 
-const TEINTE = { warm: "text-warm", iris: "text-iris" } as const;
-
-/** Un mot du titre, avec la partie mise en couleur s'il en contient une. */
-function Mot({ mot, accents }: { mot: string; accents: Record<string, "warm" | "iris"> }) {
-  const cle = Object.keys(accents).find((k) => mot.includes(k));
-  if (!cle) return <>{mot}</>;
-  const i = mot.indexOf(cle);
-  return (
-    <>
-      {mot.slice(0, i)}
-      <span className={TEINTE[accents[cle]]}>{cle}</span>
-      {mot.slice(i + cle.length)}
-    </>
-  );
-}
+// Les meilleurs talents en violet et en italique : la même police, penchée,
+// pour distinguer la fin du titre sans ajouter de caractère.
+const TON = { warm: "text-warm", iris: "text-iris italic" } as const;
 
 /**
  * Le hero.
@@ -40,7 +28,7 @@ export function Hero({ locale }: { locale: Locale }) {
   const { hero } = dict(locale);
   // Le titre est découpé mot à mot pour être levé en cascade ; le découpage
   // dépend donc de la langue et vit dans le composant, plus au chargement.
-  const words = hero.title.split(" ");
+  const words = hero.segments.flatMap((s) => s.texte.split(" ").map((mot) => ({ mot, ton: s.ton })));
   return (
     <section
       id="top"
@@ -58,16 +46,16 @@ export function Hero({ locale }: { locale: Locale }) {
 
       <h1
         aria-label={hero.title}
-        className="max-w-5xl text-center font-display text-[clamp(38px,6.4vw,86px)] font-bold leading-[1.02] tracking-[-0.03em] text-ink"
+        className="max-w-6xl text-center font-display text-[clamp(36px,5.8vw,80px)] font-bold leading-[1.02] tracking-[-0.03em] text-ink"
       >
         <span aria-hidden="true">
-          {words.map((word, i) => (
+          {words.map(({ mot, ton }, i) => (
             <span
-              key={`${word}-${i}`}
-              className="hero-rise mr-[0.24em] inline-block"
+              key={`${mot}-${i}`}
+              className={`hero-rise mr-[0.24em] inline-block ${ton ? TON[ton] : ""}`}
               style={{ animationDelay: `${START + i * STEP}s` }}
             >
-              <Mot mot={word} accents={hero.accents} />
+              {mot}
             </span>
           ))}
         </span>

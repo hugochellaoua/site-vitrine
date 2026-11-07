@@ -55,10 +55,15 @@ export const nav = {
 };
 
 export const hero = {
-  title: "L'intelligence qui révèle et engage vos meilleurs candidats.",
-  // Les mots mis en couleur : « intelligence » en orange, ce qu'elle fait
-  // (révéler, engager) en violet.
-  accents: { intelligence: "warm", "révèle": "iris", engage: "iris" } as Record<string, "warm" | "iris">,
+  title: "L'intelligence qui révèle et engage vos meilleurs talents.",
+  // Deux accents seulement : l'intelligence en orange, les meilleurs talents en violet
+  // (la voix du candidat). `title` reste la phrase entière, pour les
+  // lecteurs d'écran.
+  segments: [
+    { texte: "L'intelligence", ton: "warm" },
+    { texte: "qui révèle et engage vos" },
+    { texte: "meilleurs talents.", ton: "iris" },
+  ] as { texte: string; ton?: "warm" | "iris" }[],
   subtitle:
     "Une conversation qui comprend votre entreprise, échange avec chaque candidat et vous aide à recruter plus vite et mieux.",
   cta: { label: "Réservez une démo", href: links.booking },

@@ -41,8 +41,12 @@ export const nav = {
 };
 
 export const hero = {
-  title: "The intelligence that reveals and engages your top candidates.",
-  accents: { intelligence: "warm", reveals: "iris", engages: "iris" } as Record<string, "warm" | "iris">,
+  title: "The intelligence that reveals and engages your best talent.",
+  segments: [
+    { texte: "The intelligence", ton: "warm" },
+    { texte: "that reveals and engages your" },
+    { texte: "best talent.", ton: "iris" },
+  ] as { texte: string; ton?: "warm" | "iris" }[],
   subtitle:
     "A conversation that understands your company, talks to every candidate, and helps you hire faster and better.",
   cta: { label: "Book a demo", href: links.booking },

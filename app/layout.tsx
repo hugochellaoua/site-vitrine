@@ -19,6 +19,9 @@ const dmSans = DM_Sans({
   variable: "--font-sans-brand",
   subsets: ["latin"],
   axes: ["opsz"],
+  // L'italique sert à la fin du titre de l'accueil : on charge le vrai, pour
+  // ne pas laisser le navigateur pencher les lettres lui-même.
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
