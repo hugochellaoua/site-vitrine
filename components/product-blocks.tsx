@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { dict, type Locale } from "@/lib/i18n";
-import { VISUALS } from "@/components/products/visuals";
+import { ProductScene } from "@/components/products/scenes";
 import { Reveal } from "@/components/ui/reveal";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 
@@ -38,8 +38,7 @@ export function ProductBlocks({ locale }: { locale: Locale }) {
 
         <div className="mt-16 flex flex-col gap-20 lg:gap-24">
           {products.items.map((product, i) => {
-            const Visual = VISUALS[product.visual];
-            const b = synthesis.items[BENEFICE[product.id] ?? 0];
+              const b = synthesis.items[BENEFICE[product.id] ?? 0];
             const inverse = i % 2 === 1;
             return (
               <div
@@ -69,7 +68,7 @@ export function ProductBlocks({ locale }: { locale: Locale }) {
                 </Reveal>
                 <Reveal delay={0.1} className="w-full lg:w-1/2">
                   <div className={`flex min-h-[380px] items-center justify-center rounded-[28px] p-6 sm:p-10 ${FOND[i % 4]}`}>
-                    <Visual />
+                    <ProductScene visual={product.visual} locale={locale} />
                   </div>
                 </Reveal>
               </div>

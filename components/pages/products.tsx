@@ -6,7 +6,7 @@ import { StickyCta } from "@/components/sticky-cta";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 import { SecondaryCta } from "@/components/ui/secondary-cta";
 import { Reveal } from "@/components/ui/reveal";
-import { VISUALS } from "@/components/products/visuals";
+import { ProductScene } from "@/components/products/scenes";
 import { dict, type Locale } from "@/lib/i18n";
 import { siteUrl } from "@/lib/site";
 
@@ -108,7 +108,6 @@ export function ProductsPage({ locale }: { locale: Locale }) {
 
         {/* ── Les quatre produits ──────────────────────────────────────── */}
         {products.items.map((product, i) => {
-          const Visual = VISUALS[product.visual];
           // On alterne le côté du visuel : l'œil repart à gauche à chaque
           // produit, ce qui marque la rupture entre deux blocs sans trait.
           const reversed = i % 2 === 1;
@@ -156,7 +155,7 @@ export function ProductsPage({ locale }: { locale: Locale }) {
                 </Reveal>
 
                 <Reveal delay={0.1} className="flex w-full justify-center lg:w-1/2">
-                  <Visual />
+                  <ProductScene visual={product.visual} locale={locale} />
                 </Reveal>
               </div>
             </section>
