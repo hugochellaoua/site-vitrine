@@ -24,5 +24,7 @@ export type ExpertsContent = {
   /** Fin du titre, mise en couleur : doit en être la queue exacte. */
   emphasis: string;
   intro: string;
+  /** Au-dessus des logos des entreprises où exercent les experts. */
+  logosLabel: string;
   items: Expert[];
 };

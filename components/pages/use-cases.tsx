@@ -1,8 +1,5 @@
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
-import { Galaxy } from "@/components/galaxy";
-import { StarTexture } from "@/components/star-texture";
-import { CursorLight } from "@/components/cursor-light";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { StickyCta } from "@/components/sticky-cta";
@@ -53,9 +50,6 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
   return (
     <>
       <UseCasesJsonLd locale={locale} />
-      <StarTexture />
-      <Galaxy />
-      <CursorLight />
       <Navbar locale={locale} />
 
       <main className="relative z-10">

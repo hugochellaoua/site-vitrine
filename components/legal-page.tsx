@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { Galaxy } from "@/components/galaxy";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Badge } from "@/components/ui/section-title";
@@ -47,7 +46,6 @@ export function LegalPage({ doc, locale }: { doc: LegalDoc; locale: Locale }) {
   const blocs = normaliserNiveaux(doc.blocks);
   return (
     <>
-      <Galaxy />
       <Navbar locale={locale} />
       <main className="relative z-10 px-6 pb-24 pt-36 sm:pt-44">
         <article className="mx-auto max-w-[68ch]">

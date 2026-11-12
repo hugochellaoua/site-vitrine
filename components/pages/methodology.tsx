@@ -1,8 +1,5 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Galaxy } from "@/components/galaxy";
-import { StarTexture } from "@/components/star-texture";
-import { CursorLight } from "@/components/cursor-light";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { StickyCta } from "@/components/sticky-cta";
@@ -63,7 +60,7 @@ function MethodJsonLd({ locale }: { locale: Locale }) {
 const TEINTE_POIDS = [
   "border-iris/45 bg-iris-soft text-iris-light",
   "border-accent/45 bg-accent-soft text-accent-light",
-  "border-hairline-strong bg-white/[0.05] text-muted",
+  "border-hairline-strong bg-ink/[0.035] text-muted",
 ];
 
 export function MethodologyPage({ locale }: { locale: Locale }) {
@@ -71,9 +68,6 @@ export function MethodologyPage({ locale }: { locale: Locale }) {
   return (
     <>
       <MethodJsonLd locale={locale} />
-      <StarTexture />
-      <Galaxy />
-      <CursorLight />
       <Navbar locale={locale} />
 
       <main className="relative z-10">

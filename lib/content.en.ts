@@ -256,6 +256,7 @@ export const experts: ExpertsContent = {
   emphasis: "around us.",
   intro:
     "The support and expertise of experienced professionals who challenge our thinking on HR, business and technology issues.",
+  logosLabel: "Our experts work at",
   items: [
     {
       name: "Brice Monnier",
@@ -832,6 +833,7 @@ export const ui = {
   prevStep: "Previous step",
   nextStep: "Next step",
   lastStep: "Last step",
+  discover: "Discover",
   seeInDemoBefore: "See ",
   seeInDemoAfter: " in a demo",
   helpifyAnswer: "The Helpify answer",

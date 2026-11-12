@@ -339,7 +339,7 @@ function StepArrow({
       disabled={disabled}
       aria-label={label}
       title={label}
-      className={`glass-panel flex items-center justify-center rounded-full text-muted transition-all duration-300 hover:text-ink enabled:hover:border-white/30 disabled:cursor-default disabled:opacity-20 ${
+      className={`glass-panel flex items-center justify-center rounded-full text-muted transition-all duration-300 hover:text-ink enabled:hover:border-accent/40 disabled:cursor-default disabled:opacity-20 ${
         jump ? "h-8 w-8" : "h-10 w-10 enabled:hover:-translate-y-0.5"
       }`}
     >

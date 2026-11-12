@@ -234,7 +234,7 @@ export function Roi({ locale }: { locale: Locale }) {
               {roi.candidate.items.map((item) => (
                 <span
                   key={item}
-                  className="rounded-full border border-hairline-strong bg-void/40 px-4 py-2 text-[12.5px] text-[#e4e5f5]"
+                  className="rounded-full border border-hairline-strong bg-void/40 px-4 py-2 text-[12.5px] text-ink"
                 >
                   {item}
                 </span>
@@ -349,7 +349,7 @@ function Line({
           ? "border border-accent/40 bg-accent-soft"
           : strong
             ? "border border-hairline-strong bg-void/40"
-            : "bg-white/[0.03]"
+            : "bg-ink/[0.025]"
       }`}
     >
       <span
@@ -358,7 +358,7 @@ function Line({
             ? "text-[19px] text-ink"
             : strong
               ? "text-[17px] text-ink"
-              : "text-[15px] text-[#e4e5f5]"
+              : "text-[15px] text-ink"
         }`}
       >
         {value}

@@ -32,17 +32,15 @@ export function Hero({ locale }: { locale: Locale }) {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] flex-col items-center justify-center px-6 py-32"
+      // La seule grande zone sombre de l'accueil : l'indigo du site, éclairé
+      // par le bas d'une lueur bleue puis orange. L'aperçu du produit vient
+      // ensuite chevaucher son bas.
+      className="sombre relative flex flex-col items-center overflow-hidden px-6 pb-64 pt-40 sm:pb-72 sm:pt-48"
+      style={{
+        background:
+          "radial-gradient(60% 55% at 50% 118%, rgba(255,160,70,0.42), transparent 62%), radial-gradient(85% 85% at 50% 105%, #2a3bd6 0%, #1a1f7a 42%, #141037 82%)",
+      }}
     >
-      {/* La lueur bleue derrière le titre, comme dans la vidéo. */}
-      <div
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[70vh] w-[min(1100px,92vw)] -translate-x-1/2 -translate-y-1/2"
-        style={{
-          background:
-            "radial-gradient(ellipse 50% 45% at 50% 50%, rgba(29,80,254,0.30) 0%, rgba(29,80,254,0.08) 45%, transparent 72%)",
-        }}
-        aria-hidden="true"
-      />
 
       <h1
         aria-label={hero.title}
@@ -84,15 +82,6 @@ export function Hero({ locale }: { locale: Locale }) {
         <SecondaryCta locale={locale} />
       </div>
 
-      <div
-        className="hero-rise absolute bottom-10 flex flex-col items-center gap-2.5"
-        style={{ animationDelay: "1.5s" }}
-      >
-        <span className="text-[10.5px] uppercase tracking-[0.18em] text-faint">{hero.scrollHint}</span>
-        <span className="relative block h-9 w-px overflow-hidden bg-white/10">
-          <span className="scroll-cue absolute inset-x-0 block h-4 bg-gradient-to-b from-transparent via-accent-light to-transparent" />
-        </span>
-      </div>
     </section>
   );
 }

@@ -1,6 +1,57 @@
 @import "tailwindcss";
 
 :root {
+  /* Le site est clair : fond gris très pâle, surfaces blanches, encre bleu
+     nuit. Seules quelques bandes (haut de page, appel final, pied de page)
+     restent sombres : elles portent la classe `.sombre`, qui rétablit la
+     palette d'origine pour tout ce qu'elles contiennent. */
+  --void: #f6f7fb;
+  --void-2: #f1f3f9;
+  --void-deep: #eceff7;
+
+  --panel: #ffffff;
+  --panel-light: #ffffff;
+  --panel-soft: rgba(255, 255, 255, 0.93);
+  --chip: #eef1fb;
+
+  --hairline: rgba(14, 22, 68, 0.09);
+  --hairline-strong: rgba(14, 22, 68, 0.15);
+
+  /* Bleu — la voix de Helpify. */
+  --accent: #1d50fe;
+  --accent-light: #1d50fe;
+  --accent-soft: rgba(29, 80, 254, 0.09);
+
+  /* Orange — la voix du candidat, foncé pour rester lisible sur le blanc. */
+  --warm: #e57300;
+  --warm-light: #f08a1f;
+  --warm-soft: rgba(229, 115, 0, 0.1);
+
+  /* Violet — la méthode, plus profond que sur fond sombre. */
+  --iris: #6a3dff;
+  --iris-light: #7f5bff;
+  --iris-soft: rgba(106, 61, 255, 0.09);
+
+  /* Texte */
+  --ink: #0e1644;
+  --muted: #545c82;
+  --faint: #737a9b;
+
+  --success: #1f9d55;
+  --warning: #e57300;
+  --error: #d93636;
+
+  --shadow-glow: 0 18px 40px -20px rgba(29, 80, 254, 0.45);
+  --shadow-deep: 0 30px 60px -32px rgba(14, 22, 68, 0.28);
+
+  /* Une seule famille : le contraste vient de la graisse et du corps,
+     jamais d'un changement de caractère. */
+  --font-display: var(--font-sans-brand), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-sans-brand), ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+/* Les bandes sombres : la palette d'origine du site, rétablie localement. */
+.sombre {
   /* Fond — indigo profond relevé dans la vidéo de démonstration.
      Trois paliers seulement : le socle, un cran plus clair pour les reliefs,
      un cran plus sombre pour creuser. */
@@ -53,8 +104,8 @@
 
   /* Une seule famille : le contraste vient de la graisse et du corps,
      jamais d'un changement de caractère. */
-  --font-display: var(--font-sans-brand), "Helvetica Neue", Arial, sans-serif;
-  --font-sans: var(--font-sans-brand), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -90,10 +141,8 @@
   --animate-marquee: marquee 38s linear infinite;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: dark;
-  }
+:root {
+  color-scheme: light;
 }
 
 /* Couleur de bordure par défaut, pour que `border` seul trace un filet discret
@@ -165,6 +214,11 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 14px 40px -22px rgba(14, 22, 68, 0.28);
+}
+.sombre .glass-panel {
+  box-shadow:
     0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
     0 20px 50px -24px rgba(0, 0, 0, 0.6);
 }
@@ -193,11 +247,11 @@ body {
    texte de la page passant derrière. On garde quelques pour cent de
    transparence et le flou pour conserver l'effet de verre. */
 .glass-panel--solid {
-  background: rgba(16, 13, 48, 0.94);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(14, 22, 68, 0.12);
   box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
-    0 18px 50px -24px rgba(3, 2, 17, 0.95);
+    0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 14px 40px -22px rgba(14, 22, 68, 0.3);
 }
 
 /* Surface d'un sous-menu : opaque, contrairement à la barre de navigation.
@@ -205,7 +259,7 @@ body {
    un panneau déployé, lui, recouvre le contenu de la page. Au moindre reste de
    transparence, un grand titre continue de se lire à travers les libellés. */
 .dropdown-panel {
-  background: #100d30;
+  background: #ffffff;
 }
 
 /* Premium glassy surface: subtle gradient fill, top edge catching light,
@@ -213,12 +267,10 @@ body {
 .card-surface {
   position: relative;
   isolation: isolate;
-  background: linear-gradient(165deg, rgba(31, 27, 82, 0.62) 0%, rgba(19, 15, 55, 0.62) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: #ffffff;
   box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
-    0 30px 70px -34px rgba(0, 0, 0, 0.7);
+    0 1px 2px rgba(14, 22, 68, 0.05),
+    0 24px 50px -32px rgba(14, 22, 68, 0.28);
   transition: box-shadow 0.35s ease, transform 0.35s ease;
 }
 .card-surface::before {
@@ -228,7 +280,7 @@ body {
   z-index: -1;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.16), rgba(91, 129, 255, 0.10) 45%, rgba(255, 255, 255, 0) 75%);
+  background: linear-gradient(160deg, rgba(14, 22, 68, 0.12), rgba(14, 22, 68, 0.07));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -236,8 +288,8 @@ body {
 }
 .card-surface:hover {
   box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.1) inset,
-    0 40px 90px -30px rgba(29, 80, 254, 0.24);
+    0 1px 2px rgba(14, 22, 68, 0.06),
+    0 30px 60px -30px rgba(29, 80, 254, 0.3);
 }
 
 /* La lumière que le curseur promène sur la surface.
@@ -251,8 +303,8 @@ body {
   border-radius: inherit;
   background: radial-gradient(
     260px circle at var(--gx, 50%) var(--gy, 50%),
-    rgba(91, 129, 255, 0.18),
-    rgba(91, 129, 255, 0.06) 42%,
+    rgba(29, 80, 254, 0.07),
+    rgba(29, 80, 254, 0.02) 42%,
     transparent 70%
   );
   opacity: 0;
@@ -279,10 +331,15 @@ body {
 }
 
 .gradient-num {
-  background: linear-gradient(180deg, #ffffff, #8fa9ff);
+  background: linear-gradient(180deg, #0e1644, #1d50fe);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+:where(.sombre) .gradient-num {
+  background: linear-gradient(180deg, #ffffff, #8fa9ff);
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 @keyframes float {
@@ -582,8 +639,10 @@ body {
   position: relative;
   isolation: isolate;
   border-radius: 22px;
-  background: linear-gradient(168deg, rgba(38, 34, 96, 0.72) 0%, rgba(20, 16, 55, 0.72) 100%);
-  box-shadow: 0 30px 70px -34px rgba(0, 0, 0, 0.75);
+  background: #ffffff;
+  box-shadow:
+    0 1px 2px rgba(14, 22, 68, 0.05),
+    0 30px 60px -36px rgba(14, 22, 68, 0.3);
   overflow: hidden;
 }
 .lit-card::before {
@@ -593,7 +652,7 @@ body {
   z-index: -1;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(180deg, rgba(120, 158, 255, 0.55), rgba(120, 158, 255, 0.04) 38%);
+  background: linear-gradient(180deg, rgba(29, 80, 254, 0.4), rgba(14, 22, 68, 0.08) 38%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -606,22 +665,22 @@ body {
   top: 0;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
-  box-shadow: 0 0 14px 1px rgba(91, 129, 255, 0.7);
+  box-shadow: 0 0 10px 0 rgba(29, 80, 254, 0.35);
   pointer-events: none;
 }
 .lit-card--warm::before {
-  background: linear-gradient(180deg, rgba(255, 178, 104, 0.55), rgba(255, 178, 104, 0.04) 38%);
+  background: linear-gradient(180deg, rgba(229, 115, 0, 0.4), rgba(14, 22, 68, 0.08) 38%);
 }
 .lit-card--warm::after {
   background: linear-gradient(90deg, transparent, var(--warm), transparent);
-  box-shadow: 0 0 14px 1px rgba(255, 160, 70, 0.7);
+  box-shadow: 0 0 10px 0 rgba(229, 115, 0, 0.35);
 }
 .lit-card--iris::before {
-  background: linear-gradient(180deg, rgba(172, 152, 255, 0.55), rgba(172, 152, 255, 0.04) 38%);
+  background: linear-gradient(180deg, rgba(106, 61, 255, 0.4), rgba(14, 22, 68, 0.08) 38%);
 }
 .lit-card--iris::after {
   background: linear-gradient(90deg, transparent, var(--iris), transparent);
-  box-shadow: 0 0 14px 1px rgba(172, 152, 255, 0.7);
+  box-shadow: 0 0 10px 0 rgba(106, 61, 255, 0.35);
 }
 
 /* Ciel étoilé appliqué à un encart.

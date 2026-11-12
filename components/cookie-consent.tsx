@@ -118,7 +118,7 @@ export function CookieConsent() {
   if (!actif) return null;
 
   const bouton =
-    "flex-1 rounded-full border border-hairline-strong bg-white/5 px-4 py-2.5 text-[13.5px] font-semibold text-ink transition-colors hover:border-accent-light hover:bg-white/10";
+    "flex-1 rounded-full border border-hairline-strong bg-ink/[0.04] px-4 py-2.5 text-[13.5px] font-semibold text-ink transition-colors hover:border-accent-light hover:bg-ink/[0.07]";
 
   return (
     <>

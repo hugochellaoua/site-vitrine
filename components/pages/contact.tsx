@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Galaxy } from "@/components/galaxy";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ContactForm } from "@/components/contact-form";
@@ -19,7 +18,6 @@ export function ContactPage({ locale }: { locale: Locale }) {
   const { contact } = dict(locale);
   return (
     <>
-      <Galaxy />
       <Navbar locale={locale} />
       <main className="relative z-10 px-6 pb-24 pt-36 sm:pt-44">
         <div

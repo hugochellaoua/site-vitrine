@@ -113,7 +113,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
       </div>
 
       {status === "error" && (
-        <p role="alert" className="rounded-xl border border-error/30 bg-error/10 px-4 py-3 text-[13.5px] text-[#ffc2c2]">
+        <p role="alert" className="rounded-xl border border-error/30 bg-error/10 px-4 py-3 text-[13.5px] text-error">
           {contact.error}{" "}
           <Link href={contact.alt.href} className="font-semibold text-ink underline underline-offset-4">
             {contact.alt.label}

@@ -169,7 +169,7 @@ function DropdownMenu({
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "block rounded-xl px-3.5 py-2.5 transition-colors hover:bg-white/[0.06]",
+                  "block rounded-xl px-3.5 py-2.5 transition-colors hover:bg-ink/[0.045]",
                   wide ? "h-full" : "whitespace-nowrap",
                 )}
               >
@@ -203,7 +203,7 @@ function DropdownMenu({
               <Link
                 href={all.href}
                 onClick={() => setOpen(false)}
-                className="group flex items-center justify-center gap-1.5 rounded-xl px-3.5 py-2.5 text-[13.5px] font-semibold text-accent-light transition-colors hover:bg-white/[0.06]"
+                className="group flex items-center justify-center gap-1.5 rounded-xl px-3.5 py-2.5 text-[13.5px] font-semibold text-accent-light transition-colors hover:bg-ink/[0.045]"
               >
                 {all.label}
                 <ArrowRight

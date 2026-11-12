@@ -154,7 +154,7 @@ export function DemoConversation({ locale }: { locale: Locale }) {
         <Reveal delay={0.1} y={30} className="mt-12">
           <div ref={carte} className="card-surface mx-auto w-full max-w-[680px] overflow-hidden rounded-[28px]">
             <div className="flex items-center gap-3 border-b border-hairline px-5 py-4 sm:px-6">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/[0.07] ring-1 ring-hairline-strong">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ink/[0.05] ring-1 ring-hairline-strong">
                 <LogoMark size={20} />
               </span>
               <div className="min-w-0">
@@ -193,7 +193,7 @@ export function DemoConversation({ locale }: { locale: Locale }) {
                 href={demo.notice.href}
                 target="_blank"
                 rel="noopener"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-hairline-strong bg-white/5 px-4 py-2.5 text-[12.5px] font-semibold leading-snug text-ink transition-colors hover:border-accent-light hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-hairline-strong bg-ink/[0.04] px-4 py-2.5 text-[12.5px] font-semibold leading-snug text-ink transition-colors hover:border-accent-light hover:bg-ink/[0.07]"
               >
                 <Info size={14} className="shrink-0 text-accent-light" />
                 <span className="text-left">{demo.notice.label}</span>
@@ -290,11 +290,11 @@ function Saisie({ de, initiale }: { de: "helpify" | "candidate"; initiale: strin
       <div
         className={cn(
           "flex items-center gap-1.5 rounded-2xl px-4 py-3.5",
-          helpify ? "rounded-bl-sm bg-accent/30" : "rounded-br-sm bg-white/15",
+          helpify ? "rounded-bl-sm bg-accent-soft text-accent" : "rounded-br-sm bg-ink/[0.06] text-faint",
         )}
       >
         {[0, 1, 2].map((i) => (
-          <span key={i} className="demo-dot h-1.5 w-1.5 rounded-full bg-white/85" style={retard(i * 0.15)} />
+          <span key={i} className="demo-dot h-1.5 w-1.5 rounded-full bg-current" style={retard(i * 0.15)} />
         ))}
       </div>
       {!helpify && <AvatarCandidat initiale={initiale} />}
@@ -354,8 +354,8 @@ function Analyse({ demo }: { demo: DemoContent }) {
   return (
     <div className="demo-in flex items-end gap-2.5">
       <AvatarHelpify />
-      <div className="max-w-[88%] rounded-2xl rounded-bl-sm border border-hairline-strong bg-white/[0.05] px-4 py-3">
-        <div className="grid text-[12.5px] font-medium text-[#e4e5f5]">
+      <div className="max-w-[88%] rounded-2xl rounded-bl-sm border border-hairline-strong bg-ink/[0.035] px-4 py-3">
+        <div className="grid text-[12.5px] font-medium text-ink">
           <span className="demo-reading flex items-center gap-2 [grid-area:1/1]">
             <Loader size={13} className="animate-spin text-accent-light" />
             {a.reading}
@@ -383,7 +383,7 @@ function Analyse({ demo }: { demo: DemoContent }) {
 
 function AvatarHelpify() {
   return (
-    <span className="mb-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/[0.07] ring-1 ring-hairline-strong">
+    <span className="mb-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-ink/[0.05] ring-1 ring-hairline-strong">
       <LogoMark size={15} />
     </span>
   );

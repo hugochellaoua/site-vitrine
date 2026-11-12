@@ -36,7 +36,7 @@ export function StickyCta({ locale }: { locale: Locale }) {
         <Link
           href={learnMore.href}
           tabIndex={shown ? undefined : -1}
-          className="flex-1 rounded-full border border-hairline-strong bg-white/[0.04] px-4 py-3 text-center text-[14px] font-semibold text-ink"
+          className="flex-1 rounded-full border border-hairline-strong bg-ink/[0.03] px-4 py-3 text-center text-[14px] font-semibold text-ink"
         >
           {learnMore.label}
         </Link>

@@ -293,6 +293,7 @@ export const experts: ExpertsContent = {
   emphasis: "qui nous entourent.",
   intro:
     "Le soutien et l'expertise de profils expérimentés pour challenger notre réflexion sur les enjeux RH, business et technologiques.",
+  logosLabel: "Nos experts exercent chez",
   items: [
     {
       name: "Brice Monnier",
@@ -949,6 +950,7 @@ export const ui = {
   prevStep: "Étape précédente",
   nextStep: "Étape suivante",
   lastStep: "Dernière étape",
+  discover: "Découvrir",
   seeInDemoBefore: "Voir ",
   seeInDemoAfter: " en démo",
   helpifyAnswer: "La réponse Helpify",

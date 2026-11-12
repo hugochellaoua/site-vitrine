@@ -80,7 +80,7 @@ export function RoiCapture({ recap }: { recap: string }) {
       </div>
 
       {status === "error" && (
-        <p role="alert" className="mt-4 text-[13px] text-[#ffc2c2]">
+        <p role="alert" className="mt-4 text-[13px] text-error">
           {roi.capture.error}
         </p>
       )}
