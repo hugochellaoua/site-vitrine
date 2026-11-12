@@ -611,7 +611,8 @@ export const products = {
       id: "talent-ask",
       name: "Talent Ask",
       headline: "Engagez vos candidats et répondez à leurs questions, 24h/24",
-      body: "Le poste, l'équipe, les conditions, la suite du processus : chaque candidat obtient la clarté dont il a besoin pour se projeter, à toute heure, avant même de postuler.",
+      tag: "Des informations claires, pour que plus de candidats postulent",
+      body: "Sans informations claires, beaucoup de candidats renoncent à postuler. Le poste, l'équipe, les conditions, la suite du processus : avec Talent Ask, chacun obtient ses réponses et peut se projeter. Et comme beaucoup de candidats cherchent et postulent en dehors des heures de bureau, Talent Ask leur répond à toute heure.",
       // Seul produit tourné vers le candidat : il porte donc l'orange, comme
       // partout ailleurs sur le site.
       visual: "ask" as const,
@@ -964,8 +965,7 @@ export const defile = {
  * La page « Pourquoi utiliser l'IA dans le recrutement ? » : le constat, ce
  * que Helpify change des deux côtés, puis les objections qu'on nous oppose le
  * plus souvent. Les réponses reprennent les engagements du site (notice IA,
- * FAQ, cas d'usage) ; les chiffres sur les 18-27 ans viennent d'une étude
- * publiée, citée en bas de page.
+ * FAQ, cas d'usage).
  */
 export const pourquoiIA = {
   eyebrow: "Ressources",
@@ -978,9 +978,18 @@ export const pourquoiIA = {
       "Un candidat envoie un CV et, dans 95 % des cas, n'obtient aucun retour. Il n'a pas d'espace pour expliquer qui il est, ni personne pour lui présenter le poste.",
       "De l'autre côté, vos recruteurs n'ont pas le temps d'appeler chaque candidat. Ils lisent des mots-clés, souvent optimisés par une IA, et passent à côté de profils qu'ils n'ont jamais entendus.",
     ],
-    chiffres: [
-      { valeur: "1er", texte: "reproche des 18-27 ans dans leurs mauvaises expériences de candidature : l'absence de réponse." },
-      { valeur: "65 %", texte: "des 18-27 ans ont déjà abandonné une candidature en cours de route." },
+    points: [
+      "Le silence après une candidature est l'une des expériences que les candidats vivent le plus mal.",
+      "Quand le parcours est long ou opaque, beaucoup abandonnent leur candidature en cours de route.",
+    ],
+  },
+  attentes: {
+    titre: "Ce que veulent les candidats.",
+    items: [
+      { attente: "Comprendre avant de postuler", reponse: "Talent Ask répond à leurs questions sur le poste, l'équipe et les conditions, à toute heure." },
+      { attente: "Être écoutés, pas seulement lus", reponse: "Chaque candidat a un vrai échange autour de son parcours." },
+      { attente: "Savoir ce que fait l'IA", reponse: "Helpify se présente comme une IA, s'appuie sur les critères du poste, et la décision revient à un recruteur." },
+      { attente: "Que le temps gagné serve le contact humain", reponse: "Vos recruteurs consacrent le temps gagné aux entretiens." },
     ],
   },
   change: {
@@ -1003,7 +1012,6 @@ export const pourquoiIA = {
         ],
       },
     ],
-    chiffre: { valeur: "78 %", texte: "des 18-27 ans estiment que les recruteurs devraient utiliser le temps gagné grâce à l'IA pour préserver le contact humain." },
   },
   objections: {
     titre: "Les questions qu'on nous pose.",
@@ -1014,7 +1022,7 @@ export const pourquoiIA = {
       },
       {
         q: "Les candidats acceptent-ils d'échanger avec une IA ?",
-        a: "Oui, quand on leur explique. 62 % des 18-27 ans trouvent acceptable qu'une IA analyse leur candidature si les critères sont clairs, et 57 % acceptent un premier échange écrit ou vocal avant un entretien. Helpify annonce qu'il est une IA, s'appuie sur les critères du poste et rappelle que la décision revient à un recruteur.",
+        a: "Oui, surtout quand on leur explique. Un premier échange écrit ou vocal avant l'entretien est bien accepté quand les critères sont clairs et qu'un recruteur garde la décision. C'est exactement ce que fait Helpify : il se présente comme une IA, s'appuie sur les critères du poste, et rappelle que la décision revient à un recruteur.",
       },
       {
         q: "Comment évitez-vous les biais ?",
@@ -1022,7 +1030,7 @@ export const pourquoiIA = {
       },
       {
         q: "Et les CV rédigés avec l'IA ?",
-        a: "72 % des 18-27 ans utilisent ou envisagent d'utiliser l'IA pour préparer leurs candidatures. La conversation va chercher des éléments concrets : ce que le candidat a réellement fait, dans quel contexte, avec quels résultats.",
+        a: "De plus en plus de candidats utilisent l'IA pour préparer leurs candidatures. La conversation va chercher des éléments concrets : ce que le candidat a réellement fait, dans quel contexte, avec quels résultats.",
       },
       {
         q: "Que deviennent les données des candidats ?",
@@ -1035,7 +1043,6 @@ export const pourquoiIA = {
     ],
   },
   cta: { titre: "Voyez-le sur un de vos postes.", label: "Réservez une démo", href: links.booking },
-  source: "Chiffres sur les 18-27 ans : Kantar Media pour Hippolyte.ai, « La Gen Z ne postule pas. Elle choisit. », enquête menée du 10 au 22 juillet 2026 auprès de 500 jeunes de 18 à 27 ans.",
 };
 
 export const methode = {

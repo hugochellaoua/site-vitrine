@@ -530,7 +530,8 @@ export const products = {
       id: "talent-ask",
       name: "Talent Ask",
       headline: "Engage your candidates and answer their questions, 24/7",
-      body: "The role, the team, the conditions, the next steps: every candidate gets the clarity they need to picture themselves in the job, at any hour, even before applying.",
+      tag: "Clear information, so more candidates apply",
+      body: "Without clear information, many candidates give up on applying. The role, the team, the conditions, the next steps: with Talent Ask, everyone gets their answers and can picture themselves in the job. And since many candidates search and apply outside office hours, Talent Ask answers them at any hour.",
       visual: "ask" as const,
       tone: "iris" as const,
     },
@@ -838,9 +839,18 @@ export const pourquoiIA = {
       "A candidate sends a CV and, in 95% of cases, hears nothing back. They have no space to explain who they are, and no one to tell them about the role.",
       "On the other side, your recruiters don't have time to call every candidate. They read keywords, often optimised by AI, and miss profiles they never heard.",
     ],
-    chiffres: [
-      { valeur: "No. 1", texte: "complaint of 18-27 year-olds about bad application experiences: getting no answer." },
-      { valeur: "65%", texte: "of 18-27 year-olds have already dropped an application halfway." },
+    points: [
+      "Silence after an application is one of the experiences candidates find hardest.",
+      "When the process is long or opaque, many drop their application halfway.",
+    ],
+  },
+  attentes: {
+    titre: "What candidates want.",
+    items: [
+      { attente: "To understand before applying", reponse: "Talent Ask answers their questions about the role, the team and the conditions, at any hour." },
+      { attente: "To be heard, not just read", reponse: "Every candidate gets a real conversation about their background." },
+      { attente: "To know what the AI does", reponse: "Helpify introduces itself as an AI, relies on the role's criteria, and a recruiter decides." },
+      { attente: "For the time saved to serve human contact", reponse: "Your recruiters spend the time saved on interviews." },
     ],
   },
   change: {
@@ -863,7 +873,6 @@ export const pourquoiIA = {
         ],
       },
     ],
-    chiffre: { valeur: "78%", texte: "of 18-27 year-olds think recruiters should use the time AI saves them to preserve human contact." },
   },
   objections: {
     titre: "The questions we are asked.",
@@ -874,7 +883,7 @@ export const pourquoiIA = {
       },
       {
         q: "Do candidates accept talking to an AI?",
-        a: "Yes, when it is explained. 62% of 18-27 year-olds find it acceptable for an AI to analyse their application if the criteria are clear, and 57% accept a first written or voice exchange before an interview. Helpify says it is an AI, relies on the role's criteria and reminds candidates that a recruiter decides.",
+        a: "Yes, especially when it is explained. A first written or voice exchange before the interview is well accepted when the criteria are clear and a recruiter keeps the decision. That is exactly what Helpify does: it introduces itself as an AI, relies on the role's criteria, and reminds candidates that a recruiter decides.",
       },
       {
         q: "How do you avoid bias?",
@@ -882,7 +891,7 @@ export const pourquoiIA = {
       },
       {
         q: "What about CVs written with AI?",
-        a: "72% of 18-27 year-olds use or plan to use AI to prepare their applications. The conversation looks for concrete evidence: what the candidate actually did, in what context, with what results.",
+        a: "More and more candidates use AI to prepare their applications. The conversation looks for concrete evidence: what the candidate actually did, in what context, with what results.",
       },
       {
         q: "What happens to candidate data?",
@@ -895,7 +904,6 @@ export const pourquoiIA = {
     ],
   },
   cta: { titre: "See it on one of your roles.", label: "Book a demo", href: links.booking },
-  source: "Figures on 18-27 year-olds: Kantar Media for Hippolyte.ai, “La Gen Z ne postule pas. Elle choisit.”, survey of 500 people aged 18 to 27, 10–22 July 2026.",
 };
 
 export const methode = {

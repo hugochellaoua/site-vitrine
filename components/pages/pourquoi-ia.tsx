@@ -39,10 +39,9 @@ export function PourquoiIAPage({ locale }: { locale: Locale }) {
               ))}
             </div>
             <ul className="flex flex-col">
-              {p.constat.chiffres.map((c) => (
-                <li key={c.valeur} className="border-t border-hairline py-6">
-                  <p className="font-display text-[52px] font-light leading-none tracking-[-0.05em] text-ink">{c.valeur}</p>
-                  <p className="mt-3 max-w-[40ch] text-[14.5px] leading-relaxed text-muted">{c.texte}</p>
+              {p.constat.points.map((c) => (
+                <li key={c} className="border-t border-hairline py-6 font-display text-[clamp(19px,2vw,24px)] leading-snug tracking-[-0.02em] text-ink">
+                  {c}
                 </li>
               ))}
             </ul>
@@ -68,10 +67,21 @@ export function PourquoiIAPage({ locale }: { locale: Locale }) {
                 </Reveal>
               ))}
             </div>
-            <div className="mt-10 flex flex-col gap-3 border-t border-hairline pt-8 sm:flex-row sm:items-baseline sm:gap-8">
-              <p className="font-display text-[52px] font-light leading-none tracking-[-0.05em] text-ink">{p.change.chiffre.valeur}</p>
-              <p className="max-w-[60ch] text-[15px] leading-relaxed text-muted">{p.change.chiffre.texte}</p>
-            </div>
+          </div>
+        </section>
+
+        {/* Ce que veulent les candidats, et ce que Helpify y répond. */}
+        <section className="border-t border-hairline px-6 py-24 sm:px-10 lg:px-16">
+          <div className="mx-auto max-w-6xl">
+            <h2 className="max-w-[24ch] font-display text-[clamp(28px,3.6vw,44px)] leading-[1.08] tracking-[-0.04em] text-ink">{p.attentes.titre}</h2>
+            <ul className="mt-12 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-4">
+              {p.attentes.items.map((a) => (
+                <li key={a.attente} className="border-t border-hairline py-6">
+                  <p className="font-display text-[19px] leading-snug tracking-[-0.02em] text-ink">{a.attente}</p>
+                  <p className="mt-3 text-[14.5px] leading-relaxed text-muted">{a.reponse}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
@@ -98,7 +108,6 @@ export function PourquoiIAPage({ locale }: { locale: Locale }) {
               <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
-          <p className="mx-auto mt-14 max-w-6xl text-[12px] leading-relaxed text-faint">{p.source}</p>
         </section>
       </main>
       <Footer locale={locale} />
