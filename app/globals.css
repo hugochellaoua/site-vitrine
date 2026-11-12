@@ -309,7 +309,7 @@ body {
 }
 
 .gradient-num {
-  background: linear-gradient(180deg, #0e1644, #1d50fe);
+  background: linear-gradient(180deg, #121214, #57554f);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

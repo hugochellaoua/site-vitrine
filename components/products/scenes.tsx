@@ -284,7 +284,7 @@ export function SynergiesScene({ locale }: { locale: Locale }) {
               <span
                 key={roles[i]}
                 className={`absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border px-2.5 py-1 text-[11px] transition-all duration-500 ${
-                  relie ? "border-accent/35 bg-white text-ink shadow-[0_6px_16px_-8px_rgba(29,80,254,0.5)]" : "border-hairline bg-[#f6f7fb] text-faint"
+                  relie ? "border-accent/35 bg-white text-ink" : "border-hairline bg-[#f6f7fb] text-faint"
                 }`}
                 style={{ left: `${(p.x / W) * 100}%`, top: `${(p.y / H) * 100}%` }}
               >

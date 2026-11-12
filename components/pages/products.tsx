@@ -60,7 +60,7 @@ export function ProductsPage({ locale }: { locale: Locale }) {
             className="pointer-events-none absolute left-1/2 top-24 -z-10 h-[60vh] w-[min(1000px,92vw)] -translate-x-1/2"
             style={{
               background:
-                "radial-gradient(ellipse 50% 45% at 50% 40%, rgba(29,80,254,0.28) 0%, rgba(29,80,254,0.07) 46%, transparent 74%)",
+                "radial-gradient(ellipse 50% 45% at 50% 40%, rgba(18,18,20,0) 0%, rgba(18,18,20,0) 46%, transparent 74%)",
             }}
             aria-hidden="true"
           />
@@ -154,8 +154,13 @@ export function ProductsPage({ locale }: { locale: Locale }) {
                   </Link>
                 </Reveal>
 
-                <Reveal delay={0.1} className="flex w-full justify-center lg:w-1/2">
-                  <ProductScene visual={product.visual} locale={locale} />
+                <Reveal delay={0.1} className="w-full lg:w-1/2">
+                  <div
+                    className="flex min-h-[420px] items-center justify-center rounded-[6px] p-6 sm:p-10"
+                    style={{ background: "linear-gradient(160deg, #2b2d33 0%, #111215 100%)" }}
+                  >
+                    <ProductScene visual={product.visual} locale={locale} />
+                  </div>
                 </Reveal>
               </div>
             </section>
@@ -170,7 +175,7 @@ export function ProductsPage({ locale }: { locale: Locale }) {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href={hero.cta.href}
-                className="group inline-flex items-center gap-2.5 rounded-[4px] bg-accent px-8 py-4 text-[15px] font-semibold text-white shadow-[0_20px_60px_-16px_rgba(29,80,254,0.85)] transition-shadow duration-300 hover:shadow-[0_28px_74px_-14px_rgba(29,80,254,1)]"
+                className="group inline-flex items-center gap-2.5 rounded-[4px] bg-accent px-8 py-4 text-[15px] font-semibold text-white transition-shadow duration-300"
               >
                 {hero.cta.label}
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

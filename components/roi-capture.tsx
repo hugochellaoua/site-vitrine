@@ -64,7 +64,7 @@ export function RoiCapture({ recap }: { recap: string }) {
             autoComplete="email"
             maxLength={200}
             placeholder={roi.capture.placeholder}
-            className="w-full min-w-0 rounded-full border border-hairline-strong bg-void/70 px-4 py-3 text-[14px] text-ink placeholder:text-faint outline-none transition-[border-color,box-shadow] duration-200 focus:border-accent-light focus:shadow-[0_0_0_3px_rgba(29,80,254,0.28)] sm:w-64"
+            className="w-full min-w-0 rounded-full border border-hairline-strong bg-void/70 px-4 py-3 text-[14px] text-ink placeholder:text-faint outline-none transition-[border-color,box-shadow] duration-200 focus:border-accent-light focus:shadow-[0_0_0_3px_rgba(18,18,20,0.12)] sm:w-64"
           />
           <button
             type="submit"

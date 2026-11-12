@@ -9,7 +9,7 @@ import { dict, type Locale } from "@/lib/i18n";
 type Status = "idle" | "sending" | "sent" | "error";
 
 const input =
-  "w-full rounded-xl border border-hairline-strong bg-void/60 px-4 py-3 text-[15px] text-ink placeholder:text-faint outline-none transition-[border-color,box-shadow] duration-200 focus:border-accent-light focus:shadow-[0_0_0_3px_rgba(29,80,254,0.28)]";
+  "w-full rounded-xl border border-hairline-strong bg-void/60 px-4 py-3 text-[15px] text-ink placeholder:text-faint outline-none transition-[border-color,box-shadow] duration-200 focus:border-accent-light focus:shadow-[0_0_0_3px_rgba(18,18,20,0.12)]";
 const label = "mb-2 block text-[12.5px] font-medium text-muted";
 
 /**
@@ -126,7 +126,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="group inline-flex items-center justify-center gap-2.5 rounded-[4px] bg-accent px-8 py-4 text-[15px] font-semibold text-white shadow-[0_20px_60px_-16px_rgba(29,80,254,0.85)] transition-[box-shadow,opacity] duration-300 hover:shadow-[0_28px_74px_-14px_rgba(29,80,254,1)] disabled:cursor-wait disabled:opacity-70"
+          className="group inline-flex items-center justify-center gap-2.5 rounded-[4px] bg-accent px-8 py-4 text-[15px] font-semibold text-white transition-[box-shadow,opacity] duration-300 disabled:cursor-wait disabled:opacity-70"
         >
           {status === "sending" ? contact.sending : contact.submit}
           {status !== "sending" && (

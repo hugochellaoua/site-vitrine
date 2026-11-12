@@ -75,7 +75,7 @@ export function Hero({ locale }: { locale: Locale }) {
         <Magnetic>
           <Link
             href={hero.cta.href}
-            className="group inline-flex items-center gap-2.5 rounded-[4px] bg-accent px-8 py-4 text-[15px] font-semibold text-white shadow-[0_20px_60px_-16px_rgba(29,80,254,0.85)] transition-shadow duration-300 hover:shadow-[0_28px_74px_-14px_rgba(29,80,254,1)]"
+            className="group inline-flex items-center gap-2.5 rounded-[4px] bg-accent px-8 py-4 text-[15px] font-semibold text-white transition-shadow duration-300"
           >
             {hero.cta.label}
             <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

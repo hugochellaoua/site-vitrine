@@ -267,7 +267,7 @@ export function Navbar({ locale }: { locale: Locale }) {
           <Magnetic radius={80} strength={0.24}>
             <Link
               href={nav.cta.href}
-              className="inline-block whitespace-nowrap rounded-[4px] bg-accent px-5 py-2.5 text-[13.5px] font-semibold text-white shadow-[0_10px_30px_-10px_rgba(29,80,254,0.75)] transition-shadow duration-300 hover:shadow-[0_14px_36px_-8px_rgba(29,80,254,0.9)]"
+              className="inline-block whitespace-nowrap rounded-[4px] bg-accent px-5 py-2.5 text-[13.5px] font-semibold text-white transition-shadow duration-300"
             >
               {nav.cta.label}
             </Link>

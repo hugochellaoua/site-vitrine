@@ -43,7 +43,7 @@ export function StickyCta({ locale }: { locale: Locale }) {
         <Link
           href={hero.cta.href}
           tabIndex={shown ? undefined : -1}
-          className="flex flex-[1.3] items-center justify-center gap-2 rounded-full bg-accent px-4 py-3 text-[14px] font-semibold text-white shadow-[0_12px_36px_-12px_rgba(29,80,254,0.9)]"
+          className="flex flex-[1.3] items-center justify-center gap-2 rounded-full bg-accent px-4 py-3 text-[14px] font-semibold text-white"
         >
           {hero.cta.label}
           <ArrowRight size={15} />
