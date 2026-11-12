@@ -34,7 +34,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
     setStatus("sending");
     const data = Object.fromEntries(new FormData(e.currentTarget));
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

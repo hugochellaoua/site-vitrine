@@ -49,7 +49,8 @@ export const metadata: Metadata = {
     url: "/",
   },
   twitter: { card: "summary_large_image", title: site.title, description: site.description },
-  robots: { index: true, follow: true },
+  // La version « thème 2 » (helpify-ai.fr/theme-2) n'est pas indexée.
+  robots: process.env.NEXT_PUBLIC_BASE_PATH ? { index: false, follow: false } : { index: true, follow: true },
 };
 
 export default function RootLayout({
