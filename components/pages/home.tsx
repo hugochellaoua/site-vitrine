@@ -4,9 +4,9 @@ import { Hero } from "@/components/hero";
 import { ProductBlocks } from "@/components/product-blocks";
 import { Synthesis } from "@/components/synthesis";
 import { UseCasesGrid } from "@/components/use-cases-grid";
-import { Experts } from "@/components/experts";
 import { Donnees } from "@/components/donnees";
 import { Branche } from "@/components/branche";
+import { Defile } from "@/components/defile";
 import { Pricing } from "@/components/pricing";
 import { Faq } from "@/components/faq";
 import { FinalCta } from "@/components/final-cta";
@@ -19,9 +19,11 @@ import type { Locale } from "@/lib/i18n";
  *
  *  — le haut de page sombre, le titre, et les entreprises où exercent nos
  *    experts ;
- *  — les quatre produits en action, puis les neuf situations ;
+ *  — les quatre produits en action, la bande qui défile (ce que font les
+ *    équipes RH avec Helpify), puis les neuf situations ;
  *  — Helpify branché sur votre entreprise (bande noire, schéma animé) ;
- *  — les experts, puis l'engagement sur les données (bande noire) ;
+ *  — l'engagement sur les données (bande noire). Les experts ne sont plus
+ *    qu'en haut de page, par les logos de leurs entreprises ;
  *  — les bénéfices chiffrés, les tarifs, la FAQ et l'appel final.
  */
 export function HomePage({ locale }: { locale: Locale }) {
@@ -32,11 +34,11 @@ export function HomePage({ locale }: { locale: Locale }) {
       <main className="relative z-10">
         <Hero locale={locale} />
         <ProductBlocks locale={locale} />
+        <Defile locale={locale} />
         <UseCasesGrid locale={locale} />
         <div className="sombre bg-void">
           <Branche locale={locale} />
         </div>
-        <Experts locale={locale} />
         <div className="sombre bg-void">
           <Donnees locale={locale} />
         </div>

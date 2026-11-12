@@ -200,6 +200,7 @@ export function Navbar({ locale }: { locale: Locale }) {
   const sous = submenus(locale);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [deplieMobile, setDeplieMobile] = useState<string | null>(null);
 
   useEffect(() => {
     function onScroll() {
@@ -286,95 +287,97 @@ export function Navbar({ locale }: { locale: Locale }) {
 
       <div
         data-open={open}
-        className="mobile-menu fixed inset-0 z-[60] flex flex-col bg-void/98 backdrop-blur-xl lg:hidden"
+        className="mobile-menu fixed inset-0 z-[60] flex flex-col bg-void lg:hidden"
       >
-        <div className="flex items-center justify-between px-6 py-5">
+        <div className="flex items-center justify-between border-b border-hairline px-5 py-4">
           <LogoLockup />
           <button
             type="button"
             onClick={() => setOpen(false)}
             aria-label="Fermer le menu"
-            className="flex h-9 w-9 items-center justify-center rounded-full text-ink"
+            className="flex h-10 w-10 items-center justify-center rounded-[4px] border border-hairline text-ink"
           >
             <X size={20} />
           </button>
         </div>
-        {/* Sur mobile, il n'y a pas de survol : les sous-menus courts sont
-            dépliés sous leur entrée, en pastilles distinctes plutôt qu'en une
-            ligne de mots qui se lirait comme une phrase. Sans eux,
-            « Intégrations » — passée sous Services — deviendrait inatteignable
-            depuis le menu. Le conteneur défile, pour qu'un écran court ne coupe
-            jamais le bas de la liste.
-
-            Le centrage passe par des marges automatiques, et non par
-            `justify-center` : quand la liste dépasse la hauteur de l'écran,
-            celui-ci rejette le surplus au-dessus du bord défilable, où plus
-            aucun défilement ne va le rechercher. Les marges automatiques, elles,
-            se réduisent à zéro dès qu'il n'y a plus de place à répartir. */}
-        <div className="flex flex-1 flex-col overflow-y-auto px-6 py-4">
-          <div className="m-auto flex flex-col items-center gap-4">
+        {/* Sur mobile, chaque entrée se déplie sur place : les produits, les
+            solutions et les ressources s'affichent en liste, chacun avec sa
+            phrase, comme dans les panneaux de la version ordinateur. */}
+        <div className="flex-1 overflow-y-auto px-5">
+          <ul>
             {nav.links.map((link) => {
               const sm = link.dropdown ? sous[link.dropdown] : null;
-              const deplie = sm && sm.mobile !== false;
+              const deplie = deplieMobile === link.href;
               return (
-                <div
-                  key={link.href}
-                  className="flex flex-col items-center gap-1 text-center"
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="py-1 font-display text-[22px] leading-none text-ink"
-                  >
-                    {link.label}
-                  </Link>
-                  {deplie && (
-                    // Les entrées du sous-menu se lisent comme le sous-titre de
-                    // celle qui les porte : une seule ligne, sous le titre, dans
-                    // une graisse qui ne lui dispute rien.
-                    <ul className="flex flex-wrap items-center justify-center gap-x-1 text-[13px]">
-                      {sm.items.map((item, i) => (
-                        <li key={item.href + item.label} className="flex items-center gap-1">
-                          <Link
-                            href={item.href}
-                            onClick={() => setOpen(false)}
-                            className={cn(
-                              "py-1.5",
-                              item.tone === "warm" ? "text-warm" : "text-muted",
-                            )}
-                          >
-                            {item.label}
-                          </Link>
-                          {/* Le séparateur suit son entrée plutôt qu'il ne
-                              précède la suivante : au passage à la ligne, il
-                              reste en fin de ligne au lieu d'en ouvrir une. */}
-                          {i < sm.items.length - 1 && (
-                            <span className="text-faint" aria-hidden="true">
-                              ·
-                            </span>
+                <li key={link.href} className="border-b border-hairline">
+                  {sm ? (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => setDeplieMobile(deplie ? null : link.href)}
+                        aria-expanded={deplie}
+                        className="flex w-full items-center justify-between py-5 text-left font-display text-[24px] tracking-[-0.03em] text-ink"
+                      >
+                        {link.label}
+                        <ChevronDown size={20} className={cn("text-faint transition-transform duration-300", deplie && "rotate-180")} />
+                      </button>
+                      {deplie && (
+                        <ul className="flex flex-col gap-1 pb-5">
+                          {[...sm.items, ...(sm.extra?.items ?? [])].map((item) => (
+                            <li key={item.href + item.label}>
+                              <Link
+                                href={item.href}
+                                onClick={() => setOpen(false)}
+                                className="block rounded-[4px] bg-chip px-4 py-3"
+                              >
+                                <span className="block text-[15.5px] font-medium text-ink">{item.label}</span>
+                                {item.desc && <span className="mt-0.5 block text-[13px] leading-snug text-muted">{item.desc}</span>}
+                              </Link>
+                            </li>
+                          ))}
+                          {sm.all && (
+                            <li>
+                              <Link
+                                href={sm.all.href}
+                                onClick={() => setOpen(false)}
+                                className="flex items-center gap-1.5 px-4 py-3 text-[14px] font-medium text-ink"
+                              >
+                                {sm.all.label}
+                                <ArrowRight size={14} />
+                              </Link>
+                            </li>
                           )}
-                        </li>
-                      ))}
-                    </ul>
+                        </ul>
+                      )}
+                    </>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className="block py-5 font-display text-[24px] tracking-[-0.03em] text-ink"
+                    >
+                      {link.label}
+                    </Link>
                   )}
-                </div>
+                </li>
               );
             })}
-            <a
-              href={nav.connexion.href}
-              onClick={() => setOpen(false)}
-              className="text-base text-muted"
-            >
+          </ul>
+        </div>
+        <div className="flex flex-col gap-3 border-t border-hairline px-5 py-5">
+          <Link
+            href={nav.cta.href}
+            onClick={() => setOpen(false)}
+            className="flex items-center justify-center gap-2 rounded-[4px] bg-accent px-6 py-4 text-[15px] font-medium text-white"
+          >
+            {nav.cta.label}
+            <ArrowRight size={16} />
+          </Link>
+          <div className="flex items-center justify-between">
+            <a href={nav.connexion.href} onClick={() => setOpen(false)} className="text-[15px] text-muted">
               {nav.connexion.label}
             </a>
-            <Link
-              href={nav.cta.href}
-              onClick={() => setOpen(false)}
-              className="rounded-[4px] bg-accent px-7 py-4 text-base font-semibold text-white"
-            >
-              {nav.cta.label}
-            </Link>
-            <LanguageSwitch locale={locale} className="mt-1" />
+            <LanguageSwitch locale={locale} />
           </div>
         </div>
       </div>

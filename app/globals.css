@@ -882,3 +882,27 @@ h3.font-display {
     stroke-dashoffset: -24;
   }
 }
+.branche-eclat {
+  animation: brancheEclat 1.8s linear infinite;
+}
+@keyframes brancheEclat {
+  from {
+    stroke-dashoffset: 22;
+  }
+  to {
+    stroke-dashoffset: -400;
+  }
+}
+.branche-onde {
+  animation: brancheOnde 1.8s ease-out infinite;
+}
+@keyframes brancheOnde {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}

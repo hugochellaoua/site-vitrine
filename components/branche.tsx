@@ -24,48 +24,54 @@ import { SectionTitle } from "@/components/ui/section-title";
 
 const DUREE = 5200;
 
-/** Côté d'un bloc et épaisseur, en pixels, sur le plan du schéma. */
-const B = 128;
-const EP = 26;
+/** Le plan du schéma, en pixels : trois colonnes, Helpify au centre. */
+const W = 580;
+const H = 400;
+const LARG = 150;
+const COL_G = 0;
+const COL_D = W - LARG;
+const CX = W / 2;
+const CY = H / 2 - 18;
+const CL = 128;
+const yG = (i: number) => 92 + i * 56;
+const yD = (i: number) => 120 + i * 56;
 
-type Bloc = { id: string; x: number; y: number; titre: string; items: string[]; temps: number[] };
+/** Une courbe douce d'un point à un autre, à l'horizontale aux deux bouts. */
+const courbe = (x1: number, y1: number, x2: number, y2: number) => {
+  const m = (x1 + x2) / 2;
+  return `M${x1} ${y1} C${m} ${y1} ${m} ${y2} ${x2} ${y2}`;
+};
 
-function Boite({ bloc, actif }: { bloc: Bloc; actif: boolean }) {
-  const dessus = actif ? "bg-[#b3ac9c] text-[#121214] border-[#cfc8b8]" : "bg-[#151517] text-[#cfccc4] border-white/40";
-  const cote = actif ? "bg-[#8d8778] border-[#cfc8b8]" : "bg-[#0d0d0e] border-white/30";
+function Liaison({ d, actif, retard }: { d: string; actif: boolean; retard: number }) {
   return (
-    <div
-      className="absolute transition-transform duration-700"
-      style={{
-        left: bloc.x - B / 2,
-        top: bloc.y - B / 2,
-        width: B,
-        height: B,
-        transformStyle: "preserve-3d",
-        transform: `translateZ(${actif ? 14 : 0}px)`,
-      }}
+    <>
+      <path d={d} fill="none" stroke="rgba(244,241,234,0.16)" strokeWidth="1" />
+      {actif && (
+        <path
+          d={d}
+          fill="none"
+          stroke="#f4f1ea"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeDasharray="22 400"
+          className="branche-eclat"
+          style={{ animationDelay: `${retard}s` }}
+        />
+      )}
+    </>
+  );
+}
+
+function Puce({ x, y, actif, children }: { x: number; y: number; actif: boolean; children: string }) {
+  return (
+    <span
+      className={`absolute flex items-center border px-3.5 text-[14px] transition-colors duration-700 ${
+        actif ? "border-[#f4f1ea] bg-[#f4f1ea] text-[#121214]" : "border-white/15 bg-[#151517] text-[#cfccc4]"
+      }`}
+      style={{ left: x, top: y - 19, width: LARG, height: 38 }}
     >
-      {/* Les deux côtés visibles, puis le dessus, qui porte le texte. */}
-      <div
-        className={`absolute left-0 border transition-colors duration-700 ${cote}`}
-        style={{ top: B, width: B, height: EP, transformOrigin: "top", transform: "rotateX(90deg)" }}
-      />
-      <div
-        className={`absolute top-0 border transition-colors duration-700 ${cote}`}
-        style={{ left: B, width: EP, height: B, transformOrigin: "left", transform: "rotateY(-90deg)" }}
-      />
-      <div
-        className={`absolute inset-0 border p-3.5 transition-colors duration-700 ${dessus}`}
-        style={{ transform: `translateZ(${EP}px)` }}
-      >
-        <p className="font-mono text-[9.5px] font-medium uppercase tracking-[0.22em]">{bloc.titre}</p>
-        <ul className="mt-2 flex flex-col gap-0.5 text-[11px] italic leading-snug opacity-80">
-          {bloc.items.map((x) => (
-            <li key={x}>{x}</li>
-          ))}
-        </ul>
-      </div>
-    </div>
+      {children}
+    </span>
   );
 }
 
@@ -82,20 +88,14 @@ export function Branche({ locale }: { locale: Locale }) {
 
   const etapes = branche.steps.map((k) => processSteps.find((s) => s.key === k)).filter((s) => s !== undefined);
   const entreprise = processSteps.find((s) => s.key === "entreprise");
-  const diffusion = processSteps.find((s) => s.key === "diffusion");
   const reponses = processSteps.find((s) => s.key === "reponses");
   const sources = entreprise && "sources" in entreprise ? entreprise.sources.slice(0, 4) : [];
-  const canaux = diffusion && "channels" in diffusion ? diffusion.channels.slice(0, 3) : [];
   const echanges = reponses && "extracted" in reponses ? reponses.extracted.slice(0, 3) : [];
 
-  const P = 560;
-  const C = P / 2;
-  const blocs: Bloc[] = [
-    { id: "sources", x: P - 82, y: 82, titre: branche.blocs.sources, items: sources, temps: [0] },
-    { id: "canaux", x: 82, y: 82, titre: branche.blocs.canaux, items: canaux, temps: [1] },
-    { id: "echanges", x: 82, y: P - 82, titre: branche.blocs.echanges, items: echanges, temps: [1] },
-    { id: "garde", x: P - 82, y: P - 82, titre: branche.blocs.garde, items: branche.garde, temps: [2] },
-  ];
+  const decision = processSteps.find((s) => s.key === "decision");
+  const gauche = sources;
+  const droite = decision && "basis" in decision ? decision.basis : branche.garde;
+  const titreDroite = decision && "from" in decision ? decision.from : branche.blocs.garde;
 
   const choisir = (i: number) => {
     setTemps(i);
@@ -140,47 +140,63 @@ export function Branche({ locale }: { locale: Locale }) {
           </Link>
         </div>
 
-        {/* Le schéma : un plan incliné, les blocs posés dessus. */}
-        <div className="relative mx-auto h-[300px] w-full max-w-[560px] sm:h-[480px]" aria-hidden="true">
-          <div className="absolute left-1/2 top-1/2 origin-center scale-[0.5] sm:scale-[0.85]" style={{ width: P, height: P, marginLeft: -P / 2, marginTop: -P / 2 }}>
-            <div
-              className="relative h-full w-full"
-              style={{ transformStyle: "preserve-3d", transform: "rotateX(58deg) rotateZ(-42deg)" }}
-            >
-              <svg viewBox={`0 0 ${P} ${P}`} className="absolute inset-0 h-full w-full overflow-visible">
-                {blocs.map((b) => {
-                  const actif = b.temps.includes(temps);
-                  return (
-                    <line
-                      key={b.id}
-                      x1={b.x}
-                      y1={b.y}
-                      x2={C}
-                      y2={C}
-                      stroke={actif ? "#f4f1ea" : "rgba(244,241,234,0.28)"}
-                      strokeWidth={actif ? 1.6 : 1}
-                      strokeDasharray="5 7"
-                      className={actif ? "branche-flux" : ""}
-                      style={{ transition: "stroke .6s" }}
-                    />
-                  );
-                })}
-              </svg>
-              {blocs.map((b) => (
-                <Boite key={b.id} bloc={b} actif={b.temps.includes(temps)} />
+        {/* Le schéma, de face : vos sources à gauche, Helpify au centre, ce que
+            reçoivent vos RH à droite. Des éclats de lumière parcourent les
+            liaisons du temps en cours. */}
+        <div className="relative mx-auto h-[330px] w-full max-w-[580px] sm:h-[440px]" aria-hidden="true">
+          <div
+            className="absolute left-1/2 top-1/2 origin-center scale-[0.6] sm:scale-100"
+            style={{ width: W, height: H, marginLeft: -W / 2, marginTop: -H / 2 }}
+          >
+            <svg viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 h-full w-full overflow-visible">
+              {gauche.map((_, i) => (
+                <Liaison key={`g${i}`} d={courbe(COL_G + LARG, yG(i), CX - CL / 2, CY)} actif={temps === 0} retard={i * 0.25} />
               ))}
-              {/* Helpify, au centre. */}
-              <div className="absolute" style={{ left: C - 72, top: C - 72, width: 144, height: 144, transformStyle: "preserve-3d" }}>
-                <div className="absolute left-0 border border-white/40 bg-[#26262a]" style={{ top: 144, width: 144, height: 40, transformOrigin: "top", transform: "rotateX(90deg)" }} />
-                <div className="absolute top-0 border border-white/40 bg-[#1b1b1e]" style={{ left: 144, width: 40, height: 144, transformOrigin: "left", transform: "rotateY(-90deg)" }} />
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 border border-white/50 bg-[#2e2e33]" style={{ transform: "translateZ(40px)" }}>
-                  <p className="font-mono text-[9.5px] uppercase tracking-[0.22em] text-[#cfccc4]">{branche.blocs.centre}</p>
-                  <span className="grid h-12 w-12 place-items-center bg-[#0d0d0e]">
-                    <LogoMark size={26} />
-                  </span>
-                </div>
-              </div>
+              {droite.map((_, i) => (
+                <Liaison key={`d${i}`} d={courbe(CX + CL / 2, CY, COL_D, yD(i))} actif={temps === 2} retard={i * 0.25} />
+              ))}
+            </svg>
+
+            <p className="absolute font-mono text-[10.5px] uppercase tracking-[0.14em] text-faint" style={{ left: COL_G, top: yG(0) - 44 }}>
+              {branche.blocs.sources}
+            </p>
+            {gauche.map((x, i) => (
+              <Puce key={x} x={COL_G} y={yG(i)} actif={temps === 0}>
+                {x}
+              </Puce>
+            ))}
+
+            <div
+              className={`absolute flex flex-col items-center justify-center gap-3 border transition-colors duration-700 ${
+                temps === 1 ? "border-[#f4f1ea] bg-[#f4f1ea] text-[#121214]" : "border-white/20 bg-[#18181a] text-[#f4f1ea]"
+              }`}
+              style={{ left: CX - CL / 2, top: CY - CL / 2, width: CL, height: CL }}
+            >
+              <LogoMark size={34} />
+              <span className="font-display text-[17px] tracking-[-0.02em]">{branche.blocs.centre}</span>
+              {temps === 1 && <span className="branche-onde absolute inset-0 border border-[#f4f1ea]" />}
             </div>
+            <ul className="absolute flex justify-center gap-1.5" style={{ left: CX - 130, width: 260, top: CY + CL / 2 + 40 }}>
+              {echanges.map((x) => (
+                <li
+                  key={x}
+                  className={`rounded-[3px] border px-2.5 py-1 text-[12px] transition-colors duration-700 ${
+                    temps === 1 ? "border-[#f4f1ea]/60 text-[#f4f1ea]" : "border-white/10 text-[#7d7b75]"
+                  }`}
+                >
+                  {x}
+                </li>
+              ))}
+            </ul>
+
+            <p className="absolute font-mono text-[10.5px] uppercase tracking-[0.14em] text-faint" style={{ left: COL_D, top: yD(0) - 44 }}>
+              {titreDroite}
+            </p>
+            {droite.map((x, i) => (
+              <Puce key={x} x={COL_D} y={yD(i)} actif={temps === 2}>
+                {x}
+              </Puce>
+            ))}
           </div>
         </div>
       </div>

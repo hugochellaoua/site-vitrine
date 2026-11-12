@@ -821,6 +821,20 @@ export const footer = {
   copyright: "© 2026 Helpify",
 };
 
+export const defile = {
+  lead: "HR teams that",
+  lignes: [
+    "prequalify without screening calls.",
+    "assess every candidate beyond the CV.",
+    "never miss a talent again.",
+    "answer candidates, 24/7.",
+    "enrich their talent pool with every conversation.",
+    "apply the same criteria to everyone.",
+    "get their shortlist automatically.",
+  ],
+  cta: { label: "See the products", href: "/en/products" },
+};
+
 export const branche = {
   title: "Helpify, plugged into your company.",
   emphasis: "into your company.",

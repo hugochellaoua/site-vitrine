@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Compteur } from "@/components/compteur";
 import { dict, type Locale } from "@/lib/i18n";
 import { Reveal } from "@/components/ui/reveal";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
@@ -43,11 +44,10 @@ export function Synthesis({ locale }: { locale: Locale }) {
               </h3>
 
               <div className="mt-4 flex items-baseline gap-1">
-                <span
+                <Compteur
+                  valeur={item.value}
                   className="font-display text-[clamp(52px,5.6vw,76px)] font-light leading-none tracking-[-0.05em] text-ink"
-                >
-                  {item.value}
-                </span>
+                />
                 <span
                   className="font-display text-[28px] font-light leading-none text-ink"
                 >

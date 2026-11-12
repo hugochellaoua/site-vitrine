@@ -943,6 +943,25 @@ export const footer = {
  * illustre. Les étapes reprennent celles du process ; les blocs du schéma,
  * les sources, canaux et garde-fous déjà cités sur le site.
  */
+/**
+ * La bande qui défile : ce que font les équipes qui travaillent avec Helpify.
+ * Chaque ligne reprend une promesse déjà faite ailleurs sur le site (produits,
+ * cas d'usage, bénéfices).
+ */
+export const defile = {
+  lead: "Les équipes RH qui",
+  lignes: [
+    "préqualifient sans appels de préqualification.",
+    "évaluent chaque candidat au-delà du CV.",
+    "ne passent plus à côté d'un talent.",
+    "répondent aux candidats, 24h/24.",
+    "enrichissent leur vivier à chaque conversation.",
+    "appliquent les mêmes critères à tous.",
+    "reçoivent leur shortlist automatiquement.",
+  ],
+  cta: { label: "Voir les produits", href: "/produits" },
+};
+
 export const branche = {
   title: "Helpify branché sur votre entreprise.",
   emphasis: "sur votre entreprise.",
