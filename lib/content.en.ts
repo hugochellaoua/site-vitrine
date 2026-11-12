@@ -29,12 +29,20 @@ export const site = {
 export const nav = {
   links: [
     { label: "Products", href: "/en/products", dropdown: "products" as const },
-    { label: "Use cases", href: "/en/use-cases", dropdown: "usecases" as const },
-    { label: "The process", href: "/en#story", dropdown: "process" as const },
-    { label: "Services", href: "/en#services", dropdown: "services" as const },
+    { label: "Solutions", href: "/en/use-cases", dropdown: "usecases" as const },
+    { label: "Resources", href: "/en/methodology", dropdown: "resources" as const },
     { label: "Pricing", href: "/en#tarifs" },
-    { label: "FAQ", href: "/en#faq" },
-    { label: "Contact", href: links.contact },
+  ],
+  allProducts: { label: "See all four products", href: "/en/products" },
+  servicesLabel: "Services",
+  resources: [
+    { label: "The process", desc: "Ten steps, from your need to the shortlist", href: "/en#story" },
+    { label: "Methodology", desc: "An assessment grounded in recruitment science", href: "/en/methodology" },
+    { label: "Integrations", desc: "Helpify plugs into your stack", href: "/en#integrations" },
+    { label: "Your data", desc: "Human oversight, transparency, GDPR", href: "/en#donnees" },
+    { label: "FAQ", desc: "The questions that keep coming up", href: "/en#faq" },
+    { label: "AI notice", desc: "How Helpify uses AI, and your rights", href: links.noticeIA },
+    { label: "Contact", desc: "A question? Let's talk about your hiring", href: links.contact },
   ],
   connexion: { label: "Log in", href: links.login },
   cta: { label: "Book a demo", href: links.booking },
@@ -798,6 +806,10 @@ export const finalCta = {
 };
 
 export const footer = {
+  heads: { products: "Products", solutions: "Solutions", resources: "Resources", company: "Company", legal: "Legal" },
+  allUseCases: "All use cases",
+  address: "59 rue de Ponthieu, 75008 Paris, France",
+  email: "contact@helpify-ai.fr",
   legal: [
     { label: "Legal notice", href: links.mentionsLegales },
     { label: "Privacy", href: links.privacy },
@@ -807,6 +819,39 @@ export const footer = {
   social: { label: "Helpify on LinkedIn", href: links.linkedin },
   badges: ["GDPR compliant", "EU hosting", "European data"],
   copyright: "© 2026 Helpify",
+};
+
+export const donnees = {
+  eyebrow: "Your data",
+  title: "AI that assists, never decides.",
+  emphasis: "never decides.",
+  intro: "What the platform does with applications, and what it does not.",
+  items: [
+    {
+      title: "Human oversight",
+      body: "No hiring, rejection or final ranking decision is ever made automatically. The final decision belongs to your company.",
+    },
+    {
+      title: "Transparency for candidates",
+      body: "Candidates know they are talking to an artificial intelligence, and receive information on how it is used before the conversation starts.",
+    },
+    {
+      title: "Controlled access",
+      body: "Conversations are stored in the platform's secure space, accessible only according to the rights you define.",
+    },
+    {
+      title: "Limited retention",
+      body: "Data on candidates who were not selected is kept for up to 24 months after the last contact, unless deleted earlier.",
+    },
+    {
+      title: "GDPR rights",
+      body: "Access, rectification, erasure, restriction, objection, portability: every candidate can exercise their rights.",
+    },
+  ],
+  links: [
+    { label: "Read the AI notice", href: links.noticeIA },
+    { label: "Privacy policy", href: links.privacy },
+  ],
 };
 
 /**

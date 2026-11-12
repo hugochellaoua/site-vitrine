@@ -35,20 +35,27 @@ export const site = {
 };
 
 export const nav = {
+  // Quatre entrées seulement. Les trois premières déploient un grand panneau
+  // où chaque lien porte sa phrase (voir navbar.tsx) ; tout le reste passe par
+  // les Ressources ou le pied de page.
   links: [
-    // `dropdown` : l'entrée déploie un sous-menu au survol (voir navbar.tsx).
     { label: "Produits", href: "/produits", dropdown: "products" as const },
-    // Placé juste après les produits : on entre plus souvent par son problème
-    // que par le nom d'une brique logicielle.
-    { label: "Cas d'usage", href: "/cas-d-usage", dropdown: "usecases" as const },
-    // La méthodologie se déplie sous le process : c'est la même matière — ce
-    // qui se passe, puis comment on s'y prend — et la barre n'a plus la place
-    // d'une huitième entrée de premier niveau.
-    { label: "Le process", href: "/#story", dropdown: "process" as const },
-    { label: "Services", href: "/#services", dropdown: "services" as const },
+    // On entre plus souvent par son problème que par le nom d'une brique
+    // logicielle : les cas d'usage, présentés comme des solutions.
+    { label: "Solutions", href: "/cas-d-usage", dropdown: "usecases" as const },
+    { label: "Ressources", href: "/methodologie", dropdown: "resources" as const },
     { label: "Tarifs", href: "/#tarifs" },
-    { label: "FAQ", href: "/#faq" },
-    { label: "Contact", href: links.contact },
+  ],
+  allProducts: { label: "Voir les quatre produits", href: "/produits" },
+  servicesLabel: "Services",
+  resources: [
+    { label: "Le process", desc: "Les dix étapes, de votre besoin à la shortlist", href: "/#story" },
+    { label: "Méthodologie", desc: "Une évaluation fondée sur les sciences du recrutement", href: "/methodologie" },
+    { label: "Intégrations", desc: "Helpify se branche sur votre stack", href: "/#integrations" },
+    { label: "Vos données", desc: "Supervision humaine, transparence, RGPD", href: "/#donnees" },
+    { label: "Questions fréquentes", desc: "Les questions qui reviennent", href: "/#faq" },
+    { label: "Notice IA", desc: "Comment Helpify utilise l'IA, et vos droits", href: links.noticeIA },
+    { label: "Contact", desc: "Une question ? Parlons de vos recrutements", href: links.contact },
   ],
   connexion: { label: "Connexion", href: links.login },
   cta: { label: "Réservez une démo", href: links.booking },
@@ -910,6 +917,10 @@ export const finalCta = {
 };
 
 export const footer = {
+  heads: { products: "Produits", solutions: "Solutions", resources: "Ressources", company: "Entreprise", legal: "Légal" },
+  allUseCases: "Tous les cas d'usage",
+  address: "59 rue de Ponthieu, 75008 Paris",
+  email: "contact@helpify-ai.fr",
   legal: [
     { label: "Mentions légales", href: links.mentionsLegales },
     { label: "Confidentialité", href: links.privacy },
@@ -919,6 +930,45 @@ export const footer = {
   social: { label: "Helpify sur LinkedIn", href: links.linkedin },
   badges: ["Conforme RGPD", "Hébergement UE", "Données européennes"],
   copyright: "© 2026 Helpify",
+};
+
+/**
+ * Vos données : ce que la plateforme fait des candidatures, et ce qu'elle ne
+ * fait pas. Chaque phrase reprend un engagement écrit dans la notice IA, la
+ * politique de confidentialité ou les CGU du site : rien n'est promis ici qui
+ * n'y figure pas déjà.
+ */
+export const donnees = {
+  eyebrow: "Vos données",
+  title: "Une IA qui assiste, jamais qui décide.",
+  emphasis: "jamais qui décide.",
+  intro: "Ce que la plateforme fait des candidatures, et ce qu'elle ne fait pas.",
+  items: [
+    {
+      title: "Supervision humaine",
+      body: "Aucune décision d'embauche, de rejet ou de classement définitif n'est prise automatiquement. La décision finale appartient à votre entreprise.",
+    },
+    {
+      title: "Transparence pour le candidat",
+      body: "Le candidat sait qu'il échange avec une intelligence artificielle, et reçoit les informations sur son utilisation avant le début des échanges.",
+    },
+    {
+      title: "Accès maîtrisé",
+      body: "Les échanges sont stockés dans l'espace sécurisé de la plateforme, accessibles uniquement selon les droits que vous définissez.",
+    },
+    {
+      title: "Conservation limitée",
+      body: "Les données des candidats non retenus sont conservées jusqu'à 24 mois après le dernier contact, sauf suppression anticipée.",
+    },
+    {
+      title: "Droits RGPD",
+      body: "Accès, rectification, effacement, limitation, opposition, portabilité : chaque candidat peut exercer ses droits.",
+    },
+  ],
+  links: [
+    { label: "Lire la notice IA", href: links.noticeIA },
+    { label: "Politique de confidentialité", href: links.privacy },
+  ],
 };
 
 /**

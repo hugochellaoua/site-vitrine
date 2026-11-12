@@ -10,6 +10,7 @@ import { Synthesis } from "@/components/synthesis";
 import { UseCasesGrid } from "@/components/use-cases-grid";
 import { Experts } from "@/components/experts";
 import { DemoConversation } from "@/components/demo-conversation";
+import { Donnees } from "@/components/donnees";
 import { Services } from "@/components/services";
 import { Roi } from "@/components/roi";
 import { Pricing } from "@/components/pricing";
@@ -26,7 +27,8 @@ import type { Locale } from "@/lib/i18n";
  *    rangée des outils auxquels Helpify se branche ;
  *  — les quatre produits, un bloc chacun ;
  *  — le process en frise, puis les bénéfices qui en découlent ;
- *  — les cas d'usage, les experts qui nous entourent, la démonstration ;
+ *  — les cas d'usage, les experts qui nous entourent, la démonstration, et
+ *    ce que la plateforme fait des données ;
  *  — les services, le calcul du gain, les tarifs, la FAQ, et l'appel final
  *    sur une bande sombre.
  *
@@ -49,6 +51,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <UseCasesGrid locale={locale} />
         <Experts locale={locale} />
         <DemoConversation locale={locale} />
+        <Donnees locale={locale} />
         <Services locale={locale} />
         <Roi locale={locale} />
         <Pricing locale={locale} />

@@ -24,7 +24,7 @@ export function IntegrationsBand({ locale }: { locale: Locale }) {
   const { integrations } = dict(locale);
   const fondu = "linear-gradient(to right, transparent, #000 12%, #000 88%, transparent)";
   return (
-    <section className="relative pb-14 pt-16" aria-label={integrations.eyebrow}>
+    <section id="integrations" className="relative pb-14 pt-16" aria-label={integrations.eyebrow}>
       <p className="px-6 text-center text-[13px] text-faint">{integrations.title}</p>
       <div className="mt-7 overflow-hidden" style={{ maskImage: fondu, WebkitMaskImage: fondu }}>
         <div className="flex w-max animate-marquee hover:[animation-play-state:paused] motion-reduce:w-auto motion-reduce:animate-none motion-reduce:justify-center">
