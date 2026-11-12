@@ -141,6 +141,12 @@ export function ProductsPage({ locale }: { locale: Locale }) {
                     {product.headline}
                   </h2>
 
+                  {"tag" in product && product.tag && (
+                    <p className="mt-5 inline-flex items-center gap-2 font-display text-[15px] font-medium text-ink">
+                      <span className="h-1.5 w-1.5 bg-ink" />
+                      {product.tag}
+                    </p>
+                  )}
                   <p className="mt-5 max-w-[48ch] text-[15.5px] leading-relaxed text-muted">{product.body}</p>
 
                   <Link

@@ -5,7 +5,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 
 /**
- * Les neuf cas d'usage en grille, sur l'accueil : le nom de la situation et la
+ * Les huit cas d'usage en grille, sur l'accueil : le nom de la situation et la
  * promesse en une ligne, chacun menant à son détail sur la page des cas
  * d'usage. Le visiteur repère sa situation sans lire la page entière.
  */
@@ -19,7 +19,7 @@ export function UseCasesGrid({ locale }: { locale: Locale }) {
           <Badge>{useCases.eyebrow}</Badge>
           <SectionTitle title={useCases.title} emphasis={useCases.emphasis} className="mt-6" />
         </div>
-        <ul className="mt-14 grid grid-cols-1 border-l border-t border-hairline sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-14 grid grid-cols-1 border-l border-t border-hairline sm:grid-cols-2 lg:grid-cols-4">
           {useCases.items.map((u, i) => (
             <Reveal key={u.id} as="li" delay={(i % 3) * 0.06} className="border-b border-r border-hairline">
               <Link href={`${base}#${u.id}`} className="group flex h-full min-h-[170px] flex-col p-7 transition-colors hover:bg-chip">

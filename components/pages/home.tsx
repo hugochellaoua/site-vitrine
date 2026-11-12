@@ -5,7 +5,7 @@ import { ProductBlocks } from "@/components/product-blocks";
 import { Synthesis } from "@/components/synthesis";
 import { UseCasesGrid } from "@/components/use-cases-grid";
 import { Donnees } from "@/components/donnees";
-import { Branche } from "@/components/branche";
+import { Methode } from "@/components/methode";
 import { Defile } from "@/components/defile";
 import { Pricing } from "@/components/pricing";
 import { Faq } from "@/components/faq";
@@ -20,8 +20,9 @@ import type { Locale } from "@/lib/i18n";
  *  — le haut de page sombre, le titre, et les entreprises où exercent nos
  *    experts ;
  *  — les quatre produits en action, la bande qui défile (ce que font les
- *    équipes RH avec Helpify), puis les neuf situations ;
- *  — Helpify branché sur votre entreprise (bande noire, schéma animé) ;
+ *    équipes RH avec Helpify), puis les huit situations ;
+ *  — comment Helpify mène l'entretien, en cinq temps, et le rappel que les
+ *    quatre produits se cumulent (bande noire) ;
  *  — l'engagement sur les données (bande noire). Les experts ne sont plus
  *    qu'en haut de page, par les logos de leurs entreprises ;
  *  — les bénéfices chiffrés, les tarifs, la FAQ et l'appel final.
@@ -37,7 +38,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <Defile locale={locale} />
         <UseCasesGrid locale={locale} />
         <div className="sombre bg-void">
-          <Branche locale={locale} />
+          <Methode locale={locale} />
         </div>
         <div className="sombre bg-void">
           <Donnees locale={locale} />

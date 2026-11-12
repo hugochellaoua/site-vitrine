@@ -49,9 +49,9 @@ export const nav = {
   allProducts: { label: "Voir les quatre produits", href: "/produits" },
   servicesLabel: "Services",
   resources: [
-    { label: "Le process", desc: "Les dix étapes, de votre besoin à la shortlist", href: "/#story" },
+    { label: "Le process", desc: "Comment Helpify mène l'entretien", href: "/#story" },
     { label: "Méthodologie", desc: "Une évaluation fondée sur les sciences du recrutement", href: "/methodologie" },
-    { label: "Intégrations", desc: "Helpify se branche sur votre stack", href: "/#story" },
+    { label: "Pourquoi l'IA ?", desc: "Ce qu'elle change, et les questions qu'on nous pose", href: "/pourquoi-l-ia" },
     { label: "Vos données", desc: "Supervision humaine, transparence, RGPD", href: "/#donnees" },
     { label: "Questions fréquentes", desc: "Les questions qui reviennent", href: "/#faq" },
     { label: "Notice IA", desc: "Comment Helpify utilise l'IA, et vos droits", href: links.noticeIA },
@@ -415,11 +415,11 @@ export const methodology = {
  */
 export const useCases = {
   eyebrow: "Cas d'usage",
-  title: "Neuf situations. Dans laquelle vous reconnaissez-vous ?",
+  title: "Huit situations. Dans laquelle vous reconnaissez-vous ?",
   emphasis: "Dans laquelle vous reconnaissez-vous ?",
   intro:
     "Le recrutement ne bloque pas au même endroit selon les équipes. Partez de votre situation : voici ce qu'Helpify y change, concrètement.",
-  menuLink: "Voir les neuf cas d'usage",
+  menuLink: "Voir les huit cas d'usage",
 
   items: [
     {
@@ -451,24 +451,6 @@ export const useCases = {
       tone: "accent" as const,
     },
     {
-      id: "mieux-lire-les-candidats",
-      menu: "Mieux lire les candidats",
-      promise: "Un profil unifié et structuré",
-      problem:
-        "Les informations sont dispersées et j'ai besoin d'une lecture plus simple des profils.",
-      answer: [
-        "Helpify transforme les informations recueillies pendant la conversation en un profil unifié et structuré, basé sur les critères importants pour le poste.",
-      ],
-      benefits: [
-        "Profil candidat standardisé",
-        "Informations structurées",
-        "Lecture plus rapide",
-        "Comparaison facilitée",
-        "Mise en avant des informations pertinentes pour le poste",
-      ],
-      tone: "accent" as const,
-    },
-    {
       id: "evaluer-les-competences",
       menu: "Évaluer les compétences",
       promise: "Allez au-delà des compétences déclarées",
@@ -489,6 +471,14 @@ export const useCases = {
       answer: [
         "Le CV n'est plus la seule source d'information. Helpify ajoute une conversation avec le candidat pour aller au-delà du document.",
         "Les questions sont construites à partir des critères d'évaluation du poste et d'une méthodologie structurée de recrutement. Le candidat doit apporter des éléments concrets sur son expérience et son parcours.",
+        "Helpify transforme les informations recueillies pendant la conversation en un profil unifié et structuré, basé sur les critères importants pour le poste.",
+      ],
+      benefits: [
+        "Profil candidat standardisé",
+        "Informations structurées",
+        "Lecture plus rapide",
+        "Comparaison facilitée",
+        "Mise en avant des informations pertinentes pour le poste",
       ],
       // Une promesse d'infaillibilité serait invendable le jour où elle est
       // prise en défaut. On dit donc ce que la conversation fait vraiment.
@@ -587,39 +577,41 @@ export const products = {
   ],
   // La ligne en gras du texte source devient une suite d'étapes lisible d'un
   // coup d'œil : quatre verbes, quatre produits, dans l'ordre de la page.
-  verbs: ["Préqualifier", "Matcher", "Révéler les synergies", "Répondre aux candidats"],
+  verbs: ["Matcher", "Préqualifier", "Révéler les synergies", "Engager les candidats"],
   outro: "Une seule plateforme pour mieux comprendre vos talents et accélérer vos recrutements.",
 
   items: [
     {
-      id: "prequalification",
-      name: "Préqualification",
-      headline: "Les informations clés, sans les appels de préqualification",
-      body: "Helpify échange avec chaque candidat pour collecter automatiquement les informations essentielles à votre recrutement.",
-      visual: "chat-extract" as const,
+      id: "matching",
+      name: "Matching",
+      headline: "Identifiez mieux les profils qui correspondent réellement au besoin",
+      // La méthode, dite en un mot, au-dessus du texte : c'est un entretien.
+      tag: "Entretien structuré, fondé sur les sciences du recrutement",
+      body: "Helpify évalue chaque candidat selon vos critères, au cours d'un entretien structuré qui va chercher des preuves concrètes au-delà de ce que révèle un CV.",
+      visual: "score" as const,
       tone: "accent" as const,
     },
     {
-      id: "matching",
-      name: "Matching",
-      headline: "Identifier les profils qui correspondent réellement au besoin",
-      body: "Helpify analyse les profils selon vos critères et utilise la conversation pour aller au-delà de ce que révèle un CV.",
-      visual: "score" as const,
+      id: "prequalification",
+      name: "Préqualification",
+      headline: "Préqualifiez 100 % de vos candidats",
+      body: "Helpify échange avec chaque candidat et collecte automatiquement les informations essentielles à votre recrutement, sans un seul appel de préqualification.",
+      visual: "chat-extract" as const,
       tone: "accent" as const,
     },
     {
       id: "360-matching",
       name: "360 Matching",
-      headline: "Ne laissez plus passer un talent à cause d'une seule candidature",
-      body: "Un candidat qui ne correspond pas à un poste peut être parfaitement adapté à un autre. 360 Matching identifie ces synergies dans l'ensemble de vos offres d'emploi.",
+      headline: "Maximisez vos chances de trouver le bon candidat",
+      body: "Chaque candidat est rapproché de toutes vos offres ouvertes auxquelles il peut correspondre, pas seulement de celle à laquelle il a postulé.",
       visual: "constellation" as const,
       tone: "accent" as const,
     },
     {
       id: "talent-ask",
       name: "Talent Ask",
-      headline: "Répondez aux candidats, 24h/24",
-      body: "Talent Ask permet aux candidats de poser leurs questions sur votre entreprise, vos postes et votre environnement, directement dans leur parcours de recrutement.",
+      headline: "Engagez vos candidats et répondez à leurs questions, 24h/24",
+      body: "Le poste, l'équipe, les conditions, la suite du processus : chaque candidat obtient la clarté dont il a besoin pour se projeter, à toute heure, avant même de postuler.",
       // Seul produit tourné vers le candidat : il porte donc l'orange, comme
       // partout ailleurs sur le site.
       visual: "ask" as const,
@@ -962,19 +954,142 @@ export const defile = {
   cta: { label: "Voir les produits", href: "/produits" },
 };
 
-export const branche = {
-  title: "Helpify branché sur votre entreprise.",
-  emphasis: "sur votre entreprise.",
-  steps: ["entreprise", "reponses", "decision"],
-  cta: { label: "Nous contacter", href: links.contact },
-  blocs: {
-    sources: "Vos sources",
-    canaux: "Vos canaux",
-    centre: "Helpify",
-    echanges: "Les échanges",
-    garde: "Garde-fous",
+/**
+ * La méthode, en cinq temps : comment Helpify mène l'entretien, des critères
+ * de l'offre jusqu'à l'analyse remise aux RH. Les exemples de l'illustration
+ * (comportements observables, questions, relance) sont là pour montrer le
+ * mécanisme ; ils reprennent le poste et les réponses de Sarah K. du site.
+ */
+/**
+ * La page « Pourquoi utiliser l'IA dans le recrutement ? » : le constat, ce
+ * que Helpify change des deux côtés, puis les objections qu'on nous oppose le
+ * plus souvent. Les réponses reprennent les engagements du site (notice IA,
+ * FAQ, cas d'usage) ; les chiffres sur les 18-27 ans viennent d'une étude
+ * publiée, citée en bas de page.
+ */
+export const pourquoiIA = {
+  eyebrow: "Ressources",
+  title: "Pourquoi utiliser l'IA dans le recrutement ?",
+  emphasis: "dans le recrutement ?",
+  intro: "Ce que l'IA change pour vos candidats et pour vos recruteurs, et les questions qu'on nous pose le plus souvent.",
+  constat: {
+    titre: "Aujourd'hui, la plupart des candidats ne sont jamais écoutés.",
+    texte: [
+      "Un candidat envoie un CV et, dans 95 % des cas, n'obtient aucun retour. Il n'a pas d'espace pour expliquer qui il est, ni personne pour lui présenter le poste.",
+      "De l'autre côté, vos recruteurs n'ont pas le temps d'appeler chaque candidat. Ils lisent des mots-clés, souvent optimisés par une IA, et passent à côté de profils qu'ils n'ont jamais entendus.",
+    ],
+    chiffres: [
+      { valeur: "1er", texte: "reproche des 18-27 ans dans leurs mauvaises expériences de candidature : l'absence de réponse." },
+      { valeur: "65 %", texte: "des 18-27 ans ont déjà abandonné une candidature en cours de route." },
+    ],
   },
-  garde: ["Supervision humaine", "Transparence", "RGPD"],
+  change: {
+    titre: "Ce que Helpify change, des deux côtés.",
+    colonnes: [
+      {
+        titre: "Pour vos candidats",
+        points: [
+          "Un vrai échange autour de leur parcours, pas seulement un CV.",
+          "Des réponses à leurs questions sur le poste et l'entreprise, à toute heure.",
+          "La certitude que la décision revient à un recruteur.",
+        ],
+      },
+      {
+        titre: "Pour vos recruteurs",
+        points: [
+          "Le temps gagné revient aux entretiens et à la décision.",
+          "Chaque candidat évalué selon les mêmes critères, preuves à l'appui.",
+          "Des profils réellement écoutés, et plus seulement des mots-clés.",
+        ],
+      },
+    ],
+    chiffre: { valeur: "78 %", texte: "des 18-27 ans estiment que les recruteurs devraient utiliser le temps gagné grâce à l'IA pour préserver le contact humain." },
+  },
+  objections: {
+    titre: "Les questions qu'on nous pose.",
+    items: [
+      {
+        q: "L'IA va-t-elle décider à la place de mes recruteurs ?",
+        a: "Non. Aucune décision d'embauche, de rejet ou de classement définitif n'est prise automatiquement. Helpify prépare l'évaluation ; vos recruteurs gardent les critères, le jugement et la décision.",
+      },
+      {
+        q: "Les candidats acceptent-ils d'échanger avec une IA ?",
+        a: "Oui, quand on leur explique. 62 % des 18-27 ans trouvent acceptable qu'une IA analyse leur candidature si les critères sont clairs, et 57 % acceptent un premier échange écrit ou vocal avant un entretien. Helpify annonce qu'il est une IA, s'appuie sur les critères du poste et rappelle que la décision revient à un recruteur.",
+      },
+      {
+        q: "Comment évitez-vous les biais ?",
+        a: "Les mêmes critères pour tous, définis pour le poste. Chaque conclusion est sourcée sur les réponses du candidat, et le score est justifié critère par critère. Vous gardez la décision finale.",
+      },
+      {
+        q: "Et les CV rédigés avec l'IA ?",
+        a: "72 % des 18-27 ans utilisent ou envisagent d'utiliser l'IA pour préparer leurs candidatures. La conversation va chercher des éléments concrets : ce que le candidat a réellement fait, dans quel contexte, avec quels résultats.",
+      },
+      {
+        q: "Que deviennent les données des candidats ?",
+        a: "Elles sont conservées dans l'espace sécurisé de la plateforme, accessibles selon les droits que vous définissez, et jusqu'à 24 mois pour les candidats non retenus. Chaque candidat peut exercer ses droits RGPD.",
+      },
+      {
+        q: "Faut-il changer d'outils ?",
+        a: "Non. Helpify n'est pas un ATS : il se branche sur le vôtre, et les résultats remontent là où vos équipes travaillent déjà.",
+      },
+    ],
+  },
+  cta: { titre: "Voyez-le sur un de vos postes.", label: "Réservez une démo", href: links.booking },
+  source: "Chiffres sur les 18-27 ans : Kantar Media pour Hippolyte.ai, « La Gen Z ne postule pas. Elle choisit. », enquête menée du 10 au 22 juillet 2026 auprès de 500 jeunes de 18 à 27 ans.",
+};
+
+export const methode = {
+  title: "Comment Helpify mène l'entretien.",
+  emphasis: "mène l'entretien.",
+  etapes: [
+    {
+      titre: "Les critères du poste",
+      texte: "Helpify extrait les critères de votre offre, leur importance et les comportements observables qui permettent de les évaluer.",
+    },
+    {
+      titre: "Les questions d'entretien",
+      texte: "À partir de ces critères, Helpify construit les questions de l'entretien.",
+    },
+    {
+      titre: "Le CV du candidat",
+      texte: "Quand le candidat dépose son CV, Helpify adapte les questions à son parcours et aux critères du poste, pour comprendre ce qui les relie.",
+    },
+    {
+      titre: "Un vrai échange",
+      texte: "Les questions s'ajustent à chaque réponse pour creuser, comme le ferait un recruteur en entretien.",
+    },
+    {
+      titre: "L'analyse, critère par critère",
+      texte: "Helpify restitue son analyse selon vos critères. Vos RH décident.",
+    },
+  ],
+  cta: { label: "Réservez une démo", href: links.booking },
+  demo: {
+    offre: "Offre",
+    observable: "Comportement observable",
+    observables: [
+      "A suivi des comptes clients stratégiques",
+      "A mis en place des process et une équipe",
+      "Échange professionnel en anglais",
+      "A travaillé chez un éditeur SaaS",
+    ],
+    questions: "Questions de l'entretien",
+    exemples: [
+      "Racontez-moi comment vous avez monté un service client.",
+      "Quel client grand compte avez-vous accompagné, et comment ?",
+      "Pouvez-vous présenter un de vos projets en anglais ?",
+    ],
+    cv: "CV.pdf",
+    adaptee: "Question adaptée au CV",
+    relance: "Relance",
+    relanceTexte: "Comment avez-vous choisi les trois personnes recrutées ?",
+    analyse: "Analyse",
+    valider: "À valider par vous",
+  },
+  cumul: {
+    title: "Les quatre produits sont cumulables.",
+    texte: "Ils reposent sur le même entretien : activez-en un, ou les quatre.",
+  },
 };
 
 export const donnees = {

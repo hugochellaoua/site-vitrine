@@ -54,7 +54,7 @@ function submenus(locale: Locale): Record<"products" | "usecases" | "resources",
      */
     usecases: {
       align: "-left-40",
-      // Pas de sous-menu sur mobile : neuf intitulés y rendraient la liste
+      // Pas de sous-menu sur mobile : huit intitulés y rendraient la liste
       // interminable, alors que l'entrée mène déjà à la page qui les présente.
       mobile: false,
       items: useCases.items.map((u) => ({ label: u.menu, desc: u.promise, href: `${cas}#${u.id}` })),

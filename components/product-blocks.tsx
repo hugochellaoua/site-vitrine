@@ -45,6 +45,12 @@ export function ProductBlocks({ locale }: { locale: Locale }) {
                   <h3 className="mt-5 max-w-[22ch] text-balance font-display text-[clamp(26px,2.8vw,36px)] leading-[1.08] text-ink">
                     {product.headline}
                   </h3>
+                  {"tag" in product && product.tag && (
+                    <p className="mt-4 inline-flex items-center gap-2 font-display text-[15px] font-medium text-ink">
+                      <span className="h-1.5 w-1.5 bg-ink" />
+                      {product.tag}
+                    </p>
+                  )}
                   <p className="mt-4 max-w-[46ch] text-[15px] leading-relaxed text-muted">{product.body}</p>
                   <div className="mt-auto flex items-baseline gap-3 pt-10">
                     <span className="font-display text-[52px] font-light leading-none tracking-[-0.05em] text-ink">

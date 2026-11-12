@@ -36,9 +36,9 @@ export const nav = {
   allProducts: { label: "See all four products", href: "/en/products" },
   servicesLabel: "Services",
   resources: [
-    { label: "The process", desc: "Ten steps, from your need to the shortlist", href: "/en#story" },
+    { label: "The process", desc: "How Helpify runs the interview", href: "/en#story" },
     { label: "Methodology", desc: "An assessment grounded in recruitment science", href: "/en/methodology" },
-    { label: "Integrations", desc: "Helpify plugs into your stack", href: "/en#story" },
+    { label: "Why AI?", desc: "What it changes, and the questions we are asked", href: "/en/why-ai" },
     { label: "Your data", desc: "Human oversight, transparency, GDPR", href: "/en#donnees" },
     { label: "FAQ", desc: "The questions that keep coming up", href: "/en#faq" },
     { label: "AI notice", desc: "How Helpify uses AI, and your rights", href: links.noticeIA },
@@ -353,11 +353,11 @@ export const methodology = {
 
 export const useCases = {
   eyebrow: "Use cases",
-  title: "Nine situations. Which one is yours?",
+  title: "Eight situations. Which one is yours?",
   emphasis: "Which one is yours?",
   intro:
     "Hiring does not break down in the same place for every team. Start from your own situation: here is what Helpify changes about it, concretely.",
-  menuLink: "See the nine use cases",
+  menuLink: "See the eight use cases",
 
   items: [
     {
@@ -388,23 +388,6 @@ export const useCases = {
       tone: "accent" as const,
     },
     {
-      id: "read-candidates-better",
-      menu: "Read candidates better",
-      promise: "One unified, structured profile",
-      problem: "Information is scattered and I need a simpler way to read profiles.",
-      answer: [
-        "Helpify turns what the conversation surfaces into a unified, structured profile, built on the criteria that matter for the role.",
-      ],
-      benefits: [
-        "A standardised candidate profile",
-        "Structured information",
-        "Faster reading",
-        "Easier comparison",
-        "The information relevant to the role brought forward",
-      ],
-      tone: "accent" as const,
-    },
-    {
       id: "assess-skills",
       menu: "Assess skills",
       promise: "Go beyond claimed skills",
@@ -425,6 +408,14 @@ export const useCases = {
       answer: [
         "The CV is no longer the only source. Helpify adds a conversation with the candidate to go beyond the document.",
         "Questions are built from the assessment criteria for the role and from a structured recruitment methodology. The candidate has to bring concrete evidence about their experience and their track record.",
+        "Helpify turns what the conversation surfaces into a unified, structured profile, built on the criteria that matter for the role.",
+      ],
+      benefits: [
+        "A standardised candidate profile",
+        "Structured information",
+        "Faster reading",
+        "Easier comparison",
+        "The information relevant to the role brought forward",
       ],
       nuance:
         "The conversation does not make gaming impossible. It limits artificially polished answers and holds claims up against concrete evidence.",
@@ -506,39 +497,40 @@ export const products = {
     "Helpify turns the conversation with candidates into a genuine recruiting tool.",
     "From the first question to identifying the best profiles, our four products plug into your ATS and fit the process you already have.",
   ],
-  verbs: ["Prequalify", "Match", "Surface synergies", "Answer candidates"],
+  verbs: ["Match", "Prequalify", "Surface synergies", "Engage candidates"],
   outro: "One platform to understand your talent better and move your hiring faster.",
 
   items: [
     {
-      id: "prequalification",
-      name: "Prequalification",
-      headline: "The key information, without the prequalification calls",
-      body: "Helpify talks to every candidate to collect automatically the information your hiring depends on.",
-      visual: "chat-extract" as const,
+      id: "matching",
+      name: "Matching",
+      headline: "Better identify the profiles that genuinely fit the need",
+      tag: "Structured interview, grounded in recruitment science",
+      body: "Helpify assesses every candidate against your criteria, through a structured interview that looks for concrete evidence beyond what a CV shows.",
+      visual: "score" as const,
       tone: "accent" as const,
     },
     {
-      id: "matching",
-      name: "Matching",
-      headline: "Identify the profiles that genuinely fit the need",
-      body: "Helpify analyses profiles against your criteria and uses the conversation to go beyond what a CV shows.",
-      visual: "score" as const,
+      id: "prequalification",
+      name: "Prequalification",
+      headline: "Prequalify 100% of your candidates",
+      body: "Helpify talks to every candidate and automatically collects the information your hiring depends on, without a single screening call.",
+      visual: "chat-extract" as const,
       tone: "accent" as const,
     },
     {
       id: "360-matching",
       name: "360 Matching",
-      headline: "Stop losing a talent to a single application",
-      body: "A candidate who doesn't fit one role may be exactly right for another. 360 Matching surfaces those synergies across all your open roles.",
+      headline: "Maximise your chances of finding the right candidate",
+      body: "Every candidate is matched with all the open roles they could fit, not just the one they applied for.",
       visual: "constellation" as const,
       tone: "accent" as const,
     },
     {
       id: "talent-ask",
       name: "Talent Ask",
-      headline: "Answer candidates, around the clock",
-      body: "Talent Ask lets candidates ask their questions about your company, your roles and your environment, right inside their hiring journey.",
+      headline: "Engage your candidates and answer their questions, 24/7",
+      body: "The role, the team, the conditions, the next steps: every candidate gets the clarity they need to picture themselves in the job, at any hour, even before applying.",
       visual: "ask" as const,
       tone: "iris" as const,
     },
@@ -835,19 +827,129 @@ export const defile = {
   cta: { label: "See the products", href: "/en/products" },
 };
 
-export const branche = {
-  title: "Helpify, plugged into your company.",
-  emphasis: "into your company.",
-  steps: ["entreprise", "reponses", "decision"],
-  cta: { label: "Contact us", href: links.contact },
-  blocs: {
-    sources: "Your sources",
-    canaux: "Your channels",
-    centre: "Helpify",
-    echanges: "Conversations",
-    garde: "Safeguards",
+export const pourquoiIA = {
+  eyebrow: "Resources",
+  title: "Why use AI in recruitment?",
+  emphasis: "in recruitment?",
+  intro: "What AI changes for your candidates and your recruiters, and the questions we are asked most often.",
+  constat: {
+    titre: "Today, most candidates are never listened to.",
+    texte: [
+      "A candidate sends a CV and, in 95% of cases, hears nothing back. They have no space to explain who they are, and no one to tell them about the role.",
+      "On the other side, your recruiters don't have time to call every candidate. They read keywords, often optimised by AI, and miss profiles they never heard.",
+    ],
+    chiffres: [
+      { valeur: "No. 1", texte: "complaint of 18-27 year-olds about bad application experiences: getting no answer." },
+      { valeur: "65%", texte: "of 18-27 year-olds have already dropped an application halfway." },
+    ],
   },
-  garde: ["Human oversight", "Transparency", "GDPR"],
+  change: {
+    titre: "What Helpify changes, on both sides.",
+    colonnes: [
+      {
+        titre: "For your candidates",
+        points: [
+          "A real conversation about their background, not just a CV.",
+          "Answers to their questions about the role and the company, at any hour.",
+          "The certainty that a recruiter makes the decision.",
+        ],
+      },
+      {
+        titre: "For your recruiters",
+        points: [
+          "Time saved goes to interviews and decisions.",
+          "Every candidate assessed against the same criteria, with evidence.",
+          "Profiles that were genuinely heard, not just keywords.",
+        ],
+      },
+    ],
+    chiffre: { valeur: "78%", texte: "of 18-27 year-olds think recruiters should use the time AI saves them to preserve human contact." },
+  },
+  objections: {
+    titre: "The questions we are asked.",
+    items: [
+      {
+        q: "Will AI decide instead of my recruiters?",
+        a: "No. No hiring, rejection or final ranking decision is ever made automatically. Helpify prepares the assessment; your recruiters keep the criteria, the judgement and the decision.",
+      },
+      {
+        q: "Do candidates accept talking to an AI?",
+        a: "Yes, when it is explained. 62% of 18-27 year-olds find it acceptable for an AI to analyse their application if the criteria are clear, and 57% accept a first written or voice exchange before an interview. Helpify says it is an AI, relies on the role's criteria and reminds candidates that a recruiter decides.",
+      },
+      {
+        q: "How do you avoid bias?",
+        a: "The same criteria for everyone, defined for the role. Every conclusion is sourced from the candidate's answers, and the score is justified criterion by criterion. You keep the final decision.",
+      },
+      {
+        q: "What about CVs written with AI?",
+        a: "72% of 18-27 year-olds use or plan to use AI to prepare their applications. The conversation looks for concrete evidence: what the candidate actually did, in what context, with what results.",
+      },
+      {
+        q: "What happens to candidate data?",
+        a: "It is kept in the platform's secure space, accessible according to the rights you define, and for up to 24 months for candidates who were not selected. Every candidate can exercise their GDPR rights.",
+      },
+      {
+        q: "Do we need to change tools?",
+        a: "No. Helpify is not an ATS: it plugs into yours, and results come back where your teams already work.",
+      },
+    ],
+  },
+  cta: { titre: "See it on one of your roles.", label: "Book a demo", href: links.booking },
+  source: "Figures on 18-27 year-olds: Kantar Media for Hippolyte.ai, “La Gen Z ne postule pas. Elle choisit.”, survey of 500 people aged 18 to 27, 10–22 July 2026.",
+};
+
+export const methode = {
+  title: "How Helpify runs the interview.",
+  emphasis: "runs the interview.",
+  etapes: [
+    {
+      titre: "The role's criteria",
+      texte: "Helpify extracts the criteria from your job post, how much each one matters, and the observable behaviours that show them.",
+    },
+    {
+      titre: "The interview questions",
+      texte: "From those criteria, Helpify builds the interview questions.",
+    },
+    {
+      titre: "The candidate's CV",
+      texte: "When the candidate uploads their CV, Helpify adapts the questions to their background and to the role's criteria, to understand how they connect.",
+    },
+    {
+      titre: "A real conversation",
+      texte: "Questions adjust to every answer to dig deeper, the way a recruiter would in an interview.",
+    },
+    {
+      titre: "The analysis, criterion by criterion",
+      texte: "Helpify returns its analysis against your criteria. Your HR team decides.",
+    },
+  ],
+  cta: { label: "Book a demo", href: links.booking },
+  demo: {
+    offre: "Job post",
+    observable: "Observable behaviour",
+    observables: [
+      "Has managed strategic client accounts",
+      "Has set up processes and a team",
+      "Works professionally in English",
+      "Has worked at a SaaS company",
+    ],
+    questions: "Interview questions",
+    exemples: [
+      "Tell me about a time you built a customer service function.",
+      "Which key account did you look after, and how?",
+      "Could you walk us through one of your projects in English?",
+    ],
+    cv: "CV.pdf",
+    adaptee: "Question adapted to the CV",
+    relance: "Follow-up",
+    relanceTexte: "How did you choose the three people you hired?",
+    analyse: "Analysis",
+    valider: "For you to validate",
+  },
+  cumul: {
+    title: "The four products work together.",
+    texte: "They all rest on the same interview: turn on one, or all four.",
+  },
 };
 
 export const donnees = {

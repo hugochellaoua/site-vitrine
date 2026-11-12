@@ -13,7 +13,7 @@ import { siteUrl } from "@/lib/site";
 /**
  * Données structurées de la page.
  *
- * Une liste ordonnée des neuf cas, décrits avec les mots exacts de la page :
+ * Une liste ordonnée des huit cas, décrits avec les mots exacts de la page :
  * le problème sert de nom, la réponse de description. C'est ce que lira un
  * moteur de réponse à qui l'on demande « comment trier trop de candidatures ».
  */
@@ -78,7 +78,7 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
         </section>
 
         {/* ── Sommaire : se reconnaître en un coup d'œil ───────────────── */}
-        {/* Neuf problèmes posés côte à côte, chacun suivi de sa réponse en une
+        {/* Huit problèmes posés côte à côte, chacun suivi de sa réponse en une
             ligne. Le visiteur n'a pas à lire la page entière pour trouver sa
             situation : il la repère ici, puis y saute. */}
         <section className="relative px-6 pb-24">
@@ -109,7 +109,7 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
           </ul>
         </section>
 
-        {/* ── Les neuf cas, en détail ──────────────────────────────────── */}
+        {/* ── Les huit cas, en détail ──────────────────────────────────── */}
         {useCases.items.map((u, i) => {
           const iris = u.tone === "iris";
           return (
