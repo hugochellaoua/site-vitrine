@@ -906,3 +906,32 @@ h3.font-display {
     opacity: 0;
   }
 }
+
+/* Mode oral des films produits : les barres de la voix qui parle, et les
+   anneaux qui s'échappent de l'orbe de Helpify. */
+.voix-barre {
+  animation: voixBarre 0.9s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes voixBarre {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.voix-anneau {
+  animation: voixAnneau 1.6s ease-out infinite;
+}
+@keyframes voixAnneau {
+  from {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  to {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}

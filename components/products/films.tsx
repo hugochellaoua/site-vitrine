@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { Check, Moon, Paperclip, Send } from "lucide-react";
+import { Check, Mic, Moon, Paperclip } from "lucide-react";
+import { LogoMark } from "@/components/logo-mark";
 import { dict, type Locale } from "@/lib/i18n";
 
 /**
@@ -26,7 +27,8 @@ const W = 460;
 const H = 470;
 const BLEU = "#2f6bff";
 
-type Plan = { duree: number; etapes: number; rendu: (e: number) => ReactNode };
+/** Un plan : ses étapes, leur durée (uniforme, ou une par étape) et son dessin. */
+type Plan = { duree: number; etapes: number; temps?: number[]; rendu: (e: number) => ReactNode };
 
 /* ── Le moteur ──────────────────────────────────────────────────────── */
 
@@ -63,7 +65,7 @@ function Film({ plans, fixe }: { plans: Plan[]; fixe: number }) {
           e = 0;
         }
         if (actif) avance();
-      }, e === 0 ? 450 : p.duree / p.etapes);
+      }, e === 0 ? 450 : (p.temps?.[e - 1] ?? p.duree / p.etapes));
     };
     const io = new IntersectionObserver(
       ([x]) => {
@@ -159,29 +161,6 @@ function Entete({ titre, droite }: { titre: string; droite?: ReactNode }) {
   );
 }
 
-function Points() {
-  return (
-    <span className="flex w-max items-center gap-1 rounded-[12px] bg-[#f3f3f1] px-3 py-2.5">
-      {[0, 1, 2].map((i) => (
-        <span key={i} className="demo-dot h-1.5 w-1.5 rounded-full bg-[#9a978f]" style={{ animationDelay: `${i * 0.15}s` }} />
-      ))}
-    </span>
-  );
-}
-
-function Bulle({ helpify, children, ok }: { helpify: boolean; children: ReactNode; ok: boolean }) {
-  return (
-    <p
-      className={`max-w-[84%] rounded-[12px] px-3.5 py-2.5 text-[12.5px] leading-snug ${
-        helpify ? "rounded-bl-[3px] bg-[#121214] text-white" : "self-end rounded-br-[3px] bg-[#f3f3f1] text-[#121214]"
-      }`}
-      style={vu(ok)}
-    >
-      {children}
-    </p>
-  );
-}
-
 /**
  * Un repère annoté : une petite étiquette (point bleu, intitulé, valeur) et le
  * trait fin qui la relie à ce qu'elle désigne.
@@ -264,6 +243,111 @@ function Statut({ titre, sous, badges, e }: { titre: string; sous: string; badge
   );
 }
 
+/* ── Le mode oral ────────────────────────────────────────────────────── */
+
+/** Les barres d'une voix qui parle ; immobiles et basses quand elle se tait. */
+function Onde({ parle, clair = false }: { parle: boolean; clair?: boolean }) {
+  return (
+    <span className="flex h-5 items-center gap-[3px]">
+      {[0.55, 0.9, 0.7, 1, 0.6, 0.85, 0.5].map((h, i) => (
+        <span
+          key={i}
+          className={`block w-[3px] rounded-full ${parle ? "voix-barre" : ""} ${clair ? "bg-white" : "bg-[#121214]"}`}
+          style={{ height: `${h * 100}%`, animationDelay: `${i * 0.11}s`, transform: parle ? undefined : "scaleY(0.25)" }}
+        />
+      ))}
+    </span>
+  );
+}
+
+/** L'orbe de Helpify, comme en mode vocal : des anneaux s'en échappent quand il parle. */
+function Orbe({ parle, taille = 64 }: { parle: boolean; taille?: number }) {
+  return (
+    <span className="relative grid shrink-0 place-items-center" style={{ width: taille, height: taille }}>
+      {parle && (
+        <>
+          <span className="absolute -inset-2 rounded-full bg-[#121214]/10" />
+          <span className="voix-anneau absolute inset-0 rounded-full border-2 border-[#121214]" />
+          <span className="voix-anneau absolute inset-0 rounded-full border-2 border-[#121214]" style={{ animationDelay: "0.8s" }} />
+        </>
+      )}
+      <span className="relative grid h-full w-full place-items-center rounded-full bg-[#121214] text-white">
+        {parle ? <Onde parle clair /> : <LogoMark size={taille * 0.42} />}
+      </span>
+    </span>
+  );
+}
+
+/** Une transcription qui s'écrit mot à mot pendant que la personne parle. */
+function Transcription({ texte, enCours }: { texte: string; enCours: boolean }) {
+  const mots = texte.split(" ");
+  const [n, setN] = useState(enCours ? 0 : mots.length);
+  useEffect(() => {
+    if (!enCours) return;
+    const t = window.setInterval(() => setN((x) => (x >= mots.length ? x : x + 1)), 150);
+    return () => window.clearInterval(t);
+  }, [enCours, mots.length]);
+  return (
+    <>
+      {mots.slice(0, n).join(" ")}
+      {enCours && n < mots.length && <span className="ml-0.5 inline-block h-[1em] w-[2px] translate-y-[2px] animate-pulse bg-current" />}
+    </>
+  );
+}
+
+type Tour = { qui: "helpify" | "candidat"; texte: string };
+
+/**
+ * Un appel en cours : en haut, qui parle (l'orbe de Helpify ou le candidat,
+ * avec l'onde de sa voix) ; dessous, la transcription qui s'écrit.
+ * `tours` sont les répliques déjà commencées ; la dernière est en cours tant
+ * que `fini` est faux.
+ */
+function Appel({ titre, heure, tours, fini, nom, mots, nuit = false }: { titre: string; heure: string; tours: Tour[]; fini: boolean; nom: string; mots: { parle: string; direct: string }; nuit?: boolean }) {
+  const enCours = tours.length > 0 && !fini ? tours[tours.length - 1] : null;
+  const helpifyParle = enCours?.qui === "helpify";
+  const candidatParle = enCours?.qui === "candidat";
+  return (
+    <Carte x={20} y={40} w={420}>
+      <Entete
+        titre={titre}
+        droite={
+          <span className="flex items-center gap-1.5 tabular-nums">
+            {nuit && <Moon size={12} />}
+            <span className="h-1.5 w-1.5 rounded-full bg-[#e5484d]" />
+            {mots.direct} · {heure}
+          </span>
+        }
+      />
+      <div className="flex items-center justify-around border-b border-[#f0f0ee] px-6 py-6">
+        <span className="flex flex-col items-center gap-2.5">
+          <Orbe parle={helpifyParle} />
+          <span className="text-[11px] text-[#8b887f]">{helpifyParle ? `Helpify ${mots.parle}` : "Helpify"}</span>
+        </span>
+        <span className="flex flex-col items-center gap-2.5">
+          <span className={`grid h-16 w-16 place-items-center rounded-full border transition-colors duration-300 ${candidatParle ? "border-[#121214]" : "border-[#e4e4e0]"}`}>
+            {candidatParle ? <Onde parle /> : <span className="text-[13px] font-medium text-[#121214]">SK</span>}
+          </span>
+          <span className="text-[11px] text-[#8b887f]">{candidatParle ? `${nom} ${mots.parle}` : nom}</span>
+        </span>
+      </div>
+      <div className="flex min-h-[150px] flex-col gap-2.5 p-4">
+        {tours.map((t, i) => {
+          const actif = enCours !== null && i === tours.length - 1;
+          return (
+            <p key={i} className="text-[12.5px] leading-snug" style={vu(true)}>
+              <span className="mr-1.5 font-mono text-[10px] uppercase tracking-[0.06em] text-[#8b887f]">{t.qui === "helpify" ? "Helpify" : nom}</span>
+              <span className={t.qui === "helpify" ? "text-[#57554f]" : "text-[#121214]"}>
+                <Transcription key={`${i}-${actif}`} texte={t.texte} enCours={actif} />
+              </span>
+            </p>
+          );
+        })}
+      </div>
+    </Carte>
+  );
+}
+
 const MOTS = {
   fr: {
     nouvelle: "Nouvelle candidature",
@@ -285,6 +369,13 @@ const MOTS = {
     repondu: "Répondu",
     h24: "24h/24",
     passages: ["écrit les process, recruté trois personnes", "suivi de satisfaction"],
+    appel: "Appel",
+    parle: "parle…",
+    direct: "En direct",
+    parler: "Parler à Helpify",
+    profil: "Ce que Sarah apporte",
+    criteresSarah: ["Relation client grands comptes", "Structuration d'un service", "Anglais courant", "Expérience SaaS", "Fidélisation"],
+    nbCriteres: "critères",
   },
   en: {
     nouvelle: "New application",
@@ -306,6 +397,13 @@ const MOTS = {
     repondu: "Answered",
     h24: "24/7",
     passages: ["wrote the processes, hired three people", "satisfaction tracking"],
+    appel: "Call",
+    parle: "is speaking…",
+    direct: "Live",
+    parler: "Talk to Helpify",
+    profil: "What Sarah brings",
+    criteresSarah: ["Enterprise client relationships", "Building a function from scratch", "Fluent English", "SaaS experience", "Retention"],
+    nbCriteres: "criteria",
   },
 } as const;
 
@@ -396,20 +494,22 @@ export function PrequalFilm({ locale }: { locale: Locale }) {
       ),
     },
     {
-      duree: 5200,
-      etapes: 5,
-      rendu: (e) => (
-        <>
-          <Carte x={20} y={60} w={420} h={250}>
-            <Entete titre={m.conversation} droite={<span className="tabular-nums">{heure}</span>} />
-            <div className="flex flex-col gap-2.5 p-4">
-              {e === 1 ? <Points /> : <Bulle helpify ok={e >= 2}>{q.text}</Bulle>}
-              {e === 3 ? <span className="self-end"><Points /></span> : <Bulle helpify={false} ok={e >= 4}>{r.text}</Bulle>}
-            </div>
-          </Carte>
-          <Repere x={300} y={400} vers={[392, 172]} titre={prequal.extracted[0]} valeur={r.text} ok={e >= 5} />
-        </>
-      ),
+      // L'appel : Helpify pose sa question, le candidat répond de vive voix, et
+      // la transcription s'écrit en direct ; puis un repère la relie à la fiche.
+      duree: 0,
+      etapes: 4,
+      temps: [2000, 1500, 900, 2400],
+      rendu: (e) => {
+        const tours: Tour[] = [];
+        if (e >= 1) tours.push({ qui: "helpify", texte: q.text });
+        if (e >= 2) tours.push({ qui: "candidat", texte: r.text });
+        return (
+          <>
+            <Appel titre={`${m.appel} · ${role}`} heure={heure} nom={nom} mots={m} tours={tours} fini={e >= 3} />
+            <Repere x={320} y={425} vers={[250, 270]} titre={prequal.extracted[0]} valeur={r.text} ok={e >= 4} />
+          </>
+        );
+      },
     },
     {
       duree: 3600,
@@ -470,18 +570,25 @@ export function MatchingFilm({ locale }: { locale: Locale }) {
       ),
     },
     {
-      duree: 4800,
-      etapes: 3,
+      // Sarah répond de vive voix ; une fois sa réponse transcrite, les
+      // passages qui prouvent un critère se surlignent et s'y relient.
+      duree: 0,
+      etapes: 4,
+      temps: [3600, 1400, 1400, 1800],
       rendu: (e) => (
         <>
-          <Carte x={20} y={70} w={420}>
-            <Entete titre={`${m.reponse} · ${score.candidate}`} />
+          <Carte x={20} y={60} w={420}>
+            <Entete titre={`${m.reponse} · ${score.candidate}`} droite={<Onde parle={e === 1} />} />
             <p className="p-4 text-[14px] leading-relaxed text-[#121214]">
-              <Surligne texte={reponse} passages={m.passages} actifs={e} />
+              {e <= 1 ? (
+                <Transcription key={`m-${e}`} texte={reponse} enCours={e === 1} />
+              ) : (
+                <Surligne texte={reponse} passages={m.passages} actifs={e - 1} />
+              )}
             </p>
           </Carte>
-          <Repere x={130} y={320} vers={[120, 150]} titre={m.evalue} valeur={criteres[1]?.label} ok={e >= 1} />
-          <Repere x={290} y={385} vers={[300, 176]} titre={m.evalue} valeur={criteres[0]?.label} ok={e >= 2} />
+          <Repere x={130} y={320} vers={[120, 142]} titre={m.evalue} valeur={criteres[1]?.label} ok={e >= 2} />
+          <Repere x={290} y={385} vers={[300, 168]} titre={m.evalue} valeur={criteres[0]?.label} ok={e >= 3} />
         </>
       ),
     },
@@ -522,77 +629,129 @@ export function MatchingFilm({ locale }: { locale: Locale }) {
   return <Film plans={plans} fixe={2} />;
 }
 
+/** Quels critères de Sarah servent quelles offres (indices dans les offres). */
+const LIENS = [
+  [0, 4, 3],
+  [1, 2],
+  [0, 3],
+  [3, 0, 1],
+  [4, 1],
+];
+
 export function SynergiesFilm({ locale }: { locale: Locale }) {
   const { d } = usePoste(locale);
   const m = MOTS[locale];
   const { synergies } = d.products.demo;
-  const [premier, ...autres] = synergies.roles;
-  const CX = W / 2;
-  const CY = 250;
-  const points = autres.map((_, i) => {
-    const a = (i / autres.length) * Math.PI * 2 - Math.PI / 2;
-    return { x: CX + Math.cos(a) * 132, y: CY + Math.sin(a) * 150 };
-  });
+  const offres = synergies.roles.slice(1, 6);
+  const criteres = m.criteresSarah;
+  const y = (i: number) => 112 + i * 64;
+  const XG = 222;
+  const XD = 258;
   const plans: Plan[] = [
     {
-      duree: 2400,
-      etapes: 2,
-      rendu: (e) => (
-        <Carte x={50} y={200} w={360} style={vu(e >= 1)}>
-          <div className="flex items-center gap-3 p-4">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-[#121214] text-[12px] font-medium text-white">SK</span>
-            <span className="flex-1">
-              <span className="block text-[14px] font-medium text-[#121214]">{synergies.center}</span>
-              <span className="block text-[11.5px] text-[#8b887f]">{premier}</span>
-            </span>
-            <Pastille ok={e >= 2}>{m.vivier.split(" · ")[0]}</Pastille>
-          </div>
-        </Carte>
-      ),
-    },
-    {
-      duree: 5200,
-      etapes: autres.length,
-      rendu: (e) => (
-        <>
-          <svg className="absolute inset-0" width={W} height={H}>
-            {points.map((p, i) => {
-              const L = Math.hypot(p.x - CX, p.y - CY);
-              return (
-                <line key={i} x1={CX} y1={CY} x2={p.x} y2={p.y} stroke={BLEU} strokeOpacity={0.5} strokeWidth="1" strokeDasharray={L} strokeDashoffset={e >= i + 1 ? 0 : L} style={{ transition: "stroke-dashoffset .6s ease-out" }} />
-              );
-            })}
-          </svg>
-          {points.map((p, i) => (
+      // Sarah, ses critères à gauche, les autres offres à droite ; un à un,
+      // chaque critère se relie aux offres où il compte.
+      duree: 0,
+      etapes: criteres.length + 1,
+      temps: [900, 1000, 1000, 1000, 1000, 2600],
+      rendu: (e) => {
+        const relies = LIENS.slice(0, Math.max(0, e - 1));
+        const compte = offres.map((_, k) => relies.filter((l) => l.includes(k)).length);
+        return (
+          <>
+            <p className="absolute font-mono text-[10px] uppercase tracking-[0.06em] text-[#8b887f]" style={{ left: 14, top: 62 }}>
+              {m.profil}
+            </p>
+            <p className="absolute font-mono text-[10px] uppercase tracking-[0.06em] text-[#8b887f]" style={{ left: XD, top: 62 }}>
+              {m.vivier}
+            </p>
+            <svg className="absolute inset-0" width={W} height={H}>
+              {LIENS.map((liens, i) =>
+                liens.map((k) => {
+                  const d = `M${XG} ${y(i)} C${(XG + XD) / 2} ${y(i)} ${(XG + XD) / 2} ${y(k)} ${XD} ${y(k)}`;
+                  const actif = e >= i + 2;
+                  const courant = e === i + 2;
+                  return (
+                    <path
+                      key={`${i}-${k}`}
+                      d={d}
+                      fill="none"
+                      stroke={BLEU}
+                      strokeOpacity={courant ? 0.9 : 0.35}
+                      strokeWidth={courant ? 1.5 : 1}
+                      pathLength={1}
+                      strokeDasharray={1}
+                      strokeDashoffset={actif ? 0 : 1}
+                      style={{ transition: "stroke-dashoffset .7s ease-out, stroke-opacity .5s" }}
+                    />
+                  );
+                }),
+              )}
+            </svg>
+            {criteres.map((c, i) => (
+              <span
+                key={c}
+                className="absolute flex items-center rounded-[8px] border bg-white px-3 text-[11.5px] transition-colors duration-500"
+                style={{
+                  left: 14,
+                  top: y(i) - 18,
+                  width: XG - 14,
+                  height: 36,
+                  borderColor: e === i + 2 ? BLEU : "#ececea",
+                  color: "#121214",
+                  ...vu(e >= 1),
+                }}
+              >
+                <span className="truncate">{c}</span>
+              </span>
+            ))}
+            {offres.map((o, k) => (
+              <span
+                key={o}
+                className="absolute flex items-center justify-between gap-2 rounded-[8px] border bg-white px-3 text-[11.5px] transition-all duration-500"
+                style={{
+                  left: XD,
+                  top: y(k) - 18,
+                  width: W - XD - 14,
+                  height: 36,
+                  borderColor: compte[k] > 0 ? "rgba(47,107,255,0.45)" : "#ececea",
+                  color: compte[k] > 0 ? "#121214" : "#b3b0a8",
+                  boxShadow: compte[k] > 0 ? "0 10px 24px -16px rgba(47,107,255,0.7)" : "none",
+                }}
+              >
+                <span className="truncate">{o}</span>
+                {compte[k] > 0 && (
+                  <span className="shrink-0 rounded-full px-1.5 py-0.5 text-[10px] font-medium text-white" style={{ background: BLEU }}>
+                    {compte[k]}
+                  </span>
+                )}
+              </span>
+            ))}
             <span
-              key={autres[i]}
-              className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-[8px] border bg-white px-3 py-2 text-[12px] transition-all duration-500"
-              style={{
-                left: p.x,
-                top: p.y,
-                borderColor: e >= i + 1 ? "rgba(47,107,255,0.4)" : "#ececea",
-                color: e >= i + 1 ? "#121214" : "#b3b0a8",
-                boxShadow: e >= i + 1 ? "0 10px 24px -14px rgba(47,107,255,0.6)" : "none",
-              }}
+              className="absolute flex items-center gap-2 text-[12.5px] font-medium text-[#121214]"
+              style={{ left: 14, top: 20, ...vu(e >= 1) }}
             >
-              {autres[i]}
+              <span className="grid h-7 w-7 place-items-center rounded-full bg-[#121214] text-[10px] text-white">SK</span>
+              {synergies.center}
             </span>
-          ))}
-          <span className="absolute grid h-[78px] w-[78px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[#121214] text-[12.5px] font-medium text-white shadow-[0_0_0_10px_rgba(18,18,20,0.06)]" style={{ left: CX, top: CY }}>
-            {synergies.center}
-          </span>
-        </>
-      ),
+          </>
+        );
+      },
     },
     {
       duree: 3200,
       etapes: 2,
       rendu: (e) => (
-        <Statut titre={`${synergies.center} · ${autres.length} ${m.offres}`} sous={autres.slice(0, 3).join(" · ")} badges={[m.rapproche, m.valider]} e={e} />
+        <Statut
+          titre={`${synergies.center} · ${offres.length} ${m.offres}`}
+          sous={`${criteres.length} ${m.nbCriteres} · ${offres.slice(0, 2).join(" · ")}…`}
+          badges={[m.rapproche, m.valider]}
+          e={e}
+        />
       ),
     },
   ];
-  return <Film plans={plans} fixe={1} />;
+  return <Film plans={plans} fixe={0} />;
 }
 
 export function AskFilm({ locale }: { locale: Locale }) {
@@ -600,64 +759,49 @@ export function AskFilm({ locale }: { locale: Locale }) {
   const m = MOTS[locale];
   const { ask } = d.products.demo;
   const [q1, r1, q2, r2] = ask.messages;
+  const nom = d.products.demo.score.candidate;
+  const tours = (e: number, q: string, r: string): Tour[] => [
+    ...(e >= 1 ? [{ qui: "candidat" as const, texte: q }] : []),
+    ...(e >= 2 ? [{ qui: "helpify" as const, texte: r }] : []),
+  ];
   const plans: Plan[] = [
     {
-      duree: 3000,
-      etapes: 3,
+      // Sur l'offre, le candidat appuie pour parler à Helpify.
+      duree: 2600,
+      etapes: 2,
       rendu: (e) => (
-        <Carte x={20} y={90} w={420}>
+        <Carte x={20} y={80} w={420}>
           <div className="p-5">
             <p className="text-[11px] text-[#8b887f]">{roleLabel}</p>
             <p className="mt-1 text-[18px] font-medium tracking-[-0.02em] text-[#121214]">{role}</p>
             <div className="mt-4">
               <Squelette lignes={4} largeurs={[96, 88, 92, 54]} />
             </div>
-            <div className="mt-6 flex items-center gap-2 rounded-[8px] border border-[#e4e4e0] px-3 py-2.5">
-              <span className="flex-1 truncate text-[12.5px]" style={{ color: e >= 2 ? "#121214" : "#a9a69e" }}>
-                {e >= 2 ? q1.text : m.question}
-              </span>
-              <span className="grid h-7 w-7 place-items-center rounded-full bg-[#121214] text-white" style={{ transform: e >= 3 ? "scale(0.9)" : "scale(1)", transition: "transform .2s" }}>
-                <Send size={13} />
-              </span>
-            </div>
+            <span
+              className="mt-6 flex items-center justify-center gap-2 rounded-[8px] px-4 py-3 text-[13px] font-medium text-white transition-transform duration-200"
+              style={{ background: "#121214", transform: e >= 2 ? "scale(0.97)" : "scale(1)" }}
+            >
+              <Mic size={15} />
+              {m.parler}
+            </span>
           </div>
         </Carte>
       ),
     },
     {
-      duree: 3600,
+      duree: 0,
       etapes: 3,
-      rendu: (e) => (
-        <Carte x={20} y={90} w={420} h={260}>
-          <Entete titre={`Talent Ask · ${role}`} droite={<span className="tabular-nums">{ask.hours[0]}</span>} />
-          <div className="flex flex-col gap-2.5 p-4">
-            <Bulle helpify={false} ok>{q1.text}</Bulle>
-            {e === 1 ? <Points /> : <Bulle helpify ok={e >= 2}>{r1.text}</Bulle>}
-          </div>
-        </Carte>
-      ),
+      temps: [1800, 2600, 1400],
+      rendu: (e) => <Appel titre={`Talent Ask · ${role}`} heure={ask.hours[0]} nom={nom} mots={m} tours={tours(e, q1.text, r1.text)} fini={e >= 3} />,
     },
     {
-      duree: 4000,
+      duree: 0,
       etapes: 4,
+      temps: [1800, 2400, 900, 2200],
       rendu: (e) => (
         <>
-          <Carte x={20} y={90} w={420} h={260}>
-            <Entete
-              titre={`Talent Ask · ${role}`}
-              droite={
-                <span className="flex items-center gap-1.5 tabular-nums">
-                  <Moon size={12} />
-                  {ask.hours[2]}
-                </span>
-              }
-            />
-            <div className="flex flex-col gap-2.5 p-4">
-              <Bulle helpify={false} ok={e >= 1}>{q2.text}</Bulle>
-              {e === 2 ? <Points /> : <Bulle helpify ok={e >= 3}>{r2.text}</Bulle>}
-            </div>
-          </Carte>
-          <Repere x={330} y={395} vers={[400, 108]} titre={m.nuit} valeur={ask.hours[2]} ok={e >= 4} />
+          <Appel titre={`Talent Ask · ${role}`} heure={ask.hours[2]} nom={nom} mots={m} tours={tours(e, q2.text, r2.text)} fini={e >= 3} nuit />
+          <Repere x={330} y={420} vers={[392, 58]} titre={m.nuit} valeur={ask.hours[2]} ok={e >= 4} />
         </>
       ),
     },
@@ -665,7 +809,7 @@ export function AskFilm({ locale }: { locale: Locale }) {
       duree: 3200,
       etapes: ask.hours.length,
       rendu: (e) => (
-        <Carte x={40} y={130} w={380}>
+        <Carte x={40} y={110} w={380}>
           <Entete titre={`Talent Ask · ${role}`} droite={<span>{m.h24}</span>} />
           <ul className="flex flex-col gap-2 p-4">
             {ask.hours.map((h, i) => (
@@ -682,7 +826,7 @@ export function AskFilm({ locale }: { locale: Locale }) {
       ),
     },
   ];
-  return <Film plans={plans} fixe={2} />;
+  return <Film plans={plans} fixe={1} />;
 }
 
 const FILMS = {
