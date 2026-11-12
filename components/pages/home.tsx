@@ -45,13 +45,17 @@ export function HomePage({ locale }: { locale: Locale }) {
         <HeroApercu locale={locale} />
         <IntegrationsBand locale={locale} />
         <ProductBlocks locale={locale} />
-        <ProcessIntro locale={locale} />
-        <ProcessTimeline locale={locale} />
+        <div className="sombre bg-void">
+          <ProcessIntro locale={locale} />
+          <ProcessTimeline locale={locale} />
+        </div>
         <Synthesis locale={locale} />
         <UseCasesGrid locale={locale} />
         <Experts locale={locale} />
         <DemoConversation locale={locale} />
-        <Donnees locale={locale} />
+        <div className="sombre bg-void">
+          <Donnees locale={locale} />
+        </div>
         <Services locale={locale} />
         <Roi locale={locale} />
         <Pricing locale={locale} />

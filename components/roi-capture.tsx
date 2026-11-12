@@ -69,7 +69,7 @@ export function RoiCapture({ recap }: { recap: string }) {
           <button
             type="submit"
             disabled={status === "sending"}
-            className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-accent px-5 py-3 text-[14px] font-semibold text-white transition-opacity disabled:cursor-wait disabled:opacity-70"
+            className="group inline-flex shrink-0 items-center gap-2 rounded-[4px] bg-accent px-5 py-3 text-[14px] font-semibold text-white transition-opacity disabled:cursor-wait disabled:opacity-70"
           >
             {status === "sending" ? roi.capture.sending : roi.capture.submit}
             {status !== "sending" && (

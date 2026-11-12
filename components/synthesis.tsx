@@ -11,18 +11,6 @@ import { Badge, SectionTitle } from "@/components/ui/section-title";
  * en petit juste après. Le chiffre porte l'argument ; le texte ne fait que le
  * nommer. C'est ce qui distingue une preuve d'un paragraphe.
  */
-/**
- * Une teinte par chiffre, dans l'ordre des trois voix du site : le produit, le
- * candidat, la méthode — ces deux dernières partageant le violet, et l’orange pour le vivier. Des cartes identiques ne se distingueraient que par
- * leur contenu ; ainsi, on retient aussi laquelle parle de quoi.
- */
-const TEINTES = [
-  { arete: "", chiffre: "text-accent-light", unite: "text-accent-light/70" },
-  { arete: "lit-card--iris", chiffre: "text-iris", unite: "text-iris/70" },
-  { arete: "lit-card--iris", chiffre: "text-iris", unite: "text-iris/70" },
-  // Le vivier : ce que chaque candidat laisse derrière lui, donc l'orange, sa voix.
-  { arete: "lit-card--warm", chiffre: "text-warm", unite: "text-warm/70" },
-] as const;
 
 export function Synthesis({ locale }: { locale: Locale }) {
   const { synthesis } = dict(locale);
@@ -37,26 +25,25 @@ export function Synthesis({ locale }: { locale: Locale }) {
 
         <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {synthesis.items.map((item, i) => {
-            const teinte = TEINTES[i % TEINTES.length];
             return (
             <Reveal
               key={item.n}
               delay={i * 0.12}
               y={26}
-              className={`lit-card px-7 py-8 ${teinte.arete}`}
+              className="border-t border-hairline pb-4 pt-6"
             >
-              <h3 className="font-display text-[19px] font-bold tracking-[-0.01em] text-ink">
+              <h3 className="font-mono text-[11.5px] uppercase tracking-[0.08em] text-faint">
                 <MotCandidat texte={item.title} />
               </h3>
 
               <div className="mt-4 flex items-baseline gap-1">
                 <span
-                  className={`font-display text-[clamp(44px,5vw,64px)] font-bold leading-none tracking-[-0.04em] ${teinte.chiffre}`}
+                  className="font-display text-[clamp(52px,5.6vw,76px)] font-light leading-none tracking-[-0.05em] text-ink"
                 >
                   {item.value}
                 </span>
                 <span
-                  className={`font-display text-[22px] font-bold leading-none ${teinte.unite}`}
+                  className="font-display text-[28px] font-light leading-none text-ink"
                 >
                   {item.unit}
                 </span>

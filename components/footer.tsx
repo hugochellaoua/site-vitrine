@@ -12,7 +12,7 @@ import { CookieSettingsButton } from "@/components/cookie-consent";
 function Colonne({ titre, liens }: { titre: string; liens: { label: string; href: string; externe?: boolean }[] }) {
   return (
     <div>
-      <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-ink">{titre}</p>
+      <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-faint">{titre}</p>
       <ul className="mt-4 flex flex-col gap-2.5">
         {liens.map((l) => (
           <li key={l.href + l.label}>
@@ -38,7 +38,7 @@ export function Footer({ locale }: { locale: Locale }) {
   const cas = locale === "fr" ? "/cas-d-usage" : "/en/use-cases";
   const accueil = locale === "fr" ? "/" : "/en";
   return (
-    <footer className="sombre relative border-t border-hairline bg-void px-6 pb-28 pt-16 lg:pb-12">
+    <footer className="relative border-t border-hairline bg-chip px-6 pb-28 pt-16 lg:pb-12">
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-[1.3fr_repeat(4,1fr)] lg:gap-8">
           <div className="col-span-2 lg:col-span-1">

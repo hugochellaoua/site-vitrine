@@ -20,7 +20,7 @@ export function SectionTitle({
   as?: "h1" | "h2";
 }) {
   const base =
-    "mx-auto max-w-[20ch] text-balance font-display text-[clamp(26px,3.7vw,44px)] font-bold leading-[1.06] tracking-[-0.03em] text-ink";
+    "mx-auto max-w-[24ch] text-balance font-display text-[clamp(30px,4.2vw,52px)] font-normal leading-[1.04] tracking-[-0.04em] text-ink";
 
   if (!emphasis || !title.endsWith(emphasis)) {
     return <Tag className={`${base} ${className}`}>{title}</Tag>;
@@ -30,7 +30,7 @@ export function SectionTitle({
   return (
     <Tag className={`${base} ${className}`}>
       {lead}
-      <span className="text-warm">{emphasis}</span>
+      <span className="text-faint">{emphasis}</span>
     </Tag>
   );
 }
@@ -68,15 +68,12 @@ export function Badge({
   children: ReactNode;
   tone?: keyof typeof TEINTES_BADGE;
 }) {
+  // La teinte ne colore plus que le petit carré : l'étiquette reste sobre.
   const t = TEINTES_BADGE[tone];
   return (
-    <span
-      className={`inline-flex items-center gap-2.5 rounded-full border px-4 py-2 text-[10.5px] font-semibold uppercase tracking-[0.16em] backdrop-blur-sm ${t.cadre}`}
-    >
-      <span
-        className={`h-1.5 w-1.5 shrink-0 rounded-full ${t.point}`}
-        style={{ boxShadow: `0 0 10px 1px ${t.halo}` }}
-      />
+    // Une étiquette en chasse fixe, sans pastille : un petit carré, puis le mot.
+    <span className="inline-flex items-center gap-2 font-mono text-[11.5px] font-medium uppercase tracking-[0.08em] text-faint">
+      <span className={`h-1.5 w-1.5 shrink-0 ${t.point}`} />
       {children}
     </span>
   );

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { DM_Mono, DM_Sans } from "next/font/google";
 import { site } from "@/lib/content";
 import { siteUrl } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/next";
@@ -23,6 +23,9 @@ const dmSans = DM_Sans({
   // ne pas laisser le navigateur pencher les lettres lui-même.
   style: ["normal", "italic"],
 });
+
+/** Les petites étiquettes (numéros d'étape, noms de produit) : une chasse fixe. */
+const dmMono = DM_Mono({ variable: "--font-mono-brand", subsets: ["latin"], weight: ["400", "500"] });
 
 export const metadata: Metadata = {
   // Indispensable : sans elle, les URL de partage et les liens canoniques
@@ -55,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${dmSans.variable} h-full antialiased`}>
+    <html lang="fr" className={`${dmSans.variable} ${dmMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-void text-ink">
         {children}
         {/* Mesure d'audience sans cookie. Si l'outil change, la section 11 de la

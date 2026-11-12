@@ -82,7 +82,7 @@ export function Integrations({ locale }: { locale: Locale }) {
             {[...integrations.logos, ...integrations.logos].map((name, i) => (
               <span
                 key={`${name}-${i}`}
-                className="whitespace-nowrap rounded-full border border-hairline bg-panel/30 px-5 py-2.5 font-display text-[14px] text-muted transition-colors duration-300 hover:border-hairline-strong hover:text-ink"
+                className="whitespace-nowrap rounded-[4px] border border-hairline bg-panel/30 px-5 py-2.5 font-display text-[14px] text-muted transition-colors duration-300 hover:border-hairline-strong hover:text-ink"
               >
                 {name}
               </span>

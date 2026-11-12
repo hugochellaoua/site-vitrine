@@ -126,7 +126,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-accent px-8 py-4 text-[15px] font-semibold text-white shadow-[0_20px_60px_-16px_rgba(29,80,254,0.85)] transition-[box-shadow,opacity] duration-300 hover:shadow-[0_28px_74px_-14px_rgba(29,80,254,1)] disabled:cursor-wait disabled:opacity-70"
+          className="group inline-flex items-center justify-center gap-2.5 rounded-[4px] bg-accent px-8 py-4 text-[15px] font-semibold text-white shadow-[0_20px_60px_-16px_rgba(29,80,254,0.85)] transition-[box-shadow,opacity] duration-300 hover:shadow-[0_28px_74px_-14px_rgba(29,80,254,1)] disabled:cursor-wait disabled:opacity-70"
         >
           {status === "sending" ? contact.sending : contact.submit}
           {status !== "sending" && (

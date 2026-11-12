@@ -221,7 +221,7 @@ export function Navbar({ locale }: { locale: Locale }) {
     <header className="navbar-enter fixed inset-x-0 top-4 z-50 flex justify-center px-4 sm:top-6">
       <nav
         className={cn(
-          "glass-panel flex w-full max-w-[1120px] items-center justify-between gap-4 rounded-full transition-[padding,background-color,box-shadow] duration-300 ease-out",
+          "glass-panel flex w-full max-w-[1180px] items-center justify-between gap-4 rounded-[6px] transition-[padding,background-color,box-shadow] duration-300 ease-out",
           // Au scroll, la barre bascule sur un fond quasi opaque : voir
           // `.glass-panel--solid` dans globals.css.
           scrolled ? "glass-panel--solid px-3 py-2" : "px-4 py-2.5",
@@ -267,7 +267,7 @@ export function Navbar({ locale }: { locale: Locale }) {
           <Magnetic radius={80} strength={0.24}>
             <Link
               href={nav.cta.href}
-              className="inline-block whitespace-nowrap rounded-full bg-accent px-5 py-2.5 text-[13.5px] font-semibold text-white shadow-[0_10px_30px_-10px_rgba(29,80,254,0.75)] transition-shadow duration-300 hover:shadow-[0_14px_36px_-8px_rgba(29,80,254,0.9)]"
+              className="inline-block whitespace-nowrap rounded-[4px] bg-accent px-5 py-2.5 text-[13.5px] font-semibold text-white shadow-[0_10px_30px_-10px_rgba(29,80,254,0.75)] transition-shadow duration-300 hover:shadow-[0_14px_36px_-8px_rgba(29,80,254,0.9)]"
             >
               {nav.cta.label}
             </Link>
@@ -370,7 +370,7 @@ export function Navbar({ locale }: { locale: Locale }) {
             <Link
               href={nav.cta.href}
               onClick={() => setOpen(false)}
-              className="rounded-full bg-accent px-7 py-4 text-base font-semibold text-white"
+              className="rounded-[4px] bg-accent px-7 py-4 text-base font-semibold text-white"
             >
               {nav.cta.label}
             </Link>

@@ -53,7 +53,7 @@ export function ProductsOverview({ locale }: { locale: Locale }) {
         <div className="mt-12 flex justify-center">
           <Link
             href="/produits"
-            className="group inline-flex items-center gap-2.5 rounded-full border border-hairline-strong bg-ink/[0.03] px-7 py-4 text-[15px] font-semibold text-ink backdrop-blur-sm transition-colors duration-300 hover:border-accent/40 hover:bg-ink/[0.06]"
+            className="group inline-flex items-center gap-2.5 rounded-[4px] border border-hairline-strong bg-ink/[0.03] px-7 py-4 text-[15px] font-semibold text-ink backdrop-blur-sm transition-colors duration-300 hover:border-accent/40 hover:bg-ink/[0.06]"
           >
             {products.home.link}
             <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

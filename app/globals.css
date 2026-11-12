@@ -5,37 +5,37 @@
      nuit. Seules quelques bandes (haut de page, appel final, pied de page)
      restent sombres : elles portent la classe `.sombre`, qui rétablit la
      palette d'origine pour tout ce qu'elles contiennent. */
-  --void: #f6f7fb;
-  --void-2: #f1f3f9;
-  --void-deep: #eceff7;
+  --void: #f6f3ec;
+  --void-2: #efebe3;
+  --void-deep: #e9e4da;
 
   --panel: #ffffff;
   --panel-light: #ffffff;
-  --panel-soft: rgba(255, 255, 255, 0.93);
-  --chip: #eef1fb;
+  --panel-soft: rgba(246, 243, 236, 0.9);
+  --chip: #ece7dd;
 
-  --hairline: rgba(14, 22, 68, 0.09);
-  --hairline-strong: rgba(14, 22, 68, 0.15);
+  --hairline: rgba(18, 18, 20, 0.12);
+  --hairline-strong: rgba(18, 18, 20, 0.22);
 
   /* Bleu — la voix de Helpify. */
-  --accent: #1d50fe;
-  --accent-light: #1d50fe;
-  --accent-soft: rgba(29, 80, 254, 0.09);
+  --accent: #121214;
+  --accent-light: #121214;
+  --accent-soft: rgba(18, 18, 20, 0.06);
 
   /* Orange — la voix du candidat, foncé pour rester lisible sur le blanc. */
-  --warm: #e57300;
-  --warm-light: #f08a1f;
-  --warm-soft: rgba(229, 115, 0, 0.1);
+  --warm: #8b887f;
+  --warm-light: #8b887f;
+  --warm-soft: rgba(18, 18, 20, 0.06);
 
   /* Violet — la méthode, plus profond que sur fond sombre. */
-  --iris: #6a3dff;
-  --iris-light: #7f5bff;
-  --iris-soft: rgba(106, 61, 255, 0.09);
+  --iris: #121214;
+  --iris-light: #121214;
+  --iris-soft: rgba(18, 18, 20, 0.06);
 
   /* Texte */
-  --ink: #0e1644;
-  --muted: #545c82;
-  --faint: #737a9b;
+  --ink: #121214;
+  --muted: #57554f;
+  --faint: #8b887f;
 
   --success: #1f9d55;
   --warning: #e57300;
@@ -52,58 +52,30 @@
 
 /* Les bandes sombres : la palette d'origine du site, rétablie localement. */
 .sombre {
-  /* Fond — indigo profond relevé dans la vidéo de démonstration.
-     Trois paliers seulement : le socle, un cran plus clair pour les reliefs,
-     un cran plus sombre pour creuser. */
-  --void: #141037;
-  --void-2: #16123c;
-  --void-deep: #100d30;
-
-  /* Surfaces */
-  --panel: #191552;
-  --panel-light: #1d1a5e;
-  --panel-soft: rgba(25, 21, 82, 0.55);
-  --chip: #141c5e;
-
-  /* Bordures */
-  --hairline: rgba(255, 255, 255, 0.10);
-  --hairline-strong: rgba(255, 255, 255, 0.18);
-
-  /* Bleu — la voix de Helpify. */
-  --accent: #1d50fe;
-  --accent-light: #5b81ff;
-  --accent-soft: rgba(29, 80, 254, 0.18);
-
-  /* Orange — la voix du candidat. Ce n'est pas une couleur décorative :
-     dans le produit, la scène entière bascule à l'orange quand le candidat
-     s'exprime. On lui garde ici ce rôle, et rien d'autre. */
-  --warm: #ffa046;
-  --warm-light: #ffb970;
-  --warm-soft: rgba(255, 160, 70, 0.16);
-
-  /* Violet — la méthode. Entre le bleu de Helpify et l'orange du candidat se
-     place ce que l'un fait de ce que l'autre a dit : les critères, leur poids,
-     l'évaluation. La teinte le dit optiquement, puisqu'elle tient des deux.
-     Elle ne s'emploie donc que là où le site explique sa façon de procéder. */
-  --iris: #ac98ff;
-  --iris-light: #c3b4ff;
-  --iris-soft: rgba(172, 152, 255, 0.16);
-
-  /* Texte */
-  --ink: #ffffff;
-  --muted: #a8adcf;
-  --faint: #757aa3;
-
-  /* Sémantique, employé avec parcimonie */
-  --success: #2cc36b;
-  --warning: #ffa046;
-  --error: #ff5d5d;
-
-  --shadow-glow: 0 20px 60px -20px rgba(29, 80, 254, 0.5);
-  --shadow-deep: 0 40px 90px -30px rgba(6, 4, 24, 0.65);
-
-  /* Une seule famille : le contraste vient de la graisse et du corps,
-     jamais d'un changement de caractère. */
+  /* Les bandes sombres : un noir profond, sans couleur, comme l'encre du site. */
+  --void: #0f0f10;
+  --void-2: #141415;
+  --void-deep: #0b0b0c;
+  --panel: #19191b;
+  --panel-light: #202023;
+  --panel-soft: rgba(25, 25, 27, 0.7);
+  --chip: #202023;
+  --hairline: rgba(244, 241, 234, 0.13);
+  --hairline-strong: rgba(244, 241, 234, 0.24);
+  --accent: #f4f1ea;
+  --accent-light: #f4f1ea;
+  --accent-soft: rgba(244, 241, 234, 0.08);
+  --warm: #8e8c86;
+  --warm-light: #8e8c86;
+  --warm-soft: rgba(244, 241, 234, 0.08);
+  --iris: #f4f1ea;
+  --iris-light: #f4f1ea;
+  --iris-soft: rgba(244, 241, 234, 0.08);
+  --ink: #f4f1ea;
+  --muted: #a8a59d;
+  --faint: #7d7b75;
+  --shadow-glow: none;
+  --shadow-deep: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
   color: var(--ink);
   color-scheme: dark;
 }
@@ -135,6 +107,14 @@
 
   --font-display: var(--font-display);
   --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono-brand), ui-monospace, monospace;
+
+  /* Angles nets : boutons et cartes à peine arrondis. */
+  --radius-md: 4px;
+  --radius-lg: 5px;
+  --radius-xl: 6px;
+  --radius-2xl: 6px;
+  --radius-3xl: 8px;
 
   --animate-float: float 7s ease-in-out infinite;
   --animate-pulse-glow: pulseGlow 2.6s ease-in-out infinite;
@@ -268,9 +248,7 @@ body {
   position: relative;
   isolation: isolate;
   background: #ffffff;
-  box-shadow:
-    0 1px 2px rgba(14, 22, 68, 0.05),
-    0 24px 50px -32px rgba(14, 22, 68, 0.28);
+  box-shadow: 0 24px 50px -34px rgba(18, 18, 20, 0.35);
   transition: box-shadow 0.35s ease, transform 0.35s ease;
 }
 .card-surface::before {
@@ -638,11 +616,9 @@ body {
 .lit-card {
   position: relative;
   isolation: isolate;
-  border-radius: 22px;
-  background: #ffffff;
-  box-shadow:
-    0 1px 2px rgba(14, 22, 68, 0.05),
-    0 30px 60px -36px rgba(14, 22, 68, 0.3);
+  border-radius: 6px;
+  background: var(--chip);
+  box-shadow: none;
   overflow: hidden;
 }
 .lit-card::before {
@@ -862,4 +838,25 @@ body {
   .demo-reading {
     display: none;
   }
+}
+
+/* ─── Style éditorial ─────────────────────────────────────────────────
+   Grands titres en graisse normale, serrés ; les boutons pleins passent en
+   blanc sur les bandes sombres ; les arêtes lumineuses des cartes s'éteignent. */
+h1.font-display,
+h2.font-display,
+h3.font-display {
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+.sombre .bg-accent.text-white {
+  background-color: #f4f1ea;
+  color: #121214;
+}
+.lit-card::before,
+.lit-card::after {
+  display: none;
+}
+.card-surface::before {
+  background: linear-gradient(160deg, rgba(18, 18, 20, 0.1), rgba(18, 18, 20, 0.06));
 }

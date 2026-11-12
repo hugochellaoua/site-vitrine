@@ -173,7 +173,7 @@ export function MethodologyPage({ locale }: { locale: Locale }) {
               <ol className="flex flex-col items-center justify-center gap-3 lg:flex-row">
                 {methodology.chain.steps.map((s, i) => (
                   <li key={s} className="flex flex-col items-center gap-3 lg:flex-row">
-                    <span className="rounded-full border border-iris/35 bg-chip px-5 py-2.5 text-[13.5px] font-semibold text-ink">
+                    <span className="rounded-[4px] border border-iris/35 bg-chip px-5 py-2.5 text-[13.5px] font-semibold text-ink">
                       {s}
                     </span>
                     {i < methodology.chain.steps.length - 1 && (
@@ -205,7 +205,7 @@ export function MethodologyPage({ locale }: { locale: Locale }) {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href={hero.cta.href}
-                className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-8 py-4 text-[15px] font-semibold text-white shadow-[0_20px_60px_-16px_rgba(29,80,254,0.85)] transition-shadow duration-300 hover:shadow-[0_28px_74px_-14px_rgba(29,80,254,1)]"
+                className="group inline-flex items-center gap-2.5 rounded-[4px] bg-accent px-8 py-4 text-[15px] font-semibold text-white shadow-[0_20px_60px_-16px_rgba(29,80,254,0.85)] transition-shadow duration-300 hover:shadow-[0_28px_74px_-14px_rgba(29,80,254,1)]"
               >
                 {hero.cta.label}
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

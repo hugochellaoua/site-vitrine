@@ -139,7 +139,7 @@ function Besoin({ step }: { step: Extract<Step, { key: "besoin" }> }) {
           ))}
         </div>
       </div>
-      <div className="mt-4 flex items-center gap-2 rounded-full border border-accent/45 bg-accent-soft px-5 py-2.5 text-[12.5px] font-semibold text-ink">
+      <div className="mt-4 flex items-center gap-2 rounded-[4px] border border-accent/45 bg-accent-soft px-5 py-2.5 text-[12.5px] font-semibold text-ink">
         <Check size={13} className="text-accent-light" />
         {step.status}
       </div>
@@ -151,7 +151,7 @@ function Besoin({ step }: { step: Extract<Step, { key: "besoin" }> }) {
 function Diffusion({ step }: { step: Extract<Step, { key: "diffusion" }> }) {
   return (
     <div className="flex w-full flex-col items-center">
-      <div className="flex items-center gap-2 rounded-full border border-hairline-strong bg-panel/60 px-5 py-2.5 font-mono text-[12.5px] text-accent-light backdrop-blur-sm">
+      <div className="flex items-center gap-2 rounded-[4px] border border-hairline-strong bg-panel/60 px-5 py-2.5 font-mono text-[12.5px] text-accent-light backdrop-blur-sm">
         <LogoMark size={15} />
         {step.link}
       </div>

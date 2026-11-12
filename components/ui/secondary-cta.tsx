@@ -22,7 +22,7 @@ export function SecondaryCta({
   return (
     <Link
       href={learnMore.href}
-      className={`inline-flex items-center rounded-full border border-hairline-strong bg-panel/60 px-7 py-4 text-[15px] font-semibold text-ink backdrop-blur-sm transition-colors duration-300 hover:border-accent/40 hover:bg-panel ${className}`}
+      className={`inline-flex items-center rounded-[4px] border border-hairline-strong bg-panel/60 px-7 py-4 text-[15px] font-semibold text-ink backdrop-blur-sm transition-colors duration-300 hover:border-accent/40 hover:bg-panel ${className}`}
     >
       {learnMore.label}
     </Link>

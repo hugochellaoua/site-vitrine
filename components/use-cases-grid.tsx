@@ -13,25 +13,19 @@ export function UseCasesGrid({ locale }: { locale: Locale }) {
   const { useCases } = dict(locale);
   const base = locale === "en" ? "/en/use-cases" : "/cas-d-usage";
   return (
-    <section className="relative border-y border-hairline bg-white px-6 py-24">
+    <section className="relative px-6 py-28">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-center text-center">
           <Badge>{useCases.eyebrow}</Badge>
           <SectionTitle title={useCases.title} emphasis={useCases.emphasis} className="mt-6" />
         </div>
-        <ul className="mt-14 grid grid-cols-1 gap-x-8 gap-y-9 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-14 grid grid-cols-1 border-l border-t border-hairline sm:grid-cols-2 lg:grid-cols-3">
           {useCases.items.map((u, i) => (
-            <Reveal key={u.id} as="li" delay={(i % 3) * 0.06}>
-              <Link href={`${base}#${u.id}`} className="group flex gap-4">
-                <span
-                  className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl font-display text-[14px] font-bold ${
-                    u.tone === "iris" ? "bg-iris-soft text-iris" : "bg-accent-soft text-accent"
-                  }`}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span>
-                  <span className="flex items-center gap-1.5 font-display text-[16px] font-bold text-ink">
+            <Reveal key={u.id} as="li" delay={(i % 3) * 0.06} className="border-b border-r border-hairline">
+              <Link href={`${base}#${u.id}`} className="group flex h-full min-h-[170px] flex-col p-7 transition-colors hover:bg-chip">
+                <span className="font-mono text-[11.5px] text-faint">{String(i + 1).padStart(2, "0")}</span>
+                <span className="mt-auto pt-8">
+                  <span className="flex items-center gap-1.5 font-display text-[21px] tracking-[-0.025em] text-ink">
                     {u.menu}
                     <ArrowRight size={14} className="text-faint transition-transform duration-300 group-hover:translate-x-1 group-hover:text-accent" />
                   </span>
