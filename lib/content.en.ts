@@ -38,7 +38,7 @@ export const nav = {
   resources: [
     { label: "The process", desc: "Ten steps, from your need to the shortlist", href: "/en#story" },
     { label: "Methodology", desc: "An assessment grounded in recruitment science", href: "/en/methodology" },
-    { label: "Integrations", desc: "Helpify plugs into your stack", href: "/en#integrations" },
+    { label: "Integrations", desc: "Helpify plugs into your stack", href: "/en#story" },
     { label: "Your data", desc: "Human oversight, transparency, GDPR", href: "/en#donnees" },
     { label: "FAQ", desc: "The questions that keep coming up", href: "/en#faq" },
     { label: "AI notice", desc: "How Helpify uses AI, and your rights", href: links.noticeIA },
@@ -819,6 +819,21 @@ export const footer = {
   social: { label: "Helpify on LinkedIn", href: links.linkedin },
   badges: ["GDPR compliant", "EU hosting", "European data"],
   copyright: "© 2026 Helpify",
+};
+
+export const branche = {
+  title: "Helpify, plugged into your company.",
+  emphasis: "into your company.",
+  steps: ["entreprise", "reponses", "decision"],
+  cta: { label: "Contact us", href: links.contact },
+  blocs: {
+    sources: "Your sources",
+    canaux: "Your channels",
+    centre: "Helpify",
+    echanges: "Conversations",
+    garde: "Safeguards",
+  },
+  garde: ["Human oversight", "Transparency", "GDPR"],
 };
 
 export const donnees = {

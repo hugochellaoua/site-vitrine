@@ -51,7 +51,7 @@ export const nav = {
   resources: [
     { label: "Le process", desc: "Les dix étapes, de votre besoin à la shortlist", href: "/#story" },
     { label: "Méthodologie", desc: "Une évaluation fondée sur les sciences du recrutement", href: "/methodologie" },
-    { label: "Intégrations", desc: "Helpify se branche sur votre stack", href: "/#integrations" },
+    { label: "Intégrations", desc: "Helpify se branche sur votre stack", href: "/#story" },
     { label: "Vos données", desc: "Supervision humaine, transparence, RGPD", href: "/#donnees" },
     { label: "Questions fréquentes", desc: "Les questions qui reviennent", href: "/#faq" },
     { label: "Notice IA", desc: "Comment Helpify utilise l'IA, et vos droits", href: links.noticeIA },
@@ -938,6 +938,26 @@ export const footer = {
  * politique de confidentialité ou les CGU du site : rien n'est promis ici qui
  * n'y figure pas déjà.
  */
+/**
+ * Helpify branché sur votre entreprise : trois temps, et le schéma qui les
+ * illustre. Les étapes reprennent celles du process ; les blocs du schéma,
+ * les sources, canaux et garde-fous déjà cités sur le site.
+ */
+export const branche = {
+  title: "Helpify branché sur votre entreprise.",
+  emphasis: "sur votre entreprise.",
+  steps: ["entreprise", "reponses", "decision"],
+  cta: { label: "Nous contacter", href: links.contact },
+  blocs: {
+    sources: "Vos sources",
+    canaux: "Vos canaux",
+    centre: "Helpify",
+    echanges: "Les échanges",
+    garde: "Garde-fous",
+  },
+  garde: ["Supervision humaine", "Transparence", "RGPD"],
+};
+
 export const donnees = {
   eyebrow: "Vos données",
   title: "Une IA qui assiste, jamais qui décide.",

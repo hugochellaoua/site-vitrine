@@ -162,7 +162,7 @@ function DropdownMenu({
         <div className="glass-panel glass-panel--solid dropdown-panel w-[min(640px,calc(100vw-2rem))] rounded-2xl p-2.5">
           <ul className="grid grid-cols-2 gap-x-1.5 gap-y-0.5">
             {items.map((item) => (
-              <Lien key={item.href} item={item} fermer={() => setOpen(false)} />
+              <Lien key={item.href + item.label} item={item} fermer={() => setOpen(false)} />
             ))}
           </ul>
           {extra && (
@@ -172,7 +172,7 @@ function DropdownMenu({
               </p>
               <ul className="grid grid-cols-2 gap-x-1.5 gap-y-0.5">
                 {extra.items.map((item) => (
-                  <Lien key={item.href} item={item} fermer={() => setOpen(false)} />
+                  <Lien key={item.href + item.label} item={item} fermer={() => setOpen(false)} />
                 ))}
               </ul>
             </>
@@ -334,7 +334,7 @@ export function Navbar({ locale }: { locale: Locale }) {
                     // une graisse qui ne lui dispute rien.
                     <ul className="flex flex-wrap items-center justify-center gap-x-1 text-[13px]">
                       {sm.items.map((item, i) => (
-                        <li key={item.href} className="flex items-center gap-1">
+                        <li key={item.href + item.label} className="flex items-center gap-1">
                           <Link
                             href={item.href}
                             onClick={() => setOpen(false)}

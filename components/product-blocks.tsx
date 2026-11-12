@@ -39,7 +39,7 @@ export function ProductBlocks({ locale }: { locale: Locale }) {
             const b = synthesis.items[BENEFICE[product.id] ?? 0];
             const inverse = i % 2 === 1;
             return (
-              <Reveal key={product.id} className={`grid overflow-hidden rounded-[6px] lg:grid-cols-2 ${inverse ? "lg:[&>*:first-child]:order-2" : ""}`}>
+              <Reveal key={product.id} className={`grid grid-cols-[minmax(0,1fr)] overflow-hidden rounded-[6px] lg:grid-cols-2 ${inverse ? "lg:[&>*:first-child]:order-2" : ""}`}>
                 <div className="flex flex-col bg-chip p-8 sm:p-11">
                   <span className="self-start bg-ink px-2 py-1 font-mono text-[11px] uppercase tracking-[0.08em] text-void">{product.name}</span>
                   <h3 className="mt-5 max-w-[22ch] text-balance font-display text-[clamp(26px,2.8vw,36px)] leading-[1.08] text-ink">
@@ -65,7 +65,9 @@ export function ProductBlocks({ locale }: { locale: Locale }) {
                   className="flex min-h-[420px] items-center justify-center p-6 sm:p-10"
                   style={{ background: "linear-gradient(160deg, #2b2d33 0%, #111215 100%)" }}
                 >
-                  <ProductScene visual={product.visual} locale={locale} />
+                  <div className="w-full min-w-0">
+                    <ProductScene visual={product.visual} locale={locale} />
+                  </div>
                 </div>
               </Reveal>
             );

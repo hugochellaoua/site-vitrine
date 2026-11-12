@@ -159,7 +159,9 @@ export function ProductsPage({ locale }: { locale: Locale }) {
                     className="flex min-h-[420px] items-center justify-center rounded-[6px] p-6 sm:p-10"
                     style={{ background: "linear-gradient(160deg, #2b2d33 0%, #111215 100%)" }}
                   >
+                    <div className="w-full min-w-0">
                     <ProductScene visual={product.visual} locale={locale} />
+                  </div>
                   </div>
                 </Reveal>
               </div>

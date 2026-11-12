@@ -860,3 +860,25 @@ h3.font-display {
 .card-surface::before {
   background: linear-gradient(160deg, rgba(18, 18, 20, 0.1), rgba(18, 18, 20, 0.06));
 }
+
+/* Helpify branché : la barre du temps en cours se remplit, et les liaisons
+   actives du schéma coulent vers Helpify. */
+.branche-barre {
+  width: 0;
+  animation-name: brancheBarre;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes brancheBarre {
+  to {
+    width: 100%;
+  }
+}
+.branche-flux {
+  animation: brancheFlux 1.1s linear infinite;
+}
+@keyframes brancheFlux {
+  to {
+    stroke-dashoffset: -24;
+  }
+}

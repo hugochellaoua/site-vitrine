@@ -38,15 +38,21 @@ export function Hero({ locale }: { locale: Locale }) {
       // La seule grande zone sombre de l'accueil : l'indigo du site, éclairé
       // par le bas d'une lueur bleue puis orange. L'aperçu du produit vient
       // ensuite chevaucher son bas.
-      className="sombre relative flex flex-col items-center overflow-hidden px-6 pb-64 pt-40 sm:pb-72 sm:pt-48"
+      className="sombre relative isolate flex min-h-[92svh] flex-col justify-end overflow-hidden px-6 pb-16 pt-40 sm:px-10 lg:px-16"
       style={{
         background: "radial-gradient(70% 90% at 72% 10%, #2a2d35 0%, #16171b 48%, #0b0b0c 100%)",
       }}
     >
+      {/* Un grain très fin, pour que le fond ne fasse pas aplat numérique. */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 opacity-40"
+        style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px)", backgroundSize: "4px 4px" }}
+        aria-hidden="true"
+      />
 
       <h1
         aria-label={hero.title}
-        className="max-w-6xl text-center font-display text-[clamp(36px,5.8vw,80px)] font-normal leading-[1.02] tracking-[-0.045em] text-ink"
+        className="max-w-5xl text-left font-display text-[clamp(38px,5.6vw,78px)] font-normal leading-[1.02] tracking-[-0.045em] text-ink"
       >
         <span aria-hidden="true">
           {words.map(({ mot, ton }, i) => (
@@ -62,20 +68,20 @@ export function Hero({ locale }: { locale: Locale }) {
       </h1>
 
       <p
-        className="hero-rise mt-9 max-w-xl text-balance text-center text-[16.5px] leading-relaxed text-muted sm:text-[18px]"
+        className="hero-rise mt-7 max-w-xl text-left text-[16px] leading-relaxed text-muted sm:text-[17px]"
         style={{ animationDelay: `${START + words.length * STEP + 0.25}s` }}
       >
         {hero.subtitle}
       </p>
 
       <div
-        className="hero-rise mt-11 flex flex-wrap items-center justify-center gap-3"
+        className="hero-rise mt-9 flex flex-wrap items-center gap-3"
         style={{ animationDelay: `${START + words.length * STEP + 0.4}s` }}
       >
         <Magnetic>
           <Link
             href={hero.cta.href}
-            className="group inline-flex items-center gap-2.5 rounded-[4px] bg-accent px-8 py-4 text-[15px] font-semibold text-white transition-shadow duration-300"
+            className="group inline-flex items-center gap-2.5 rounded-[4px] bg-accent px-6 py-3.5 text-[14.5px] font-medium text-white transition-opacity duration-300 hover:opacity-90"
           >
             {hero.cta.label}
             <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -85,14 +91,14 @@ export function Hero({ locale }: { locale: Locale }) {
       </div>
 
       {/* Les entreprises où exercent nos experts, en rangée encadrée. */}
-      <div className="hero-rise mt-14 flex flex-col items-center gap-3" style={{ animationDelay: `${START + words.length * STEP + 0.55}s` }}>
+      <div className="hero-rise mt-14 flex flex-col items-start gap-3" style={{ animationDelay: `${START + words.length * STEP + 0.55}s` }}>
         <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-faint">{experts.logosLabel}</p>
         <div className="flex border border-hairline">
-          <span className="flex h-16 items-center border-r border-hairline px-8">
-            <CompanyLogo logo="loreal" className="!w-[118px] text-ink" />
+          <span className="flex h-14 items-center border-r border-hairline px-5 sm:h-16 sm:px-8">
+            <CompanyLogo logo="loreal" className="!w-[92px] text-ink sm:!w-[118px]" />
           </span>
-          <span className="flex h-16 items-center px-8">
-            <CompanyLogo logo="reflection" className="!w-[150px] text-ink" />
+          <span className="flex h-14 items-center px-5 sm:h-16 sm:px-8">
+            <CompanyLogo logo="reflection" className="!w-[118px] text-ink sm:!w-[150px]" />
           </span>
         </div>
       </div>

@@ -1,56 +1,49 @@
 import Link from "next/link";
 import { ArrowRight, Clock, Eye, KeyRound, Scale, UserCheck } from "lucide-react";
 import { dict, type Locale } from "@/lib/i18n";
-import { Reveal } from "@/components/ui/reveal";
-import { Badge, SectionTitle } from "@/components/ui/section-title";
+import { SectionTitle } from "@/components/ui/section-title";
 
 /**
- * Vos données : les engagements de la plateforme sur les candidatures, en cinq
- * cartes, avec les liens vers les textes qui les fondent (notice IA,
- * politique de confidentialité). C'est la question que pose tout DRH avant
- * d'aller plus loin ; on y répond sur l'accueil, sans l'envoyer lire un texte
- * juridique.
+ * Vos données, en bandeau : le titre à gauche, l'engagement principal et le
+ * lien vers la notice IA à droite, puis une rangée de cinq garanties séparées
+ * par de fins filets. Chaque garantie reprend un engagement écrit dans la
+ * notice IA, la politique de confidentialité ou les CGU du site.
  */
 const ICONES = [UserCheck, Eye, KeyRound, Clock, Scale];
 
 export function Donnees({ locale }: { locale: Locale }) {
-  const { donnees } = dict(locale);
+  const { donnees, footer } = dict(locale);
   return (
-    <section id="donnees" className="relative px-6 py-28">
+    <section id="donnees" className="relative px-6 py-24 sm:px-10 lg:px-16">
       <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col items-center text-center">
-          <Badge>{donnees.eyebrow}</Badge>
-          <SectionTitle title={donnees.title} emphasis={donnees.emphasis} className="mt-6" />
-          <p className="mt-5 max-w-xl text-balance text-[16px] leading-relaxed text-muted">{donnees.intro}</p>
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <SectionTitle title={donnees.title} emphasis={donnees.emphasis} className="!mx-0 !max-w-[15ch] text-left" />
+          <div>
+            <p className="max-w-[52ch] text-[17px] leading-relaxed text-muted">{donnees.items[0].body}</p>
+            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link
+                href={donnees.links[0].href}
+                className="group inline-flex items-center gap-2 rounded-[4px] border border-hairline-strong px-5 py-3 text-[14px] text-ink transition-colors hover:border-ink/60"
+              >
+                {donnees.links[0].label}
+                <ArrowRight size={15} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+              </Link>
+              <span className="text-[13px] text-faint">{footer.badges[0]}</span>
+            </div>
+          </div>
         </div>
-        <ul className="mt-14 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-5">
+
+        <ul className="mt-16 grid grid-cols-2 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
           {donnees.items.map((item, i) => {
             const Icone = ICONES[i % ICONES.length];
             return (
-              <Reveal key={item.title} as="li" delay={i * 0.06} className="border-t border-hairline pt-6 pr-4">
-                <span className="grid h-9 w-9 place-items-center text-ink">
-                  <Icone size={19} strokeWidth={1.75} aria-hidden="true" />
-                </span>
-                <h3 className="mt-3 font-display text-[17px] leading-snug text-ink">{item.title}</h3>
-                <p className="mt-2 text-[13.5px] leading-relaxed text-muted">{item.body}</p>
-              </Reveal>
+              <li key={item.title} className={`pr-6 ${i > 0 ? "lg:border-l lg:border-hairline lg:pl-6" : ""}`}>
+                <Icone size={44} strokeWidth={1.1} className="text-ink/85" aria-hidden="true" />
+                <p className="mt-6 max-w-[16ch] text-[15.5px] leading-snug text-ink">{item.title}</p>
+              </li>
             );
           })}
         </ul>
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
-          {donnees.links.map((l, i) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className={`group inline-flex items-center gap-1.5 rounded-[4px] px-4 py-2.5 text-[13.5px] font-medium ${
-                i === 0 ? "bg-ink text-void" : "border border-hairline-strong text-ink"
-              }`}
-            >
-              {l.label}
-              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-            </Link>
-          ))}
-        </div>
       </div>
     </section>
   );

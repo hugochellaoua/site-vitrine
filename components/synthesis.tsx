@@ -1,4 +1,4 @@
-import { MotCandidat } from "@/components/ui/mot-candidat";
+import Link from "next/link";
 import { dict, type Locale } from "@/lib/i18n";
 import { Reveal } from "@/components/ui/reveal";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
@@ -13,27 +13,33 @@ import { Badge, SectionTitle } from "@/components/ui/section-title";
  */
 
 export function Synthesis({ locale }: { locale: Locale }) {
-  const { synthesis } = dict(locale);
+  const { synthesis, hero } = dict(locale);
   return (
-    <section className="relative px-6 py-28">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex flex-col items-center text-center">
+    <section className="relative px-6 py-28 sm:px-10 lg:px-16">
+      <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
+        <div>
           <Badge>{synthesis.eyebrow}</Badge>
-          <SectionTitle title={synthesis.title} emphasis={synthesis.emphasis} className="mt-6" />
-          <p className="mx-auto mt-5 max-w-[52ch] text-balance text-[16.5px] leading-relaxed text-muted">{synthesis.sub}</p>
+          <SectionTitle title={synthesis.title} emphasis={synthesis.emphasis} className="!mx-0 mt-6 !max-w-[14ch] text-left" />
+          <p className="mt-6 max-w-[44ch] text-[16px] leading-relaxed text-muted">{synthesis.sub}</p>
+          <Link
+            href={hero.cta.href}
+            className="mt-8 inline-flex rounded-[4px] bg-accent px-5 py-3 text-[14px] font-medium text-white transition-opacity hover:opacity-90"
+          >
+            {hero.cta.label}
+          </Link>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-x-10 sm:grid-cols-2">
           {synthesis.items.map((item, i) => {
             return (
             <Reveal
               key={item.n}
               delay={i * 0.12}
               y={26}
-              className="border-t border-hairline pb-4 pt-6"
+              className="border-t border-hairline pb-10 pt-6"
             >
               <h3 className="font-mono text-[11.5px] uppercase tracking-[0.08em] text-faint">
-                <MotCandidat texte={item.title} />
+                {item.title}
               </h3>
 
               <div className="mt-4 flex items-baseline gap-1">
