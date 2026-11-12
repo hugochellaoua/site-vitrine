@@ -6,7 +6,7 @@ import { StickyCta } from "@/components/sticky-cta";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 import { SecondaryCta } from "@/components/ui/secondary-cta";
 import { Reveal } from "@/components/ui/reveal";
-import { ProductScene } from "@/components/products/scenes";
+import { ProductFilm } from "@/components/products/films";
 import { dict, type Locale } from "@/lib/i18n";
 import { siteUrl } from "@/lib/site";
 
@@ -157,10 +157,10 @@ export function ProductsPage({ locale }: { locale: Locale }) {
                 <Reveal delay={0.1} className="w-full lg:w-1/2">
                   <div
                     className="flex min-h-[420px] items-center justify-center rounded-[6px] p-6 sm:p-10"
-                    style={{ background: "linear-gradient(160deg, #2b2d33 0%, #111215 100%)" }}
+                    style={{ background: "#fbfbfa" }}
                   >
                     <div className="w-full min-w-0">
-                    <ProductScene visual={product.visual} locale={locale} />
+                    <ProductFilm visual={product.visual} locale={locale} />
                   </div>
                   </div>
                 </Reveal>

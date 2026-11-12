@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { dict, type Locale } from "@/lib/i18n";
-import { ProductScene } from "@/components/products/scenes";
+import { ProductFilm } from "@/components/products/films";
 import { Reveal } from "@/components/ui/reveal";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 
@@ -63,10 +63,10 @@ export function ProductBlocks({ locale }: { locale: Locale }) {
                 </div>
                 <div
                   className="flex min-h-[420px] items-center justify-center p-6 sm:p-10"
-                  style={{ background: "linear-gradient(160deg, #2b2d33 0%, #111215 100%)" }}
+                  style={{ background: "#fbfbfa" }}
                 >
                   <div className="w-full min-w-0">
-                    <ProductScene visual={product.visual} locale={locale} />
+                    <ProductFilm visual={product.visual} locale={locale} />
                   </div>
                 </div>
               </Reveal>
