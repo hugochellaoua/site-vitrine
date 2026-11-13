@@ -614,7 +614,7 @@ export const products = {
       name: "Talent Ask",
       headline: "Engagez vos candidats et répondez à leurs questions, 24h/24",
       tag: "Des informations claires, pour que plus de candidats postulent",
-      body: "Sans informations claires, beaucoup de candidats renoncent à postuler. Le poste, l'équipe, les conditions, la suite du processus : avec Talent Ask, chacun obtient ses réponses et peut se projeter. Et comme beaucoup de candidats cherchent et postulent en dehors des heures de bureau, Talent Ask leur répond à toute heure.",
+      body: "Sans informations claires, beaucoup de candidats renoncent à postuler. Le poste, l'équipe, les conditions, la suite du processus : avec Talent Ask, chacun obtient ses réponses et peut se projeter. Et comme beaucoup de candidats cherchent et postulent en dehors des heures de bureau, Talent Ask leur répond à toute heure. Les questions qu'ils posent vous remontent : elles deviennent des insights pour mieux communiquer à l'externe et attirer les talents.",
       // Seul produit tourné vers le candidat : il porte donc l'orange, comme
       // partout ailleurs sur le site.
       visual: "ask" as const,

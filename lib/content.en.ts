@@ -533,7 +533,7 @@ export const products = {
       name: "Talent Ask",
       headline: "Engage your candidates and answer their questions, 24/7",
       tag: "Clear information, so more candidates apply",
-      body: "Without clear information, many candidates give up on applying. The role, the team, the conditions, the next steps: with Talent Ask, everyone gets their answers and can picture themselves in the job. And since many candidates search and apply outside office hours, Talent Ask answers them at any hour.",
+      body: "Without clear information, many candidates give up on applying. The role, the team, the conditions, the next steps: with Talent Ask, everyone gets their answers and can picture themselves in the job. And since many candidates search and apply outside office hours, Talent Ask answers them at any hour. The questions they ask come back to you as insights, to communicate better externally and attract talent.",
       visual: "ask" as const,
       tone: "iris" as const,
     },
