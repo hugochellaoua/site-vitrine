@@ -51,6 +51,7 @@ export const nav = {
   resources: [
     { label: "Le process", desc: "Comment Helpify mène l'entretien", href: "/#story" },
     { label: "Méthodologie", desc: "Une évaluation fondée sur les sciences du recrutement", href: "/methodologie" },
+    { label: "L'équipe", desc: "Les expertises réunies autour de Helpify", href: "/equipe" },
     { label: "Pourquoi l'IA ?", desc: "Ce qu'elle change, et les questions qu'on nous pose", href: "/pourquoi-l-ia" },
     { label: "Vos données", desc: "Supervision humaine, transparence, RGPD", href: "/#donnees" },
     { label: "Questions fréquentes", desc: "Les questions qui reviennent", href: "/#faq" },
@@ -310,13 +311,13 @@ export const experts: ExpertsContent = {
     },
     {
       name: "Florent Gbelidji",
-      role: "Member of Technical Staff – Open Source Lead chez Reflection AI",
+      role: "Engineering Lead IA chez Reflection AI",
       logo: "reflection",
       body: "Apporte une expertise de pointe en ingénierie des modèles d'IA, avec un regard exigeant sur leur fiabilité, leur robustesse et leur maîtrise.",
     },
     {
       name: "Rome Lambert",
-      role: "RRH indépendante – PME TPE",
+      role: "RRH & recruteuse indépendante",
       body: "Apporte une vision terrain des problématiques RH opérationnelles, avec une approche de proximité au plus près des réalités des entreprises.",
     },
   ],
@@ -961,6 +962,74 @@ export const defile = {
  * (comportements observables, questions, relance) sont là pour montrer le
  * mécanisme ; ils reprennent le poste et les réponses de Sarah K. du site.
  */
+/**
+ * L'équipe : les expertises réunies autour de Helpify, en quatre groupes. Les
+ * fondateurs d'abord (relation client et produit, technique et sécurité),
+ * puis les experts qui les accompagnent.
+ */
+export const equipe = {
+  eyebrow: "L'équipe",
+  title: "Les expertises réunies autour de Helpify.",
+  emphasis: "autour de Helpify.",
+  groupes: [
+    {
+      titre: "Relation client & produit",
+      membres: [
+        {
+          nom: "Hugo Chellaoua",
+          initiales: "HC",
+          role: "CEO",
+          points: ["Porte la vision produit et la relation client", "En lien direct avec les enjeux des équipes recrutement"],
+          experience: "+8 ans d'expérience dans les logiciels RH B2B",
+        },
+      ],
+    },
+    {
+      titre: "Technique & sécurité",
+      membres: [
+        {
+          nom: "Mounir Zaghba",
+          initiales: "MZ",
+          role: "CTO",
+          points: ["Garant de l'architecture, de la fiabilité et de la sécurité de la plateforme"],
+          experience: "+15 ans d'expérience dans des contextes à haute sécurité",
+        },
+      ],
+    },
+    {
+      titre: "Experts métier",
+      membres: [
+        {
+          nom: "Brice Monnier",
+          initiales: "BM",
+          role: "DRH chez L'Oréal Innovation",
+          logo: "loreal" as const,
+          points: ["Apporte la vision des grands groupes sur les enjeux RH, la transformation et l'innovation"],
+        },
+        {
+          nom: "Rome Lambert",
+          initiales: "RL",
+          role: "RRH & recruteuse indépendante",
+          points: ["Le regard terrain du recrutement : sourcing, qualification et expérience candidat"],
+        },
+      ],
+    },
+    {
+      titre: "Expert IA",
+      membres: [
+        {
+          nom: "Florent Gbelidji",
+          initiales: "FG",
+          role: "Engineering Lead IA chez Reflection AI",
+          logo: "reflection" as const,
+          points: ["Contribue à la fiabilité de l'IA, du questionnement et de la restitution"],
+        },
+      ],
+    },
+  ] as { titre: string; membres: { nom: string; initiales: string; role: string; logo?: "loreal" | "reflection"; points: string[]; experience?: string }[] }[],
+  cta: { titre: "Parlons de vos recrutements.", label: "Réservez une démo", href: links.booking },
+};
+
 /**
  * La page « Pourquoi utiliser l'IA dans le recrutement ? » : le constat, ce
  * que Helpify change des deux côtés, puis les objections qu'on nous oppose le

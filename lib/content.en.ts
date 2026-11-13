@@ -38,6 +38,7 @@ export const nav = {
   resources: [
     { label: "The process", desc: "How Helpify runs the interview", href: "/en#story" },
     { label: "Methodology", desc: "An assessment grounded in recruitment science", href: "/en/methodology" },
+    { label: "The team", desc: "The expertise gathered around Helpify", href: "/en/team" },
     { label: "Why AI?", desc: "What it changes, and the questions we are asked", href: "/en/why-ai" },
     { label: "Your data", desc: "Human oversight, transparency, GDPR", href: "/en#donnees" },
     { label: "FAQ", desc: "The questions that keep coming up", href: "/en#faq" },
@@ -274,13 +275,13 @@ export const experts: ExpertsContent = {
     },
     {
       name: "Florent Gbelidji",
-      role: "Member of Technical Staff – Open Source Lead at Reflection AI",
+      role: "AI Engineering Lead at Reflection AI",
       logo: "reflection",
       body: "Brings cutting-edge expertise in AI model engineering, with a demanding eye on their reliability, robustness and control.",
     },
     {
       name: "Rome Lambert",
-      role: "Independent HR manager – SMEs and micro-businesses",
+      role: "Independent HR manager & recruiter",
       body: "Brings a field-level view of operational HR issues, with a hands-on approach that stays close to the realities of businesses.",
     },
   ],
@@ -826,6 +827,69 @@ export const defile = {
     "get their shortlist automatically.",
   ],
   cta: { label: "See the products", href: "/en/products" },
+};
+
+export const equipe = {
+  eyebrow: "The team",
+  title: "The expertise gathered around Helpify.",
+  emphasis: "around Helpify.",
+  groupes: [
+    {
+      titre: "Customer relations & product",
+      membres: [
+        {
+          nom: "Hugo Chellaoua",
+          initiales: "HC",
+          role: "CEO",
+          points: ["Leads the product vision and customer relationships", "Works directly with the challenges of recruitment teams"],
+          experience: "8+ years in B2B HR software",
+        },
+      ],
+    },
+    {
+      titre: "Engineering & security",
+      membres: [
+        {
+          nom: "Mounir Zaghba",
+          initiales: "MZ",
+          role: "CTO",
+          points: ["Guarantees the platform's architecture, reliability and security"],
+          experience: "15+ years in high-security environments",
+        },
+      ],
+    },
+    {
+      titre: "HR experts",
+      membres: [
+        {
+          nom: "Brice Monnier",
+          initiales: "BM",
+          role: "HR Director at L'Oréal Innovation",
+          logo: "loreal" as const,
+          points: ["Brings the large-group perspective on HR, transformation and innovation"],
+        },
+        {
+          nom: "Rome Lambert",
+          initiales: "RL",
+          role: "Independent HR manager & recruiter",
+          points: ["The field view of recruitment: sourcing, qualification and candidate experience"],
+        },
+      ],
+    },
+    {
+      titre: "AI expert",
+      membres: [
+        {
+          nom: "Florent Gbelidji",
+          initiales: "FG",
+          role: "AI Engineering Lead at Reflection AI",
+          logo: "reflection" as const,
+          points: ["Contributes to the reliability of the AI, its questioning and its reporting"],
+        },
+      ],
+    },
+  ] as { titre: string; membres: { nom: string; initiales: string; role: string; logo?: "loreal" | "reflection"; points: string[]; experience?: string }[] }[],
+  cta: { titre: "Let's talk about your hiring.", label: "Book a demo", href: links.booking },
 };
 
 export const pourquoiIA = {

@@ -50,6 +50,7 @@ export const ROUTES = [
   { fr: "/cas-d-usage", en: "/en/use-cases" },
   { fr: "/methodologie", en: "/en/methodology" },
   { fr: "/pourquoi-l-ia", en: "/en/why-ai" },
+  { fr: "/equipe", en: "/en/team" },
   { fr: "/contact", en: "/en/contact" },
   { fr: "/mentions-legales", en: "/en/legal-notice" },
   { fr: "/politique-de-confidentialite", en: "/en/privacy-policy" },

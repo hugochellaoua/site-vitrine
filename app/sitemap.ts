@@ -19,6 +19,7 @@ const PRIORITES: Record<string, { p: number; f: "weekly" | "monthly" | "yearly" 
   "/cas-d-usage": { p: 0.9, f: "monthly" },
   "/methodologie": { p: 0.8, f: "monthly" },
   "/pourquoi-l-ia": { p: 0.7, f: "monthly" },
+  "/equipe": { p: 0.6, f: "monthly" },
   "/contact": { p: 0.8, f: "monthly" },
 };
 
