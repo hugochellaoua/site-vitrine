@@ -9,9 +9,9 @@ import { cn } from "@/lib/cn";
 /**
  * Le calculateur de ROI, à côté des tarifs.
  *
- * Deux façons d'entrer : le temps de tri par semaine, si on le connaît ; sinon
- * les recrutements de l'année et les candidatures reçues pour chacun, à
- * 2 minutes la candidature. Le résultat se lit en jours (7 heures), par mois et
+ * Deux façons d'entrer : le temps de tri par recruteur et par semaine, et le
+ * nombre de recruteurs ; ou les candidatures reçues sur l'année, à 2 minutes
+ * la candidature. Le résultat se lit en jours (7 heures), par mois et
  * par an ; avec un taux horaire, il se lit aussi en euros. Puis la question.
  *
  * Aucun gain n'est promis : le calcul ne porte que sur ce que le tri coûte
@@ -68,7 +68,7 @@ export function CalculRoi({ locale }: { locale: Locale }) {
   const { calculRoi: t } = dict(locale);
   const [mode, setMode] = useState<Mode>("temps");
   const [heuresSemaine, setHeuresSemaine] = useState("");
-  const [recrutements, setRecrutements] = useState("");
+  const [recruteurs, setRecruteurs] = useState("");
   const [candidatures, setCandidatures] = useState("");
   const [taux, setTaux] = useState("");
 
@@ -83,11 +83,11 @@ export function CalculRoi({ locale }: { locale: Locale }) {
   let heuresAn: number | null = null;
   if (mode === "temps") {
     const h = lire(heuresSemaine);
-    if (h !== null) heuresAn = h * SEMAINES_PAR_AN;
+    const n = lire(recruteurs);
+    if (h !== null && n !== null) heuresAn = h * n * SEMAINES_PAR_AN;
   } else {
-    const r = lire(recrutements);
     const c = lire(candidatures);
-    if (r !== null && c !== null) heuresAn = (r * c * t.minutesParCandidature) / 60;
+    if (c !== null) heuresAn = (c * t.minutesParCandidature) / 60;
   }
   const pret = heuresAn !== null && heuresAn > 0;
   const heuresMois = heuresAn !== null ? heuresAn / 12 : null;
@@ -128,13 +128,13 @@ export function CalculRoi({ locale }: { locale: Locale }) {
 
       <div className="mt-5 flex flex-col gap-4">
         {mode === "temps" ? (
-          <Champ label={t.heuresSemaine.label} unite={t.heuresSemaine.unite} valeur={heuresSemaine} changer={setHeuresSemaine} exemple="10" />
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Champ label={t.heuresSemaine.label} unite={t.heuresSemaine.unite} valeur={heuresSemaine} changer={setHeuresSemaine} exemple="5" />
+            <Champ label={t.recruteurs.label} valeur={recruteurs} changer={setRecruteurs} exemple="3" />
+          </div>
         ) : (
           <>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Champ label={t.recrutements.label} valeur={recrutements} changer={setRecrutements} exemple="20" />
-              <Champ label={t.candidatures.label} valeur={candidatures} changer={setCandidatures} exemple="150" />
-            </div>
+            <Champ label={t.candidatures.label} valeur={candidatures} changer={setCandidatures} exemple="3 000" />
             <p className="-mt-1 text-[12px] text-faint">{t.base}</p>
           </>
         )}
