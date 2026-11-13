@@ -6,8 +6,8 @@ export const contentType = ogContentType;
 
 export default function Image() {
   return renderOgImage({
-    lead: "Une conversation.",
-    accent: "Quatre objectifs.",
+    lead: "Quatre produits.",
+    accent: "Une seule conversation.",
     sub: "Préqualifier, matcher, révéler les synergies, répondre aux candidats — intégrés à votre ATS.",
   });
 }

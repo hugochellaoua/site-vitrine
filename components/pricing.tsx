@@ -29,7 +29,7 @@ export function Pricing({ locale }: { locale: Locale }) {
           <Magnetic>
             <Link
               href={pricing.cta.href}
-              className="inline-block rounded-[4px] bg-gradient-to-br from-accent-light to-accent px-8 py-4 text-[15px] font-semibold text-white transition-shadow duration-300"
+              className="inline-block rounded-full bg-gradient-to-br from-accent-light to-accent px-8 py-4 text-[15px] font-semibold text-white shadow-[0_20px_60px_-18px_rgba(30,79,255,0.7)] transition-shadow duration-300 hover:shadow-[0_28px_70px_-16px_rgba(30,79,255,0.85)]"
             >
               {pricing.cta.label}
             </Link>

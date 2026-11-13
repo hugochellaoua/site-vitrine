@@ -68,7 +68,7 @@ function Service({
         />
         <DisclosurePanel open={open} id={`${item.id}-detail`} className="mt-5 flex flex-col gap-3.5">
           {item.body.map((p, i) => (
-            <p key={i} className="max-w-[62ch] text-[13.5px] leading-relaxed text-ink">
+            <p key={i} className="max-w-[62ch] text-[13.5px] leading-relaxed text-[#e4e5f5]">
               {p}
             </p>
           ))}

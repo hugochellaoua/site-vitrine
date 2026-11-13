@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { Galaxy } from "@/components/galaxy";
+import { StarTexture } from "@/components/star-texture";
+import { CursorLight } from "@/components/cursor-light";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { StickyCta } from "@/components/sticky-cta";
@@ -60,7 +63,7 @@ function MethodJsonLd({ locale }: { locale: Locale }) {
 const TEINTE_POIDS = [
   "border-iris/45 bg-iris-soft text-iris-light",
   "border-accent/45 bg-accent-soft text-accent-light",
-  "border-hairline-strong bg-ink/[0.035] text-muted",
+  "border-hairline-strong bg-white/[0.05] text-muted",
 ];
 
 export function MethodologyPage({ locale }: { locale: Locale }) {
@@ -68,6 +71,9 @@ export function MethodologyPage({ locale }: { locale: Locale }) {
   return (
     <>
       <MethodJsonLd locale={locale} />
+      <StarTexture />
+      <Galaxy />
+      <CursorLight />
       <Navbar locale={locale} />
 
       <main className="relative z-10">
@@ -77,7 +83,7 @@ export function MethodologyPage({ locale }: { locale: Locale }) {
             className="pointer-events-none absolute left-1/2 top-24 -z-10 h-[60vh] w-[min(1000px,92vw)] -translate-x-1/2"
             style={{
               background:
-                "radial-gradient(ellipse 50% 45% at 50% 40%, rgba(18,18,20,0) 0%, rgba(18,18,20,0) 46%, transparent 74%)",
+                "radial-gradient(ellipse 50% 45% at 50% 40%, rgba(29,80,254,0.28) 0%, rgba(29,80,254,0.07) 46%, transparent 74%)",
             }}
             aria-hidden="true"
           />
@@ -173,7 +179,7 @@ export function MethodologyPage({ locale }: { locale: Locale }) {
               <ol className="flex flex-col items-center justify-center gap-3 lg:flex-row">
                 {methodology.chain.steps.map((s, i) => (
                   <li key={s} className="flex flex-col items-center gap-3 lg:flex-row">
-                    <span className="rounded-[4px] border border-iris/35 bg-chip px-5 py-2.5 text-[13.5px] font-semibold text-ink">
+                    <span className="rounded-full border border-iris/35 bg-chip px-5 py-2.5 text-[13.5px] font-semibold text-ink">
                       {s}
                     </span>
                     {i < methodology.chain.steps.length - 1 && (
@@ -205,7 +211,7 @@ export function MethodologyPage({ locale }: { locale: Locale }) {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href={hero.cta.href}
-                className="group inline-flex items-center gap-2.5 rounded-[4px] bg-accent px-8 py-4 text-[15px] font-semibold text-white transition-shadow duration-300"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-8 py-4 text-[15px] font-semibold text-white shadow-[0_20px_60px_-16px_rgba(29,80,254,0.85)] transition-shadow duration-300 hover:shadow-[0_28px_74px_-14px_rgba(29,80,254,1)]"
               >
                 {hero.cta.label}
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

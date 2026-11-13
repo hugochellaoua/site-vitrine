@@ -29,23 +29,13 @@ export const site = {
 export const nav = {
   links: [
     { label: "Products", href: "/en/products", dropdown: "products" as const },
-    { label: "Solutions", href: "/en/use-cases", dropdown: "usecases" as const },
-    { label: "Resources", href: "/en/methodology", dropdown: "resources" as const },
+    { label: "Use cases", href: "/en/use-cases", dropdown: "usecases" as const },
+    { label: "The process", href: "/en#story", dropdown: "process" as const },
+    { label: "Services", href: "/en#services", dropdown: "services" as const },
     { label: "Pricing", href: "/en#tarifs" },
+    { label: "FAQ", href: "/en#faq" },
+    { label: "Contact", href: links.contact },
   ],
-  allProducts: { label: "See all four products", href: "/en/products" },
-  servicesLabel: "Services",
-  resources: [
-    { label: "The process", desc: "How Helpify runs the interview", href: "/en#story" },
-    { label: "Methodology", desc: "An assessment grounded in recruitment science", href: "/en/methodology" },
-    { label: "The team", desc: "The expertise gathered around Helpify", href: "/en/team" },
-    { label: "Why AI?", desc: "What it changes, and the questions we are asked", href: "/en/why-ai" },
-    { label: "Your data", desc: "Human oversight, transparency, GDPR", href: "/en#donnees" },
-    { label: "FAQ", desc: "The questions that keep coming up", href: "/en#faq" },
-    { label: "AI notice", desc: "How Helpify uses AI, and your rights", href: links.noticeIA },
-    { label: "Contact", desc: "A question? Let's talk about your hiring", href: links.contact },
-  ],
-  candidat: { label: "For candidates", href: "/en/candidates" },
   connexion: { label: "Log in", href: links.login },
   cta: { label: "Book a demo", href: links.booking },
 };
@@ -266,7 +256,6 @@ export const experts: ExpertsContent = {
   emphasis: "around us.",
   intro:
     "The support and expertise of experienced professionals who challenge our thinking on HR, business and technology issues.",
-  logosLabel: "Our experts work at",
   items: [
     {
       name: "Brice Monnier",
@@ -276,13 +265,13 @@ export const experts: ExpertsContent = {
     },
     {
       name: "Florent Gbelidji",
-      role: "AI Engineering Lead at Reflection AI",
+      role: "Member of Technical Staff – Open Source Lead at Reflection AI",
       logo: "reflection",
       body: "Brings cutting-edge expertise in AI model engineering, with a demanding eye on their reliability, robustness and control.",
     },
     {
       name: "Rome Lambert",
-      role: "Independent HR manager & recruiter",
+      role: "Independent HR manager – SMEs and micro-businesses",
       body: "Brings a field-level view of operational HR issues, with a hands-on approach that stays close to the realities of businesses.",
     },
   ],
@@ -355,11 +344,11 @@ export const methodology = {
 
 export const useCases = {
   eyebrow: "Use cases",
-  title: "Eight situations. Which one is yours?",
+  title: "Nine situations. Which one is yours?",
   emphasis: "Which one is yours?",
   intro:
     "Hiring does not break down in the same place for every team. Start from your own situation: here is what Helpify changes about it, concretely.",
-  menuLink: "See the eight use cases",
+  menuLink: "See the nine use cases",
 
   items: [
     {
@@ -390,6 +379,23 @@ export const useCases = {
       tone: "accent" as const,
     },
     {
+      id: "read-candidates-better",
+      menu: "Read candidates better",
+      promise: "One unified, structured profile",
+      problem: "Information is scattered and I need a simpler way to read profiles.",
+      answer: [
+        "Helpify turns what the conversation surfaces into a unified, structured profile, built on the criteria that matter for the role.",
+      ],
+      benefits: [
+        "A standardised candidate profile",
+        "Structured information",
+        "Faster reading",
+        "Easier comparison",
+        "The information relevant to the role brought forward",
+      ],
+      tone: "accent" as const,
+    },
+    {
       id: "assess-skills",
       menu: "Assess skills",
       promise: "Go beyond claimed skills",
@@ -410,14 +416,6 @@ export const useCases = {
       answer: [
         "The CV is no longer the only source. Helpify adds a conversation with the candidate to go beyond the document.",
         "Questions are built from the assessment criteria for the role and from a structured recruitment methodology. The candidate has to bring concrete evidence about their experience and their track record.",
-        "Helpify turns what the conversation surfaces into a unified, structured profile, built on the criteria that matter for the role.",
-      ],
-      benefits: [
-        "A standardised candidate profile",
-        "Structured information",
-        "Faster reading",
-        "Easier comparison",
-        "The information relevant to the role brought forward",
       ],
       nuance:
         "The conversation does not make gaming impossible. It limits artificially polished answers and holds claims up against concrete evidence.",
@@ -493,47 +491,45 @@ export const useCases = {
 
 export const products = {
   eyebrow: "Our products",
-  title: "One conversation. Four goals.",
-  emphasis: "Four goals.",
+  title: "Four products. One conversation.",
+  emphasis: "One conversation.",
   intro: [
     "Helpify turns the conversation with candidates into a genuine recruiting tool.",
     "From the first question to identifying the best profiles, our four products plug into your ATS and fit the process you already have.",
   ],
-  verbs: ["Match", "Prequalify", "Surface synergies", "Engage candidates"],
+  verbs: ["Prequalify", "Match", "Surface synergies", "Answer candidates"],
   outro: "One platform to understand your talent better and move your hiring faster.",
 
   items: [
     {
-      id: "matching",
-      name: "Matching",
-      headline: "Better identify the profiles that genuinely fit the need",
-      tag: "Structured interview, grounded in recruitment science",
-      body: "Helpify assesses every candidate against your criteria, through a structured interview that looks for concrete evidence beyond what a CV shows.",
-      visual: "score" as const,
+      id: "prequalification",
+      name: "Prequalification",
+      headline: "The key information, without the prequalification calls",
+      body: "Helpify talks to every candidate to collect automatically the information your hiring depends on.",
+      visual: "chat-extract" as const,
       tone: "accent" as const,
     },
     {
-      id: "prequalification",
-      name: "Prequalification",
-      headline: "Prequalify 100% of your candidates",
-      body: "Helpify talks to every candidate and automatically collects the information your hiring depends on, without a single screening call.",
-      visual: "chat-extract" as const,
+      id: "matching",
+      name: "Matching",
+      headline: "Identify the profiles that genuinely fit the need",
+      body: "Helpify analyses profiles against your criteria and uses the conversation to go beyond what a CV shows.",
+      visual: "score" as const,
       tone: "accent" as const,
     },
     {
       id: "360-matching",
       name: "360 Matching",
-      headline: "Maximise your chances of finding the right candidate",
-      body: "Every candidate is matched with all the open roles they could fit, not just the one they applied for.",
+      headline: "Stop losing a talent to a single application",
+      body: "A candidate who doesn't fit one role may be exactly right for another. 360 Matching surfaces those synergies across all your open roles.",
       visual: "constellation" as const,
       tone: "accent" as const,
     },
     {
       id: "talent-ask",
       name: "Talent Ask",
-      headline: "Engage your candidates and answer their questions, 24/7",
-      tag: "Clear information, so more candidates apply",
-      body: "Without clear information, many candidates give up on applying. The role, the team, the conditions, the next steps: with Talent Ask, everyone gets their answers and can picture themselves in the job. And since many candidates search and apply outside office hours, Talent Ask answers them at any hour. The questions they ask come back to you as insights, to communicate better externally and attract talent.",
+      headline: "Answer candidates, around the clock",
+      body: "Talent Ask lets candidates ask their questions about your company, your roles and your environment, right inside their hiring journey.",
       visual: "ask" as const,
       tone: "iris" as const,
     },
@@ -574,8 +570,8 @@ export const products = {
 
   home: {
     eyebrow: "Our products",
-    title: "One conversation. Four goals.",
-    emphasis: "Four goals.",
+    title: "Four products. One conversation.",
+    emphasis: "One conversation.",
     link: "Explore the four products",
   },
 
@@ -801,10 +797,6 @@ export const finalCta = {
 };
 
 export const footer = {
-  heads: { products: "Products", solutions: "Solutions", resources: "Resources", company: "Company", legal: "Legal" },
-  allUseCases: "All use cases",
-  address: "59 rue de Ponthieu, 75008 Paris, France",
-  email: "contact@helpify-ai.fr",
   legal: [
     { label: "Legal notice", href: links.mentionsLegales },
     { label: "Privacy", href: links.privacy },
@@ -814,299 +806,6 @@ export const footer = {
   social: { label: "Helpify on LinkedIn", href: links.linkedin },
   badges: ["GDPR compliant", "EU hosting", "European data"],
   copyright: "© 2026 Helpify",
-};
-
-export const defile = {
-  lead: "Recruiters who",
-  lignes: [
-    "prequalify without screening calls.",
-    "assess every candidate beyond the CV.",
-    "never miss a talent again.",
-    "answer candidates, 24/7.",
-    "enrich their talent pool with every conversation.",
-    "apply the same criteria to everyone.",
-    "get their shortlist automatically.",
-  ],
-  cta: { label: "See the products", href: "/en/products" },
-};
-
-export const espaceCandidat = {
-  eyebrow: "For candidates",
-  badge: "Coming soon",
-  title: "Show who you are, beyond your CV.",
-  emphasis: "beyond your CV.",
-  intro: "Talk with Helpify about your background. It brings out what your CV doesn't say, and you share it when you apply.",
-  etapesTitre: "How it will work.",
-  etapes: [
-    {
-      titre: "You talk with Helpify",
-      texte: "A real interview, written or spoken: questions about your background, your achievements and their context, what you are looking for.",
-    },
-    {
-      titre: "Your profile takes shape",
-      texte: "Helpify turns it into a clear profile: what you actually did, what you can do, what drives you. Enough to stand out well beyond a CV.",
-    },
-    {
-      titre: "You share it when you apply",
-      texte: "A link to add to your application, next to your CV.",
-    },
-    {
-      titre: "The recruiter sees the match",
-      texte: "They add their job description and see how your profile fits it, criterion by criterion.",
-    },
-  ],
-  apercu: {
-    profil: "Profile",
-    realisations: "Achievements",
-    realisation: "Built a customer service function from scratch: processes, hired three people, satisfaction tracking.",
-    competences: "Skills",
-    fiche: "Job description added",
-    correspondance: "Match",
-  },
-  attente: {
-    titre: "Be among the first.",
-    texte: "Sign up: we'll let you know as soon as the candidate space opens.",
-    prenom: "First name",
-    email: "Email",
-    metier: "Role or job you're looking for (optional)",
-    bouton: "Join the waiting list",
-    envoi: "Sending…",
-    mention: "By signing up, you agree that Helpify may email you about the candidate space. Your data is used for nothing else.",
-    confidentialite: { label: "Privacy policy", href: links.privacy },
-    ok: "You're on the list. We'll let you know as soon as the candidate space opens.",
-    erreur: "Your sign-up could not be sent. Please try again in a moment.",
-    source: "Liste d'attente · Espace candidat",
-  },
-};
-
-export const equipe = {
-  eyebrow: "The team",
-  title: "The expertise gathered around Helpify.",
-  emphasis: "around Helpify.",
-  groupes: [
-    {
-      titre: "Customer relations & product",
-      membres: [
-        {
-          nom: "Hugo Chellaoua",
-          initiales: "HC",
-          photo: "/equipe/hugo.jpg",
-          role: "CEO",
-          points: ["Leads the product vision and customer relationships", "Works directly with the challenges of recruitment teams"],
-        },
-      ],
-    },
-    {
-      titre: "Engineering & security",
-      membres: [
-        {
-          nom: "Mounir Zaghba",
-          initiales: "MZ",
-          role: "CTO",
-          points: ["Guarantees the platform's architecture, reliability and security"],
-        },
-      ],
-    },
-    {
-      titre: "HR experts",
-      membres: [
-        {
-          nom: "Brice Monnier",
-          initiales: "BM",
-          photo: "/equipe/brice-monnier.jpg",
-          role: "HR Director at L'Oréal Innovation",
-          logo: "loreal" as const,
-          points: ["Brings the large-group perspective on HR, transformation and innovation"],
-        },
-        {
-          nom: "Rome Lambert",
-          initiales: "RL",
-          photo: "/equipe/rome.jpg",
-          role: "Independent HR manager & recruiter",
-          points: ["The field view of recruitment: sourcing, qualification and candidate experience"],
-        },
-      ],
-    },
-    {
-      titre: "AI expert",
-      membres: [
-        {
-          nom: "Florent Gbelidji",
-          initiales: "FG",
-          photo: "/equipe/florent.jpg",
-          role: "AI Engineering Lead at Reflection AI",
-          logo: "reflection" as const,
-          points: ["Contributes to the reliability of the AI, its questioning and its reporting"],
-        },
-      ],
-    },
-  ] as { titre: string; membres: { nom: string; initiales: string; photo?: string; role: string; logo?: "loreal" | "reflection"; points: string[]; experience?: string }[] }[],
-  cta: { titre: "Let's talk about your hiring.", label: "Book a demo", href: links.booking },
-};
-
-export const pourquoiIA = {
-  eyebrow: "Resources",
-  title: "Why use AI in recruitment?",
-  emphasis: "in recruitment?",
-  intro: "What AI changes for your candidates and your recruiters, and the questions we are asked most often.",
-  constat: {
-    titre: "Today, most candidates are never listened to.",
-    texte: [
-      "A candidate sends a CV and, in 95% of cases, hears nothing back. They have no space to explain who they are, and no one to tell them about the role.",
-      "On the other side, your recruiters don't have time to call every candidate. They read keywords, often optimised by AI, and miss profiles they never heard.",
-    ],
-    points: [
-      "Silence after an application is one of the experiences candidates find hardest.",
-      "When the process is long or opaque, many drop their application halfway.",
-    ],
-  },
-  attentes: {
-    titre: "What candidates want.",
-    items: [
-      { attente: "To understand before applying", reponse: "Talent Ask answers their questions about the role, the team and the conditions, at any hour." },
-      { attente: "To be heard, not just read", reponse: "Every candidate gets a real conversation about their background." },
-      { attente: "To know what the AI does", reponse: "Helpify introduces itself as an AI, relies on the role's criteria, and a recruiter decides." },
-      { attente: "For the time saved to serve human contact", reponse: "Your recruiters spend the time saved on interviews." },
-    ],
-  },
-  change: {
-    titre: "What Helpify changes, on both sides.",
-    colonnes: [
-      {
-        titre: "For your candidates",
-        points: [
-          "A real conversation about their background, not just a CV.",
-          "Answers to their questions about the role and the company, at any hour.",
-          "The certainty that a recruiter makes the decision.",
-        ],
-      },
-      {
-        titre: "For your recruiters",
-        points: [
-          "Time saved goes to interviews and decisions.",
-          "Every candidate assessed against the same criteria, with evidence.",
-          "Profiles that were genuinely heard, not just keywords.",
-        ],
-      },
-    ],
-  },
-  objections: {
-    titre: "The questions we are asked.",
-    items: [
-      {
-        q: "Will AI decide instead of my recruiters?",
-        a: "No. No hiring, rejection or final ranking decision is ever made automatically. Helpify prepares the assessment; your recruiters keep the criteria, the judgement and the decision.",
-      },
-      {
-        q: "Do candidates accept talking to an AI?",
-        a: "Yes, especially when it is explained. A first written or voice exchange before the interview is well accepted when the criteria are clear and a recruiter keeps the decision. That is exactly what Helpify does: it introduces itself as an AI, relies on the role's criteria, and reminds candidates that a recruiter decides.",
-      },
-      {
-        q: "How do you avoid bias?",
-        a: "The same criteria for everyone, defined for the role. Every conclusion is sourced from the candidate's answers, and the score is justified criterion by criterion. You keep the final decision.",
-      },
-      {
-        q: "What about CVs written with AI?",
-        a: "More and more candidates use AI to prepare their applications. The conversation looks for concrete evidence: what the candidate actually did, in what context, with what results.",
-      },
-      {
-        q: "What happens to candidate data?",
-        a: "It is kept in the platform's secure space, accessible according to the rights you define, and for up to 24 months for candidates who were not selected. Every candidate can exercise their GDPR rights.",
-      },
-      {
-        q: "Do we need to change tools?",
-        a: "No. Helpify is not an ATS: it plugs into yours, and results come back where your teams already work.",
-      },
-    ],
-  },
-  cta: { titre: "See it on one of your roles.", label: "Book a demo", href: links.booking },
-};
-
-export const methode = {
-  title: "How Helpify runs the interview.",
-  emphasis: "runs the interview.",
-  etapes: [
-    {
-      titre: "The role's criteria",
-      texte: "Helpify extracts the criteria from your job post, how much each one matters, and the observable behaviours that show them.",
-    },
-    {
-      titre: "The interview questions",
-      texte: "From those criteria, Helpify builds the interview questions.",
-    },
-    {
-      titre: "The candidate's CV",
-      texte: "When the candidate uploads their CV, Helpify adapts the questions to their background and to the role's criteria, to understand how they connect.",
-    },
-    {
-      titre: "A real conversation",
-      texte: "Questions adjust to every answer to dig deeper, the way a recruiter would in an interview.",
-    },
-    {
-      titre: "The analysis, criterion by criterion",
-      texte: "Helpify returns its analysis against your criteria. Your HR team decides.",
-    },
-  ],
-  cta: { label: "Book a demo", href: links.booking },
-  demo: {
-    offre: "Job post",
-    observable: "Observable behaviour",
-    observables: [
-      "Has managed strategic client accounts",
-      "Has set up processes and a team",
-      "Works professionally in English",
-      "Has worked at a SaaS company",
-    ],
-    questions: "Interview questions",
-    exemples: [
-      "Tell me about a time you built a customer service function.",
-      "Which key account did you look after, and how?",
-      "Could you walk us through one of your projects in English?",
-    ],
-    cv: "CV.pdf",
-    adaptee: "Question adapted to the CV",
-    relance: "Follow-up",
-    relanceTexte: "How did you choose the three people you hired?",
-    analyse: "Analysis",
-    valider: "For you to validate",
-  },
-  cumul: {
-    title: "The four products work together.",
-    texte: "They all rest on the same interview: turn on one, or all four.",
-  },
-};
-
-export const donnees = {
-  eyebrow: "Your data",
-  title: "AI that assists, never decides.",
-  emphasis: "never decides.",
-  intro: "What the platform does with applications, and what it does not.",
-  items: [
-    {
-      title: "Human oversight",
-      body: "No hiring, rejection or final ranking decision is ever made automatically. The final decision belongs to your company.",
-    },
-    {
-      title: "Transparency for candidates",
-      body: "Candidates know they are talking to an artificial intelligence, and receive information on how it is used before the conversation starts.",
-    },
-    {
-      title: "Controlled access",
-      body: "Conversations are stored in the platform's secure space, accessible only according to the rights you define.",
-    },
-    {
-      title: "Limited retention",
-      body: "Data on candidates who were not selected is kept for up to 24 months after the last contact, unless deleted earlier.",
-    },
-    {
-      title: "GDPR rights",
-      body: "Access, rectification, erasure, restriction, objection, portability: every candidate can exercise their rights.",
-    },
-  ],
-  links: [
-    { label: "Read the AI notice", href: links.noticeIA },
-    { label: "Privacy policy", href: links.privacy },
-  ],
 };
 
 /**
@@ -1133,7 +832,6 @@ export const ui = {
   prevStep: "Previous step",
   nextStep: "Next step",
   lastStep: "Last step",
-  discover: "Discover",
   seeInDemoBefore: "See ",
   seeInDemoAfter: " in a demo",
   helpifyAnswer: "The Helpify answer",

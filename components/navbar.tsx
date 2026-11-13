@@ -17,77 +17,64 @@ import { LanguageSwitch } from "@/components/ui/language-switch";
  * libellés ne peuvent pas diverger de ceux des pages. Le calcul dépend de la
  * langue, il ne peut donc plus se faire au chargement du module.
  */
-type Entree = { label: string; href: string; desc?: string; tone?: "warm" | "ink" };
-type Panneau = {
-  items: Entree[];
-  /** Un second groupe, sous un intitulé, dans le même panneau. */
-  extra?: { title: string; items: Entree[] };
-  all?: { label: string; href: string };
-  /** Décalage du panneau vers la gauche, pour qu'il ne sorte pas de l'écran. */
-  align: string;
-  /** Faux : l'entrée ne déplie rien dans le menu mobile. */
-  mobile?: boolean;
-};
-
-function submenus(locale: Locale): Record<"products" | "usecases" | "resources", Panneau> {
-  const { products, services, useCases, nav } = dict(locale);
+function submenus(locale: Locale) {
+  const { products, services, useCases } = dict(locale);
   const p = (path: string) => (locale === "fr" ? path : `/en${path === "/" ? "" : path}`);
   const produits = locale === "fr" ? "/produits" : "/en/products";
   const cas = locale === "fr" ? "/cas-d-usage" : "/en/use-cases";
+  const metho = locale === "fr" ? "/methodologie" : "/en/methodology";
+  const mots =
+    locale === "fr"
+      ? { deroule: "Le déroulé, étape par étape", metho: "Notre méthodologie", integ: "Intégrations" }
+      : { deroule: "The process, step by step", metho: "Our methodology", integ: "Integrations" };
 
   return {
-    // Les produits, chacun avec sa promesse, puis les services : tout ce que
-    // l'on achète, au même endroit.
     products: {
-      align: "-left-24",
-      items: products.items.map((x) => ({ label: x.name, desc: x.headline, href: `${produits}#${x.id}`, tone: "warm" as const })),
-      extra: {
-        title: nav.servicesLabel,
-        items: services.items.map((x) => ({ label: x.title, desc: x.line, href: p(`/#${x.id}`) })),
-      },
-      all: nav.allProducts,
+      tone: "warm" as const,
+      items: products.items.map((x) => ({ label: x.name, href: `${produits}#${x.id}` })),
+    },
+    process: {
+      tone: "ink" as const,
+      items: [
+        { label: mots.deroule, href: p("/#story") },
+        { label: mots.metho, href: metho },
+      ],
+    },
+    services: {
+      tone: "ink" as const,
+      items: [
+        // Les intégrations quittent le premier niveau du menu : elles relèvent
+        // de ce que l'on met en place autour du produit, comme les autres.
+        { label: mots.integ, href: p("/#integrations") },
+        ...services.items.map((x) => ({ label: x.title, href: p(`/#${x.id}`) })),
+      ],
     },
     /**
-     * Les cas d'usage s'affichent problème → réponse. Un menu qui n'énumérerait
-     * que « Volume important » ou « Profils atypiques » obligerait à cliquer
-     * pour comprendre ; la promesse sous chaque libellé fait tout le travail.
+     * Les cas d'usage s'affichent problème → réponse, sur deux colonnes.
+     *
+     * Un menu qui n'énumérerait que « Volume important » ou « Profils atypiques »
+     * obligerait à cliquer pour comprendre. La promesse posée sous chaque
+     * libellé fait tout le travail : le visiteur reconnaît sa situation et sait
+     * déjà ce qu'on lui répond.
      */
     usecases: {
-      align: "-left-40",
-      // Pas de sous-menu sur mobile : huit intitulés y rendraient la liste
-      // interminable, alors que l'entrée mène déjà à la page qui les présente.
+      tone: "ink" as const,
+      wide: true,
+      // Pas de sous-menu sur mobile : déplier neuf intitulés y rendrait la liste
+      // interminable, alors que l'entrée mène déjà à la page qui les présente
+      // tous, mieux qu'un menu ne le ferait.
       mobile: false,
-      items: useCases.items.map((u) => ({ label: u.menu, desc: u.promise, href: `${cas}#${u.id}` })),
       all: { label: useCases.menuLink, href: cas },
-    },
-    resources: {
-      align: "-left-64",
-      items: nav.resources,
+      items: useCases.items.map((u) => ({
+        label: u.menu,
+        desc: u.promise,
+        href: `${cas}#${u.id}`,
+      })),
     },
   };
 }
 
 type Submenus = ReturnType<typeof submenus>;
-
-/** Une entrée d'un panneau : son nom, puis sa phrase. */
-function Lien({ item, fermer }: { item: Entree; fermer: () => void }) {
-  return (
-    <li>
-      <Link href={item.href} onClick={fermer} className="block h-full rounded-xl px-3.5 py-2.5 transition-colors hover:bg-ink/[0.045]">
-        <span
-          className={cn(
-            "block font-display text-[14.5px] font-bold tracking-[-0.01em]",
-            // L'orange est réservé aux noms de produits.
-            item.tone === "warm" ? "text-warm" : "text-ink",
-          )}
-        >
-          {item.label}
-        </span>
-        {item.desc && <span className="mt-0.5 block text-[12.5px] leading-snug text-muted">{item.desc}</span>}
-      </Link>
-    </li>
-  );
-}
 
 /**
  * Sous-menu déployé au survol d'une entrée du menu principal.
@@ -112,7 +99,10 @@ function DropdownMenu({
   menu: keyof Submenus;
   sous: Submenus;
 }) {
-  const { items, extra, all, align } = sous[menu];
+  const sousMenu = sous[menu];
+  const { items, tone } = sousMenu;
+  const wide = "wide" in sousMenu && sousMenu.wide;
+  const all = "all" in sousMenu ? sousMenu.all : null;
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -157,39 +147,73 @@ function DropdownMenu({
           dans l'espace entre le lien et le panneau, qui se refermerait. */}
       <div
         data-open={open}
-        className={cn("dropdown absolute top-full z-10 pt-3", align)}
+        className={cn(
+          "dropdown absolute top-full z-10 pt-3",
+          // Le panneau large est trop étendu pour être centré sur son entrée :
+          // il déborderait de l'écran. Il s'aligne donc sur le bord gauche de
+          // la barre, dont il ne dépasse jamais.
+          wide ? "-left-40 xl:-left-44" : "left-1/2 -translate-x-1/2",
+        )}
       >
-        <div className="glass-panel glass-panel--solid dropdown-panel w-[min(640px,calc(100vw-2rem))] rounded-2xl p-2.5">
-          <ul className="grid grid-cols-2 gap-x-1.5 gap-y-0.5">
-            {items.map((item) => (
-              <Lien key={item.href + item.label} item={item} fermer={() => setOpen(false)} />
-            ))}
-          </ul>
-          {extra && (
-            <>
-              <p className="mt-2 border-t border-hairline px-3.5 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-faint">
-                {extra.title}
-              </p>
-              <ul className="grid grid-cols-2 gap-x-1.5 gap-y-0.5">
-                {extra.items.map((item) => (
-                  <Lien key={item.href + item.label} item={item} fermer={() => setOpen(false)} />
-                ))}
-              </ul>
-            </>
+        <ul
+          className={cn(
+            "glass-panel glass-panel--solid dropdown-panel rounded-2xl p-2",
+            wide
+              ? "grid w-[min(620px,calc(100vw-2rem))] grid-cols-2 gap-x-2 gap-y-0.5"
+              : "flex min-w-[240px] flex-col gap-0.5",
           )}
+        >
+          {items.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "block rounded-xl px-3.5 py-2.5 transition-colors hover:bg-white/[0.06]",
+                  wide ? "h-full" : "whitespace-nowrap",
+                )}
+              >
+                <span
+                  className={cn(
+                    "block font-display text-[14.5px] font-bold tracking-[-0.01em]",
+                    // L'orange est réservé aux noms de produits ; les services
+                    // et les cas d'usage restent en blanc pour qu'on distingue
+                    // les deux registres.
+                    tone === "warm" ? "text-warm" : "text-ink",
+                  )}
+                >
+                  {item.label}
+                </span>
+                {"desc" in item && item.desc && (
+                  // La réponse, sous le problème. La flèche dit le lien entre
+                  // les deux sans qu'aucun mot ne soit nécessaire.
+                  <span className="mt-0.5 block text-[12.5px] leading-snug text-muted">
+                    <span className="text-accent-light" aria-hidden="true">
+                      →{" "}
+                    </span>
+                    {item.desc}
+                  </span>
+                )}
+              </Link>
+            </li>
+          ))}
+
           {all && (
-            <div className="mt-2 border-t border-hairline pt-1.5">
+            <li className="col-span-2 mt-1 border-t border-hairline pt-1">
               <Link
                 href={all.href}
                 onClick={() => setOpen(false)}
-                className="group flex items-center justify-center gap-1.5 rounded-xl px-3.5 py-2.5 text-[13.5px] font-semibold text-accent-light transition-colors hover:bg-ink/[0.045]"
+                className="group flex items-center justify-center gap-1.5 rounded-xl px-3.5 py-2.5 text-[13.5px] font-semibold text-accent-light transition-colors hover:bg-white/[0.06]"
               >
                 {all.label}
-                <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                <ArrowRight
+                  size={14}
+                  className="transition-transform duration-300 group-hover:translate-x-0.5"
+                />
               </Link>
-            </div>
+            </li>
           )}
-        </div>
+        </ul>
       </div>
     </div>
   );
@@ -200,7 +224,6 @@ export function Navbar({ locale }: { locale: Locale }) {
   const sous = submenus(locale);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [deplieMobile, setDeplieMobile] = useState<string | null>(null);
 
   useEffect(() => {
     function onScroll() {
@@ -222,7 +245,7 @@ export function Navbar({ locale }: { locale: Locale }) {
     <header className="navbar-enter fixed inset-x-0 top-4 z-50 flex justify-center px-4 sm:top-6">
       <nav
         className={cn(
-          "glass-panel flex w-full max-w-[1180px] items-center justify-between gap-4 rounded-[6px] transition-[padding,background-color,box-shadow] duration-300 ease-out",
+          "glass-panel flex w-full max-w-[1120px] items-center justify-between gap-4 rounded-full transition-[padding,background-color,box-shadow] duration-300 ease-out",
           // Au scroll, la barre bascule sur un fond quasi opaque : voir
           // `.glass-panel--solid` dans globals.css.
           scrolled ? "glass-panel--solid px-3 py-2" : "px-4 py-2.5",
@@ -258,9 +281,6 @@ export function Navbar({ locale }: { locale: Locale }) {
           {/* L'application vit sur son propre sous-domaine : ce lien quitte le
               site, d'où une ancre simple plutôt qu'un lien de navigation
               interne, dont le préchargement n'aurait rien à précharger. */}
-          <Link href={nav.candidat.href} className="whitespace-nowrap text-[13.5px] text-muted transition-colors hover:text-ink">
-            {nav.candidat.label}
-          </Link>
           <a
             href={nav.connexion.href}
             className="whitespace-nowrap text-[13.5px] text-muted transition-colors hover:text-ink"
@@ -271,7 +291,7 @@ export function Navbar({ locale }: { locale: Locale }) {
           <Magnetic radius={80} strength={0.24}>
             <Link
               href={nav.cta.href}
-              className="inline-block whitespace-nowrap rounded-[4px] bg-accent px-5 py-2.5 text-[13.5px] font-semibold text-white transition-shadow duration-300"
+              className="inline-block whitespace-nowrap rounded-full bg-accent px-5 py-2.5 text-[13.5px] font-semibold text-white shadow-[0_10px_30px_-10px_rgba(29,80,254,0.75)] transition-shadow duration-300 hover:shadow-[0_14px_36px_-8px_rgba(29,80,254,0.9)]"
             >
               {nav.cta.label}
             </Link>
@@ -290,104 +310,95 @@ export function Navbar({ locale }: { locale: Locale }) {
 
       <div
         data-open={open}
-        className="mobile-menu fixed inset-0 z-[60] flex flex-col bg-void lg:hidden"
+        className="mobile-menu fixed inset-0 z-[60] flex flex-col bg-void/98 backdrop-blur-xl lg:hidden"
       >
-        <div className="flex items-center justify-between border-b border-hairline px-5 py-4">
+        <div className="flex items-center justify-between px-6 py-5">
           <LogoLockup />
           <button
             type="button"
             onClick={() => setOpen(false)}
             aria-label="Fermer le menu"
-            className="flex h-10 w-10 items-center justify-center rounded-[4px] border border-hairline text-ink"
+            className="flex h-9 w-9 items-center justify-center rounded-full text-ink"
           >
             <X size={20} />
           </button>
         </div>
-        {/* Sur mobile, chaque entrée se déplie sur place : les produits, les
-            solutions et les ressources s'affichent en liste, chacun avec sa
-            phrase, comme dans les panneaux de la version ordinateur. */}
-        <div className="flex-1 overflow-y-auto px-5">
-          <ul>
+        {/* Sur mobile, il n'y a pas de survol : les sous-menus courts sont
+            dépliés sous leur entrée, en pastilles distinctes plutôt qu'en une
+            ligne de mots qui se lirait comme une phrase. Sans eux,
+            « Intégrations » — passée sous Services — deviendrait inatteignable
+            depuis le menu. Le conteneur défile, pour qu'un écran court ne coupe
+            jamais le bas de la liste.
+
+            Le centrage passe par des marges automatiques, et non par
+            `justify-center` : quand la liste dépasse la hauteur de l'écran,
+            celui-ci rejette le surplus au-dessus du bord défilable, où plus
+            aucun défilement ne va le rechercher. Les marges automatiques, elles,
+            se réduisent à zéro dès qu'il n'y a plus de place à répartir. */}
+        <div className="flex flex-1 flex-col overflow-y-auto px-6 py-4">
+          <div className="m-auto flex flex-col items-center gap-4">
             {nav.links.map((link) => {
               const sm = link.dropdown ? sous[link.dropdown] : null;
-              const deplie = deplieMobile === link.href;
+              const deplie = sm && !("mobile" in sm && sm.mobile === false);
               return (
-                <li key={link.href} className="border-b border-hairline">
-                  {sm ? (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => setDeplieMobile(deplie ? null : link.href)}
-                        aria-expanded={deplie}
-                        className="flex w-full items-center justify-between py-5 text-left font-display text-[24px] tracking-[-0.03em] text-ink"
-                      >
-                        {link.label}
-                        <ChevronDown size={20} className={cn("text-faint transition-transform duration-300", deplie && "rotate-180")} />
-                      </button>
-                      {deplie && (
-                        <ul className="flex flex-col gap-1 pb-5">
-                          {[...sm.items, ...(sm.extra?.items ?? [])].map((item) => (
-                            <li key={item.href + item.label}>
-                              <Link
-                                href={item.href}
-                                onClick={() => setOpen(false)}
-                                className="block rounded-[4px] bg-chip px-4 py-3"
-                              >
-                                <span className="block text-[15.5px] font-medium text-ink">{item.label}</span>
-                                {item.desc && <span className="mt-0.5 block text-[13px] leading-snug text-muted">{item.desc}</span>}
-                              </Link>
-                            </li>
-                          ))}
-                          {sm.all && (
-                            <li>
-                              <Link
-                                href={sm.all.href}
-                                onClick={() => setOpen(false)}
-                                className="flex items-center gap-1.5 px-4 py-3 text-[14px] font-medium text-ink"
-                              >
-                                {sm.all.label}
-                                <ArrowRight size={14} />
-                              </Link>
-                            </li>
+                <div
+                  key={link.href}
+                  className="flex flex-col items-center gap-1 text-center"
+                >
+                  <Link
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="py-1 font-display text-[22px] leading-none text-ink"
+                  >
+                    {link.label}
+                  </Link>
+                  {deplie && (
+                    // Les entrées du sous-menu se lisent comme le sous-titre de
+                    // celle qui les porte : une seule ligne, sous le titre, dans
+                    // une graisse qui ne lui dispute rien.
+                    <ul className="flex flex-wrap items-center justify-center gap-x-1 text-[13px]">
+                      {sm.items.map((item, i) => (
+                        <li key={item.href} className="flex items-center gap-1">
+                          <Link
+                            href={item.href}
+                            onClick={() => setOpen(false)}
+                            className={cn(
+                              "py-1.5",
+                              sm.tone === "warm" ? "text-warm" : "text-muted",
+                            )}
+                          >
+                            {item.label}
+                          </Link>
+                          {/* Le séparateur suit son entrée plutôt qu'il ne
+                              précède la suivante : au passage à la ligne, il
+                              reste en fin de ligne au lieu d'en ouvrir une. */}
+                          {i < sm.items.length - 1 && (
+                            <span className="text-faint" aria-hidden="true">
+                              ·
+                            </span>
                           )}
-                        </ul>
-                      )}
-                    </>
-                  ) : (
-                    <Link
-                      href={link.href}
-                      onClick={() => setOpen(false)}
-                      className="block py-5 font-display text-[24px] tracking-[-0.03em] text-ink"
-                    >
-                      {link.label}
-                    </Link>
+                        </li>
+                      ))}
+                    </ul>
                   )}
-                </li>
+                </div>
               );
             })}
-          </ul>
-        </div>
-        <div className="flex flex-col gap-3 border-t border-hairline px-5 py-5">
-          <Link
-            href={nav.cta.href}
-            onClick={() => setOpen(false)}
-            className="flex items-center justify-center gap-2 rounded-[4px] bg-accent px-6 py-4 text-[15px] font-medium text-white"
-          >
-            {nav.cta.label}
-            <ArrowRight size={16} />
-          </Link>
-          <Link
-            href={nav.candidat.href}
-            onClick={() => setOpen(false)}
-            className="flex items-center justify-center rounded-[4px] border border-hairline-strong px-6 py-3.5 text-[15px] text-ink"
-          >
-            {nav.candidat.label}
-          </Link>
-          <div className="flex items-center justify-between">
-            <a href={nav.connexion.href} onClick={() => setOpen(false)} className="text-[15px] text-muted">
+            <a
+              href={nav.connexion.href}
+              onClick={() => setOpen(false)}
+              className="text-base text-muted"
+            >
               {nav.connexion.label}
             </a>
-            <LanguageSwitch locale={locale} />
+            <Link
+              href={nav.cta.href}
+              onClick={() => setOpen(false)}
+              className="rounded-full bg-accent px-7 py-4 text-base font-semibold text-white"
+            >
+              {nav.cta.label}
+            </Link>
+            <LanguageSwitch locale={locale} className="mt-1" />
           </div>
         </div>
       </div>

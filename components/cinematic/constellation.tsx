@@ -56,7 +56,7 @@ export function Constellation({
         {points.map((p, i) => (
           <div
             key={i}
-            className="absolute w-[31%] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-hairline-strong bg-panel/70 px-2 py-1.5 text-center text-[10.5px] leading-tight text-ink backdrop-blur-sm"
+            className="absolute w-[31%] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-hairline-strong bg-panel/70 px-2 py-1.5 text-center text-[10.5px] leading-tight text-[#dfe3ff] backdrop-blur-sm"
             style={{ top: `${p.top}%`, left: `${p.left}%` }}
           >
             {p.label}
@@ -78,7 +78,7 @@ export function Constellation({
           {labels.map((l) => (
             <span
               key={l}
-              className="rounded-full border border-hairline bg-panel/50 px-2.5 py-1 text-[10.5px] text-ink"
+              className="rounded-full border border-hairline bg-panel/50 px-2.5 py-1 text-[10.5px] text-[#dfe3ff]"
             >
               {l}
             </span>

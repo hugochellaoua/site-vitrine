@@ -64,12 +64,12 @@ export function RoiCapture({ recap }: { recap: string }) {
             autoComplete="email"
             maxLength={200}
             placeholder={roi.capture.placeholder}
-            className="w-full min-w-0 rounded-full border border-hairline-strong bg-void/70 px-4 py-3 text-[14px] text-ink placeholder:text-faint outline-none transition-[border-color,box-shadow] duration-200 focus:border-accent-light focus:shadow-[0_0_0_3px_rgba(18,18,20,0.12)] sm:w-64"
+            className="w-full min-w-0 rounded-full border border-hairline-strong bg-void/70 px-4 py-3 text-[14px] text-ink placeholder:text-faint outline-none transition-[border-color,box-shadow] duration-200 focus:border-accent-light focus:shadow-[0_0_0_3px_rgba(29,80,254,0.28)] sm:w-64"
           />
           <button
             type="submit"
             disabled={status === "sending"}
-            className="group inline-flex shrink-0 items-center gap-2 rounded-[4px] bg-accent px-5 py-3 text-[14px] font-semibold text-white transition-opacity disabled:cursor-wait disabled:opacity-70"
+            className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-accent px-5 py-3 text-[14px] font-semibold text-white transition-opacity disabled:cursor-wait disabled:opacity-70"
           >
             {status === "sending" ? roi.capture.sending : roi.capture.submit}
             {status !== "sending" && (
@@ -80,7 +80,7 @@ export function RoiCapture({ recap }: { recap: string }) {
       </div>
 
       {status === "error" && (
-        <p role="alert" className="mt-4 text-[13px] text-error">
+        <p role="alert" className="mt-4 text-[13px] text-[#ffc2c2]">
           {roi.capture.error}
         </p>
       )}

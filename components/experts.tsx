@@ -32,7 +32,7 @@ function initiales(nom: string) {
 export function Experts({ locale }: { locale: Locale }) {
   const { experts } = dict(locale);
   return (
-    <section id="experts" className="relative px-6 py-24">
+    <section id="experts" className="relative px-6 py-10 md:py-12">
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-col items-center text-center">
           <SectionTitle title={experts.title} emphasis={experts.emphasis} />
@@ -41,17 +41,7 @@ export function Experts({ locale }: { locale: Locale }) {
           </p>
         </div>
 
-        {/* Les entreprises où exercent les experts, en grand : la caution se lit
-            avant même les fiches. */}
-        <div className="mt-10 flex flex-col items-center gap-5">
-          <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-faint">{experts.logosLabel}</p>
-          <div className="flex flex-wrap items-center justify-center gap-x-16 gap-y-6">
-            <CompanyLogo logo="loreal" className="!w-[150px] text-ink" />
-            <CompanyLogo logo="reflection" className="!w-[190px] text-ink" />
-          </div>
-        </div>
-
-        <ul className="mt-12 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5">
+        <ul className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-5">
           {experts.items.map((expert, i) => (
             <Reveal key={expert.name} as="li" delay={i * 0.1} y={22} className="h-full">
               <div className="lit-card flex h-full flex-col gap-4 p-6 sm:flex-row sm:items-start sm:gap-10 lg:flex-col lg:items-stretch lg:gap-4">

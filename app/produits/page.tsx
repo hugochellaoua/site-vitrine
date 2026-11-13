@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "Quatre produits intégrés à votre ATS : préqualification des candidats, matching au-delà du CV, 360 Matching sur tout le vivier, et Talent Ask qui répond 24h/24.",
   alternates: { canonical: "/produits", languages: { fr: "/produits", en: "/en/products" } },
   openGraph: {
-    title: "Une conversation. Quatre objectifs.",
+    title: "Quatre produits. Une seule conversation.",
     description:
       "Préqualifier, matcher, révéler les synergies, répondre aux candidats : les quatre produits Helpify, intégrés à votre ATS.",
     url: "/produits",

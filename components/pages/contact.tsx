@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { Galaxy } from "@/components/galaxy";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ContactForm } from "@/components/contact-form";
@@ -18,13 +19,14 @@ export function ContactPage({ locale }: { locale: Locale }) {
   const { contact } = dict(locale);
   return (
     <>
+      <Galaxy />
       <Navbar locale={locale} />
       <main className="relative z-10 px-6 pb-24 pt-36 sm:pt-44">
         <div
           className="pointer-events-none absolute left-1/2 top-40 -z-10 h-[60vh] w-[min(900px,92vw)] -translate-x-1/2"
           style={{
             background:
-              "radial-gradient(ellipse 50% 45% at 50% 40%, rgba(18,18,20,0) 0%, rgba(18,18,20,0) 46%, transparent 74%)",
+              "radial-gradient(ellipse 50% 45% at 50% 40%, rgba(29,80,254,0.26) 0%, rgba(29,80,254,0.06) 48%, transparent 74%)",
           }}
           aria-hidden="true"
         />
