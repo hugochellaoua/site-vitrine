@@ -1,6 +1,6 @@
 import { renderOgImage, ogSize, ogContentType } from "@/lib/og-image";
 
-export const alt = "Helpify — l'IA qui préqualifie chaque candidat par la conversation";
+export const alt = "Helpify — l'IA qui révèle et engage vos meilleurs talents";
 export const size = ogSize;
 export const contentType = ogContentType;
 
