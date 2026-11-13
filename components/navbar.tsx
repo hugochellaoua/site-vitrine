@@ -3,7 +3,27 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Magnetic } from "@/components/ui/magnetic";
-import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronDown,
+  CircleHelp,
+  FileText,
+  FlaskConical,
+  Handshake,
+  Mail,
+  Menu,
+  MessageCircleQuestion,
+  MessagesSquare,
+  Orbit,
+  Palette,
+  ShieldCheck,
+  Sparkles,
+  Target,
+  Users,
+  Workflow,
+  X,
+  type LucideIcon,
+} from "lucide-react";
 import { LogoLockup } from "@/components/logo-mark";
 import { dict, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/cn";
@@ -17,7 +37,25 @@ import { LanguageSwitch } from "@/components/ui/language-switch";
  * libellés ne peuvent pas diverger de ceux des pages. Le calcul dépend de la
  * langue, il ne peut donc plus se faire au chargement du module.
  */
-type Entree = { label: string; href: string; desc?: string; tone?: "warm" | "ink" };
+type Entree = { label: string; href: string; desc?: string; tone?: "warm" | "ink"; icon?: LucideIcon };
+
+/** Une icône par produit, par service et par ressource, repérés par leur identifiant. */
+const ICONES: Record<string, LucideIcon> = {
+  matching: Target,
+  prequalification: MessagesSquare,
+  "360-matching": Orbit,
+  "talent-ask": MessageCircleQuestion,
+  "marque-blanche": Palette,
+  accompagnement: Handshake,
+  process: Workflow,
+  methode: FlaskConical,
+  equipe: Users,
+  ia: Sparkles,
+  donnees: ShieldCheck,
+  faq: CircleHelp,
+  notice: FileText,
+  contact: Mail,
+};
 type Panneau = {
   items: Entree[];
   /** Un second groupe, sous un intitulé, dans le même panneau. */
@@ -40,10 +78,10 @@ function submenus(locale: Locale): Record<"products" | "usecases" | "resources",
     // l'on achète, au même endroit.
     products: {
       align: "-left-24",
-      items: products.items.map((x) => ({ label: x.name, desc: x.headline, href: `${produits}#${x.id}`, tone: "warm" as const })),
+      items: products.items.map((x) => ({ label: x.name, desc: x.headline, href: `${produits}#${x.id}`, tone: "warm" as const, icon: ICONES[x.id] })),
       extra: {
         title: nav.servicesLabel,
-        items: services.items.map((x) => ({ label: x.title, desc: x.line, href: p(`/#${x.id}`) })),
+        items: services.items.map((x) => ({ label: x.title, desc: x.line, href: p(`/#${x.id}`), icon: ICONES[x.id] })),
       },
       all: nav.allProducts,
     },
@@ -62,18 +100,29 @@ function submenus(locale: Locale): Record<"products" | "usecases" | "resources",
     },
     resources: {
       align: "-left-64",
-      items: nav.resources,
+      items: nav.resources.map(({ icone, ...r }) => ({ ...r, icon: ICONES[icone] })),
     },
   };
 }
 
 type Submenus = ReturnType<typeof submenus>;
 
-/** Une entrée d'un panneau : son nom, puis sa phrase. */
+/** L'icône d'une entrée, dans un petit carré. */
+function Icone({ icon: I }: { icon: LucideIcon }) {
+  return (
+    <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] bg-chip text-ink transition-colors group-hover:bg-ink group-hover:text-void" aria-hidden="true">
+      <I size={16} strokeWidth={1.6} />
+    </span>
+  );
+}
+
+/** Une entrée d'un panneau : son icône, son nom, puis sa phrase. */
 function Lien({ item, fermer }: { item: Entree; fermer: () => void }) {
   return (
     <li>
-      <Link href={item.href} onClick={fermer} className="block h-full rounded-xl px-3.5 py-2.5 transition-colors hover:bg-ink/[0.045]">
+      <Link href={item.href} onClick={fermer} className="group flex h-full gap-3 rounded-xl px-3.5 py-2.5 transition-colors hover:bg-ink/[0.045]">
+        {item.icon && <Icone icon={item.icon} />}
+        <span className="min-w-0">
         <span
           className={cn(
             "block font-display text-[14.5px] font-bold tracking-[-0.01em]",
@@ -84,6 +133,7 @@ function Lien({ item, fermer }: { item: Entree; fermer: () => void }) {
           {item.label}
         </span>
         {item.desc && <span className="mt-0.5 block text-[12.5px] leading-snug text-muted">{item.desc}</span>}
+        </span>
       </Link>
     </li>
   );
@@ -331,10 +381,17 @@ export function Navbar({ locale }: { locale: Locale }) {
                               <Link
                                 href={item.href}
                                 onClick={() => setOpen(false)}
-                                className="block rounded-[4px] bg-chip px-4 py-3"
+                                className="flex gap-3 rounded-[4px] bg-chip px-4 py-3"
                               >
-                                <span className="block text-[15.5px] font-medium text-ink">{item.label}</span>
-                                {item.desc && <span className="mt-0.5 block text-[13px] leading-snug text-muted">{item.desc}</span>}
+                                {item.icon && (
+                                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] bg-void text-ink" aria-hidden="true">
+                                    <item.icon size={16} strokeWidth={1.6} />
+                                  </span>
+                                )}
+                                <span className="min-w-0">
+                                  <span className="block text-[15.5px] font-medium text-ink">{item.label}</span>
+                                  {item.desc && <span className="mt-0.5 block text-[13px] leading-snug text-muted">{item.desc}</span>}
+                                </span>
                               </Link>
                             </li>
                           ))}
