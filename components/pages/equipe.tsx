@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/navbar";
@@ -10,7 +11,8 @@ import { dict, type Locale } from "@/lib/i18n";
 
 /**
  * L'équipe : les groupes vont par deux sur une ligne, chacun sous son
- * intitulé en chasse fixe. Chaque fiche porte les initiales (en attendant des
+ * intitulé en chasse fixe. Chaque fiche montre la photo de la personne, ou ses
+ * initiales en attendant. Chaque fiche porte les initiales (en attendant des
  * photos), le nom, la fonction, le logo de l'entreprise s'il y en a un, ce
  * que la personne apporte, et son expérience en évidence.
  */
@@ -46,7 +48,11 @@ export function EquipePage({ locale }: { locale: Locale }) {
                         {g.membres.map((m, i) => (
                           <Reveal key={m.nom} as="li" delay={i * 0.08} className="flex flex-col rounded-[6px] bg-chip p-7">
                             <div className="flex items-start justify-between gap-4">
-                              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-ink font-display text-[16px] text-void">{m.initiales}</span>
+                              {m.photo ? (
+                                <Image src={m.photo} alt={m.nom} width={144} height={144} className="h-[72px] w-[72px] shrink-0 rounded-full object-cover contrast-[1.08] grayscale" />
+                              ) : (
+                                <span className="grid h-[72px] w-[72px] shrink-0 place-items-center rounded-full bg-ink font-display text-[18px] text-void">{m.initiales}</span>
+                              )}
                               {m.logo && <CompanyLogo logo={m.logo} className="mt-2 text-ink" />}
                             </div>
                             <p className="mt-6 font-display text-[24px] leading-tight tracking-[-0.03em] text-ink">{m.nom}</p>

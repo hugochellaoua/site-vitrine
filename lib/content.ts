@@ -978,6 +978,7 @@ export const equipe = {
         {
           nom: "Hugo Chellaoua",
           initiales: "HC",
+          photo: "/equipe/hugo.jpg",
           role: "CEO",
           points: ["Porte la vision produit et la relation client", "En lien direct avec les enjeux des équipes recrutement"],
           experience: "+8 ans d'expérience dans les logiciels RH B2B",
@@ -1002,6 +1003,7 @@ export const equipe = {
         {
           nom: "Brice Monnier",
           initiales: "BM",
+          photo: "/equipe/brice-monnier.jpg",
           role: "DRH chez L'Oréal Innovation",
           logo: "loreal" as const,
           points: ["Apporte la vision des grands groupes sur les enjeux RH, la transformation et l'innovation"],
@@ -1009,6 +1011,7 @@ export const equipe = {
         {
           nom: "Rome Lambert",
           initiales: "RL",
+          photo: "/equipe/rome.jpg",
           role: "RRH & recruteuse indépendante",
           points: ["Le regard terrain du recrutement : sourcing, qualification et expérience candidat"],
         },
@@ -1020,13 +1023,14 @@ export const equipe = {
         {
           nom: "Florent Gbelidji",
           initiales: "FG",
+          photo: "/equipe/florent.jpg",
           role: "Engineering Lead IA chez Reflection AI",
           logo: "reflection" as const,
           points: ["Contribue à la fiabilité de l'IA, du questionnement et de la restitution"],
         },
       ],
     },
-  ] as { titre: string; membres: { nom: string; initiales: string; role: string; logo?: "loreal" | "reflection"; points: string[]; experience?: string }[] }[],
+  ] as { titre: string; membres: { nom: string; initiales: string; photo?: string; role: string; logo?: "loreal" | "reflection"; points: string[]; experience?: string }[] }[],
   cta: { titre: "Parlons de vos recrutements.", label: "Réservez une démo", href: links.booking },
 };
 

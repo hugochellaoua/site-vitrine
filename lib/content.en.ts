@@ -840,6 +840,7 @@ export const equipe = {
         {
           nom: "Hugo Chellaoua",
           initiales: "HC",
+          photo: "/equipe/hugo.jpg",
           role: "CEO",
           points: ["Leads the product vision and customer relationships", "Works directly with the challenges of recruitment teams"],
           experience: "8+ years in B2B HR software",
@@ -864,6 +865,7 @@ export const equipe = {
         {
           nom: "Brice Monnier",
           initiales: "BM",
+          photo: "/equipe/brice-monnier.jpg",
           role: "HR Director at L'Oréal Innovation",
           logo: "loreal" as const,
           points: ["Brings the large-group perspective on HR, transformation and innovation"],
@@ -871,6 +873,7 @@ export const equipe = {
         {
           nom: "Rome Lambert",
           initiales: "RL",
+          photo: "/equipe/rome.jpg",
           role: "Independent HR manager & recruiter",
           points: ["The field view of recruitment: sourcing, qualification and candidate experience"],
         },
@@ -882,13 +885,14 @@ export const equipe = {
         {
           nom: "Florent Gbelidji",
           initiales: "FG",
+          photo: "/equipe/florent.jpg",
           role: "AI Engineering Lead at Reflection AI",
           logo: "reflection" as const,
           points: ["Contributes to the reliability of the AI, its questioning and its reporting"],
         },
       ],
     },
-  ] as { titre: string; membres: { nom: string; initiales: string; role: string; logo?: "loreal" | "reflection"; points: string[]; experience?: string }[] }[],
+  ] as { titre: string; membres: { nom: string; initiales: string; photo?: string; role: string; logo?: "loreal" | "reflection"; points: string[]; experience?: string }[] }[],
   cta: { titre: "Let's talk about your hiring.", label: "Book a demo", href: links.booking },
 };
 
