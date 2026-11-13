@@ -118,7 +118,7 @@ function Besoin({ step }: { step: Extract<Step, { key: "besoin" }> }) {
           {step.fields.map((f, i) => (
             <div
               key={f.label}
-              className="flex items-center justify-between gap-3 rounded-xl border border-hairline bg-void/40 px-3.5 py-2.5 text-[12.5px] text-[#e4e5f5]"
+              className="flex items-center justify-between gap-3 rounded-xl border border-hairline bg-void/40 px-3.5 py-2.5 text-[12.5px] text-ink"
               style={{ animation: "pulseGlow 2.6s ease-in-out infinite", animationDelay: `${i * 0.2}s` }}
             >
               <span className="min-w-0 truncate">{f.label}</span>
@@ -130,7 +130,7 @@ function Besoin({ step }: { step: Extract<Step, { key: "besoin" }> }) {
                     ? "bg-iris-soft text-iris-light"
                     : f.weight === "Important"
                       ? "bg-accent-soft text-accent-light"
-                      : "bg-white/[0.06] text-muted"
+                      : "bg-ink/[0.045] text-muted"
                 }`}
               >
                 {f.weight}
@@ -139,7 +139,7 @@ function Besoin({ step }: { step: Extract<Step, { key: "besoin" }> }) {
           ))}
         </div>
       </div>
-      <div className="mt-4 flex items-center gap-2 rounded-full border border-accent/45 bg-accent-soft px-5 py-2.5 text-[12.5px] font-semibold text-ink">
+      <div className="mt-4 flex items-center gap-2 rounded-[4px] border border-accent/45 bg-accent-soft px-5 py-2.5 text-[12.5px] font-semibold text-ink">
         <Check size={13} className="text-accent-light" />
         {step.status}
       </div>
@@ -151,7 +151,7 @@ function Besoin({ step }: { step: Extract<Step, { key: "besoin" }> }) {
 function Diffusion({ step }: { step: Extract<Step, { key: "diffusion" }> }) {
   return (
     <div className="flex w-full flex-col items-center">
-      <div className="flex items-center gap-2 rounded-full border border-hairline-strong bg-panel/60 px-5 py-2.5 font-mono text-[12.5px] text-accent-light backdrop-blur-sm">
+      <div className="flex items-center gap-2 rounded-[4px] border border-hairline-strong bg-panel/60 px-5 py-2.5 font-mono text-[12.5px] text-accent-light backdrop-blur-sm">
         <LogoMark size={15} />
         {step.link}
       </div>
@@ -308,7 +308,7 @@ function Evaluation({ step }: { step: Extract<Step, { key: "evaluation" }> }) {
         {step.rows.map((row) => (
           <div key={row.label} className="flex items-baseline justify-between gap-3">
             <dt className="text-[11.5px] text-faint">{row.label}</dt>
-            <dd className="text-right text-[12px] font-medium text-[#e4e5f5]">{row.value}</dd>
+            <dd className="text-right text-[12px] font-medium text-ink">{row.value}</dd>
           </div>
         ))}
       </dl>
@@ -349,7 +349,7 @@ function Reponse({ step }: { step: Extract<Step, { key: "reponse" }> }) {
         {step.decisions.map((d, i) => (
           <span
             key={d}
-            className="flex items-center gap-2 rounded-full border border-hairline bg-panel/40 px-4 py-2 text-[12px] text-[#e4e5f5]"
+            className="flex items-center gap-2 rounded-full border border-hairline bg-panel/40 px-4 py-2 text-[12px] text-ink"
           >
             <span
               className={`flex h-5 w-5 items-center justify-center rounded-full ${
@@ -374,8 +374,8 @@ function Reponse({ step }: { step: Extract<Step, { key: "reponse" }> }) {
           </span>
         </div>
         <div className="mt-3.5 flex flex-col gap-2 text-left">
-          <p className="text-[12.5px] text-[#e4e5f5]">{step.email.greeting}</p>
-          <p className="text-[12.5px] text-[#e4e5f5]">{step.email.lead}</p>
+          <p className="text-[12.5px] text-ink">{step.email.greeting}</p>
+          <p className="text-[12.5px] text-ink">{step.email.lead}</p>
           <ul className="flex flex-col gap-1.5 pl-1">
             {step.email.points.map((point, i) => (
               <li
@@ -388,7 +388,7 @@ function Reponse({ step }: { step: Extract<Step, { key: "reponse" }> }) {
               </li>
             ))}
           </ul>
-          <p className="mt-1 text-[12.5px] text-[#e4e5f5]">{step.email.closing}</p>
+          <p className="mt-1 text-[12.5px] text-ink">{step.email.closing}</p>
         </div>
       </div>
     </div>
@@ -408,7 +408,7 @@ function Decision({ step }: { step: Extract<Step, { key: "decision" }> }) {
           {step.basis.map((c, i) => (
             <li
               key={c}
-              className="flex items-center justify-center gap-2 rounded-lg border border-hairline bg-void/40 px-3 py-2 text-[11.5px] text-[#dfe3ff]"
+              className="flex items-center justify-center gap-2 rounded-lg border border-hairline bg-void/40 px-3 py-2 text-[11.5px] text-ink"
               style={{ animation: "pulseGlow 2.8s ease-in-out infinite", animationDelay: `${i * 0.22}s` }}
             >
               <Check size={11} className="text-accent-light" />

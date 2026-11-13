@@ -1,8 +1,5 @@
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
-import { Galaxy } from "@/components/galaxy";
-import { StarTexture } from "@/components/star-texture";
-import { CursorLight } from "@/components/cursor-light";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { StickyCta } from "@/components/sticky-cta";
@@ -16,7 +13,7 @@ import { siteUrl } from "@/lib/site";
 /**
  * Données structurées de la page.
  *
- * Une liste ordonnée des neuf cas, décrits avec les mots exacts de la page :
+ * Une liste ordonnée des huit cas, décrits avec les mots exacts de la page :
  * le problème sert de nom, la réponse de description. C'est ce que lira un
  * moteur de réponse à qui l'on demande « comment trier trop de candidatures ».
  */
@@ -53,9 +50,6 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
   return (
     <>
       <UseCasesJsonLd locale={locale} />
-      <StarTexture />
-      <Galaxy />
-      <CursorLight />
       <Navbar locale={locale} />
 
       <main className="relative z-10">
@@ -65,7 +59,7 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
             className="pointer-events-none absolute left-1/2 top-24 -z-10 h-[60vh] w-[min(1000px,92vw)] -translate-x-1/2"
             style={{
               background:
-                "radial-gradient(ellipse 50% 45% at 50% 40%, rgba(29,80,254,0.28) 0%, rgba(29,80,254,0.07) 46%, transparent 74%)",
+                "radial-gradient(ellipse 50% 45% at 50% 40%, rgba(18,18,20,0) 0%, rgba(18,18,20,0) 46%, transparent 74%)",
             }}
             aria-hidden="true"
           />
@@ -84,7 +78,7 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
         </section>
 
         {/* ── Sommaire : se reconnaître en un coup d'œil ───────────────── */}
-        {/* Neuf problèmes posés côte à côte, chacun suivi de sa réponse en une
+        {/* Huit problèmes posés côte à côte, chacun suivi de sa réponse en une
             ligne. Le visiteur n'a pas à lire la page entière pour trouver sa
             situation : il la repère ici, puis y saute. */}
         <section className="relative px-6 pb-24">
@@ -115,7 +109,7 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
           </ul>
         </section>
 
-        {/* ── Les neuf cas, en détail ──────────────────────────────────── */}
+        {/* ── Les huit cas, en détail ──────────────────────────────────── */}
         {useCases.items.map((u, i) => {
           const iris = u.tone === "iris";
           return (
@@ -219,7 +213,7 @@ export function UseCasesPage({ locale }: { locale: Locale }) {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href={hero.cta.href}
-                className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-8 py-4 text-[15px] font-semibold text-white shadow-[0_20px_60px_-16px_rgba(29,80,254,0.85)] transition-shadow duration-300 hover:shadow-[0_28px_74px_-14px_rgba(29,80,254,1)]"
+                className="group inline-flex items-center gap-2.5 rounded-[4px] bg-accent px-8 py-4 text-[15px] font-semibold text-white transition-shadow duration-300"
               >
                 {hero.cta.label}
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

@@ -1,15 +1,12 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Galaxy } from "@/components/galaxy";
-import { StarTexture } from "@/components/star-texture";
-import { CursorLight } from "@/components/cursor-light";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { StickyCta } from "@/components/sticky-cta";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 import { SecondaryCta } from "@/components/ui/secondary-cta";
 import { Reveal } from "@/components/ui/reveal";
-import { VISUALS } from "@/components/products/visuals";
+import { ProductFilm } from "@/components/products/films";
 import { dict, type Locale } from "@/lib/i18n";
 import { siteUrl } from "@/lib/site";
 
@@ -54,9 +51,6 @@ export function ProductsPage({ locale }: { locale: Locale }) {
   return (
     <>
       <ProductsJsonLd locale={locale} />
-      <StarTexture />
-      <Galaxy />
-      <CursorLight />
       <Navbar locale={locale} />
 
       <main className="relative z-10">
@@ -66,7 +60,7 @@ export function ProductsPage({ locale }: { locale: Locale }) {
             className="pointer-events-none absolute left-1/2 top-24 -z-10 h-[60vh] w-[min(1000px,92vw)] -translate-x-1/2"
             style={{
               background:
-                "radial-gradient(ellipse 50% 45% at 50% 40%, rgba(29,80,254,0.28) 0%, rgba(29,80,254,0.07) 46%, transparent 74%)",
+                "radial-gradient(ellipse 50% 45% at 50% 40%, rgba(18,18,20,0) 0%, rgba(18,18,20,0) 46%, transparent 74%)",
             }}
             aria-hidden="true"
           />
@@ -76,6 +70,7 @@ export function ProductsPage({ locale }: { locale: Locale }) {
               as="h1"
               title={products.title}
               emphasis={products.emphasis}
+              encadre
               className="mt-6 !max-w-[22ch] !text-[clamp(32px,5vw,58px)]"
             />
             {products.intro.map((p, i) => (
@@ -114,7 +109,6 @@ export function ProductsPage({ locale }: { locale: Locale }) {
 
         {/* ── Les quatre produits ──────────────────────────────────────── */}
         {products.items.map((product, i) => {
-          const Visual = VISUALS[product.visual];
           // On alterne le côté du visuel : l'œil repart à gauche à chaque
           // produit, ce qui marque la rupture entre deux blocs sans trait.
           const reversed = i % 2 === 1;
@@ -148,6 +142,12 @@ export function ProductsPage({ locale }: { locale: Locale }) {
                     {product.headline}
                   </h2>
 
+                  {"tag" in product && product.tag && (
+                    <p className="mt-5 inline-flex items-center gap-2 font-display text-[15px] font-medium text-ink">
+                      <span className="h-1.5 w-1.5 bg-ink" />
+                      {product.tag}
+                    </p>
+                  )}
                   <p className="mt-5 max-w-[48ch] text-[15.5px] leading-relaxed text-muted">{product.body}</p>
 
                   <Link
@@ -161,8 +161,15 @@ export function ProductsPage({ locale }: { locale: Locale }) {
                   </Link>
                 </Reveal>
 
-                <Reveal delay={0.1} className="flex w-full justify-center lg:w-1/2">
-                  <Visual />
+                <Reveal delay={0.1} className="w-full lg:w-1/2">
+                  <div
+                    className="flex min-h-[420px] items-center justify-center rounded-[6px] p-6 sm:p-10"
+                    style={{ background: "#fbfbfa" }}
+                  >
+                    <div className="w-full min-w-0">
+                    <ProductFilm visual={product.visual} locale={locale} />
+                  </div>
+                  </div>
                 </Reveal>
               </div>
             </section>
@@ -177,7 +184,7 @@ export function ProductsPage({ locale }: { locale: Locale }) {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href={hero.cta.href}
-                className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-8 py-4 text-[15px] font-semibold text-white shadow-[0_20px_60px_-16px_rgba(29,80,254,0.85)] transition-shadow duration-300 hover:shadow-[0_28px_74px_-14px_rgba(29,80,254,1)]"
+                className="group inline-flex items-center gap-2.5 rounded-[4px] bg-accent px-8 py-4 text-[15px] font-semibold text-white transition-shadow duration-300"
               >
                 {hero.cta.label}
                 <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />

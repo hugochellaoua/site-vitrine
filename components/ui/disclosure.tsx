@@ -51,7 +51,7 @@ export function DisclosureButton({
           // La lueur orange donne au bouton la présence d'une vraie invitation :
           // sans elle, un contour se perd dans une page sombre parcourue vite.
           ? "border-warm/55 bg-warm-soft text-warm-light shadow-[0_18px_50px_-18px_rgba(255,160,70,0.5)] hover:border-warm/80 hover:bg-warm/20 hover:shadow-[0_24px_64px_-16px_rgba(255,160,70,0.7)]"
-          : "border-hairline-strong bg-white/[0.04] text-ink hover:border-white/30 hover:bg-white/[0.08]",
+          : "border-hairline-strong bg-ink/[0.03] text-ink hover:border-accent/40 hover:bg-ink/[0.06]",
         size === "xl"
           // Large et mince plutôt que haut et court : la barre traverse la
           // moitié de la page sur un grand écran, et prend toute la largeur

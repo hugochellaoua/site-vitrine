@@ -13,7 +13,7 @@ function Bubble({ from, text, tone = "accent" }: { from: string; text: string; t
       className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 text-[12.5px] leading-snug ${
         helpify
           ? tone === "iris"
-            ? "rounded-bl-sm bg-iris font-medium text-[#1a1236]"
+            ? "rounded-bl-sm bg-iris font-medium text-white"
             : "rounded-bl-sm bg-accent text-white"
           : "rounded-br-sm bg-[#f9f9fb] font-medium text-[#141037]"
       }`}
@@ -66,7 +66,7 @@ export function PrequalVisual() {
           {d.prequal.extracted.map((tag, i) => (
             <li
               key={tag}
-              className="rounded-full border border-accent/35 bg-accent-soft px-3 py-1.5 text-[11px] text-[#c7d3ff]"
+              className="rounded-full border border-accent/35 bg-accent-soft px-3 py-1.5 text-[11px] text-accent"
               style={{ animation: "pulseGlow 2.8s ease-in-out infinite", animationDelay: `${i * 0.22}s` }}
             >
               {tag}
@@ -89,7 +89,7 @@ export function ScoreVisual() {
       <div className="flex items-center gap-4 border-b border-hairline pb-4">
         <div className="relative h-[72px] w-[72px] shrink-0">
           <svg width="72" height="72" viewBox="0 0 72 72" className="-rotate-90">
-            <circle cx="36" cy="36" r={R} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="4" />
+            <circle cx="36" cy="36" r={R} fill="none" stroke="rgba(14,22,68,0.08)" strokeWidth="4" />
             <circle
               cx="36"
               cy="36"
@@ -122,7 +122,7 @@ export function ScoreVisual() {
         {s.rows.map((row) => (
           <div key={row.label} className="flex items-baseline justify-between gap-3">
             <dt className="text-[11.5px] text-faint">{row.label}</dt>
-            <dd className="text-right text-[12px] font-medium text-[#e4e5f5]">{row.value}</dd>
+            <dd className="text-right text-[12px] font-medium text-ink">{row.value}</dd>
           </div>
         ))}
       </dl>

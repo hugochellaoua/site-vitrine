@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { Galaxy } from "@/components/galaxy";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Badge } from "@/components/ui/section-title";
@@ -44,7 +43,6 @@ export function LegalNoticePage({ locale }: { locale: Locale }) {
 
   return (
     <>
-      <Galaxy />
       <Navbar locale={locale} />
       <main className="relative z-10 px-6 pb-24 pt-36 sm:pt-44">
         <article className="mx-auto max-w-[68ch]">
@@ -63,7 +61,7 @@ export function LegalNoticePage({ locale }: { locale: Locale }) {
                 </dt>
                 <dd className="text-[15px] leading-relaxed text-muted">
                   {f.value ?? (
-                    <span className="inline-flex flex-col gap-0.5 rounded-lg border border-error/40 bg-error/10 px-3 py-2 text-[13px] text-[#ffc2c2]">
+                    <span className="inline-flex flex-col gap-0.5 rounded-lg border border-error/40 bg-error/10 px-3 py-2 text-[13px] text-error">
                       <span className="font-semibold">{t.todo}</span>
                       {f.hint && <span className="text-[12px] opacity-80">{f.hint}</span>}
                     </span>

@@ -7,7 +7,7 @@ export const contentType = ogContentType;
 
 export default function Image() {
   return renderOgImage({
-    lead: "Neuf situations.",
+    lead: "Huit situations.",
     accent: "Une réponse concrète.",
     sub: "Volume, standardisation, lecture des profils, CV boostés par l'IA, profils atypiques.",
   });

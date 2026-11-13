@@ -7,10 +7,9 @@ import { cn } from "@/lib/cn";
  * produit. Deux arcs face à face suffisent : le grand écoute, le petit répond.
  * C'est la conversation elle-même, pas son décor.
  *
- * Les couleurs disent qui parle, selon la règle tenue partout sur le site :
- * le bleu (celui des boutons, `--accent`) est Helpify, l'orange est le talent.
- * L'arc du candidat est volontairement plus court — il répond, il n'occupe pas
- * tout l'espace.
+ * Noir et blanc : la marque prend la couleur du texte qui l'entoure (noire sur
+ * fond clair, blanche sur fond sombre). L'arc du candidat, plus court, est un
+ * ton plus léger : il répond, il n'occupe pas tout l'espace.
  */
 export function LogoMark({ size = 30, className }: { size?: number; className?: string }) {
   return (
@@ -24,13 +23,14 @@ export function LogoMark({ size = 30, className }: { size?: number; className?: 
     >
       <path
         d="M27 10C14 19 14 45 27 54"
-        stroke="#1d50fe"
+        stroke="currentColor"
         strokeWidth="8"
         strokeLinecap="round"
       />
       <path
         d="M41 19C50 25 50 39 41 45"
-        stroke="#ffa046"
+        stroke="currentColor"
+        strokeOpacity="0.45"
         strokeWidth="7"
         strokeLinecap="round"
       />

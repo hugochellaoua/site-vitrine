@@ -26,13 +26,13 @@ export function LanguageSwitch({ locale, className = "" }: { locale: Locale; cla
   return (
     <div
       className={cn(
-        "flex items-center gap-0.5 rounded-full border border-hairline-strong bg-white/[0.04] p-0.5 text-[11.5px] font-semibold",
+        "flex items-center gap-0.5 rounded-full border border-hairline-strong bg-ink/[0.03] p-0.5 text-[11.5px] font-semibold",
         className
       )}
     >
       <span
         aria-current="true"
-        className="rounded-full bg-white/[0.08] px-2.5 py-1 uppercase tracking-[0.08em] text-ink"
+        className="rounded-full bg-ink/[0.06] px-2.5 py-1 uppercase tracking-[0.08em] text-ink"
       >
         {locale}
       </span>

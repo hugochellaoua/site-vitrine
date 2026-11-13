@@ -9,7 +9,7 @@ import { dict, type Locale } from "@/lib/i18n";
 type Status = "idle" | "sending" | "sent" | "error";
 
 const input =
-  "w-full rounded-xl border border-hairline-strong bg-void/60 px-4 py-3 text-[15px] text-ink placeholder:text-faint outline-none transition-[border-color,box-shadow] duration-200 focus:border-accent-light focus:shadow-[0_0_0_3px_rgba(29,80,254,0.28)]";
+  "w-full rounded-xl border border-hairline-strong bg-void/60 px-4 py-3 text-[15px] text-ink placeholder:text-faint outline-none transition-[border-color,box-shadow] duration-200 focus:border-accent-light focus:shadow-[0_0_0_3px_rgba(18,18,20,0.12)]";
 const label = "mb-2 block text-[12.5px] font-medium text-muted";
 
 /**
@@ -34,7 +34,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
     setStatus("sending");
     const data = Object.fromEntries(new FormData(e.currentTarget));
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -113,7 +113,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
       </div>
 
       {status === "error" && (
-        <p role="alert" className="rounded-xl border border-error/30 bg-error/10 px-4 py-3 text-[13.5px] text-[#ffc2c2]">
+        <p role="alert" className="rounded-xl border border-error/30 bg-error/10 px-4 py-3 text-[13.5px] text-error">
           {contact.error}{" "}
           <Link href={contact.alt.href} className="font-semibold text-ink underline underline-offset-4">
             {contact.alt.label}
@@ -126,7 +126,7 @@ export function ContactForm({ locale }: { locale: Locale }) {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-accent px-8 py-4 text-[15px] font-semibold text-white shadow-[0_20px_60px_-16px_rgba(29,80,254,0.85)] transition-[box-shadow,opacity] duration-300 hover:shadow-[0_28px_74px_-14px_rgba(29,80,254,1)] disabled:cursor-wait disabled:opacity-70"
+          className="group inline-flex items-center justify-center gap-2.5 rounded-[4px] bg-accent px-8 py-4 text-[15px] font-semibold text-white transition-[box-shadow,opacity] duration-300 disabled:cursor-wait disabled:opacity-70"
         >
           {status === "sending" ? contact.sending : contact.submit}
           {status !== "sending" && (

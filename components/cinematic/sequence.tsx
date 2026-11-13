@@ -339,7 +339,7 @@ function StepArrow({
       disabled={disabled}
       aria-label={label}
       title={label}
-      className={`glass-panel flex items-center justify-center rounded-full text-muted transition-all duration-300 hover:text-ink enabled:hover:border-white/30 disabled:cursor-default disabled:opacity-20 ${
+      className={`glass-panel flex items-center justify-center rounded-full text-muted transition-all duration-300 hover:text-ink enabled:hover:border-accent/40 disabled:cursor-default disabled:opacity-20 ${
         jump ? "h-8 w-8" : "h-10 w-10 enabled:hover:-translate-y-0.5"
       }`}
     >
@@ -394,7 +394,7 @@ function Outro({ locale }: { locale: Locale }) {
       <div className="flex flex-wrap items-center justify-center gap-3">
         <Link
           href={processOutro.cta.href}
-          className="rounded-full bg-accent px-7 py-4 text-[15px] font-semibold text-white shadow-[0_20px_60px_-16px_rgba(29,80,254,0.85)] transition-shadow duration-300 hover:shadow-[0_28px_74px_-14px_rgba(29,80,254,1)]"
+          className="rounded-[4px] bg-accent px-7 py-4 text-[15px] font-semibold text-white transition-shadow duration-300"
         >
           {processOutro.cta.label}
         </Link>

@@ -1,0 +1,41 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { dict, type Locale } from "@/lib/i18n";
+import { Reveal } from "@/components/ui/reveal";
+import { Badge, SectionTitle } from "@/components/ui/section-title";
+
+/**
+ * Les huit cas d'usage en grille, sur l'accueil : le nom de la situation et la
+ * promesse en une ligne, chacun menant à son détail sur la page des cas
+ * d'usage. Le visiteur repère sa situation sans lire la page entière.
+ */
+export function UseCasesGrid({ locale }: { locale: Locale }) {
+  const { useCases } = dict(locale);
+  const base = locale === "en" ? "/en/use-cases" : "/cas-d-usage";
+  return (
+    <section className="relative px-6 py-28">
+      <div className="mx-auto max-w-6xl">
+        <div className="flex flex-col items-center text-center">
+          <Badge>{useCases.eyebrow}</Badge>
+          <SectionTitle title={useCases.title} emphasis={useCases.emphasis} className="mt-6" />
+        </div>
+        <ul className="mt-14 grid grid-cols-1 border-l border-t border-hairline sm:grid-cols-2 lg:grid-cols-4">
+          {useCases.items.map((u, i) => (
+            <Reveal key={u.id} as="li" delay={(i % 3) * 0.06} className="border-b border-r border-hairline">
+              <Link href={`${base}#${u.id}`} className="group flex h-full min-h-[170px] flex-col p-7 transition-colors hover:bg-chip">
+                <span className="font-mono text-[11.5px] text-faint">{String(i + 1).padStart(2, "0")}</span>
+                <span className="mt-auto pt-8">
+                  <span className="flex items-center gap-1.5 font-display text-[21px] tracking-[-0.025em] text-ink">
+                    {u.menu}
+                    <ArrowRight size={14} className="text-faint transition-transform duration-300 group-hover:translate-x-1 group-hover:text-accent" />
+                  </span>
+                  <span className="mt-1 block text-[14px] leading-snug text-muted">{u.promise}</span>
+                </span>
+              </Link>
+            </Reveal>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}

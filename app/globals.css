@@ -1,60 +1,83 @@
 @import "tailwindcss";
 
 :root {
-  /* Fond — indigo profond relevé dans la vidéo de démonstration.
-     Trois paliers seulement : le socle, un cran plus clair pour les reliefs,
-     un cran plus sombre pour creuser. */
-  --void: #141037;
-  --void-2: #16123c;
-  --void-deep: #100d30;
+  /* Le site est clair : fond gris très pâle, surfaces blanches, encre bleu
+     nuit. Seules quelques bandes (haut de page, appel final, pied de page)
+     restent sombres : elles portent la classe `.sombre`, qui rétablit la
+     palette d'origine pour tout ce qu'elles contiennent. */
+  --void: #f6f3ec;
+  --void-2: #efebe3;
+  --void-deep: #e9e4da;
 
-  /* Surfaces */
-  --panel: #191552;
-  --panel-light: #1d1a5e;
-  --panel-soft: rgba(25, 21, 82, 0.55);
-  --chip: #141c5e;
+  --panel: #ffffff;
+  --panel-light: #ffffff;
+  --panel-soft: rgba(246, 243, 236, 0.9);
+  --chip: #ece7dd;
 
-  /* Bordures */
-  --hairline: rgba(255, 255, 255, 0.10);
-  --hairline-strong: rgba(255, 255, 255, 0.18);
+  --hairline: rgba(18, 18, 20, 0.12);
+  --hairline-strong: rgba(18, 18, 20, 0.22);
 
   /* Bleu — la voix de Helpify. */
-  --accent: #1d50fe;
-  --accent-light: #5b81ff;
-  --accent-soft: rgba(29, 80, 254, 0.18);
+  --accent: #121214;
+  --accent-light: #121214;
+  --accent-soft: rgba(18, 18, 20, 0.06);
 
-  /* Orange — la voix du candidat. Ce n'est pas une couleur décorative :
-     dans le produit, la scène entière bascule à l'orange quand le candidat
-     s'exprime. On lui garde ici ce rôle, et rien d'autre. */
-  --warm: #ffa046;
-  --warm-light: #ffb970;
-  --warm-soft: rgba(255, 160, 70, 0.16);
+  /* Orange — la voix du candidat, foncé pour rester lisible sur le blanc. */
+  --warm: #8b887f;
+  --warm-light: #8b887f;
+  --warm-soft: rgba(18, 18, 20, 0.06);
 
-  /* Violet — la méthode. Entre le bleu de Helpify et l'orange du candidat se
-     place ce que l'un fait de ce que l'autre a dit : les critères, leur poids,
-     l'évaluation. La teinte le dit optiquement, puisqu'elle tient des deux.
-     Elle ne s'emploie donc que là où le site explique sa façon de procéder. */
-  --iris: #ac98ff;
-  --iris-light: #c3b4ff;
-  --iris-soft: rgba(172, 152, 255, 0.16);
+  /* Violet — la méthode, plus profond que sur fond sombre. */
+  --iris: #121214;
+  --iris-light: #121214;
+  --iris-soft: rgba(18, 18, 20, 0.06);
 
   /* Texte */
-  --ink: #ffffff;
-  --muted: #a8adcf;
-  --faint: #757aa3;
+  --ink: #121214;
+  --muted: #57554f;
+  --faint: #8b887f;
 
-  /* Sémantique, employé avec parcimonie */
-  --success: #2cc36b;
-  --warning: #ffa046;
-  --error: #ff5d5d;
+  --success: #1f9d55;
+  --warning: #e57300;
+  --error: #d93636;
 
-  --shadow-glow: 0 20px 60px -20px rgba(29, 80, 254, 0.5);
-  --shadow-deep: 0 40px 90px -30px rgba(6, 4, 24, 0.65);
+  --shadow-glow: 0 18px 40px -20px rgba(29, 80, 254, 0.45);
+  --shadow-deep: 0 30px 60px -32px rgba(14, 22, 68, 0.28);
 
   /* Une seule famille : le contraste vient de la graisse et du corps,
      jamais d'un changement de caractère. */
   --font-display: var(--font-sans-brand), "Helvetica Neue", Arial, sans-serif;
   --font-sans: var(--font-sans-brand), ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+/* Les bandes sombres : la palette d'origine du site, rétablie localement. */
+.sombre {
+  /* Les bandes sombres : un noir profond, sans couleur, comme l'encre du site. */
+  --void: #0f0f10;
+  --void-2: #141415;
+  --void-deep: #0b0b0c;
+  --panel: #19191b;
+  --panel-light: #202023;
+  --panel-soft: rgba(25, 25, 27, 0.7);
+  --chip: #202023;
+  --hairline: rgba(244, 241, 234, 0.13);
+  --hairline-strong: rgba(244, 241, 234, 0.24);
+  --accent: #f4f1ea;
+  --accent-light: #f4f1ea;
+  --accent-soft: rgba(244, 241, 234, 0.08);
+  --warm: #8e8c86;
+  --warm-light: #8e8c86;
+  --warm-soft: rgba(244, 241, 234, 0.08);
+  --iris: #f4f1ea;
+  --iris-light: #f4f1ea;
+  --iris-soft: rgba(244, 241, 234, 0.08);
+  --ink: #f4f1ea;
+  --muted: #a8a59d;
+  --faint: #7d7b75;
+  --shadow-glow: none;
+  --shadow-deep: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+  color: var(--ink);
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -84,16 +107,22 @@
 
   --font-display: var(--font-display);
   --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono-brand), ui-monospace, monospace;
+
+  /* Angles nets : boutons et cartes à peine arrondis. */
+  --radius-md: 4px;
+  --radius-lg: 5px;
+  --radius-xl: 6px;
+  --radius-2xl: 6px;
+  --radius-3xl: 8px;
 
   --animate-float: float 7s ease-in-out infinite;
   --animate-pulse-glow: pulseGlow 2.6s ease-in-out infinite;
   --animate-marquee: marquee 38s linear infinite;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: dark;
-  }
+:root {
+  color-scheme: light;
 }
 
 /* Couleur de bordure par défaut, pour que `border` seul trace un filet discret
@@ -165,6 +194,11 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 14px 40px -22px rgba(14, 22, 68, 0.28);
+}
+.sombre .glass-panel {
+  box-shadow:
     0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
     0 20px 50px -24px rgba(0, 0, 0, 0.6);
 }
@@ -193,11 +227,11 @@ body {
    texte de la page passant derrière. On garde quelques pour cent de
    transparence et le flou pour conserver l'effet de verre. */
 .glass-panel--solid {
-  background: rgba(16, 13, 48, 0.94);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(14, 22, 68, 0.12);
   box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
-    0 18px 50px -24px rgba(3, 2, 17, 0.95);
+    0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 14px 40px -22px rgba(14, 22, 68, 0.3);
 }
 
 /* Surface d'un sous-menu : opaque, contrairement à la barre de navigation.
@@ -205,7 +239,7 @@ body {
    un panneau déployé, lui, recouvre le contenu de la page. Au moindre reste de
    transparence, un grand titre continue de se lire à travers les libellés. */
 .dropdown-panel {
-  background: #100d30;
+  background: #ffffff;
 }
 
 /* Premium glassy surface: subtle gradient fill, top edge catching light,
@@ -213,12 +247,8 @@ body {
 .card-surface {
   position: relative;
   isolation: isolate;
-  background: linear-gradient(165deg, rgba(31, 27, 82, 0.62) 0%, rgba(19, 15, 55, 0.62) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.08) inset,
-    0 30px 70px -34px rgba(0, 0, 0, 0.7);
+  background: #ffffff;
+  box-shadow: 0 24px 50px -34px rgba(18, 18, 20, 0.35);
   transition: box-shadow 0.35s ease, transform 0.35s ease;
 }
 .card-surface::before {
@@ -228,7 +258,7 @@ body {
   z-index: -1;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.16), rgba(91, 129, 255, 0.10) 45%, rgba(255, 255, 255, 0) 75%);
+  background: linear-gradient(160deg, rgba(14, 22, 68, 0.12), rgba(14, 22, 68, 0.07));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -236,8 +266,8 @@ body {
 }
 .card-surface:hover {
   box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.1) inset,
-    0 40px 90px -30px rgba(29, 80, 254, 0.24);
+    0 1px 2px rgba(14, 22, 68, 0.06),
+    0 30px 60px -30px rgba(29, 80, 254, 0.3);
 }
 
 /* La lumière que le curseur promène sur la surface.
@@ -251,8 +281,8 @@ body {
   border-radius: inherit;
   background: radial-gradient(
     260px circle at var(--gx, 50%) var(--gy, 50%),
-    rgba(91, 129, 255, 0.18),
-    rgba(91, 129, 255, 0.06) 42%,
+    rgba(29, 80, 254, 0.07),
+    rgba(29, 80, 254, 0.02) 42%,
     transparent 70%
   );
   opacity: 0;
@@ -279,10 +309,15 @@ body {
 }
 
 .gradient-num {
-  background: linear-gradient(180deg, #ffffff, #8fa9ff);
+  background: linear-gradient(180deg, #121214, #57554f);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+:where(.sombre) .gradient-num {
+  background: linear-gradient(180deg, #ffffff, #8fa9ff);
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 @keyframes float {
@@ -581,9 +616,9 @@ body {
 .lit-card {
   position: relative;
   isolation: isolate;
-  border-radius: 22px;
-  background: linear-gradient(168deg, rgba(38, 34, 96, 0.72) 0%, rgba(20, 16, 55, 0.72) 100%);
-  box-shadow: 0 30px 70px -34px rgba(0, 0, 0, 0.75);
+  border-radius: 6px;
+  background: var(--chip);
+  box-shadow: none;
   overflow: hidden;
 }
 .lit-card::before {
@@ -593,7 +628,7 @@ body {
   z-index: -1;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(180deg, rgba(120, 158, 255, 0.55), rgba(120, 158, 255, 0.04) 38%);
+  background: linear-gradient(180deg, rgba(29, 80, 254, 0.4), rgba(14, 22, 68, 0.08) 38%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -606,22 +641,22 @@ body {
   top: 0;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
-  box-shadow: 0 0 14px 1px rgba(91, 129, 255, 0.7);
+  box-shadow: 0 0 10px 0 rgba(29, 80, 254, 0.35);
   pointer-events: none;
 }
 .lit-card--warm::before {
-  background: linear-gradient(180deg, rgba(255, 178, 104, 0.55), rgba(255, 178, 104, 0.04) 38%);
+  background: linear-gradient(180deg, rgba(229, 115, 0, 0.4), rgba(14, 22, 68, 0.08) 38%);
 }
 .lit-card--warm::after {
   background: linear-gradient(90deg, transparent, var(--warm), transparent);
-  box-shadow: 0 0 14px 1px rgba(255, 160, 70, 0.7);
+  box-shadow: 0 0 10px 0 rgba(229, 115, 0, 0.35);
 }
 .lit-card--iris::before {
-  background: linear-gradient(180deg, rgba(172, 152, 255, 0.55), rgba(172, 152, 255, 0.04) 38%);
+  background: linear-gradient(180deg, rgba(106, 61, 255, 0.4), rgba(14, 22, 68, 0.08) 38%);
 }
 .lit-card--iris::after {
   background: linear-gradient(90deg, transparent, var(--iris), transparent);
-  box-shadow: 0 0 14px 1px rgba(172, 152, 255, 0.7);
+  box-shadow: 0 0 10px 0 rgba(106, 61, 255, 0.35);
 }
 
 /* Ciel étoilé appliqué à un encart.
@@ -802,5 +837,101 @@ body {
   }
   .demo-reading {
     display: none;
+  }
+}
+
+/* ─── Style éditorial ─────────────────────────────────────────────────
+   Grands titres en graisse normale, serrés ; les boutons pleins passent en
+   blanc sur les bandes sombres ; les arêtes lumineuses des cartes s'éteignent. */
+h1.font-display,
+h2.font-display,
+h3.font-display {
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+.sombre .bg-accent.text-white {
+  background-color: #f4f1ea;
+  color: #121214;
+}
+.lit-card::before,
+.lit-card::after {
+  display: none;
+}
+.card-surface::before {
+  background: linear-gradient(160deg, rgba(18, 18, 20, 0.1), rgba(18, 18, 20, 0.06));
+}
+
+/* Helpify branché : la barre du temps en cours se remplit, et les liaisons
+   actives du schéma coulent vers Helpify. */
+.branche-barre {
+  width: 0;
+  animation-name: brancheBarre;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes brancheBarre {
+  to {
+    width: 100%;
+  }
+}
+.branche-flux {
+  animation: brancheFlux 1.1s linear infinite;
+}
+@keyframes brancheFlux {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+.branche-eclat {
+  animation: brancheEclat 1.8s linear infinite;
+}
+@keyframes brancheEclat {
+  from {
+    stroke-dashoffset: 22;
+  }
+  to {
+    stroke-dashoffset: -400;
+  }
+}
+.branche-onde {
+  animation: brancheOnde 1.8s ease-out infinite;
+}
+@keyframes brancheOnde {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+/* Mode oral des films produits : les barres de la voix qui parle, et les
+   anneaux qui s'échappent de l'orbe de Helpify. */
+.voix-barre {
+  animation: voixBarre 0.9s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes voixBarre {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.voix-anneau {
+  animation: voixAnneau 1.6s ease-out infinite;
+}
+@keyframes voixAnneau {
+  from {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  to {
+    transform: scale(1.7);
+    opacity: 0;
   }
 }

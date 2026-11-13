@@ -355,7 +355,7 @@ function Frise({ locale, vertical }: { locale: Locale; vertical: boolean }) {
     ? { haut: "Back before the process", bas: "Skip the process" }
     : { haut: "Revenir avant le process", bas: "Passer le process" };
   const bouton =
-    "grid h-11 w-11 place-items-center rounded-full border border-hairline-strong bg-panel/60 text-ink/80 backdrop-blur transition-colors duration-200 hover:border-white/30 hover:bg-chip hover:text-ink";
+    "grid h-11 w-11 place-items-center rounded-full border border-hairline-strong bg-panel/60 text-ink/80 backdrop-blur transition-colors duration-200 hover:border-accent/40 hover:bg-chip hover:text-ink";
 
   const fondu = vertical
     ? "linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent)"

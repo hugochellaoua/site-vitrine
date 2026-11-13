@@ -35,21 +35,30 @@ export const site = {
 };
 
 export const nav = {
+  // Quatre entrées seulement. Les trois premières déploient un grand panneau
+  // où chaque lien porte sa phrase (voir navbar.tsx) ; tout le reste passe par
+  // les Ressources ou le pied de page.
   links: [
-    // `dropdown` : l'entrée déploie un sous-menu au survol (voir navbar.tsx).
     { label: "Produits", href: "/produits", dropdown: "products" as const },
-    // Placé juste après les produits : on entre plus souvent par son problème
-    // que par le nom d'une brique logicielle.
-    { label: "Cas d'usage", href: "/cas-d-usage", dropdown: "usecases" as const },
-    // La méthodologie se déplie sous le process : c'est la même matière — ce
-    // qui se passe, puis comment on s'y prend — et la barre n'a plus la place
-    // d'une huitième entrée de premier niveau.
-    { label: "Le process", href: "/#story", dropdown: "process" as const },
-    { label: "Services", href: "/#services", dropdown: "services" as const },
+    // On entre plus souvent par son problème que par le nom d'une brique
+    // logicielle : les cas d'usage, présentés comme des solutions.
+    { label: "Solutions", href: "/cas-d-usage", dropdown: "usecases" as const },
+    { label: "Ressources", href: "/methodologie", dropdown: "resources" as const },
     { label: "Tarifs", href: "/#tarifs" },
-    { label: "FAQ", href: "/#faq" },
-    { label: "Contact", href: links.contact },
   ],
+  allProducts: { label: "Voir les quatre produits", href: "/produits" },
+  servicesLabel: "Services",
+  resources: [
+    { label: "Le process", desc: "Comment Helpify mène l'entretien", href: "/#story" },
+    { label: "Méthodologie", desc: "Une évaluation fondée sur les sciences du recrutement", href: "/methodologie" },
+    { label: "L'équipe", desc: "Les expertises réunies autour de Helpify", href: "/equipe" },
+    { label: "Pourquoi l'IA ?", desc: "Ce qu'elle change, et les questions qu'on nous pose", href: "/pourquoi-l-ia" },
+    { label: "Vos données", desc: "Supervision humaine, transparence, RGPD", href: "/#donnees" },
+    { label: "Questions fréquentes", desc: "Les questions qui reviennent", href: "/#faq" },
+    { label: "Notice IA", desc: "Comment Helpify utilise l'IA, et vos droits", href: links.noticeIA },
+    { label: "Contact", desc: "Une question ? Parlons de vos recrutements", href: links.contact },
+  ],
+  candidat: { label: "Espace candidat", href: "/candidats" },
   connexion: { label: "Connexion", href: links.login },
   cta: { label: "Réservez une démo", href: links.booking },
 };
@@ -293,6 +302,7 @@ export const experts: ExpertsContent = {
   emphasis: "qui nous entourent.",
   intro:
     "Le soutien et l'expertise de profils expérimentés pour challenger notre réflexion sur les enjeux RH, business et technologiques.",
+  logosLabel: "Nos experts exercent chez",
   items: [
     {
       name: "Brice Monnier",
@@ -302,13 +312,13 @@ export const experts: ExpertsContent = {
     },
     {
       name: "Florent Gbelidji",
-      role: "Member of Technical Staff – Open Source Lead chez Reflection AI",
+      role: "Engineering Lead IA chez Reflection AI",
       logo: "reflection",
       body: "Apporte une expertise de pointe en ingénierie des modèles d'IA, avec un regard exigeant sur leur fiabilité, leur robustesse et leur maîtrise.",
     },
     {
       name: "Rome Lambert",
-      role: "RRH indépendante – PME TPE",
+      role: "RRH & recruteuse indépendante",
       body: "Apporte une vision terrain des problématiques RH opérationnelles, avec une approche de proximité au plus près des réalités des entreprises.",
     },
   ],
@@ -407,11 +417,11 @@ export const methodology = {
  */
 export const useCases = {
   eyebrow: "Cas d'usage",
-  title: "Neuf situations. Dans laquelle vous reconnaissez-vous ?",
+  title: "Huit situations. Dans laquelle vous reconnaissez-vous ?",
   emphasis: "Dans laquelle vous reconnaissez-vous ?",
   intro:
     "Le recrutement ne bloque pas au même endroit selon les équipes. Partez de votre situation : voici ce qu'Helpify y change, concrètement.",
-  menuLink: "Voir les neuf cas d'usage",
+  menuLink: "Voir les huit cas d'usage",
 
   items: [
     {
@@ -443,24 +453,6 @@ export const useCases = {
       tone: "accent" as const,
     },
     {
-      id: "mieux-lire-les-candidats",
-      menu: "Mieux lire les candidats",
-      promise: "Un profil unifié et structuré",
-      problem:
-        "Les informations sont dispersées et j'ai besoin d'une lecture plus simple des profils.",
-      answer: [
-        "Helpify transforme les informations recueillies pendant la conversation en un profil unifié et structuré, basé sur les critères importants pour le poste.",
-      ],
-      benefits: [
-        "Profil candidat standardisé",
-        "Informations structurées",
-        "Lecture plus rapide",
-        "Comparaison facilitée",
-        "Mise en avant des informations pertinentes pour le poste",
-      ],
-      tone: "accent" as const,
-    },
-    {
       id: "evaluer-les-competences",
       menu: "Évaluer les compétences",
       promise: "Allez au-delà des compétences déclarées",
@@ -481,6 +473,14 @@ export const useCases = {
       answer: [
         "Le CV n'est plus la seule source d'information. Helpify ajoute une conversation avec le candidat pour aller au-delà du document.",
         "Les questions sont construites à partir des critères d'évaluation du poste et d'une méthodologie structurée de recrutement. Le candidat doit apporter des éléments concrets sur son expérience et son parcours.",
+        "Helpify transforme les informations recueillies pendant la conversation en un profil unifié et structuré, basé sur les critères importants pour le poste.",
+      ],
+      benefits: [
+        "Profil candidat standardisé",
+        "Informations structurées",
+        "Lecture plus rapide",
+        "Comparaison facilitée",
+        "Mise en avant des informations pertinentes pour le poste",
       ],
       // Une promesse d'infaillibilité serait invendable le jour où elle est
       // prise en défaut. On dit donc ce que la conversation fait vraiment.
@@ -571,47 +571,50 @@ export const useCases = {
 // ─────────────────────────────────────────────────────────────
 export const products = {
   eyebrow: "Nos produits",
-  title: "Quatre produits. Une seule conversation.",
-  emphasis: "Une seule conversation.",
+  title: "Une conversation. Quatre objectifs.",
+  emphasis: "Quatre objectifs.",
   intro: [
     "Helpify transforme la conversation avec les candidats en un véritable outil de recrutement.",
     "De la première question à l'identification des meilleurs profils, nos quatre produits s'intègrent à votre ATS et s'adaptent à votre processus existant.",
   ],
   // La ligne en gras du texte source devient une suite d'étapes lisible d'un
   // coup d'œil : quatre verbes, quatre produits, dans l'ordre de la page.
-  verbs: ["Préqualifier", "Matcher", "Révéler les synergies", "Répondre aux candidats"],
+  verbs: ["Matcher", "Préqualifier", "Révéler les synergies", "Engager les candidats"],
   outro: "Une seule plateforme pour mieux comprendre vos talents et accélérer vos recrutements.",
 
   items: [
     {
-      id: "prequalification",
-      name: "Préqualification",
-      headline: "Les informations clés, sans les appels de préqualification",
-      body: "Helpify échange avec chaque candidat pour collecter automatiquement les informations essentielles à votre recrutement.",
-      visual: "chat-extract" as const,
+      id: "matching",
+      name: "Matching",
+      headline: "Identifiez mieux les profils qui correspondent réellement au besoin",
+      // La méthode, dite en un mot, au-dessus du texte : c'est un entretien.
+      tag: "Entretien structuré, fondé sur les sciences du recrutement",
+      body: "Helpify évalue chaque candidat selon vos critères, au cours d'un entretien structuré qui va chercher des preuves concrètes au-delà de ce que révèle un CV.",
+      visual: "score" as const,
       tone: "accent" as const,
     },
     {
-      id: "matching",
-      name: "Matching",
-      headline: "Identifier les profils qui correspondent réellement au besoin",
-      body: "Helpify analyse les profils selon vos critères et utilise la conversation pour aller au-delà de ce que révèle un CV.",
-      visual: "score" as const,
+      id: "prequalification",
+      name: "Préqualification",
+      headline: "Préqualifiez 100 % de vos candidats",
+      body: "Helpify échange avec chaque candidat et collecte automatiquement les informations essentielles à votre recrutement, sans un seul appel de préqualification.",
+      visual: "chat-extract" as const,
       tone: "accent" as const,
     },
     {
       id: "360-matching",
       name: "360 Matching",
-      headline: "Ne laissez plus passer un talent à cause d'une seule candidature",
-      body: "Un candidat qui ne correspond pas à un poste peut être parfaitement adapté à un autre. 360 Matching identifie ces synergies dans l'ensemble de vos offres d'emploi.",
+      headline: "Maximisez vos chances de trouver le bon candidat",
+      body: "Chaque candidat est rapproché de toutes vos offres ouvertes auxquelles il peut correspondre, pas seulement de celle à laquelle il a postulé.",
       visual: "constellation" as const,
       tone: "accent" as const,
     },
     {
       id: "talent-ask",
       name: "Talent Ask",
-      headline: "Répondez aux candidats, 24h/24",
-      body: "Talent Ask permet aux candidats de poser leurs questions sur votre entreprise, vos postes et votre environnement, directement dans leur parcours de recrutement.",
+      headline: "Engagez vos candidats et répondez à leurs questions, 24h/24",
+      tag: "Des informations claires, pour que plus de candidats postulent",
+      body: "Sans informations claires, beaucoup de candidats renoncent à postuler. Le poste, l'équipe, les conditions, la suite du processus : avec Talent Ask, chacun obtient ses réponses et peut se projeter. Et comme beaucoup de candidats cherchent et postulent en dehors des heures de bureau, Talent Ask leur répond à toute heure. Les questions qu'ils posent vous remontent : elles deviennent des insights pour mieux communiquer à l'externe et attirer les talents.",
       // Seul produit tourné vers le candidat : il porte donc l'orange, comme
       // partout ailleurs sur le site.
       visual: "ask" as const,
@@ -660,8 +663,8 @@ export const products = {
   // bénéfices, car on ne peut pas juger un résultat sans savoir d'où il vient.
   home: {
     eyebrow: "Nos produits",
-    title: "Quatre produits. Une seule conversation.",
-    emphasis: "Une seule conversation.",
+    title: "Une conversation. Quatre objectifs.",
+    emphasis: "Quatre objectifs.",
     link: "Découvrir les quatre produits",
   },
 
@@ -909,6 +912,10 @@ export const finalCta = {
 };
 
 export const footer = {
+  heads: { products: "Produits", solutions: "Solutions", resources: "Ressources", company: "Entreprise", legal: "Légal" },
+  allUseCases: "Tous les cas d'usage",
+  address: "59 rue de Ponthieu, 75008 Paris",
+  email: "contact@helpify-ai.fr",
   legal: [
     { label: "Mentions légales", href: links.mentionsLegales },
     { label: "Confidentialité", href: links.privacy },
@@ -918,6 +925,339 @@ export const footer = {
   social: { label: "Helpify sur LinkedIn", href: links.linkedin },
   badges: ["Conforme RGPD", "Hébergement UE", "Données européennes"],
   copyright: "© 2026 Helpify",
+};
+
+/**
+ * Vos données : ce que la plateforme fait des candidatures, et ce qu'elle ne
+ * fait pas. Chaque phrase reprend un engagement écrit dans la notice IA, la
+ * politique de confidentialité ou les CGU du site : rien n'est promis ici qui
+ * n'y figure pas déjà.
+ */
+/**
+ * Helpify branché sur votre entreprise : trois temps, et le schéma qui les
+ * illustre. Les étapes reprennent celles du process ; les blocs du schéma,
+ * les sources, canaux et garde-fous déjà cités sur le site.
+ */
+/**
+ * La bande qui défile : ce que font les équipes qui travaillent avec Helpify.
+ * Chaque ligne reprend une promesse déjà faite ailleurs sur le site (produits,
+ * cas d'usage, bénéfices).
+ */
+export const defile = {
+  lead: "Les recruteurs qui",
+  lignes: [
+    "préqualifient sans appels de préqualification.",
+    "évaluent chaque candidat au-delà du CV.",
+    "ne passent plus à côté d'un talent.",
+    "répondent aux candidats, 24h/24.",
+    "enrichissent leur vivier à chaque conversation.",
+    "appliquent les mêmes critères à tous.",
+    "reçoivent leur shortlist automatiquement.",
+  ],
+  cta: { label: "Voir les produits", href: "/produits" },
+};
+
+/**
+ * La méthode, en cinq temps : comment Helpify mène l'entretien, des critères
+ * de l'offre jusqu'à l'analyse remise aux RH. Les exemples de l'illustration
+ * (comportements observables, questions, relance) sont là pour montrer le
+ * mécanisme ; ils reprennent le poste et les réponses de Sarah K. du site.
+ */
+/**
+ * L'espace candidat : une page pour les candidats, en préparation. Le candidat
+ * échange avec Helpify sur son parcours, en tire un profil qui le distingue
+ * au-delà du CV, et le partage quand il postule ; le recruteur y ajoute sa
+ * fiche de poste pour voir la correspondance. En attendant l'ouverture, une
+ * liste d'attente.
+ */
+export const espaceCandidat = {
+  eyebrow: "Espace candidat",
+  badge: "Bientôt disponible",
+  title: "Montrez qui vous êtes, au-delà de votre CV.",
+  emphasis: "au-delà de votre CV.",
+  intro: "Échangez avec Helpify sur votre parcours. Il fait ressortir ce que votre CV ne dit pas, et vous le partagez quand vous postulez.",
+  etapesTitre: "Comment ça marchera.",
+  etapes: [
+    {
+      titre: "Vous échangez avec Helpify",
+      texte: "Un vrai entretien, à l'écrit ou à l'oral : des questions sur votre parcours, vos réalisations et leur contexte, ce que vous cherchez.",
+    },
+    {
+      titre: "Votre profil prend forme",
+      texte: "Helpify en tire un profil clair : ce que vous avez réellement fait, ce que vous savez faire, ce qui vous motive. De quoi vous démarquer bien au-delà d'un CV.",
+    },
+    {
+      titre: "Vous le partagez quand vous postulez",
+      texte: "Un lien à joindre à votre candidature, à côté de votre CV.",
+    },
+    {
+      titre: "Le recruteur voit la correspondance",
+      texte: "Il ajoute sa fiche de poste et voit en quoi votre profil y répond, critère par critère.",
+    },
+  ],
+  apercu: {
+    profil: "Profil",
+    realisations: "Réalisations",
+    realisation: "A monté un service client de zéro : process, recrutement de trois personnes, suivi de satisfaction.",
+    competences: "Compétences",
+    fiche: "Fiche de poste ajoutée",
+    correspondance: "Correspondance",
+  },
+  attente: {
+    titre: "Soyez parmi les premiers.",
+    texte: "Inscrivez-vous : on vous prévient dès que l'espace candidat ouvre.",
+    prenom: "Prénom",
+    email: "E-mail",
+    metier: "Métier ou poste recherché (facultatif)",
+    bouton: "Rejoindre la liste d'attente",
+    envoi: "Envoi…",
+    mention: "En vous inscrivant, vous acceptez qu'Helpify vous écrive au sujet de l'espace candidat. Vos données ne servent qu'à cela.",
+    confidentialite: { label: "Politique de confidentialité", href: links.privacy },
+    ok: "C'est noté. On vous prévient dès que l'espace candidat ouvre.",
+    erreur: "L'inscription n'a pas pu être envoyée. Réessayez dans un instant.",
+    source: "Liste d'attente · Espace candidat",
+  },
+};
+
+/**
+ * L'équipe : les expertises réunies autour de Helpify, en quatre groupes. Les
+ * fondateurs d'abord (relation client et produit, technique et sécurité),
+ * puis les experts qui les accompagnent.
+ */
+export const equipe = {
+  eyebrow: "L'équipe",
+  title: "Les expertises réunies autour de Helpify.",
+  emphasis: "autour de Helpify.",
+  groupes: [
+    {
+      titre: "Relation client & produit",
+      membres: [
+        {
+          nom: "Hugo Chellaoua",
+          initiales: "HC",
+          photo: "/equipe/hugo.jpg",
+          role: "CEO",
+          points: ["Porte la vision produit et la relation client", "En lien direct avec les enjeux des équipes recrutement"],
+        },
+      ],
+    },
+    {
+      titre: "Technique & sécurité",
+      membres: [
+        {
+          nom: "Mounir Zaghba",
+          initiales: "MZ",
+          role: "CTO",
+          points: ["Garant de l'architecture, de la fiabilité et de la sécurité de la plateforme"],
+        },
+      ],
+    },
+    {
+      titre: "Experts métier",
+      membres: [
+        {
+          nom: "Brice Monnier",
+          initiales: "BM",
+          photo: "/equipe/brice-monnier.jpg",
+          role: "DRH chez L'Oréal Innovation",
+          logo: "loreal" as const,
+          points: ["Apporte la vision des grands groupes sur les enjeux RH, la transformation et l'innovation"],
+        },
+        {
+          nom: "Rome Lambert",
+          initiales: "RL",
+          photo: "/equipe/rome.jpg",
+          role: "RRH & recruteuse indépendante",
+          points: ["Le regard terrain du recrutement : sourcing, qualification et expérience candidat"],
+        },
+      ],
+    },
+    {
+      titre: "Expert IA",
+      membres: [
+        {
+          nom: "Florent Gbelidji",
+          initiales: "FG",
+          photo: "/equipe/florent.jpg",
+          role: "Engineering Lead IA chez Reflection AI",
+          logo: "reflection" as const,
+          points: ["Contribue à la fiabilité de l'IA, du questionnement et de la restitution"],
+        },
+      ],
+    },
+  ] as { titre: string; membres: { nom: string; initiales: string; photo?: string; role: string; logo?: "loreal" | "reflection"; points: string[]; experience?: string }[] }[],
+  cta: { titre: "Parlons de vos recrutements.", label: "Réservez une démo", href: links.booking },
+};
+
+/**
+ * La page « Pourquoi utiliser l'IA dans le recrutement ? » : le constat, ce
+ * que Helpify change des deux côtés, puis les objections qu'on nous oppose le
+ * plus souvent. Les réponses reprennent les engagements du site (notice IA,
+ * FAQ, cas d'usage).
+ */
+export const pourquoiIA = {
+  eyebrow: "Ressources",
+  title: "Pourquoi utiliser l'IA dans le recrutement ?",
+  emphasis: "dans le recrutement ?",
+  intro: "Ce que l'IA change pour vos candidats et pour vos recruteurs, et les questions qu'on nous pose le plus souvent.",
+  constat: {
+    titre: "Aujourd'hui, la plupart des candidats ne sont jamais écoutés.",
+    texte: [
+      "Un candidat envoie un CV et, dans 95 % des cas, n'obtient aucun retour. Il n'a pas d'espace pour expliquer qui il est, ni personne pour lui présenter le poste.",
+      "De l'autre côté, vos recruteurs n'ont pas le temps d'appeler chaque candidat. Ils lisent des mots-clés, souvent optimisés par une IA, et passent à côté de profils qu'ils n'ont jamais entendus.",
+    ],
+    points: [
+      "Le silence après une candidature est l'une des expériences que les candidats vivent le plus mal.",
+      "Quand le parcours est long ou opaque, beaucoup abandonnent leur candidature en cours de route.",
+    ],
+  },
+  attentes: {
+    titre: "Ce que veulent les candidats.",
+    items: [
+      { attente: "Comprendre avant de postuler", reponse: "Talent Ask répond à leurs questions sur le poste, l'équipe et les conditions, à toute heure." },
+      { attente: "Être écoutés, pas seulement lus", reponse: "Chaque candidat a un vrai échange autour de son parcours." },
+      { attente: "Savoir ce que fait l'IA", reponse: "Helpify se présente comme une IA, s'appuie sur les critères du poste, et la décision revient à un recruteur." },
+      { attente: "Que le temps gagné serve le contact humain", reponse: "Vos recruteurs consacrent le temps gagné aux entretiens." },
+    ],
+  },
+  change: {
+    titre: "Ce que Helpify change, des deux côtés.",
+    colonnes: [
+      {
+        titre: "Pour vos candidats",
+        points: [
+          "Un vrai échange autour de leur parcours, pas seulement un CV.",
+          "Des réponses à leurs questions sur le poste et l'entreprise, à toute heure.",
+          "La certitude que la décision revient à un recruteur.",
+        ],
+      },
+      {
+        titre: "Pour vos recruteurs",
+        points: [
+          "Le temps gagné revient aux entretiens et à la décision.",
+          "Chaque candidat évalué selon les mêmes critères, preuves à l'appui.",
+          "Des profils réellement écoutés, et plus seulement des mots-clés.",
+        ],
+      },
+    ],
+  },
+  objections: {
+    titre: "Les questions qu'on nous pose.",
+    items: [
+      {
+        q: "L'IA va-t-elle décider à la place de mes recruteurs ?",
+        a: "Non. Aucune décision d'embauche, de rejet ou de classement définitif n'est prise automatiquement. Helpify prépare l'évaluation ; vos recruteurs gardent les critères, le jugement et la décision.",
+      },
+      {
+        q: "Les candidats acceptent-ils d'échanger avec une IA ?",
+        a: "Oui, surtout quand on leur explique. Un premier échange écrit ou vocal avant l'entretien est bien accepté quand les critères sont clairs et qu'un recruteur garde la décision. C'est exactement ce que fait Helpify : il se présente comme une IA, s'appuie sur les critères du poste, et rappelle que la décision revient à un recruteur.",
+      },
+      {
+        q: "Comment évitez-vous les biais ?",
+        a: "Les mêmes critères pour tous, définis pour le poste. Chaque conclusion est sourcée sur les réponses du candidat, et le score est justifié critère par critère. Vous gardez la décision finale.",
+      },
+      {
+        q: "Et les CV rédigés avec l'IA ?",
+        a: "De plus en plus de candidats utilisent l'IA pour préparer leurs candidatures. La conversation va chercher des éléments concrets : ce que le candidat a réellement fait, dans quel contexte, avec quels résultats.",
+      },
+      {
+        q: "Que deviennent les données des candidats ?",
+        a: "Elles sont conservées dans l'espace sécurisé de la plateforme, accessibles selon les droits que vous définissez, et jusqu'à 24 mois pour les candidats non retenus. Chaque candidat peut exercer ses droits RGPD.",
+      },
+      {
+        q: "Faut-il changer d'outils ?",
+        a: "Non. Helpify n'est pas un ATS : il se branche sur le vôtre, et les résultats remontent là où vos équipes travaillent déjà.",
+      },
+    ],
+  },
+  cta: { titre: "Voyez-le sur un de vos postes.", label: "Réservez une démo", href: links.booking },
+};
+
+export const methode = {
+  title: "Comment Helpify mène l'entretien.",
+  emphasis: "mène l'entretien.",
+  etapes: [
+    {
+      titre: "Les critères du poste",
+      texte: "Helpify extrait les critères de votre offre, leur importance et les comportements observables qui permettent de les évaluer.",
+    },
+    {
+      titre: "Les questions d'entretien",
+      texte: "À partir de ces critères, Helpify construit les questions de l'entretien.",
+    },
+    {
+      titre: "Le CV du candidat",
+      texte: "Quand le candidat dépose son CV, Helpify adapte les questions à son parcours et aux critères du poste, pour comprendre ce qui les relie.",
+    },
+    {
+      titre: "Un vrai échange",
+      texte: "Les questions s'ajustent à chaque réponse pour creuser, comme le ferait un recruteur en entretien.",
+    },
+    {
+      titre: "L'analyse, critère par critère",
+      texte: "Helpify restitue son analyse selon vos critères. Vos RH décident.",
+    },
+  ],
+  cta: { label: "Réservez une démo", href: links.booking },
+  demo: {
+    offre: "Offre",
+    observable: "Comportement observable",
+    observables: [
+      "A suivi des comptes clients stratégiques",
+      "A mis en place des process et une équipe",
+      "Échange professionnel en anglais",
+      "A travaillé chez un éditeur SaaS",
+    ],
+    questions: "Questions de l'entretien",
+    exemples: [
+      "Racontez-moi comment vous avez monté un service client.",
+      "Quel client grand compte avez-vous accompagné, et comment ?",
+      "Pouvez-vous présenter un de vos projets en anglais ?",
+    ],
+    cv: "CV.pdf",
+    adaptee: "Question adaptée au CV",
+    relance: "Relance",
+    relanceTexte: "Comment avez-vous choisi les trois personnes recrutées ?",
+    analyse: "Analyse",
+    valider: "À valider par vous",
+  },
+  cumul: {
+    title: "Les quatre produits sont cumulables.",
+    texte: "Ils reposent sur le même entretien : activez-en un, ou les quatre.",
+  },
+};
+
+export const donnees = {
+  eyebrow: "Vos données",
+  title: "Une IA qui assiste, jamais qui décide.",
+  emphasis: "jamais qui décide.",
+  intro: "Ce que la plateforme fait des candidatures, et ce qu'elle ne fait pas.",
+  items: [
+    {
+      title: "Supervision humaine",
+      body: "Aucune décision d'embauche, de rejet ou de classement définitif n'est prise automatiquement. La décision finale appartient à votre entreprise.",
+    },
+    {
+      title: "Transparence pour le candidat",
+      body: "Le candidat sait qu'il échange avec une intelligence artificielle, et reçoit les informations sur son utilisation avant le début des échanges.",
+    },
+    {
+      title: "Accès maîtrisé",
+      body: "Les échanges sont stockés dans l'espace sécurisé de la plateforme, accessibles uniquement selon les droits que vous définissez.",
+    },
+    {
+      title: "Conservation limitée",
+      body: "Les données des candidats non retenus sont conservées jusqu'à 24 mois après le dernier contact, sauf suppression anticipée.",
+    },
+    {
+      title: "Droits RGPD",
+      body: "Accès, rectification, effacement, limitation, opposition, portabilité : chaque candidat peut exercer ses droits.",
+    },
+  ],
+  links: [
+    { label: "Lire la notice IA", href: links.noticeIA },
+    { label: "Politique de confidentialité", href: links.privacy },
+  ],
 };
 
 /**
@@ -949,6 +1289,7 @@ export const ui = {
   prevStep: "Étape précédente",
   nextStep: "Étape suivante",
   lastStep: "Dernière étape",
+  discover: "Découvrir",
   seeInDemoBefore: "Voir ",
   seeInDemoAfter: " en démo",
   helpifyAnswer: "La réponse Helpify",

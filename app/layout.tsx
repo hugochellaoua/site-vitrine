@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { DM_Mono, DM_Sans } from "next/font/google";
 import { site } from "@/lib/content";
 import { siteUrl } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/next";
@@ -24,6 +24,9 @@ const dmSans = DM_Sans({
   style: ["normal", "italic"],
 });
 
+/** Les petites étiquettes (numéros d'étape, noms de produit) : une chasse fixe. */
+const dmMono = DM_Mono({ variable: "--font-mono-brand", subsets: ["latin"], weight: ["400", "500"] });
+
 export const metadata: Metadata = {
   // Indispensable : sans elle, les URL de partage et les liens canoniques
   // restent relatifs, et les réseaux sociaux ne trouvent pas l'image.
@@ -46,7 +49,8 @@ export const metadata: Metadata = {
     url: "/",
   },
   twitter: { card: "summary_large_image", title: site.title, description: site.description },
-  robots: { index: true, follow: true },
+  // La version « thème 2 » (helpify-ai.fr/theme-2) n'est pas indexée.
+  robots: process.env.NEXT_PUBLIC_BASE_PATH ? { index: false, follow: false } : { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -55,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${dmSans.variable} h-full antialiased`}>
+    <html lang="fr" className={`${dmSans.variable} ${dmMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-void text-ink">
         {children}
         {/* Mesure d'audience sans cookie. Si l'outil change, la section 11 de la
