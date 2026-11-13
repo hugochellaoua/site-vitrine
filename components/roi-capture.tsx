@@ -23,7 +23,7 @@ export function RoiCapture({ recap }: { recap: string }) {
     setStatus("sending");
     const email = String(new FormData(e.currentTarget).get("email") ?? "");
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, message: recap, source: roi.capture.source }),
