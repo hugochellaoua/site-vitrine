@@ -70,6 +70,7 @@ export function ProductsPage({ locale }: { locale: Locale }) {
               as="h1"
               title={products.title}
               emphasis={products.emphasis}
+              encadre
               className="mt-6 !max-w-[22ch] !text-[clamp(32px,5vw,58px)]"
             />
             {products.intro.map((p, i) => (

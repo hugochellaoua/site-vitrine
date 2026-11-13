@@ -12,15 +12,28 @@ export function SectionTitle({
   emphasis,
   className = "",
   as: Tag = "h2",
+  encadre = false,
 }: {
   title: string;
   emphasis?: string;
   className?: string;
   /** `h1` quand le titre est celui de la page entière, et non d'une section. */
   as?: "h1" | "h2";
+  /** Le titre entier en blanc, dans un bloc noir qui épouse le texte. */
+  encadre?: boolean;
 }) {
   const base =
     "mx-auto max-w-[24ch] text-balance font-display text-[clamp(30px,4.2vw,52px)] font-normal leading-[1.04] tracking-[-0.04em] text-ink";
+
+  if (encadre) {
+    return (
+      <Tag className={`${base} ${className}`}>
+        <span className="inline-block rounded-[6px] bg-[#121214] px-[0.45em] pb-[0.24em] pt-[0.18em] text-white [box-decoration-break:clone]">
+          {title}
+        </span>
+      </Tag>
+    );
+  }
 
   if (!emphasis || !title.endsWith(emphasis)) {
     return <Tag className={`${base} ${className}`}>{title}</Tag>;

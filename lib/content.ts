@@ -571,8 +571,8 @@ export const useCases = {
 // ─────────────────────────────────────────────────────────────
 export const products = {
   eyebrow: "Nos produits",
-  title: "Quatre produits. Une seule conversation.",
-  emphasis: "Une seule conversation.",
+  title: "Une conversation. Quatre objectifs.",
+  emphasis: "Quatre objectifs.",
   intro: [
     "Helpify transforme la conversation avec les candidats en un véritable outil de recrutement.",
     "De la première question à l'identification des meilleurs profils, nos quatre produits s'intègrent à votre ATS et s'adaptent à votre processus existant.",
@@ -663,8 +663,8 @@ export const products = {
   // bénéfices, car on ne peut pas juger un résultat sans savoir d'où il vient.
   home: {
     eyebrow: "Nos produits",
-    title: "Quatre produits. Une seule conversation.",
-    emphasis: "Une seule conversation.",
+    title: "Une conversation. Quatre objectifs.",
+    emphasis: "Quatre objectifs.",
     link: "Découvrir les quatre produits",
   },
 

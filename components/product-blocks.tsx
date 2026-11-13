@@ -31,7 +31,7 @@ export function ProductBlocks({ locale }: { locale: Locale }) {
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-center text-center">
           <Badge>{products.home.eyebrow}</Badge>
-          <SectionTitle title={products.home.title} emphasis={products.home.emphasis} className="mt-6" />
+          <SectionTitle title={products.home.title} emphasis={products.home.emphasis} encadre className="mt-6" />
         </div>
 
         <div className="mt-14 flex flex-col gap-4">
