@@ -4,28 +4,32 @@ import { dict, type Locale } from "@/lib/i18n";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 import { AnimatedStat } from "@/components/animated-stat";
 import { SecondaryCta } from "@/components/ui/secondary-cta";
+import { CalculRoi } from "@/components/calcul-roi";
 
 export function Pricing({ locale }: { locale: Locale }) {
   const { pricing } = dict(locale);
   return (
-    <section id="tarifs" className="relative px-6 py-28">
-      <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
+    // Les tarifs à gauche, le calculateur de ROI à côté : on y arrive par
+    // « Tarifs » comme par « Calculer mon ROI ».
+    <section id="tarifs" className="relative scroll-mt-20 px-6 py-28">
+      <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)] items-start gap-14 lg:grid-cols-[1fr_1.1fr]">
+      <div className="flex flex-col items-center text-center lg:sticky lg:top-28 lg:items-start lg:text-left">
         <Badge>{pricing.eyebrow}</Badge>
-        <SectionTitle title={pricing.title} emphasis={pricing.emphasis} className="mt-6" />
+        <SectionTitle title={pricing.title} emphasis={pricing.emphasis} className="mt-6 lg:!mx-0" />
         <p className="mt-3 text-[15px] text-muted">{pricing.sub}</p>
 
-        <div className="mt-14 flex flex-col items-center">
+        <div className="mt-12 flex flex-col items-center lg:items-start">
           <AnimatedStat
             value={pricing.stat}
             suffix="%"
             label={pricing.statLabel}
             size="text-[clamp(56px,9vw,96px)]"
-            align="center"
+            align="responsive"
           />
         </div>
 
-        <div className="mt-14 flex flex-col items-center gap-2.5">
-          <div className="flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-12 flex flex-col items-center gap-2.5 lg:items-start">
+          <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-start">
           <Magnetic>
             <Link
               href={pricing.cta.href}
@@ -45,6 +49,9 @@ export function Pricing({ locale }: { locale: Locale }) {
             {pricing.altLink.label}
           </a>
         </div>
+      </div>
+
+      <CalculRoi locale={locale} />
       </div>
     </section>
   );

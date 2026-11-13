@@ -935,3 +935,12 @@ h3.font-display {
     opacity: 0;
   }
 }
+
+/* La question du calculateur de ROI arrive avec un léger rebond. */
+@keyframes roiPop {
+  0% { transform: translateY(8px) scale(0.97); opacity: 0; }
+  60% { transform: translateY(0) scale(1.01); opacity: 1; }
+  100% { transform: none; opacity: 1; }
+}
+.roi-pop { animation: roiPop 600ms cubic-bezier(0.2, 0.8, 0.2, 1) 250ms both; }
+@media (prefers-reduced-motion: reduce) { .roi-pop { animation: none; } }

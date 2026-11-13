@@ -40,6 +40,7 @@ export const nav = {
     { icone: "methode" as const, label: "Methodology", desc: "An assessment grounded in recruitment science", href: "/en/methodology" },
     { icone: "equipe" as const, label: "The team", desc: "The expertise gathered around Helpify", href: "/en/team" },
     { icone: "ia" as const, label: "Why AI?", desc: "What it changes, and the questions we are asked", href: "/en/why-ai" },
+    { icone: "roi" as const, label: "Calculate my ROI", desc: "The time and budget you spend on screening", href: "/en#roi" },
     { icone: "donnees" as const, label: "Your data", desc: "Human oversight, transparency, GDPR", href: "/en#donnees" },
     { icone: "faq" as const, label: "FAQ", desc: "The questions that keep coming up", href: "/en#faq" },
     { icone: "notice" as const, label: "AI notice", desc: "How Helpify uses AI, and your rights", href: links.noticeIA },
@@ -713,6 +714,40 @@ export const pricing = {
   cta: { label: "Book a demo", href: links.booking },
   ctaSub: "15 min · No commitment",
   altLink: { label: "I already have an account", href: links.login },
+};
+
+// The calculator next to pricing: it measures what screening costs today, with
+// the visitor's own figures only, then asks the question.
+export const calculRoi = {
+  eyebrow: "Calculate my ROI",
+  title: "How much does screening applications cost you?",
+  modes: {
+    temps: "I know my screening time",
+    recrutements: "I'll start from my hires",
+  },
+  heuresSemaine: { label: "Hours spent screening applications, per week", unite: "h" },
+  recrutements: { label: "Hires per year", unite: "" },
+  candidatures: { label: "Applications received per hire", unite: "" },
+  minutesParCandidature: 2,
+  base: "Based on 2 minutes per application.",
+  sousTotal: "Time spent screening",
+  parMois: "per month",
+  parAn: "per year",
+  jour: "day",
+  jours: "days",
+  heures: "h",
+  taux: { label: "Your hourly rate", unite: "€" },
+  hypotheses: "One day = 7 working hours · one year = 52 weeks.",
+  phrase: {
+    debut: "Today, you spend",
+    milieu: "a month, or",
+    fin: "a year, screening applications.",
+    cout: "That is",
+    coutMilieu: "a month and",
+    coutFin: "a year.",
+  },
+  question: "What would it change for your company to get those days back, or to put them into higher-value work?",
+  cta: { label: "Let's talk", href: links.booking },
 };
 
 export const faq = {

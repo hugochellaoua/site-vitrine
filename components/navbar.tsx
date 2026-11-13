@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Magnetic } from "@/components/ui/magnetic";
 import {
   ArrowRight,
+  Calculator,
   ChevronDown,
   CircleHelp,
   FileText,
@@ -51,6 +52,7 @@ const ICONES: Record<string, LucideIcon> = {
   methode: FlaskConical,
   equipe: Users,
   ia: Sparkles,
+  roi: Calculator,
   donnees: ShieldCheck,
   faq: CircleHelp,
   notice: FileText,

@@ -53,6 +53,7 @@ export const nav = {
     { icone: "methode" as const, label: "Méthodologie", desc: "Une évaluation fondée sur les sciences du recrutement", href: "/methodologie" },
     { icone: "equipe" as const, label: "L'équipe", desc: "Les expertises réunies autour de Helpify", href: "/equipe" },
     { icone: "ia" as const, label: "Pourquoi l'IA ?", desc: "Ce qu'elle change, et les questions qu'on nous pose", href: "/pourquoi-l-ia" },
+    { icone: "roi" as const, label: "Calculer mon ROI", desc: "Le temps et le budget que vous consacrez au tri", href: "/#roi" },
     { icone: "donnees" as const, label: "Vos données", desc: "Supervision humaine, transparence, RGPD", href: "/#donnees" },
     { icone: "faq" as const, label: "Questions fréquentes", desc: "Les questions qui reviennent", href: "/#faq" },
     { icone: "notice" as const, label: "Notice IA", desc: "Comment Helpify utilise l'IA, et vos droits", href: links.noticeIA },
@@ -823,6 +824,42 @@ export const pricing = {
   cta: { label: "Réservez une démo", href: links.booking },
   ctaSub: "15 min · Sans engagement",
   altLink: { label: "J'ai déjà un compte", href: links.login },
+};
+
+// Le calculateur, à côté des tarifs. Il ne promet aucun gain : il mesure ce que
+// le tri coûte aujourd'hui, avec les seuls chiffres du visiteur, puis lui pose
+// la question. Hypothèses affichées : 52 semaines, 7 h par jour, 2 min par
+// candidature.
+export const calculRoi = {
+  eyebrow: "Calculer mon ROI",
+  title: "Combien vous coûte le tri des candidatures ?",
+  modes: {
+    temps: "Je connais mon temps de tri",
+    recrutements: "Je pars de mes recrutements",
+  },
+  heuresSemaine: { label: "Heures passées à trier les candidatures, par semaine", unite: "h" },
+  recrutements: { label: "Recrutements par an", unite: "" },
+  candidatures: { label: "Candidatures reçues par recrutement", unite: "" },
+  minutesParCandidature: 2,
+  base: "Base : 2 minutes par candidature.",
+  sousTotal: "Temps consacré au tri",
+  parMois: "par mois",
+  parAn: "par an",
+  jour: "jour",
+  jours: "jours",
+  heures: "h",
+  taux: { label: "Votre taux horaire", unite: "€" },
+  hypotheses: "Une journée = 7 heures de travail · une année = 52 semaines.",
+  phrase: {
+    debut: "Actuellement, vous consacrez",
+    milieu: "par mois, soit",
+    fin: "par an, au tri des candidatures.",
+    cout: "Soit",
+    coutMilieu: "par mois et",
+    coutFin: "par an.",
+  },
+  question: "Qu'est-ce que cela changerait pour votre entreprise de récupérer ces jours, ou de les consacrer à des tâches à plus forte valeur ajoutée ?",
+  cta: { label: "Parlons-en", href: links.booking },
 };
 
 export const faq = {

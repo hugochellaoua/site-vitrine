@@ -14,7 +14,7 @@ export function AnimatedStat({
   suffix?: string;
   label: string;
   size?: string;
-  align?: "left" | "center";
+  align?: "left" | "center" | "responsive";
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [display, setDisplay] = useState(0);
@@ -58,14 +58,14 @@ export function AnimatedStat({
   }, [value]);
 
   return (
-    <div ref={ref} className={align === "center" ? "text-center" : "text-left"}>
+    <div ref={ref} className={align === "center" ? "text-center" : align === "responsive" ? "text-center lg:text-left" : "text-left"}>
       <div className={`gradient-num font-display font-bold tabular-nums leading-none ${size}`}>
         {display}
         {suffix}
       </div>
       <div
         className={`mt-3 text-[11px] uppercase tracking-[0.14em] text-faint ${
-          align === "center" ? "" : "max-w-[14ch]"
+          align === "left" ? "max-w-[14ch]" : ""
         }`}
       >
         {label}
