@@ -7,6 +7,7 @@ import { UseCasesGrid } from "@/components/use-cases-grid";
 import { Donnees } from "@/components/donnees";
 import { Methode } from "@/components/methode";
 import { Defile } from "@/components/defile";
+import { IntegrationsBand } from "@/components/integrations-band";
 import { Pricing } from "@/components/pricing";
 import { Faq } from "@/components/faq";
 import { FinalCta } from "@/components/final-cta";
@@ -20,7 +21,8 @@ import type { Locale } from "@/lib/i18n";
  *  — le haut de page sombre, le titre, et les entreprises où exercent nos
  *    experts ;
  *  — les quatre produits en action, la bande qui défile (ce que font les
- *    recruteurs avec Helpify), puis les huit situations ;
+ *    recruteurs avec Helpify), la rangée des ATS auxquels Helpify se
+ *    branche, puis les huit situations ;
  *  — comment Helpify mène l'entretien, en cinq temps, et le rappel que les
  *    quatre produits se cumulent (bande noire) ;
  *  — l'engagement sur les données (bande noire). Les experts ne sont plus
@@ -36,6 +38,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <Hero locale={locale} />
         <ProductBlocks locale={locale} />
         <Defile locale={locale} />
+        <IntegrationsBand locale={locale} />
         <UseCasesGrid locale={locale} />
         <div className="sombre bg-void">
           <Methode locale={locale} />

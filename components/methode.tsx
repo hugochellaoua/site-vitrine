@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
-import Link from "next/link";
 import { FileText } from "lucide-react";
 import { dict, type Locale } from "@/lib/i18n";
 import { SectionTitle } from "@/components/ui/section-title";
@@ -15,7 +14,6 @@ import { SectionTitle } from "@/components/ui/section-title";
  * les critères et leurs comportements observables, les questions, la question
  * adaptée au CV, l'échange et sa relance, puis l'analyse.
  *
- * Dessous, une ligne rappelle que les quatre produits sont cumulables.
  * Qui a demandé moins de mouvement voit le premier temps, et peut cliquer.
  */
 
@@ -181,23 +179,6 @@ export function Methode({ locale }: { locale: Locale }) {
         </div>
       </div>
 
-      {/* Les produits se cumulent : ils reposent tous sur cet entretien. */}
-      <div className="mx-auto mt-20 flex max-w-6xl flex-col gap-6 border-t border-hairline pt-10 lg:flex-row lg:items-center lg:justify-between">
-        <div>
-          <p className="font-display text-[clamp(22px,2.4vw,30px)] tracking-[-0.03em] text-ink">{methode.cumul.title}</p>
-          <p className="mt-2 text-[15px] text-muted">{methode.cumul.texte}</p>
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
-          {products.items.map((p) => (
-            <span key={p.id} className="rounded-[4px] border border-hairline-strong px-3 py-2 text-[13.5px] text-ink">
-              {p.name}
-            </span>
-          ))}
-          <Link href={methode.cta.href} className="ml-2 rounded-[4px] bg-accent px-4 py-2 text-[13.5px] font-medium text-white transition-opacity hover:opacity-90">
-            {methode.cta.label}
-          </Link>
-        </div>
-      </div>
     </section>
   );
 }

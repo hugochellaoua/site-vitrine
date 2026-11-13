@@ -12,7 +12,7 @@ function Liste({ noms, cachee = false }: { noms: string[]; cachee?: boolean }) {
   return (
     <ul className="flex shrink-0 items-center gap-14 pr-14 motion-reduce:flex-wrap motion-reduce:justify-center motion-reduce:gap-y-4" aria-hidden={cachee || undefined}>
       {noms.map((nom) => (
-        <li key={nom} className="whitespace-nowrap font-display text-[18px] font-bold tracking-[-0.01em] text-[#a2a7bf]">
+        <li key={nom} className="whitespace-nowrap font-display text-[18px] font-bold tracking-[-0.01em] text-[#a3a09a]">
           {nom}
         </li>
       ))}
