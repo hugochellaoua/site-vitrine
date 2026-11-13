@@ -20,7 +20,7 @@ import type { Locale } from "@/lib/i18n";
  *  — le haut de page sombre, le titre, et les entreprises où exercent nos
  *    experts ;
  *  — les quatre produits en action, la bande qui défile (ce que font les
- *    équipes RH avec Helpify), puis les huit situations ;
+ *    recruteurs avec Helpify), puis les huit situations ;
  *  — comment Helpify mène l'entretien, en cinq temps, et le rappel que les
  *    quatre produits se cumulent (bande noire) ;
  *  — l'engagement sur les données (bande noire). Les experts ne sont plus

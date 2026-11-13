@@ -258,6 +258,9 @@ export function Navbar({ locale }: { locale: Locale }) {
           {/* L'application vit sur son propre sous-domaine : ce lien quitte le
               site, d'où une ancre simple plutôt qu'un lien de navigation
               interne, dont le préchargement n'aurait rien à précharger. */}
+          <Link href={nav.candidat.href} className="whitespace-nowrap text-[13.5px] text-muted transition-colors hover:text-ink">
+            {nav.candidat.label}
+          </Link>
           <a
             href={nav.connexion.href}
             className="whitespace-nowrap text-[13.5px] text-muted transition-colors hover:text-ink"
@@ -372,6 +375,13 @@ export function Navbar({ locale }: { locale: Locale }) {
           >
             {nav.cta.label}
             <ArrowRight size={16} />
+          </Link>
+          <Link
+            href={nav.candidat.href}
+            onClick={() => setOpen(false)}
+            className="flex items-center justify-center rounded-[4px] border border-hairline-strong px-6 py-3.5 text-[15px] text-ink"
+          >
+            {nav.candidat.label}
           </Link>
           <div className="flex items-center justify-between">
             <a href={nav.connexion.href} onClick={() => setOpen(false)} className="text-[15px] text-muted">

@@ -58,6 +58,7 @@ export const nav = {
     { label: "Notice IA", desc: "Comment Helpify utilise l'IA, et vos droits", href: links.noticeIA },
     { label: "Contact", desc: "Une question ? Parlons de vos recrutements", href: links.contact },
   ],
+  candidat: { label: "Espace candidat", href: "/candidats" },
   connexion: { label: "Connexion", href: links.login },
   cta: { label: "Réservez une démo", href: links.booking },
 };
@@ -943,7 +944,7 @@ export const footer = {
  * cas d'usage, bénéfices).
  */
 export const defile = {
-  lead: "Les équipes RH qui",
+  lead: "Les recruteurs qui",
   lignes: [
     "préqualifient sans appels de préqualification.",
     "évaluent chaque candidat au-delà du CV.",
@@ -962,6 +963,62 @@ export const defile = {
  * (comportements observables, questions, relance) sont là pour montrer le
  * mécanisme ; ils reprennent le poste et les réponses de Sarah K. du site.
  */
+/**
+ * L'espace candidat : une page pour les candidats, en préparation. Le candidat
+ * échange avec Helpify sur son parcours, en tire un profil qui le distingue
+ * au-delà du CV, et le partage quand il postule ; le recruteur y ajoute sa
+ * fiche de poste pour voir la correspondance. En attendant l'ouverture, une
+ * liste d'attente.
+ */
+export const espaceCandidat = {
+  eyebrow: "Espace candidat",
+  badge: "Bientôt disponible",
+  title: "Montrez qui vous êtes, au-delà de votre CV.",
+  emphasis: "au-delà de votre CV.",
+  intro: "Échangez avec Helpify sur votre parcours. Il fait ressortir ce que votre CV ne dit pas, et vous le partagez quand vous postulez.",
+  etapesTitre: "Comment ça marchera.",
+  etapes: [
+    {
+      titre: "Vous échangez avec Helpify",
+      texte: "Un vrai entretien, à l'écrit ou à l'oral : des questions sur votre parcours, vos réalisations et leur contexte, ce que vous cherchez.",
+    },
+    {
+      titre: "Votre profil prend forme",
+      texte: "Helpify en tire un profil clair : ce que vous avez réellement fait, ce que vous savez faire, ce qui vous motive. De quoi vous démarquer bien au-delà d'un CV.",
+    },
+    {
+      titre: "Vous le partagez quand vous postulez",
+      texte: "Un lien à joindre à votre candidature, à côté de votre CV.",
+    },
+    {
+      titre: "Le recruteur voit la correspondance",
+      texte: "Il ajoute sa fiche de poste et voit en quoi votre profil y répond, critère par critère.",
+    },
+  ],
+  apercu: {
+    profil: "Profil",
+    realisations: "Réalisations",
+    realisation: "A monté un service client de zéro : process, recrutement de trois personnes, suivi de satisfaction.",
+    competences: "Compétences",
+    fiche: "Fiche de poste ajoutée",
+    correspondance: "Correspondance",
+  },
+  attente: {
+    titre: "Soyez parmi les premiers.",
+    texte: "Inscrivez-vous : on vous prévient dès que l'espace candidat ouvre.",
+    prenom: "Prénom",
+    email: "E-mail",
+    metier: "Métier ou poste recherché (facultatif)",
+    bouton: "Rejoindre la liste d'attente",
+    envoi: "Envoi…",
+    mention: "En vous inscrivant, vous acceptez qu'Helpify vous écrive au sujet de l'espace candidat. Vos données ne servent qu'à cela.",
+    confidentialite: { label: "Politique de confidentialité", href: links.privacy },
+    ok: "C'est noté. On vous prévient dès que l'espace candidat ouvre.",
+    erreur: "L'inscription n'a pas pu être envoyée. Réessayez dans un instant.",
+    source: "Liste d'attente · Espace candidat",
+  },
+};
+
 /**
  * L'équipe : les expertises réunies autour de Helpify, en quatre groupes. Les
  * fondateurs d'abord (relation client et produit, technique et sécurité),

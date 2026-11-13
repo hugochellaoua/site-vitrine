@@ -45,6 +45,7 @@ export const nav = {
     { label: "AI notice", desc: "How Helpify uses AI, and your rights", href: links.noticeIA },
     { label: "Contact", desc: "A question? Let's talk about your hiring", href: links.contact },
   ],
+  candidat: { label: "For candidates", href: "/en/candidates" },
   connexion: { label: "Log in", href: links.login },
   cta: { label: "Book a demo", href: links.booking },
 };
@@ -816,7 +817,7 @@ export const footer = {
 };
 
 export const defile = {
-  lead: "HR teams that",
+  lead: "Recruiters who",
   lignes: [
     "prequalify without screening calls.",
     "assess every candidate beyond the CV.",
@@ -827,6 +828,55 @@ export const defile = {
     "get their shortlist automatically.",
   ],
   cta: { label: "See the products", href: "/en/products" },
+};
+
+export const espaceCandidat = {
+  eyebrow: "For candidates",
+  badge: "Coming soon",
+  title: "Show who you are, beyond your CV.",
+  emphasis: "beyond your CV.",
+  intro: "Talk with Helpify about your background. It brings out what your CV doesn't say, and you share it when you apply.",
+  etapesTitre: "How it will work.",
+  etapes: [
+    {
+      titre: "You talk with Helpify",
+      texte: "A real interview, written or spoken: questions about your background, your achievements and their context, what you are looking for.",
+    },
+    {
+      titre: "Your profile takes shape",
+      texte: "Helpify turns it into a clear profile: what you actually did, what you can do, what drives you. Enough to stand out well beyond a CV.",
+    },
+    {
+      titre: "You share it when you apply",
+      texte: "A link to add to your application, next to your CV.",
+    },
+    {
+      titre: "The recruiter sees the match",
+      texte: "They add their job description and see how your profile fits it, criterion by criterion.",
+    },
+  ],
+  apercu: {
+    profil: "Profile",
+    realisations: "Achievements",
+    realisation: "Built a customer service function from scratch: processes, hired three people, satisfaction tracking.",
+    competences: "Skills",
+    fiche: "Job description added",
+    correspondance: "Match",
+  },
+  attente: {
+    titre: "Be among the first.",
+    texte: "Sign up: we'll let you know as soon as the candidate space opens.",
+    prenom: "First name",
+    email: "Email",
+    metier: "Role or job you're looking for (optional)",
+    bouton: "Join the waiting list",
+    envoi: "Sending…",
+    mention: "By signing up, you agree that Helpify may email you about the candidate space. Your data is used for nothing else.",
+    confidentialite: { label: "Privacy policy", href: links.privacy },
+    ok: "You're on the list. We'll let you know as soon as the candidate space opens.",
+    erreur: "Your sign-up could not be sent. Please try again in a moment.",
+    source: "Liste d'attente · Espace candidat",
+  },
 };
 
 export const equipe = {

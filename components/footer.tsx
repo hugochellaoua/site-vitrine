@@ -91,6 +91,7 @@ export function Footer({ locale }: { locale: Locale }) {
             titre={footer.heads.company}
             liens={[
               { label: nav.cta.label, href: nav.cta.href, externe: true },
+              { label: nav.candidat.label, href: nav.candidat.href },
               { label: nav.connexion.label, href: nav.connexion.href, externe: true },
               { label: "LinkedIn", href: footer.social.href, externe: true },
               ...footer.legal.map((l) => ({ label: l.label, href: l.href })),

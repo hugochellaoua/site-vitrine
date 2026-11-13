@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { dict, type Locale } from "@/lib/i18n";
 
 /**
- * La bande qui défile : « Les équipes RH qui… », puis une ligne après l'autre,
+ * La bande qui défile : « Les recruteurs qui… », puis une ligne après l'autre,
  * ce que Helpify leur permet. La ligne en cours est en noir, les voisines
  * s'estompent au-dessus et au-dessous, et la liste remonte doucement.
  *
