@@ -118,7 +118,7 @@ export function CookieConsent() {
   if (!actif) return null;
 
   const bouton =
-    "flex-1 rounded-full border border-hairline-strong bg-ink/[0.04] px-4 py-2.5 text-[13.5px] font-semibold text-ink transition-colors hover:border-accent-light hover:bg-ink/[0.07]";
+    "flex-1 rounded-[4px] border border-ink px-4 py-2.5 text-[13.5px] font-medium text-ink transition-colors hover:bg-ink hover:text-void";
 
   return (
     <>
@@ -146,14 +146,14 @@ gtag('config', '${GA_ID}', {
         <div
           role="dialog"
           aria-labelledby="cookies-titre"
-          className="fixed inset-x-3 bottom-3 z-50 rounded-2xl border border-hairline-strong bg-panel/95 p-5 shadow-[var(--shadow-deep)] backdrop-blur-xl sm:inset-x-auto sm:bottom-5 sm:left-5 sm:max-w-[420px]"
+          className="fixed inset-x-3 bottom-3 z-50 rounded-[6px] border border-hairline-strong bg-panel p-5 shadow-[var(--shadow-deep)] sm:inset-x-auto sm:bottom-5 sm:left-5 sm:max-w-[400px]"
         >
-          <p id="cookies-titre" className="font-display text-[15px] font-semibold text-ink">
+          <p id="cookies-titre" className="font-mono text-[11.5px] font-medium uppercase tracking-[0.08em] text-ink">
             {cookies.title}
           </p>
           <p className="mt-2 text-[13px] leading-relaxed text-muted">
             {cookies.text}{" "}
-            <Link href={cookies.privacy.href} className="text-ink underline underline-offset-2 hover:text-accent-light">
+            <Link href={cookies.privacy.href} className="text-ink underline underline-offset-2 hover:text-muted">
               {cookies.privacy.label}
             </Link>
           </p>
