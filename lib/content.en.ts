@@ -20,8 +20,8 @@ export const learnMore = { label: "Learn more", href: links.contact };
 
 export const site = {
   name: "Helpify",
-  title: "Helpify — The AI that prequalifies your candidates | Recruiting",
-  tagline: "The AI that prequalifies your candidates",
+  title: "Helpify — The AI that reveals and engages your best talent | Recruiting",
+  tagline: "The AI that reveals and engages your best talent",
   description:
     "Helpify talks to every candidate, returns a structured assessment and hands you a shortlist. Prequalification AI that plugs into your ATS.",
 };

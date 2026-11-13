@@ -28,8 +28,8 @@ export const site = {
   // Le titre doit contenir les mots que tapent les acheteurs — « recrutement »,
   // « candidats » — avant la formule de marque. L'ancien titre était joli mais
   // ne contenait aucun terme recherché.
-  title: "Helpify — L'IA qui préqualifie vos candidats | Recrutement",
-  tagline: "L'IA qui préqualifie vos candidats",
+  title: "Helpify — L'IA qui révèle et engage vos meilleurs talents | Recrutement",
+  tagline: "L'IA qui révèle et engage vos meilleurs talents",
   description:
     "Helpify échange avec chaque candidat, restitue une évaluation structurée et vous livre une shortlist. Une IA de préqualification qui se branche sur votre ATS.",
 };
