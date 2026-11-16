@@ -67,7 +67,7 @@ export function Hero({ locale }: { locale: Locale }) {
             >
               {ton === "iris" ? (
                 // Le point final n'est pas repris : à côté du bloc, il flotterait.
-                <span className="mt-[0.06em] inline-block rounded-[6px] bg-[#f4f1ea] px-[0.18em] pb-[0.08em] pt-[0.01em] text-[#121214]">
+                <span className="relative top-[0.06em] inline-block rounded-[5px] bg-[#f4f1ea] px-[0.12em] pb-[0.05em] pt-0 leading-[0.92] text-[#121214]">
                   {mot.replace(/\.$/, "")}
                 </span>
               ) : (
