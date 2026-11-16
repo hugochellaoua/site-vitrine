@@ -508,7 +508,7 @@ export const products = {
     {
       id: "matching",
       name: "Matching",
-      headline: "Better identify the profiles that genuinely fit the need",
+      headline: "Get your shortlist fast",
       tag: "Structured interview, grounded in recruitment science",
       body: "Helpify assesses every candidate against your criteria, through a structured interview that looks for concrete evidence beyond what a CV shows.",
       chiffre: { value: "−90", unit: "%", label: "less time to shortlist" },
@@ -518,7 +518,7 @@ export const products = {
     {
       id: "prequalification",
       name: "Prequalification",
-      headline: "Hear every candidate, without spending your days on it",
+      headline: "Collect information from all your candidates",
       body: "Helpify talks to every candidate and automatically collects the information your hiring depends on.",
       chiffre: { value: "100", unit: "%", label: "of candidates qualified" },
       visual: "chat-extract" as const,

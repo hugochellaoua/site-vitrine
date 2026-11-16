@@ -945,14 +945,3 @@ h3.font-display {
 .roi-pop { animation: roiPop 600ms cubic-bezier(0.2, 0.8, 0.2, 1) 250ms both; }
 @media (prefers-reduced-motion: reduce) { .roi-pop { animation: none; } }
 
-/*
- * « meilleurs talents », dans le titre de l'accueil : la même couleur que le
- * reste du titre, avec une lueur blanche douce derrière les lettres. Pas de
- * couleur, pas de dégradé.
- */
-.talent-eclat {
-  color: inherit;
-  text-shadow:
-    0 0 16px rgba(255, 255, 255, 0.45),
-    0 0 44px rgba(255, 255, 255, 0.22);
-}

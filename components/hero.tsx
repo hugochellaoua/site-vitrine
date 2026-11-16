@@ -15,7 +15,7 @@ const START = 0.28;
 // pour distinguer la fin du titre sans ajouter de caractère.
 // Le titre en deux tons, comme toute la page : le début en clair, la fin en
 // gris. L'orange de Helpify ne reste que dans le logo.
-// « meilleurs talents » : une lumière à part (voir `.talent-eclat`).
+// « meilleurs talents » : en noir sur un fond clair (voir plus bas).
 const TON = { warm: "text-ink", iris: "" } as const;
 
 /**
@@ -32,7 +32,10 @@ export function Hero({ locale }: { locale: Locale }) {
   const { hero, experts } = dict(locale);
   // Le titre est découpé mot à mot pour être levé en cascade ; le découpage
   // dépend donc de la langue et vit dans le composant, plus au chargement.
-  const words = hero.segments.flatMap((s) => s.texte.split(" ").map((mot) => ({ mot, ton: s.ton })));
+  // « meilleurs talents » reste d'un seul bloc : il est posé sur un fond clair.
+  const words = hero.segments.flatMap((s) =>
+    s.ton === "iris" ? [{ mot: s.texte, ton: s.ton }] : s.texte.split(" ").map((mot) => ({ mot, ton: s.ton })),
+  );
   return (
     <section
       id="top"
@@ -62,7 +65,14 @@ export function Hero({ locale }: { locale: Locale }) {
               className={`hero-rise mr-[0.24em] inline-block ${ton ? TON[ton] : ""}`}
               style={{ animationDelay: `${START + i * STEP}s` }}
             >
-              {ton === "iris" ? <span className="talent-eclat">{mot}</span> : mot}
+              {ton === "iris" ? (
+                // Le point final n'est pas repris : à côté du bloc, il flotterait.
+                <span className="mt-[0.06em] inline-block rounded-[6px] bg-[#f4f1ea] px-[0.18em] pb-[0.08em] pt-[0.01em] text-[#121214]">
+                  {mot.replace(/\.$/, "")}
+                </span>
+              ) : (
+                mot
+              )}
             </span>
           ))}
         </span>

@@ -588,7 +588,7 @@ export const products = {
     {
       id: "matching",
       name: "Matching",
-      headline: "Identifiez mieux les profils qui correspondent réellement au besoin",
+      headline: "Obtenez rapidement la shortlist",
       // La méthode, dite en un mot, au-dessus du texte : c'est un entretien.
       tag: "Entretien structuré, fondé sur les sciences du recrutement",
       body: "Helpify évalue chaque candidat selon vos critères, au cours d'un entretien structuré qui va chercher des preuves concrètes au-delà de ce que révèle un CV.",
@@ -600,7 +600,7 @@ export const products = {
     {
       id: "prequalification",
       name: "Préqualification",
-      headline: "Écoutez chaque candidat, sans y consacrer vos journées",
+      headline: "Collectez les informations de l'ensemble de vos candidats",
       body: "Helpify échange avec chaque candidat et collecte automatiquement les informations essentielles à votre recrutement.",
       chiffre: { value: "100", unit: "%", label: "des candidats qualifiés" },
       visual: "chat-extract" as const,
