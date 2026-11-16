@@ -6,25 +6,18 @@ import { Reveal } from "@/components/ui/reveal";
 import { Badge, SectionTitle } from "@/components/ui/section-title";
 
 /**
- * Les quatre produits, une grande carte chacun : le texte sur fond beige d'un
+ * Les produits, une grande carte chacun : le texte sur fond beige d'un
  * côté, la plateforme en action sur fond sombre de l'autre, et l'alternance
- * gauche/droite d'une carte à l'autre. Chaque bloc porte le chiffre du bénéfice auquel le produit
- * contribue le plus, repris tel quel de la section des bénéfices.
+ * gauche/droite d'une carte à l'autre. Chaque bloc suit le même plan : la valeur
+ * principale en titre, une description, puis un chiffre.
  *
  * Textes et illustrations sont ceux de la page produits : l'accueil en donne
  * l'essentiel, la page produits le détail.
  */
 
-/** Le bénéfice associé à chaque produit (index dans `synthesis.items`). */
-const BENEFICE: Record<string, number> = {
-  prequalification: 0,
-  matching: 2,
-  "360-matching": 3,
-  "talent-ask": 1,
-};
 
 export function ProductBlocks({ locale }: { locale: Locale }) {
-  const { products, synthesis, ui } = dict(locale);
+  const { products, ui } = dict(locale);
   const base = locale === "en" ? "/en/products" : "/produits";
   return (
     <section id="produits" className="relative scroll-mt-28 px-6 pb-12 pt-24">
@@ -36,7 +29,7 @@ export function ProductBlocks({ locale }: { locale: Locale }) {
 
         <div className="mt-14 flex flex-col gap-4">
           {products.items.map((product, i) => {
-            const b = synthesis.items[BENEFICE[product.id] ?? 0];
+            const b = product.chiffre;
             const inverse = i % 2 === 1;
             return (
               <Reveal key={product.id} className={`grid grid-cols-[minmax(0,1fr)] overflow-hidden rounded-[6px] lg:grid-cols-2 ${inverse ? "lg:[&>*:first-child]:order-2" : ""}`}>

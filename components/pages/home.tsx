@@ -2,7 +2,6 @@ import { StructuredData } from "@/components/structured-data";
 import { Navbar } from "@/components/navbar";
 import { Hero } from "@/components/hero";
 import { ProductBlocks } from "@/components/product-blocks";
-import { Synthesis } from "@/components/synthesis";
 import { UseCasesGrid } from "@/components/use-cases-grid";
 import { Donnees } from "@/components/donnees";
 import { Methode } from "@/components/methode";
@@ -27,7 +26,8 @@ import type { Locale } from "@/lib/i18n";
  *    quatre produits se cumulent (bande noire) ;
  *  — l'engagement sur les données (bande noire). Les experts ne sont plus
  *    qu'en haut de page, par les logos de leurs entreprises ;
- *  — les bénéfices chiffrés, les tarifs, la FAQ et l'appel final.
+ *  — les tarifs et le calculateur de ROI, la FAQ et l'appel final. Les
+ *    bénéfices chiffrés sont sur chaque produit, et sur leur page (Ressources).
  */
 export function HomePage({ locale }: { locale: Locale }) {
   return (
@@ -46,7 +46,6 @@ export function HomePage({ locale }: { locale: Locale }) {
         <div className="sombre bg-void">
           <Donnees locale={locale} />
         </div>
-        <Synthesis locale={locale} />
         <Pricing locale={locale} />
         <Faq locale={locale} />
         <div className="sombre bg-void">

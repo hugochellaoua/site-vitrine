@@ -46,13 +46,14 @@ export const nav = {
     { label: "Ressources", href: "/methodologie", dropdown: "resources" as const },
     { label: "Tarifs", href: "/#tarifs" },
   ],
-  allProducts: { label: "Voir les quatre produits", href: "/produits" },
+  allProducts: { label: "Voir les trois produits", href: "/produits" },
   servicesLabel: "Services",
   resources: [
     { icone: "process" as const, label: "Le process", desc: "Comment Helpify mène l'entretien", href: "/#story" },
     { icone: "methode" as const, label: "Méthodologie", desc: "Une évaluation fondée sur les sciences du recrutement", href: "/methodologie" },
     { icone: "equipe" as const, label: "L'équipe", desc: "Les expertises réunies autour de Helpify", href: "/equipe" },
     { icone: "ia" as const, label: "Pourquoi l'IA ?", desc: "Ce qu'elle change, et les questions qu'on nous pose", href: "/pourquoi-l-ia" },
+    { icone: "benefices" as const, label: "Les bénéfices", desc: "Ce que Helpify change, en quatre chiffres", href: "/benefices" },
     { icone: "roi" as const, label: "Calculer mon ROI", desc: "Le temps et le budget que vous consacrez au tri", href: "/#roi" },
     { icone: "donnees" as const, label: "Vos données", desc: "Supervision humaine, transparence, RGPD", href: "/#donnees" },
     { icone: "faq" as const, label: "Questions fréquentes", desc: "Les questions qui reviennent", href: "/#faq" },
@@ -326,15 +327,15 @@ export const experts: ExpertsContent = {
 };
 
 export const synthesis = {
-  eyebrow: "Résultats mesurés",
+  eyebrow: "Les bénéfices",
   title: "Quatre bénéfices, un seul process.",
   emphasis: "un seul process.",
   sub: "Le temps gagné, vos recruteurs le consacrent aux entretiens et à ce qui fait vraiment avancer votre activité.",
   items: [
-    { n: "01", title: "Gain de temps", value: "−90", unit: "%", label: "de temps jusqu'à la shortlist", steps: "Étapes 03 & 08" },
-    { n: "02", title: "Expérience candidat", value: "4,8", unit: "/5", label: "note moyenne des candidats", steps: "Étapes 04 & 10" },
-    { n: "03", title: "Évaluation", value: "3", unit: "×", label: "plus de signaux qualifiés : les réalisations et leur contexte", steps: "Étapes 01 & 07" },
-    { n: "04", title: "Vivier", value: "100", unit: "%", label: "des candidats avec un profil riche, pas seulement un CV", steps: "Étapes 05 & 07" },
+    { n: "01", title: "Gain de temps", value: "−90", unit: "%", label: "de temps jusqu'à la shortlist" },
+    { n: "02", title: "Préqualification", value: "100", unit: "%", label: "des candidats qualifiés" },
+    { n: "03", title: "Expérience candidat", value: "24", unit: "h/24", label: "pour répondre aux candidats, même hors des heures de bureau" },
+    { n: "04", title: "Vivier", value: "100", unit: "%", label: "des candidats avec un profil riche, pas seulement un CV" },
   ],
 };
 
@@ -572,15 +573,15 @@ export const useCases = {
 // ─────────────────────────────────────────────────────────────
 export const products = {
   eyebrow: "Nos produits",
-  title: "Une conversation. Quatre objectifs.",
-  emphasis: "Quatre objectifs.",
+  title: "Une conversation. Trois objectifs.",
+  emphasis: "Trois objectifs.",
   intro: [
     "Helpify transforme la conversation avec les candidats en un véritable outil de recrutement.",
-    "De la première question à l'identification des meilleurs profils, nos quatre produits s'intègrent à votre ATS et s'adaptent à votre processus existant.",
+    "De la première question à l'identification des meilleurs profils, nos trois produits s'intègrent à votre ATS et s'adaptent à votre processus existant.",
   ],
   // La ligne en gras du texte source devient une suite d'étapes lisible d'un
-  // coup d'œil : quatre verbes, quatre produits, dans l'ordre de la page.
-  verbs: ["Matcher", "Préqualifier", "Révéler les synergies", "Engager les candidats"],
+  // coup d'œil : un verbe par produit, dans l'ordre de la page.
+  verbs: ["Matcher", "Préqualifier", "Engager les candidats"],
   outro: "Une seule plateforme pour mieux comprendre vos talents et accélérer vos recrutements.",
 
   items: [
@@ -591,31 +592,27 @@ export const products = {
       // La méthode, dite en un mot, au-dessus du texte : c'est un entretien.
       tag: "Entretien structuré, fondé sur les sciences du recrutement",
       body: "Helpify évalue chaque candidat selon vos critères, au cours d'un entretien structuré qui va chercher des preuves concrètes au-delà de ce que révèle un CV.",
+      // La valeur principale en titre, la description, puis un chiffre.
+      chiffre: { value: "−90", unit: "%", label: "de temps jusqu'à la shortlist" },
       visual: "score" as const,
       tone: "accent" as const,
     },
     {
       id: "prequalification",
       name: "Préqualification",
-      headline: "Préqualifiez 100 % de vos candidats",
-      body: "Helpify échange avec chaque candidat et collecte automatiquement les informations essentielles à votre recrutement, sans un seul appel de préqualification.",
+      headline: "Écoutez chaque candidat, sans y consacrer vos journées",
+      body: "Helpify échange avec chaque candidat et collecte automatiquement les informations essentielles à votre recrutement.",
+      chiffre: { value: "100", unit: "%", label: "des candidats qualifiés" },
       visual: "chat-extract" as const,
-      tone: "accent" as const,
-    },
-    {
-      id: "360-matching",
-      name: "360 Matching",
-      headline: "Maximisez vos chances de trouver le bon candidat",
-      body: "Chaque candidat est rapproché de toutes vos offres ouvertes auxquelles il peut correspondre, pas seulement de celle à laquelle il a postulé.",
-      visual: "constellation" as const,
       tone: "accent" as const,
     },
     {
       id: "talent-ask",
       name: "Talent Ask",
-      headline: "Engagez vos candidats et répondez à leurs questions, 24h/24",
+      headline: "Engagez et projetez vos candidats",
       tag: "Des informations claires, pour que plus de candidats postulent",
-      body: "Sans informations claires, beaucoup de candidats renoncent à postuler. Le poste, l'équipe, les conditions, la suite du processus : avec Talent Ask, chacun obtient ses réponses et peut se projeter. Et comme beaucoup de candidats cherchent et postulent en dehors des heures de bureau, Talent Ask leur répond à toute heure. Les questions qu'ils posent vous remontent : elles deviennent des insights pour mieux communiquer à l'externe et attirer les talents.",
+      body: "Le poste, l'équipe, les conditions, la suite : Talent Ask répond aux candidats à toute heure, pour qu'ils se projettent et postulent. Leurs questions vous remontent et deviennent des insights pour mieux attirer les talents.",
+      chiffre: { value: "24", unit: "h/24", label: "pour répondre aux candidats, même hors des heures de bureau" },
       // Seul produit tourné vers le candidat : il porte donc l'orange, comme
       // partout ailleurs sur le site.
       visual: "ask" as const,
@@ -664,13 +661,13 @@ export const products = {
   // bénéfices, car on ne peut pas juger un résultat sans savoir d'où il vient.
   home: {
     eyebrow: "Nos produits",
-    title: "Une conversation. Quatre objectifs.",
-    emphasis: "Quatre objectifs.",
-    link: "Découvrir les quatre produits",
+    title: "Une conversation. Trois objectifs.",
+    emphasis: "Trois objectifs.",
+    link: "Découvrir les trois produits",
   },
 
   cta: {
-    title: "Voir les quatre produits en conditions réelles.",
+    title: "Voir les trois produits en conditions réelles.",
     emphasis: "en conditions réelles.",
     sub: "15 min sur un de vos postes, avec vos critères.",
   },
@@ -983,13 +980,14 @@ export const footer = {
 export const defile = {
   lead: "Les recruteurs qui",
   lignes: [
-    "préqualifient sans appels de préqualification.",
+    "préqualifient 100 % de leurs candidats.",
     "évaluent chaque candidat au-delà du CV.",
+    "gagnent 90 % de temps jusqu'à la shortlist.",
     "ne passent plus à côté d'un talent.",
     "répondent aux candidats, 24h/24.",
     "enrichissent leur vivier à chaque conversation.",
     "appliquent les mêmes critères à tous.",
-    "reçoivent leur shortlist automatiquement.",
+    "consacrent leur temps aux entretiens.",
   ],
   cta: { label: "Voir les produits", href: "/produits" },
 };
@@ -1259,7 +1257,7 @@ export const methode = {
     valider: "À valider par vous",
   },
   cumul: {
-    title: "Les quatre produits sont cumulables.",
+    title: "Les trois produits sont cumulables.",
     texte: "Ils reposent sur le même entretien : activez-en un, ou les quatre.",
   },
 };

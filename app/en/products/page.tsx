@@ -4,12 +4,12 @@ import { ProductsPage } from "@/components/pages/products";
 export const metadata: Metadata = {
   title: "Products — Prequalification, matching and candidate answers",
   description:
-    "Four products that plug into your ATS: candidate prequalification, matching beyond the CV, 360 Matching across your whole talent pool, and Talent Ask answering around the clock.",
+    "Three products that plug into your ATS: matching beyond the CV, candidate prequalification, and Talent Ask answering around the clock.",
   alternates: { canonical: "/en/products", languages: { fr: "/produits", en: "/en/products" } },
   openGraph: {
-    title: "One conversation. Four goals.",
+    title: "One conversation. Three goals.",
     description:
-      "Prequalify, match, surface synergies, answer candidates: the four Helpify products, integrated with your ATS.",
+      "Match, prequalify, engage candidates: the three Helpify products, integrated with your ATS.",
     url: "/en/products",
     locale: "en_GB",
   },

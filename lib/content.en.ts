@@ -33,13 +33,14 @@ export const nav = {
     { label: "Resources", href: "/en/methodology", dropdown: "resources" as const },
     { label: "Pricing", href: "/en#tarifs" },
   ],
-  allProducts: { label: "See all four products", href: "/en/products" },
+  allProducts: { label: "See all three products", href: "/en/products" },
   servicesLabel: "Services",
   resources: [
     { icone: "process" as const, label: "The process", desc: "How Helpify runs the interview", href: "/en#story" },
     { icone: "methode" as const, label: "Methodology", desc: "An assessment grounded in recruitment science", href: "/en/methodology" },
     { icone: "equipe" as const, label: "The team", desc: "The expertise gathered around Helpify", href: "/en/team" },
     { icone: "ia" as const, label: "Why AI?", desc: "What it changes, and the questions we are asked", href: "/en/why-ai" },
+    { icone: "benefices" as const, label: "The benefits", desc: "What Helpify changes, in four figures", href: "/en/benefits" },
     { icone: "roi" as const, label: "Calculate my ROI", desc: "The time and budget you spend on screening", href: "/en#roi" },
     { icone: "donnees" as const, label: "Your data", desc: "Human oversight, transparency, GDPR", href: "/en#donnees" },
     { icone: "faq" as const, label: "FAQ", desc: "The questions that keep coming up", href: "/en#faq" },
@@ -290,15 +291,15 @@ export const experts: ExpertsContent = {
 };
 
 export const synthesis = {
-  eyebrow: "Measured results",
+  eyebrow: "The benefits",
   title: "Four benefits, one process.",
   emphasis: "one process.",
   sub: "The time saved goes back to your recruiters: for interviews, and for the work that really moves your business forward.",
   items: [
-    { n: "01", title: "Time saved", value: "−90", unit: "%", label: "less time to shortlist", steps: "Steps 03 & 08" },
-    { n: "02", title: "Candidate experience", value: "4.8", unit: "/5", label: "average candidate rating", steps: "Steps 04 & 10" },
-    { n: "03", title: "Assessment", value: "3", unit: "×", label: "more qualified signals: achievements and their context", steps: "Steps 01 & 07" },
-    { n: "04", title: "Talent pool", value: "100", unit: "%", label: "of candidates with a rich profile, not just a CV", steps: "Steps 05 & 07" },
+    { n: "01", title: "Time saved", value: "−90", unit: "%", label: "less time to shortlist" },
+    { n: "02", title: "Prequalification", value: "100", unit: "%", label: "of candidates qualified" },
+    { n: "03", title: "Candidate experience", value: "24", unit: "/7", label: "to answer candidates, even outside office hours" },
+    { n: "04", title: "Talent pool", value: "100", unit: "%", label: "of candidates with a rich profile, not just a CV" },
   ],
 };
 
@@ -494,13 +495,13 @@ export const useCases = {
 
 export const products = {
   eyebrow: "Our products",
-  title: "One conversation. Four goals.",
-  emphasis: "Four goals.",
+  title: "One conversation. Three goals.",
+  emphasis: "Three goals.",
   intro: [
     "Helpify turns the conversation with candidates into a genuine recruiting tool.",
-    "From the first question to identifying the best profiles, our four products plug into your ATS and fit the process you already have.",
+    "From the first question to identifying the best profiles, our three products plug into your ATS and fit the process you already have.",
   ],
-  verbs: ["Match", "Prequalify", "Surface synergies", "Engage candidates"],
+  verbs: ["Match", "Prequalify", "Engage candidates"],
   outro: "One platform to understand your talent better and move your hiring faster.",
 
   items: [
@@ -510,31 +511,26 @@ export const products = {
       headline: "Better identify the profiles that genuinely fit the need",
       tag: "Structured interview, grounded in recruitment science",
       body: "Helpify assesses every candidate against your criteria, through a structured interview that looks for concrete evidence beyond what a CV shows.",
+      chiffre: { value: "−90", unit: "%", label: "less time to shortlist" },
       visual: "score" as const,
       tone: "accent" as const,
     },
     {
       id: "prequalification",
       name: "Prequalification",
-      headline: "Prequalify 100% of your candidates",
-      body: "Helpify talks to every candidate and automatically collects the information your hiring depends on, without a single screening call.",
+      headline: "Hear every candidate, without spending your days on it",
+      body: "Helpify talks to every candidate and automatically collects the information your hiring depends on.",
+      chiffre: { value: "100", unit: "%", label: "of candidates qualified" },
       visual: "chat-extract" as const,
-      tone: "accent" as const,
-    },
-    {
-      id: "360-matching",
-      name: "360 Matching",
-      headline: "Maximise your chances of finding the right candidate",
-      body: "Every candidate is matched with all the open roles they could fit, not just the one they applied for.",
-      visual: "constellation" as const,
       tone: "accent" as const,
     },
     {
       id: "talent-ask",
       name: "Talent Ask",
-      headline: "Engage your candidates and answer their questions, 24/7",
+      headline: "Engage your candidates and help them picture the job",
       tag: "Clear information, so more candidates apply",
-      body: "Without clear information, many candidates give up on applying. The role, the team, the conditions, the next steps: with Talent Ask, everyone gets their answers and can picture themselves in the job. And since many candidates search and apply outside office hours, Talent Ask answers them at any hour. The questions they ask come back to you as insights, to communicate better externally and attract talent.",
+      body: "The role, the team, the conditions, the next steps: Talent Ask answers candidates at any hour, so they can picture the job and apply. Their questions come back to you as insights to attract talent better.",
+      chiffre: { value: "24", unit: "/7", label: "to answer candidates, even outside office hours" },
       visual: "ask" as const,
       tone: "iris" as const,
     },
@@ -575,13 +571,13 @@ export const products = {
 
   home: {
     eyebrow: "Our products",
-    title: "One conversation. Four goals.",
-    emphasis: "Four goals.",
-    link: "Explore the four products",
+    title: "One conversation. Three goals.",
+    emphasis: "Three goals.",
+    link: "Explore the three products",
   },
 
   cta: {
-    title: "See the four products on real conditions.",
+    title: "See the three products in real conditions.",
     emphasis: "on real conditions.",
     sub: "15 min on one of your roles, with your criteria.",
   },
@@ -854,13 +850,14 @@ export const footer = {
 export const defile = {
   lead: "Recruiters who",
   lignes: [
-    "prequalify without screening calls.",
+    "prequalify 100% of their candidates.",
     "assess every candidate beyond the CV.",
+    "save 90% of the time to shortlist.",
     "never miss a talent again.",
     "answer candidates, 24/7.",
     "enrich their talent pool with every conversation.",
     "apply the same criteria to everyone.",
-    "get their shortlist automatically.",
+    "spend their time on interviews.",
   ],
   cta: { label: "See the products", href: "/en/products" },
 };
@@ -1106,7 +1103,7 @@ export const methode = {
     valider: "For you to validate",
   },
   cumul: {
-    title: "The four products work together.",
+    title: "The three products work together.",
     texte: "They all rest on the same interview: turn on one, or all four.",
   },
 };

@@ -13,14 +13,15 @@ import { Badge, SectionTitle } from "@/components/ui/section-title";
  * nommer. C'est ce qui distingue une preuve d'un paragraphe.
  */
 
-export function Synthesis({ locale }: { locale: Locale }) {
+/** `page` : la section est la page entière (Ressources › Les bénéfices). */
+export function Synthesis({ locale, page = false }: { locale: Locale; page?: boolean }) {
   const { synthesis, hero } = dict(locale);
   return (
-    <section className="relative px-6 py-28 sm:px-10 lg:px-16">
+    <section className={`relative px-6 sm:px-10 lg:px-16 ${page ? "pb-28 pt-40 sm:pt-48" : "py-28"}`}>
       <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
         <div>
           <Badge>{synthesis.eyebrow}</Badge>
-          <SectionTitle title={synthesis.title} emphasis={synthesis.emphasis} className="!mx-0 mt-6 !max-w-[14ch] text-left" />
+          <SectionTitle as={page ? "h1" : "h2"} title={synthesis.title} emphasis={synthesis.emphasis} className="!mx-0 mt-6 !max-w-[14ch] text-left" />
           <p className="mt-6 max-w-[44ch] text-[16px] leading-relaxed text-muted">{synthesis.sub}</p>
           <Link
             href={hero.cta.href}
@@ -56,9 +57,6 @@ export function Synthesis({ locale }: { locale: Locale }) {
               </div>
 
               <p className="mt-4 text-[13.5px] leading-snug text-muted">{item.label}</p>
-              <p className="mt-5 border-t border-hairline pt-4 text-[10.5px] uppercase tracking-[0.14em] text-faint">
-                {item.steps}
-              </p>
             </Reveal>
             );
           })}

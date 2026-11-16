@@ -51,6 +51,7 @@ export const ROUTES = [
   { fr: "/methodologie", en: "/en/methodology" },
   { fr: "/pourquoi-l-ia", en: "/en/why-ai" },
   { fr: "/equipe", en: "/en/team" },
+  { fr: "/benefices", en: "/en/benefits" },
   { fr: "/candidats", en: "/en/candidates" },
   { fr: "/contact", en: "/en/contact" },
   { fr: "/mentions-legales", en: "/en/legal-notice" },

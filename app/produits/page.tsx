@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   // de l'entreprise. Les deux n'ont pas à dire la même chose.
   title: "Produits — Préqualification, matching et réponses candidats",
   description:
-    "Quatre produits intégrés à votre ATS : préqualification des candidats, matching au-delà du CV, 360 Matching sur tout le vivier, et Talent Ask qui répond 24h/24.",
+    "Trois produits intégrés à votre ATS : matching au-delà du CV, préqualification des candidats, et Talent Ask qui répond 24h/24.",
   alternates: { canonical: "/produits", languages: { fr: "/produits", en: "/en/products" } },
   openGraph: {
-    title: "Une conversation. Quatre objectifs.",
+    title: "Une conversation. Trois objectifs.",
     description:
-      "Préqualifier, matcher, révéler les synergies, répondre aux candidats : les quatre produits Helpify, intégrés à votre ATS.",
+      "Matcher, préqualifier, engager les candidats : les trois produits Helpify, intégrés à votre ATS.",
     url: "/produits",
   },
 };

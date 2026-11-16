@@ -15,7 +15,8 @@ const START = 0.28;
 // pour distinguer la fin du titre sans ajouter de caractère.
 // Le titre en deux tons, comme toute la page : le début en clair, la fin en
 // gris. L'orange de Helpify ne reste que dans le logo.
-const TON = { warm: "text-ink", iris: "text-[#8e8f96]" } as const;
+// « meilleurs talents » : une lumière à part (voir `.talent-eclat`).
+const TON = { warm: "text-ink", iris: "" } as const;
 
 /**
  * Le hero.
@@ -61,7 +62,7 @@ export function Hero({ locale }: { locale: Locale }) {
               className={`hero-rise mr-[0.24em] inline-block ${ton ? TON[ton] : ""}`}
               style={{ animationDelay: `${START + i * STEP}s` }}
             >
-              {mot}
+              {ton === "iris" ? <span className="talent-eclat">{mot}</span> : mot}
             </span>
           ))}
         </span>
