@@ -334,7 +334,7 @@ export const synthesis = {
   items: [
     { n: "01", title: "Gain de temps", value: "−90", unit: "%", label: "de temps jusqu'à la shortlist" },
     { n: "02", title: "Préqualification", value: "100", unit: "%", label: "des candidats qualifiés" },
-    { n: "03", title: "Expérience candidat", value: "24", unit: "h/24", label: "pour répondre aux candidats, même hors des heures de bureau" },
+    { n: "03", title: "Engagement des candidats", avant: "jusqu'à", value: "30", unit: "%", label: "de candidats qualifiés en plus" },
     { n: "04", title: "Vivier", value: "100", unit: "%", label: "des candidats avec un profil riche, pas seulement un CV" },
   ],
 };
@@ -589,8 +589,6 @@ export const products = {
       id: "matching",
       name: "Matching",
       headline: "Obtenez rapidement la shortlist",
-      // La méthode, dite en un mot, au-dessus du texte : c'est un entretien.
-      tag: "Entretien structuré, fondé sur les sciences du recrutement",
       body: "Helpify évalue chaque candidat selon vos critères, au cours d'un entretien structuré qui va chercher des preuves concrètes au-delà de ce que révèle un CV.",
       // La valeur principale en titre, la description, puis un chiffre.
       chiffre: { value: "−90", unit: "%", label: "de temps jusqu'à la shortlist" },
@@ -601,7 +599,7 @@ export const products = {
       id: "prequalification",
       name: "Préqualification",
       headline: "Collectez les informations de l'ensemble de vos candidats",
-      body: "Helpify échange avec chaque candidat et collecte automatiquement les informations essentielles à votre recrutement.",
+      body: "Helpify échange avec chacun de vos candidats à toute heure, peu importe le volume, pour collecter les informations essentielles.",
       chiffre: { value: "100", unit: "%", label: "des candidats qualifiés" },
       visual: "chat-extract" as const,
       tone: "accent" as const,
@@ -610,9 +608,8 @@ export const products = {
       id: "talent-ask",
       name: "Talent Ask",
       headline: "Engagez et projetez vos candidats",
-      tag: "Des informations claires, pour que plus de candidats postulent",
       body: "Le poste, l'équipe, les conditions, la suite : Talent Ask répond aux candidats à toute heure, pour qu'ils se projettent et postulent. Leurs questions vous remontent et deviennent des insights pour mieux attirer les talents.",
-      chiffre: { value: "24", unit: "h/24", label: "pour répondre aux candidats, même hors des heures de bureau" },
+      chiffre: { avant: "jusqu'à", value: "30", unit: "%", label: "de candidats qualifiés en plus" },
       // Seul produit tourné vers le candidat : il porte donc l'orange, comme
       // partout ailleurs sur le site.
       visual: "ask" as const,

@@ -45,6 +45,7 @@ export function Synthesis({ locale, page = false }: { locale: Locale; page?: boo
               </h3>
 
               <div className="mt-4 flex items-baseline gap-1">
+                {"avant" in item && <span className="mr-2 text-[13.5px] text-muted">{item.avant}</span>}
                 <Compteur
                   valeur={item.value}
                   className="font-display text-[clamp(52px,5.6vw,76px)] font-light leading-none tracking-[-0.05em] text-ink"
