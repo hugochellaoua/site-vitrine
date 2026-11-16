@@ -946,34 +946,13 @@ h3.font-display {
 @media (prefers-reduced-motion: reduce) { .roi-pop { animation: none; } }
 
 /*
- * « meilleurs talents », dans le titre de l'accueil : un dégradé clair, entre
- * le blanc et un lilas très pâle, qu'un reflet traverse lentement, et un halo
- * doux autour des lettres. La lumière reste discrète : elle distingue les
- * mots sans quitter le noir et blanc du site.
+ * « meilleurs talents », dans le titre de l'accueil : le gris d'origine, d'une
+ * seule teinte, avec une lueur blanche douce derrière les lettres. Pas de
+ * couleur, pas de dégradé.
  */
 .talent-eclat {
-  background-image: linear-gradient(
-    100deg,
-    #f4f1ea 0%,
-    #cfc8ff 28%,
-    #ffffff 46%,
-    #b9b0ff 64%,
-    #e9e5ff 82%,
-    #f4f1ea 100%
-  );
-  background-size: 250% 100%;
-  background-position: 100% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  filter: drop-shadow(0 0 22px rgba(176, 164, 255, 0.42)) drop-shadow(0 0 3px rgba(255, 255, 255, 0.25));
-  animation: talentReflet 7s ease-in-out 1.6s infinite;
-}
-@keyframes talentReflet {
-  0%, 100% { background-position: 100% 0; }
-  50% { background-position: 0% 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .talent-eclat { animation: none; }
+  color: #8e8f96;
+  text-shadow:
+    0 0 18px rgba(255, 255, 255, 0.28),
+    0 0 48px rgba(255, 255, 255, 0.16);
 }
