@@ -946,13 +946,13 @@ h3.font-display {
 @media (prefers-reduced-motion: reduce) { .roi-pop { animation: none; } }
 
 /*
- * « meilleurs talents », dans le titre de l'accueil : le gris d'origine, d'une
- * seule teinte, avec une lueur blanche douce derrière les lettres. Pas de
+ * « meilleurs talents », dans le titre de l'accueil : la même couleur que le
+ * reste du titre, avec une lueur blanche douce derrière les lettres. Pas de
  * couleur, pas de dégradé.
  */
 .talent-eclat {
-  color: #8e8f96;
+  color: inherit;
   text-shadow:
-    0 0 18px rgba(255, 255, 255, 0.28),
-    0 0 48px rgba(255, 255, 255, 0.16);
+    0 0 16px rgba(255, 255, 255, 0.45),
+    0 0 44px rgba(255, 255, 255, 0.22);
 }
